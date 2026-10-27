@@ -1,0 +1,1057 @@
+{
+  "schema_version": "1.0",
+  "subject": "Physics",
+  "class": 11,
+  "items": [
+    {
+      "item_id": "item-phy-11-friction-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Laws of Motion",
+      "concept_id": "phy-11-friction",
+      "lesson_id": "lesson-phy-11-friction",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What is the primary difference between static friction and kinetic friction in terms of when they occur?",
+      "answer_guide": "Static friction opposes the tendency of motion (stationary), while kinetic friction acts when surfaces are sliding.",
+      "explanation": "Static friction prevents motion; kinetic friction opposes existing relative motion.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-friction-explanation-001",
+        "phy11-friction-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-friction-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Laws of Motion",
+      "concept_id": "phy-11-friction",
+      "lesson_id": "lesson-phy-11-friction",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A 5 kg box is on a level floor with μ_s = 0.6 and g = 10 m/s^2. Will the box move if a horizontal force of 20 N is applied?",
+      "answer_guide": "N = 50 N; f_s_max = 0.6 * 50 = 30 N. Since 20 N < 30 N, the box will not move.",
+      "explanation": "Compare the applied force to the maximum static friction.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-friction-explanation-001",
+        "phy11-friction-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-friction-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Laws of Motion",
+      "concept_id": "phy-11-friction",
+      "lesson_id": "lesson-phy-11-friction",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "A block is held stationary on a surface by a horizontal force F. If the coefficient of static friction is μ_s, what happens to the friction force if F is doubled, provided the block remains stationary?",
+      "answer_guide": "The friction force also doubles.",
+      "explanation": "Static friction adjusts its value to balance the applied force up to its maximum limit.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-friction-explanation-001",
+        "phy11-friction-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-gravitation-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Gravitation",
+      "concept_id": "phy-11-gravitation",
+      "lesson_id": "lesson-phy-11-gravitation",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "How does the gravitational force between two masses change if the distance between their centers is doubled?",
+      "answer_guide": "The force becomes one fourth (1/4) of the original force.",
+      "explanation": "Gravitational force follows an inverse-square law (F ∝ 1/r²).",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-gravitation-explanation-001",
+        "phy11-gravitation-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-gravitation-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Gravitation",
+      "concept_id": "phy-11-gravitation",
+      "lesson_id": "lesson-phy-11-gravitation",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Two spheres of mass m1 and m2 are separated by distance r. If m1 is doubled and r is halved, what is the new force in terms of the original force F?",
+      "answer_guide": "F_new = G(2m1)m2/(r/2)^2 = G(2m1)m2/(r^2/4) = 8 * (Gm1m2/r^2) = 8F.",
+      "explanation": "Apply the formula F = Gm1m2/r^2 with the new values.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-gravitation-explanation-001",
+        "phy11-gravitation-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-gravitation-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Gravitation",
+      "concept_id": "phy-11-gravitation",
+      "lesson_id": "lesson-phy-11-gravitation",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Why can the gravitational field of a spherical body be treated as if all its mass were concentrated at its center for points outside the sphere?",
+      "answer_guide": "Because the field behaves as if the mass were concentrated at the center for any external point.",
+      "explanation": "This is a property of spherical symmetry in gravitation.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-gravitation-explanation-001",
+        "phy11-gravitation-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-impulse-momentum-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Laws of Motion",
+      "concept_id": "phy-11-impulse-momentum",
+      "lesson_id": "lesson-phy-11-impulse-momentum",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the relationship between impulse and the change in momentum of an object?",
+      "answer_guide": "Impulse is equal to the change in momentum of the object.",
+      "explanation": "Fundamental definition of the impulse-momentum theorem.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-impulse-momentum-explanation-001",
+        "phy-11-impulse-momentum-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-impulse-momentum-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Laws of Motion",
+      "concept_id": "phy-11-impulse-momentum",
+      "lesson_id": "lesson-phy-11-impulse-momentum",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A 0.5 kg ball moving at 8 m/s is caught and brought to rest. Calculate the impulse delivered to the ball.",
+      "answer_guide": "Δp = m(v_final - v_initial) = 0.5(0 - 8) = -4 kg m/s. Impulse = -4 N s.",
+      "explanation": "Impulse equals the change in momentum (final minus initial).",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-impulse-momentum-explanation-001",
+        "phy-11-impulse-momentum-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-impulse-momentum-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Laws of Motion",
+      "concept_id": "phy-11-impulse-momentum",
+      "lesson_id": "lesson-phy-11-impulse-momentum",
+      "item_type": "short_answer",
+      "bloom_level": "evaluate",
+      "difficulty": "hard",
+      "question": "Two objects of different masses are subjected to the same impulse. Which one will experience a greater change in velocity, and why?",
+      "answer_guide": "The object with the smaller mass will experience a greater change in velocity because Δv = Impulse/m.",
+      "explanation": "Analyzes the inverse relationship between mass and velocity change for a constant impulse.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-impulse-momentum-explanation-001",
+        "phy-11-impulse-momentum-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-measurement-uncertainty-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Units and Measurements",
+      "concept_id": "phy-11-measurement-uncertainty",
+      "lesson_id": "lesson-phy-11-measurement-uncertainty",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the purpose of using significant figures when reporting a measured value?",
+      "answer_guide": "To communicate the precision appropriate to the instrument used for measurement.",
+      "explanation": "Significant figures indicate the reliability of the reported digits.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-measurement-uncertainty-explanation-001",
+        "phy-11-measurement-uncertainty-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-measurement-uncertainty-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Units and Measurements",
+      "concept_id": "phy-11-measurement-uncertainty",
+      "lesson_id": "lesson-phy-11-measurement-uncertainty",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A student records a length as 5.4 cm using a ruler with a resolution of 0.1 cm. Is reporting the value as 5.400 cm correct? Why?",
+      "answer_guide": "No, it is incorrect.",
+      "explanation": "Reporting 5.400 cm implies unsupported precision beyond the instrument's 0.1 cm resolution.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-measurement-uncertainty-explanation-001",
+        "phy-11-measurement-uncertainty-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-measurement-uncertainty-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Units and Measurements",
+      "concept_id": "phy-11-measurement-uncertainty",
+      "lesson_id": "lesson-phy-11-measurement-uncertainty",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "When calculating the area of a rectangle from two independent measurements of length and width, how is the uncertainty of the result determined?",
+      "answer_guide": "Uncertainty propagation follows the mathematical operation (multiplication) used to calculate the result.",
+      "explanation": "For products, relative uncertainties are typically combined to find the total uncertainty.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-measurement-uncertainty-explanation-001",
+        "phy-11-measurement-uncertainty-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-moment-of-inertia-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "System of Particles and Rotational Motion",
+      "concept_id": "phy-11-moment-of-inertia",
+      "lesson_id": "lesson-phy-11-moment-of-inertia",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What does the moment of inertia of a body represent in rotational motion?",
+      "answer_guide": "It measures the body's resistance to angular acceleration about a chosen axis.",
+      "explanation": "Conceptual definition of moment of inertia.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-moment-of-inertia-explanation-001",
+        "phy-11-moment-of-inertia-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-moment-of-inertia-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "System of Particles and Rotational Motion",
+      "concept_id": "phy-11-moment-of-inertia",
+      "lesson_id": "lesson-phy-11-moment-of-inertia",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Calculate the moment of inertia of a system consisting of two point masses of 0.5 kg each, located 0.2 m from the axis of rotation.",
+      "answer_guide": "I = Σmr² = (0.5 * 0.2²) + (0.5 * 0.2²) = 0.02 + 0.02 = 0.04 kg m².",
+      "explanation": "Direct application of the point mass formula for moment of inertia.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-moment-of-inertia-explanation-001",
+        "phy-11-moment-of-inertia-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-moment-of-inertia-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "System of Particles and Rotational Motion",
+      "concept_id": "phy-11-moment-of-inertia",
+      "lesson_id": "lesson-phy-11-moment-of-inertia",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If the axis of rotation for a rigid body is shifted to a position further from the mass distribution, how does the angular acceleration change for a constant applied torque?",
+      "answer_guide": "Shifting the axis increases r, which increases I (Σmr²). Since α = τ/I, for a constant τ, the angular acceleration α will decrease.",
+      "explanation": "Analyzes the relationship between axis position, moment of inertia, and angular acceleration.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-moment-of-inertia-explanation-001",
+        "phy-11-moment-of-inertia-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-newtons-second-law-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Laws of Motion",
+      "concept_id": "phy-11-newtons-second-law",
+      "lesson_id": "lesson-phy-11-newtons-second-law",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "According to Newton's second law, in which direction does the acceleration of an object point relative to the net force acting on it?",
+      "answer_guide": "The acceleration points in the same direction as the net force.",
+      "explanation": "Newton's second law states F_net = ma, where acceleration is proportional to and in the direction of the net force.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-newtons-law-explanation-001",
+        "phy11-newtons-law-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-newtons-second-law-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Laws of Motion",
+      "concept_id": "phy-11-newtons-second-law",
+      "lesson_id": "lesson-phy-11-newtons-second-law",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A 5 kg object changes its velocity from 2 m/s to 8 m/s in 2 seconds. Calculate the net force acting on the object.",
+      "answer_guide": "a = (8-2)/2 = 3 m/s^2; F_net = 5 kg * 3 m/s^2 = 15 N.",
+      "explanation": "Apply F = ma using the change in velocity over time to find acceleration.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-newtons-law-explanation-001",
+        "phy11-newtons-law-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-newtons-second-law-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Laws of Motion",
+      "concept_id": "phy-11-newtons-second-law",
+      "lesson_id": "lesson-phy-11-newtons-second-law",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Two forces act on a 3 kg mass: 10 N to the right and 4 N to the left. If the mass starts from rest, what is its velocity after 4 seconds?",
+      "answer_guide": "F_net = 10 - 4 = 6 N; a = 6/3 = 2 m/s^2; v = 0 + (2 * 4) = 8 m/s.",
+      "explanation": "Forces must be added as vectors to find the net force before calculating acceleration and final velocity.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-newtons-law-explanation-001",
+        "phy11-newtons-law-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-projectile-motion-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Motion in a Plane",
+      "concept_id": "phy-11-projectile-motion",
+      "lesson_id": "lesson-phy-11-projectile-motion",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "In ideal projectile motion neglecting air resistance, what is the horizontal acceleration of the projectile?",
+      "answer_guide": "The horizontal acceleration is zero.",
+      "explanation": "Without air resistance, there are no horizontal forces acting on the projectile.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-projectile-explanation-001",
+        "phy11-projectile-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-projectile-motion-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Motion in a Plane",
+      "concept_id": "phy-11-projectile-motion",
+      "lesson_id": "lesson-phy-11-projectile-motion",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A ball is launched horizontally at 15 m/s from a height of 45 m. Using g = 10 m/s^2, calculate the horizontal range.",
+      "answer_guide": "45 = 0.5 * 10 * t^2 => t = 3 s; Range = 15 * 3 = 45 m.",
+      "explanation": "Use the vertical fall time to determine the distance traveled horizontally.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-projectile-explanation-001",
+        "phy11-projectile-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-projectile-motion-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Motion in a Plane",
+      "concept_id": "phy-11-projectile-motion",
+      "lesson_id": "lesson-phy-11-projectile-motion",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "A projectile is launched horizontally from a ledge. If the launch height is quadrupled while the initial horizontal velocity remains constant, how does the horizontal range change?",
+      "answer_guide": "The range doubles.",
+      "explanation": "Time t is proportional to sqrt(h). If h becomes 4h, t becomes 2t. Since range = v*t, range also doubles.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-projectile-explanation-001",
+        "phy11-projectile-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-simple-harmonic-motion-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Oscillations",
+      "concept_id": "phy-11-simple-harmonic-motion",
+      "lesson_id": "lesson-phy-11-simple-harmonic-motion",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "In simple harmonic motion, what is the relationship between acceleration and displacement from the equilibrium position?",
+      "answer_guide": "Acceleration is proportional to displacement and points in the opposite direction (a = -ω²x).",
+      "explanation": "This defining characteristic ensures the object is always pulled back toward equilibrium.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-simple-harmonic-motion-explanation-001",
+        "phy11-simple-harmonic-motion-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-simple-harmonic-motion-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Oscillations",
+      "concept_id": "phy-11-simple-harmonic-motion",
+      "lesson_id": "lesson-phy-11-simple-harmonic-motion",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "An object in SHM has a position given by x(t) = 0.1 cos(2t) meters. Determine the amplitude and the period.",
+      "answer_guide": "Amplitude = 0.1 m; Period T = 2π/ω = 2π/2 = π s.",
+      "explanation": "Identify amplitude from the coefficient and period from the angular frequency ω=2.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-simple-harmonic-motion-explanation-001",
+        "phy11-simple-harmonic-motion-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-simple-harmonic-motion-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Oscillations",
+      "concept_id": "phy-11-simple-harmonic-motion",
+      "lesson_id": "lesson-phy-11-simple-harmonic-motion",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If the angular frequency ω of a system in SHM is doubled, how does the period T of the oscillation change?",
+      "answer_guide": "The period is halved.",
+      "explanation": "Since T = 2π/ω, the period is inversely proportional to the angular frequency.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-simple-harmonic-motion-explanation-001",
+        "phy11-simple-harmonic-motion-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-standing-waves-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Waves",
+      "concept_id": "phy-11-standing-waves",
+      "lesson_id": "lesson-phy-11-standing-waves",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "In a standing wave, what is the difference between a node and an antinode?",
+      "answer_guide": "A node is a point of permanent zero displacement; an antinode is a point of maximum oscillation.",
+      "explanation": "Basic definitions of standing wave characteristics.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-standing-waves-explanation-001",
+        "phy-11-standing-waves-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-standing-waves-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Waves",
+      "concept_id": "phy-11-standing-waves",
+      "lesson_id": "lesson-phy-11-standing-waves",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "In a standing wave pattern on a string, the distance between two consecutive nodes is 0.3 m. What is the wavelength of the wave?",
+      "answer_guide": "Distance between adjacent nodes = λ/2. Therefore, λ = 2 * 0.3 = 0.6 m.",
+      "explanation": "Application of the relationship between node spacing and wavelength.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-standing-waves-explanation-001",
+        "phy-11-standing-waves-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-standing-waves-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Waves",
+      "concept_id": "phy-11-standing-waves",
+      "lesson_id": "lesson-phy-11-standing-waves",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Two waves of the same frequency and amplitude travel in opposite directions on a string. Describe the resulting displacement at a point where the waves interfere destructively at all times.",
+      "answer_guide": "The displacement is always zero. This point is called a node, formed by the algebraic sum of opposite displacements.",
+      "explanation": "Analyzes the superposition principle leading to the formation of a node.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-standing-waves-explanation-001",
+        "phy-11-standing-waves-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-thermal-expansion-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Thermal Properties of Matter",
+      "concept_id": "phy-11-thermal-expansion",
+      "lesson_id": "lesson-phy-11-thermal-expansion",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Why do most materials expand when they are heated?",
+      "answer_guide": "They expand because the average separation between their particles increases.",
+      "explanation": "Microscopic explanation of thermal expansion.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-thermal-expansion-explanation-001",
+        "phy-11-thermal-expansion-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-thermal-expansion-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Thermal Properties of Matter",
+      "concept_id": "phy-11-thermal-expansion",
+      "lesson_id": "lesson-phy-11-thermal-expansion",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A steel rod of length 1.5 m has a coefficient of linear expansion α = 1.2×10⁻⁵ K⁻¹. Calculate the change in length if the temperature increases by 100 K.",
+      "answer_guide": "ΔL = αL₀ΔT = (1.2×10⁻⁵) * 1.5 * 100 = 0.0018 m (or 1.8 mm).",
+      "explanation": "Direct application of the linear expansion formula.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-thermal-expansion-explanation-001",
+        "phy-11-thermal-expansion-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-thermal-expansion-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Thermal Properties of Matter",
+      "concept_id": "phy-11-thermal-expansion",
+      "lesson_id": "lesson-phy-11-thermal-expansion",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Two rods of the same initial length but different materials (α₁ > α₂) are heated by the same temperature ΔT. Compare their final lengths and explain the result.",
+      "answer_guide": "The rod with α₁ will be longer. Since ΔL = αL₀ΔT, a larger α results in a greater increase in length for the same L₀ and ΔT.",
+      "explanation": "Analyzes the effect of the expansion coefficient on final length.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-thermal-expansion-explanation-001",
+        "phy-11-thermal-expansion-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-torque-equilibrium-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "System of Particles and Rotational Motion",
+      "concept_id": "phy-11-torque-equilibrium",
+      "lesson_id": "lesson-phy-11-torque-equilibrium",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What are the two conditions required for a rigid body to be in static equilibrium?",
+      "answer_guide": "The net external force must be zero and the net external torque must be zero.",
+      "explanation": "Definition of static equilibrium for a rigid body.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-torque-equilibrium-explanation-001",
+        "phy-11-torque-equilibrium-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-torque-equilibrium-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "System of Particles and Rotational Motion",
+      "concept_id": "phy-11-torque-equilibrium",
+      "lesson_id": "lesson-phy-11-torque-equilibrium",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A force of 15 N is applied perpendicular to a wrench at a distance of 0.25 m from the bolt. Calculate the magnitude of the torque.",
+      "answer_guide": "τ = rF sin(90°) = 0.25 * 15 * 1 = 3.75 N m.",
+      "explanation": "Direct application of the torque formula for a perpendicular force.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-torque-equilibrium-explanation-001",
+        "phy-11-torque-equilibrium-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-torque-equilibrium-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "System of Particles and Rotational Motion",
+      "concept_id": "phy-11-torque-equilibrium",
+      "lesson_id": "lesson-phy-11-torque-equilibrium",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "A 2 m long uniform beam is balanced at its center. If a 10 N force is applied 0.5 m to the left of the center, where must a 5 N force be applied to maintain equilibrium?",
+      "answer_guide": "Left torque = 10 * 0.5 = 5 N m. Right torque must be 5 N m. 5 * r = 5, so r = 1.0 m to the right of the center.",
+      "explanation": "Uses the principle that net torque must be zero for equilibrium.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-torque-equilibrium-explanation-001",
+        "phy-11-torque-equilibrium-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-vector-components-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Motion in a Plane",
+      "concept_id": "phy-11-vector-components",
+      "lesson_id": "lesson-phy-11-vector-components",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "If a vector A makes an angle θ with the positive x-axis, what are the formulas for its x and y components?",
+      "answer_guide": "Ax = A cosθ and Ay = A sinθ.",
+      "explanation": "Standard trigonometric resolution of a vector into perpendicular components.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-vector-components-explanation-001",
+        "phy-11-vector-components-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-vector-components-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Motion in a Plane",
+      "concept_id": "phy-11-vector-components",
+      "lesson_id": "lesson-phy-11-vector-components",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A force of 20 N is applied at an angle of 60° above the positive x-axis. Calculate the horizontal and vertical components.",
+      "answer_guide": "Fx = 20 cos(60°) = 20 * 0.5 = 10 N; Fy = 20 sin(60°) ≈ 20 * 0.866 = 17.32 N.",
+      "explanation": "Direct application of component formulas with given magnitude and angle.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-vector-components-explanation-001",
+        "phy-11-vector-components-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-vector-components-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Motion in a Plane",
+      "concept_id": "phy-11-vector-components",
+      "lesson_id": "lesson-phy-11-vector-components",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "A vector has components Ax = 3 units and Ay = -4 units. Determine the magnitude of the vector and the angle it makes with the positive x-axis.",
+      "answer_guide": "Magnitude A = sqrt(3² + (-4)²) = 5 units. Angle θ = tan⁻¹(-4/3) ≈ -53.1°.",
+      "explanation": "Inverse process of resolution using Pythagorean theorem and tangent function.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-vector-components-explanation-001",
+        "phy-11-vector-components-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-velocity-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Motion in a Straight Line",
+      "concept_id": "phy-11-velocity",
+      "lesson_id": "lesson-phy-11-velocity",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Define average velocity and state whether it is a scalar or vector quantity.",
+      "answer_guide": "Average velocity is the total displacement divided by the elapsed time. It is a vector quantity.",
+      "explanation": "Based on the definition of average velocity as displacement over time.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-velocity-explanation-001",
+        "phy-11-velocity-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-velocity-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Motion in a Straight Line",
+      "concept_id": "phy-11-velocity",
+      "lesson_id": "lesson-phy-11-velocity",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A cyclist travels 3 km East and then 4 km West in a total time of 2 hours. Calculate the average velocity.",
+      "answer_guide": "Displacement = 3 - 4 = -1 km (or 1 km West). Average velocity = -1 km / 2 h = -0.5 km/h (or 0.5 km/h West).",
+      "explanation": "Average velocity depends on net displacement, not total distance.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-velocity-explanation-001",
+        "phy-11-velocity-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-velocity-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Motion in a Straight Line",
+      "concept_id": "phy-11-velocity",
+      "lesson_id": "lesson-phy-11-velocity",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "A particle moves in a circular path of radius R. After completing exactly one full revolution in time T, compare its average speed and average velocity.",
+      "answer_guide": "Average speed is (2πR)/T. Average velocity is 0 because the net displacement after one full revolution is zero.",
+      "explanation": "Distinguishes between distance-based speed and displacement-based velocity.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy-11-velocity-explanation-001",
+        "phy-11-velocity-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-work-energy-theorem-easy-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Work, Energy and Power",
+      "concept_id": "phy-11-work-energy-theorem",
+      "lesson_id": "lesson-phy-11-work-energy-theorem",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the relationship between the net work done on an object and its kinetic energy?",
+      "answer_guide": "The net work done on an object equals its change in kinetic energy (W_net = ΔK).",
+      "explanation": "This is the fundamental definition of the work-energy theorem.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-work-energy-explanation-001",
+        "phy11-work-energy-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-work-energy-theorem-medium-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Work, Energy and Power",
+      "concept_id": "phy-11-work-energy-theorem",
+      "lesson_id": "lesson-phy-11-work-energy-theorem",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A 4 kg block increases its speed from 3 m/s to 5 m/s. Calculate the net work done on the block.",
+      "answer_guide": "W_net = 0.5 * 4 * (5^2 - 3^2) = 2 * (25 - 9) = 32 J.",
+      "explanation": "Calculate the change in kinetic energy using the given mass and velocities.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-work-energy-explanation-001",
+        "phy11-work-energy-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-11-work-energy-theorem-hard-demo-01",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Work, Energy and Power",
+      "concept_id": "phy-11-work-energy-theorem",
+      "lesson_id": "lesson-phy-11-work-energy-theorem",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "A block is pushed across a floor by a force acting at a 90-degree angle to the displacement. If the block's speed remains constant, what is the net work done on the block?",
+      "answer_guide": "The net work is 0 J.",
+      "explanation": "A force perpendicular to displacement does no work, and constant speed implies ΔK = 0.",
+      "source_reference_ids": [
+        "adapted-original-physics-11"
+      ],
+      "supporting_chunk_ids": [
+        "phy11-work-energy-explanation-001",
+        "phy11-work-energy-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    }
+  ]
+}

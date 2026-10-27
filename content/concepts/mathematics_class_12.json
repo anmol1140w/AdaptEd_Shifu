@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "subject": "Mathematics",
+  "class": 12,
+  "concepts": [
+    {
+      "concept_id": "math-12-matrices",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Matrices",
+      "name": "Matrix multiplication and order",
+      "description": "If A has order m × n and B has order n × p, the product AB is defined and has order m × p. Each entry is a row-by-column dot product. Matrix multiplication is generally not commutative: AB need not equal BA, and one product may be defined while the other is not.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-12-matrices-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-derivatives-applications",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Applications of Derivatives",
+      "name": "Increasing and decreasing functions",
+      "description": "On an interval where a differentiable function has f'(x) > 0, it is increasing; where f'(x) < 0, it is decreasing. Critical points where f'(x) = 0 or is undefined divide the domain into intervals to test. A sign chart for the derivative supports the conclusion on each interval.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-12-derivatives-applications-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-definite-integrals",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Integrals",
+      "name": "Definite integrals and symmetry",
+      "description": "A definite integral accumulates signed area over an interval and can be evaluated using an antiderivative: ∫_a^b f(x)dx = F(b) - F(a). Symmetry can simplify integrals: for an even function, ∫_-a^a f(x)dx = 2∫_0^a f(x)dx; for an odd function the integral over symmetric limits is zero. Check the function's parity before applying these properties.",
+      "prerequisite_ids": [
+        "math-12-derivatives-applications"
+      ],
+      "misconception_chunk_ids": [
+        "math-12-definite-integrals-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-continuity-at-a-point",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Continuity and Differentiability",
+      "name": "Continuity at a point",
+      "description": "A function f is continuous at x = a when f(a) is defined, lim(x→a)f(x) exists, and that limit equals f(a). A graph may have a removable hole, jump, or unbounded behavior; each fails at least one part of the condition.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math12-continuity-at-a-point-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-separation-of-variables",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Differential Equations",
+      "name": "Separation of variables",
+      "description": "A differential equation is separable when it can be rearranged to place expressions involving y with dy and expressions involving x with dx. Integrate both sides and include a constant of integration. A solution may need to be checked against the original equation and any initial condition.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math12-separation-of-variables-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-vector-dot-product",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Vectors",
+      "name": "Dot product and angle",
+      "description": "For vectors a and b, a·b = |a||b|cosθ. In components, (a₁,a₂,a₃)·(b₁,b₂,b₃)=a₁b₁+a₂b₂+a₃b₃. A zero dot product indicates perpendicular nonzero vectors.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math12-vector-dot-product-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-inverse-sine",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Inverse Trigonometric Functions",
+      "name": "Principal values of inverse sine",
+      "description": "The inverse sine function returns a principal angle whose sine is the input. Its domain is [−1,1] and its principal-value range is [−π/2,π/2]. This restricted range makes arcsin a function even though sine itself is periodic and not one-to-one over all real numbers.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-12-inverse-sine-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-determinants-invertibility",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Determinants",
+      "name": "Determinant and invertibility",
+      "description": "A square matrix is invertible exactly when its determinant is nonzero. For a 2×2 matrix [[a,b],[c,d]], determinant is ad−bc. A zero determinant signals linearly dependent rows or columns and no inverse.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-12-determinants-invertibility-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-integration-substitution",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Integrals",
+      "name": "Integration by substitution",
+      "description": "Substitution simplifies an integral by setting u equal to an inner expression and replacing du consistently. It reverses the chain rule. For definite integrals, either change the limits to u-values or substitute back before applying the original limits.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-12-integration-substitution-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-order-degree",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Differential Equations",
+      "name": "Order and degree",
+      "description": "The order of a differential equation is the highest derivative present. The degree is the power of the highest-order derivative after the equation is expressed as a polynomial in derivatives, when that degree is defined. These are different classifications.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-12-order-degree-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-direction-cosines",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Three-Dimensional Geometry",
+      "name": "Direction ratios and direction cosines",
+      "description": "Direction ratios are any proportional triple describing a line’s direction. Direction cosines are cosines of the angles the direction makes with the coordinate axes and satisfy l²+m²+n²=1. Normalize direction ratios to obtain direction cosines.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-12-direction-cosines-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-area-between-curves",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Application of Integrals",
+      "name": "Area between curves",
+      "description": "When two curves y=f(x) and y=g(x) bound a region from x=a to x=b and f is above g, its area is ∫_a^b [f(x)−g(x)]dx. If the curves cross, split the interval at intersections so the upper-minus-lower order is correct on each part.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-12-area-between-curves-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-linear-programming",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Linear Programming",
+      "name": "Feasible region and objective function",
+      "description": "A linear programming problem optimizes a linear objective subject to linear constraints. The feasible region is the intersection of the constraint half-planes. For a bounded polygonal feasible region, an optimum occurs at a corner point; evaluate the objective at each feasible vertex.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-12-linear-programming-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-conditional-probability",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Probability",
+      "name": "Conditional probability and independence",
+      "description": "Conditional probability is P(A|B)=P(A∩B)/P(B) when P(B)>0. Events A and B are independent when learning that B occurred does not change the probability of A; equivalently P(A∩B)=P(A)P(B).",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-12-conditional-probability-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    }
+  ]
+}

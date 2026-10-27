@@ -1,0 +1,880 @@
+{
+  "schema_version": "1.0",
+  "title": "NCERT PCM Class 11–12 Source Corpus",
+  "language": "en",
+  "source_authority": "National Council of Educational Research and Training (NCERT)",
+  "source_catalog": "https://ncert.nic.in/textbook.php",
+  "books": [
+    {
+      "book_id": "ncert-keph1",
+      "book_code": "keph1",
+      "class": 11,
+      "subject": "Physics",
+      "part": 1,
+      "title": "Physics, Part 1, Class 11",
+      "edition_label": "Reprint 2026-27 (as marked in downloaded source PDFs)",
+      "archive": "source_archives/keph1dd.zip",
+      "official_download_url": "https://ncert.nic.in/textbook/pdf/keph1dd.zip",
+      "chapters": [
+        {
+          "chapter_code": "keph101",
+          "chapter_title": "Units and Measurements",
+          "source_pdf": "source_pdfs/keph1/keph101.pdf",
+          "pdf_pages": 12,
+          "word_count": 6939
+        },
+        {
+          "chapter_code": "keph102",
+          "chapter_title": "Motion in a Straight Line",
+          "source_pdf": "source_pdfs/keph1/keph102.pdf",
+          "pdf_pages": 14,
+          "word_count": 6045
+        },
+        {
+          "chapter_code": "keph103",
+          "chapter_title": "Motion in a Plane",
+          "source_pdf": "source_pdfs/keph1/keph103.pdf",
+          "pdf_pages": 22,
+          "word_count": 11145
+        },
+        {
+          "chapter_code": "keph104",
+          "chapter_title": "Laws of Motion",
+          "source_pdf": "source_pdfs/keph1/keph104.pdf",
+          "pdf_pages": 22,
+          "word_count": 13368
+        },
+        {
+          "chapter_code": "keph105",
+          "chapter_title": "Work, Energy and Power",
+          "source_pdf": "source_pdfs/keph1/keph105.pdf",
+          "pdf_pages": 21,
+          "word_count": 11197
+        },
+        {
+          "chapter_code": "keph106",
+          "chapter_title": "System of Particles and Rotational Motion",
+          "source_pdf": "source_pdfs/keph1/keph106.pdf",
+          "pdf_pages": 35,
+          "word_count": 19861
+        },
+        {
+          "chapter_code": "keph107",
+          "chapter_title": "Gravitation",
+          "source_pdf": "source_pdfs/keph1/keph107.pdf",
+          "pdf_pages": 17,
+          "word_count": 9348
+        },
+        {
+          "chapter_code": "keph1a1",
+          "chapter_title": "Appendix",
+          "source_pdf": "source_pdfs/keph1/keph1a1.pdf",
+          "pdf_pages": 16,
+          "word_count": 3325
+        },
+        {
+          "chapter_code": "keph1an",
+          "chapter_title": "Answers",
+          "source_pdf": "source_pdfs/keph1/keph1an.pdf",
+          "pdf_pages": 9,
+          "word_count": 2714
+        },
+        {
+          "chapter_code": "keph1ps",
+          "chapter_title": "Prelims",
+          "source_pdf": "source_pdfs/keph1/keph1ps.pdf",
+          "pdf_pages": 16,
+          "word_count": 4958
+        }
+      ]
+    },
+    {
+      "book_id": "ncert-keph2",
+      "book_code": "keph2",
+      "class": 11,
+      "subject": "Physics",
+      "part": 2,
+      "title": "Physics, Part 2, Class 11",
+      "edition_label": "Reprint 2026-27 (as marked in downloaded source PDFs)",
+      "archive": "source_archives/keph2dd.zip",
+      "official_download_url": "https://ncert.nic.in/textbook/pdf/keph2dd.zip",
+      "chapters": [
+        {
+          "chapter_code": "keph201",
+          "chapter_title": "Mechanical Properties of Solids",
+          "source_pdf": "source_pdfs/keph2/keph201.pdf",
+          "pdf_pages": 13,
+          "word_count": 6338
+        },
+        {
+          "chapter_code": "keph202",
+          "chapter_title": "Mechanical Properties of Fluids",
+          "source_pdf": "source_pdfs/keph2/keph202.pdf",
+          "pdf_pages": 22,
+          "word_count": 11983
+        },
+        {
+          "chapter_code": "keph203",
+          "chapter_title": "Thermal Properties of Matter",
+          "source_pdf": "source_pdfs/keph2/keph203.pdf",
+          "pdf_pages": 24,
+          "word_count": 12855
+        },
+        {
+          "chapter_code": "keph204",
+          "chapter_title": "Thermodynamics",
+          "source_pdf": "source_pdfs/keph2/keph204.pdf",
+          "pdf_pages": 18,
+          "word_count": 9913
+        },
+        {
+          "chapter_code": "keph205",
+          "chapter_title": "Kinetic Theory",
+          "source_pdf": "source_pdfs/keph2/keph205.pdf",
+          "pdf_pages": 15,
+          "word_count": 8654
+        },
+        {
+          "chapter_code": "keph206",
+          "chapter_title": "Oscillations",
+          "source_pdf": "source_pdfs/keph2/keph206.pdf",
+          "pdf_pages": 19,
+          "word_count": 8432
+        },
+        {
+          "chapter_code": "keph207",
+          "chapter_title": "Waves",
+          "source_pdf": "source_pdfs/keph2/keph207.pdf",
+          "pdf_pages": 22,
+          "word_count": 11392
+        },
+        {
+          "chapter_code": "keph2an",
+          "chapter_title": "Answers",
+          "source_pdf": "source_pdfs/keph2/keph2an.pdf",
+          "pdf_pages": 15,
+          "word_count": 3999
+        },
+        {
+          "chapter_code": "keph2ps",
+          "chapter_title": "Prelims",
+          "source_pdf": "source_pdfs/keph2/keph2ps.pdf",
+          "pdf_pages": 16,
+          "word_count": 4492
+        }
+      ]
+    },
+    {
+      "book_id": "ncert-kech1",
+      "book_code": "kech1",
+      "class": 11,
+      "subject": "Chemistry",
+      "part": 1,
+      "title": "Chemistry, Part 1, Class 11",
+      "edition_label": "Reprint 2026-27 (as marked in downloaded source PDFs)",
+      "archive": "source_archives/kech1dd.zip",
+      "official_download_url": "https://ncert.nic.in/textbook/pdf/kech1dd.zip",
+      "chapters": [
+        {
+          "chapter_code": "kech101",
+          "chapter_title": "Some Basic Concepts of Chemistry",
+          "source_pdf": "source_pdfs/kech1/kech101.pdf",
+          "pdf_pages": 28,
+          "word_count": 13847
+        },
+        {
+          "chapter_code": "kech102",
+          "chapter_title": "Structure of Atom",
+          "source_pdf": "source_pdfs/kech1/kech102.pdf",
+          "pdf_pages": 45,
+          "word_count": 22633
+        },
+        {
+          "chapter_code": "kech103",
+          "chapter_title": "Classification of Elements and Periodicity in Properties",
+          "source_pdf": "source_pdfs/kech1/kech103.pdf",
+          "pdf_pages": 26,
+          "word_count": 11563
+        },
+        {
+          "chapter_code": "kech104",
+          "chapter_title": "Chemical Bonding and Molecular Structure",
+          "source_pdf": "source_pdfs/kech1/kech104.pdf",
+          "pdf_pages": 36,
+          "word_count": 16490
+        },
+        {
+          "chapter_code": "kech105",
+          "chapter_title": "Thermodynamics",
+          "source_pdf": "source_pdfs/kech1/kech105.pdf",
+          "pdf_pages": 32,
+          "word_count": 15488
+        },
+        {
+          "chapter_code": "kech106",
+          "chapter_title": "Equilibrium",
+          "source_pdf": "source_pdfs/kech1/kech106.pdf",
+          "pdf_pages": 53,
+          "word_count": 28182
+        },
+        {
+          "chapter_code": "kech1a1",
+          "chapter_title": "Appendix",
+          "source_pdf": "source_pdfs/kech1/kech1a1.pdf",
+          "pdf_pages": 14,
+          "word_count": 3929
+        },
+        {
+          "chapter_code": "kech1an",
+          "chapter_title": "Answers",
+          "source_pdf": "source_pdfs/kech1/kech1an.pdf",
+          "pdf_pages": 6,
+          "word_count": 1710
+        },
+        {
+          "chapter_code": "kech1ps",
+          "chapter_title": "Prelims",
+          "source_pdf": "source_pdfs/kech1/kech1ps.pdf",
+          "pdf_pages": 12,
+          "word_count": 2119
+        }
+      ]
+    },
+    {
+      "book_id": "ncert-kech2",
+      "book_code": "kech2",
+      "class": 11,
+      "subject": "Chemistry",
+      "part": 2,
+      "title": "Chemistry, Part 2, Class 11",
+      "edition_label": "Reprint 2026-27 (as marked in downloaded source PDFs)",
+      "archive": "source_archives/kech2dd.zip",
+      "official_download_url": "https://ncert.nic.in/textbook/pdf/kech2dd.zip",
+      "chapters": [
+        {
+          "chapter_code": "kech201",
+          "chapter_title": "Redox Reactions",
+          "source_pdf": "source_pdfs/kech2/kech201.pdf",
+          "pdf_pages": 21,
+          "word_count": 10867
+        },
+        {
+          "chapter_code": "kech202",
+          "chapter_title": "Organic Chemistry: Some Basic Principles and Techniques",
+          "source_pdf": "source_pdfs/kech2/kech202.pdf",
+          "pdf_pages": 39,
+          "word_count": 3953
+        },
+        {
+          "chapter_code": "kech203",
+          "chapter_title": "Hydrocarbons",
+          "source_pdf": "source_pdfs/kech2/kech203.pdf",
+          "pdf_pages": 33,
+          "word_count": 13096
+        },
+        {
+          "chapter_code": "kech2an",
+          "chapter_title": "Answers",
+          "source_pdf": "source_pdfs/kech2/kech2an.pdf",
+          "pdf_pages": 5,
+          "word_count": 540
+        },
+        {
+          "chapter_code": "kech2ps",
+          "chapter_title": "Prelims",
+          "source_pdf": "source_pdfs/kech2/kech2ps.pdf",
+          "pdf_pages": 10,
+          "word_count": 1890
+        }
+      ]
+    },
+    {
+      "book_id": "ncert-kemh1",
+      "book_code": "kemh1",
+      "class": 11,
+      "subject": "Mathematics",
+      "part": null,
+      "title": "Mathematics, Class 11",
+      "edition_label": "Reprint 2026-27 (as marked in downloaded source PDFs)",
+      "archive": "source_archives/kemh1dd.zip",
+      "official_download_url": "https://ncert.nic.in/textbook/pdf/kemh1dd.zip",
+      "chapters": [
+        {
+          "chapter_code": "kemh101",
+          "chapter_title": "Sets",
+          "source_pdf": "source_pdfs/kemh1/kemh101.pdf",
+          "pdf_pages": 23,
+          "word_count": 10378
+        },
+        {
+          "chapter_code": "kemh102",
+          "chapter_title": "Relations and Functions",
+          "source_pdf": "source_pdfs/kemh1/kemh102.pdf",
+          "pdf_pages": 19,
+          "word_count": 6198
+        },
+        {
+          "chapter_code": "kemh103",
+          "chapter_title": "Trigonometric Functions",
+          "source_pdf": "source_pdfs/kemh1/kemh103.pdf",
+          "pdf_pages": 33,
+          "word_count": 9164
+        },
+        {
+          "chapter_code": "kemh104",
+          "chapter_title": "Complex Numbers and Quadratic Equations",
+          "source_pdf": "source_pdfs/kemh1/kemh104.pdf",
+          "pdf_pages": 13,
+          "word_count": 4050
+        },
+        {
+          "chapter_code": "kemh105",
+          "chapter_title": "Linear Inequalities",
+          "source_pdf": "source_pdfs/kemh1/kemh105.pdf",
+          "pdf_pages": 11,
+          "word_count": 3601
+        },
+        {
+          "chapter_code": "kemh106",
+          "chapter_title": "Permutations and Combinations",
+          "source_pdf": "source_pdfs/kemh1/kemh106.pdf",
+          "pdf_pages": 26,
+          "word_count": 8828
+        },
+        {
+          "chapter_code": "kemh107",
+          "chapter_title": "Binomial Theorem",
+          "source_pdf": "source_pdfs/kemh1/kemh107.pdf",
+          "pdf_pages": 9,
+          "word_count": 2709
+        },
+        {
+          "chapter_code": "kemh108",
+          "chapter_title": "Sequences and Series",
+          "source_pdf": "source_pdfs/kemh1/kemh108.pdf",
+          "pdf_pages": 16,
+          "word_count": 5410
+        },
+        {
+          "chapter_code": "kemh109",
+          "chapter_title": "Straight Lines",
+          "source_pdf": "source_pdfs/kemh1/kemh109.pdf",
+          "pdf_pages": 25,
+          "word_count": 7912
+        },
+        {
+          "chapter_code": "kemh110",
+          "chapter_title": "Conic Sections",
+          "source_pdf": "source_pdfs/kemh1/kemh110.pdf",
+          "pdf_pages": 32,
+          "word_count": 8584
+        },
+        {
+          "chapter_code": "kemh111",
+          "chapter_title": "Introduction to Three Dimensional Geometry",
+          "source_pdf": "source_pdfs/kemh1/kemh111.pdf",
+          "pdf_pages": 9,
+          "word_count": 3153
+        },
+        {
+          "chapter_code": "kemh112",
+          "chapter_title": "Limits and Derivatives",
+          "source_pdf": "source_pdfs/kemh1/kemh112.pdf",
+          "pdf_pages": 40,
+          "word_count": 12590
+        },
+        {
+          "chapter_code": "kemh113",
+          "chapter_title": "Statistics",
+          "source_pdf": "source_pdfs/kemh1/kemh113.pdf",
+          "pdf_pages": 32,
+          "word_count": 8662
+        },
+        {
+          "chapter_code": "kemh114",
+          "chapter_title": "Probability",
+          "source_pdf": "source_pdfs/kemh1/kemh114.pdf",
+          "pdf_pages": 25,
+          "word_count": 8484
+        },
+        {
+          "chapter_code": "kemh1a1",
+          "chapter_title": "Appendix",
+          "source_pdf": "source_pdfs/kemh1/kemh1a1.pdf",
+          "pdf_pages": 9,
+          "word_count": 2566
+        },
+        {
+          "chapter_code": "kemh1a2",
+          "chapter_title": "Appendix",
+          "source_pdf": "source_pdfs/kemh1/kemh1a2.pdf",
+          "pdf_pages": 12,
+          "word_count": 4028
+        },
+        {
+          "chapter_code": "kemh1an",
+          "chapter_title": "Answers",
+          "source_pdf": "source_pdfs/kemh1/kemh1an.pdf",
+          "pdf_pages": 22,
+          "word_count": 6412
+        },
+        {
+          "chapter_code": "kemh1ps",
+          "chapter_title": "Prelims",
+          "source_pdf": "source_pdfs/kemh1/kemh1ps.pdf",
+          "pdf_pages": 12,
+          "word_count": 1878
+        },
+        {
+          "chapter_code": "kemh1sm",
+          "chapter_title": "Supplementary Material",
+          "source_pdf": "source_pdfs/kemh1/kemh1sm.pdf",
+          "pdf_pages": 8,
+          "word_count": 1231
+        }
+      ]
+    },
+    {
+      "book_id": "ncert-leph1",
+      "book_code": "leph1",
+      "class": 12,
+      "subject": "Physics",
+      "part": 1,
+      "title": "Physics, Part 1, Class 12",
+      "edition_label": "Reprint 2026-27 (as marked in downloaded source PDFs)",
+      "archive": "source_archives/leph1dd.zip",
+      "official_download_url": "https://ncert.nic.in/textbook/pdf/leph1dd.zip",
+      "chapters": [
+        {
+          "chapter_code": "leph101",
+          "chapter_title": "Electric Charges and Fields",
+          "source_pdf": "source_pdfs/leph1/leph101.pdf",
+          "pdf_pages": 44,
+          "word_count": 19114
+        },
+        {
+          "chapter_code": "leph102",
+          "chapter_title": "Electrostatic Potential and Capacitance",
+          "source_pdf": "source_pdfs/leph1/leph102.pdf",
+          "pdf_pages": 36,
+          "word_count": 14458
+        },
+        {
+          "chapter_code": "leph103",
+          "chapter_title": "Current Electricity",
+          "source_pdf": "source_pdfs/leph1/leph103.pdf",
+          "pdf_pages": 26,
+          "word_count": 10450
+        },
+        {
+          "chapter_code": "leph104",
+          "chapter_title": "Moving Charges and Magnetism",
+          "source_pdf": "source_pdfs/leph1/leph104.pdf",
+          "pdf_pages": 29,
+          "word_count": 12065
+        },
+        {
+          "chapter_code": "leph105",
+          "chapter_title": "Magnetism and Matter",
+          "source_pdf": "source_pdfs/leph1/leph105.pdf",
+          "pdf_pages": 18,
+          "word_count": 6483
+        },
+        {
+          "chapter_code": "leph106",
+          "chapter_title": "Electromagnetic Induction",
+          "source_pdf": "source_pdfs/leph1/leph106.pdf",
+          "pdf_pages": 23,
+          "word_count": 8314
+        },
+        {
+          "chapter_code": "leph107",
+          "chapter_title": "Alternating Current",
+          "source_pdf": "source_pdfs/leph1/leph107.pdf",
+          "pdf_pages": 24,
+          "word_count": 9116
+        },
+        {
+          "chapter_code": "leph108",
+          "chapter_title": "Electromagnetic Waves",
+          "source_pdf": "source_pdfs/leph1/leph108.pdf",
+          "pdf_pages": 14,
+          "word_count": 5849
+        },
+        {
+          "chapter_code": "leph1an",
+          "chapter_title": "Answers",
+          "source_pdf": "source_pdfs/leph1/leph1an.pdf",
+          "pdf_pages": 6,
+          "word_count": 1423
+        },
+        {
+          "chapter_code": "leph1ps",
+          "chapter_title": "Prelims",
+          "source_pdf": "source_pdfs/leph1/leph1ps.pdf",
+          "pdf_pages": 16,
+          "word_count": 3929
+        }
+      ]
+    },
+    {
+      "book_id": "ncert-leph2",
+      "book_code": "leph2",
+      "class": 12,
+      "subject": "Physics",
+      "part": 2,
+      "title": "Physics, Part 2, Class 12",
+      "edition_label": "Reprint 2026-27 (as marked in downloaded source PDFs)",
+      "archive": "source_archives/leph2dd.zip",
+      "official_download_url": "https://ncert.nic.in/textbook/pdf/leph2dd.zip",
+      "chapters": [
+        {
+          "chapter_code": "leph201",
+          "chapter_title": "Ray Optics and Optical Instruments",
+          "source_pdf": "source_pdfs/leph2/leph201.pdf",
+          "pdf_pages": 34,
+          "word_count": 12618
+        },
+        {
+          "chapter_code": "leph202",
+          "chapter_title": "Wave Optics",
+          "source_pdf": "source_pdfs/leph2/leph202.pdf",
+          "pdf_pages": 19,
+          "word_count": 7473
+        },
+        {
+          "chapter_code": "leph203",
+          "chapter_title": "Dual Nature of Radiation and Matter",
+          "source_pdf": "source_pdfs/leph2/leph203.pdf",
+          "pdf_pages": 16,
+          "word_count": 7201
+        },
+        {
+          "chapter_code": "leph204",
+          "chapter_title": "Atoms",
+          "source_pdf": "source_pdfs/leph2/leph204.pdf",
+          "pdf_pages": 16,
+          "word_count": 6982
+        },
+        {
+          "chapter_code": "leph205",
+          "chapter_title": "Nuclei",
+          "source_pdf": "source_pdfs/leph2/leph205.pdf",
+          "pdf_pages": 17,
+          "word_count": 7311
+        },
+        {
+          "chapter_code": "leph206",
+          "chapter_title": "Semiconductor Electronics",
+          "source_pdf": "source_pdfs/leph2/leph206.pdf",
+          "pdf_pages": 21,
+          "word_count": 8230
+        },
+        {
+          "chapter_code": "leph2an",
+          "chapter_title": "Answers",
+          "source_pdf": "source_pdfs/leph2/leph2an.pdf",
+          "pdf_pages": 11,
+          "word_count": 3282
+        },
+        {
+          "chapter_code": "leph2ps",
+          "chapter_title": "Prelims",
+          "source_pdf": "source_pdfs/leph2/leph2ps.pdf",
+          "pdf_pages": 18,
+          "word_count": 3428
+        }
+      ]
+    },
+    {
+      "book_id": "ncert-lech1",
+      "book_code": "lech1",
+      "class": 12,
+      "subject": "Chemistry",
+      "part": 1,
+      "title": "Chemistry, Part 1, Class 12",
+      "edition_label": "Reprint 2026-27 (as marked in downloaded source PDFs)",
+      "archive": "source_archives/lech1dd.zip",
+      "official_download_url": "https://ncert.nic.in/textbook/pdf/lech1dd.zip",
+      "chapters": [
+        {
+          "chapter_code": "lech101",
+          "chapter_title": "Solutions",
+          "source_pdf": "source_pdfs/lech1/lech101.pdf",
+          "pdf_pages": 30,
+          "word_count": 12237
+        },
+        {
+          "chapter_code": "lech102",
+          "chapter_title": "Electrochemistry",
+          "source_pdf": "source_pdfs/lech1/lech102.pdf",
+          "pdf_pages": 30,
+          "word_count": 11783
+        },
+        {
+          "chapter_code": "lech103",
+          "chapter_title": "Chemical Kinetics",
+          "source_pdf": "source_pdfs/lech1/lech103.pdf",
+          "pdf_pages": 28,
+          "word_count": 9466
+        },
+        {
+          "chapter_code": "lech104",
+          "chapter_title": "The d- and f-Block Elements",
+          "source_pdf": "source_pdfs/lech1/lech104.pdf",
+          "pdf_pages": 29,
+          "word_count": 12890
+        },
+        {
+          "chapter_code": "lech105",
+          "chapter_title": "Coordination Compounds",
+          "source_pdf": "source_pdfs/lech1/lech105.pdf",
+          "pdf_pages": 23,
+          "word_count": 8778
+        },
+        {
+          "chapter_code": "lech1a1",
+          "chapter_title": "Appendix",
+          "source_pdf": "source_pdfs/lech1/lech1a1.pdf",
+          "pdf_pages": 13,
+          "word_count": 7958
+        },
+        {
+          "chapter_code": "lech1an",
+          "chapter_title": "Answers",
+          "source_pdf": "source_pdfs/lech1/lech1an.pdf",
+          "pdf_pages": 5,
+          "word_count": 1016
+        },
+        {
+          "chapter_code": "lech1ps",
+          "chapter_title": "Prelims",
+          "source_pdf": "source_pdfs/lech1/lech1ps.pdf",
+          "pdf_pages": 14,
+          "word_count": 2641
+        }
+      ]
+    },
+    {
+      "book_id": "ncert-lech2",
+      "book_code": "lech2",
+      "class": 12,
+      "subject": "Chemistry",
+      "part": 2,
+      "title": "Chemistry, Part 2, Class 12",
+      "edition_label": "Reprint 2026-27 (as marked in downloaded source PDFs)",
+      "archive": "source_archives/lech2dd.zip",
+      "official_download_url": "https://ncert.nic.in/textbook/pdf/lech2dd.zip",
+      "chapters": [
+        {
+          "chapter_code": "lech201",
+          "chapter_title": "Haloalkanes and Haloarenes",
+          "source_pdf": "source_pdfs/lech2/lech201.pdf",
+          "pdf_pages": 34,
+          "word_count": 8810
+        },
+        {
+          "chapter_code": "lech202",
+          "chapter_title": "Alcohols, Phenols and Ethers",
+          "source_pdf": "source_pdfs/lech2/lech202.pdf",
+          "pdf_pages": 34,
+          "word_count": 7774
+        },
+        {
+          "chapter_code": "lech203",
+          "chapter_title": "Aldehydes, Ketones and Carboxylic Acids",
+          "source_pdf": "source_pdfs/lech2/lech203.pdf",
+          "pdf_pages": 32,
+          "word_count": 7281
+        },
+        {
+          "chapter_code": "lech204",
+          "chapter_title": "Amines",
+          "source_pdf": "source_pdfs/lech2/lech204.pdf",
+          "pdf_pages": 22,
+          "word_count": 5774
+        },
+        {
+          "chapter_code": "lech205",
+          "chapter_title": "Biomolecules",
+          "source_pdf": "source_pdfs/lech2/lech205.pdf",
+          "pdf_pages": 22,
+          "word_count": 7023
+        },
+        {
+          "chapter_code": "lech2an",
+          "chapter_title": "Answers",
+          "source_pdf": "source_pdfs/lech2/lech2an.pdf",
+          "pdf_pages": 6,
+          "word_count": 412
+        },
+        {
+          "chapter_code": "lech2ps",
+          "chapter_title": "Prelims",
+          "source_pdf": "source_pdfs/lech2/lech2ps.pdf",
+          "pdf_pages": 14,
+          "word_count": 2695
+        }
+      ]
+    },
+    {
+      "book_id": "ncert-lemh1",
+      "book_code": "lemh1",
+      "class": 12,
+      "subject": "Mathematics",
+      "part": 1,
+      "title": "Mathematics, Part 1, Class 12",
+      "edition_label": "Reprint 2026-27 (as marked in downloaded source PDFs)",
+      "archive": "source_archives/lemh1dd.zip",
+      "official_download_url": "https://ncert.nic.in/textbook/pdf/lemh1dd.zip",
+      "chapters": [
+        {
+          "chapter_code": "lemh101",
+          "chapter_title": "Relations and Functions",
+          "source_pdf": "source_pdfs/lemh1/lemh101.pdf",
+          "pdf_pages": 17,
+          "word_count": 7492
+        },
+        {
+          "chapter_code": "lemh102",
+          "chapter_title": "Inverse Trigonometric Functions",
+          "source_pdf": "source_pdfs/lemh1/lemh102.pdf",
+          "pdf_pages": 16,
+          "word_count": 4560
+        },
+        {
+          "chapter_code": "lemh103",
+          "chapter_title": "Matrices",
+          "source_pdf": "source_pdfs/lemh1/lemh103.pdf",
+          "pdf_pages": 42,
+          "word_count": 13124
+        },
+        {
+          "chapter_code": "lemh104",
+          "chapter_title": "Determinants",
+          "source_pdf": "source_pdfs/lemh1/lemh104.pdf",
+          "pdf_pages": 28,
+          "word_count": 8541
+        },
+        {
+          "chapter_code": "lemh105",
+          "chapter_title": "Continuity and Differentiability",
+          "source_pdf": "source_pdfs/lemh1/lemh105.pdf",
+          "pdf_pages": 43,
+          "word_count": 13827
+        },
+        {
+          "chapter_code": "lemh106",
+          "chapter_title": "Applications of Derivatives",
+          "source_pdf": "source_pdfs/lemh1/lemh106.pdf",
+          "pdf_pages": 40,
+          "word_count": 13762
+        },
+        {
+          "chapter_code": "lemh1a1",
+          "chapter_title": "Appendix",
+          "source_pdf": "source_pdfs/lemh1/lemh1a1.pdf",
+          "pdf_pages": 9,
+          "word_count": 2944
+        },
+        {
+          "chapter_code": "lemh1a2",
+          "chapter_title": "Appendix",
+          "source_pdf": "source_pdfs/lemh1/lemh1a2.pdf",
+          "pdf_pages": 12,
+          "word_count": 3631
+        },
+        {
+          "chapter_code": "lemh1an",
+          "chapter_title": "Answers",
+          "source_pdf": "source_pdfs/lemh1/lemh1an.pdf",
+          "pdf_pages": 17,
+          "word_count": 4112
+        },
+        {
+          "chapter_code": "lemh1ps",
+          "chapter_title": "Prelims",
+          "source_pdf": "source_pdfs/lemh1/lemh1ps.pdf",
+          "pdf_pages": 12,
+          "word_count": 2298
+        }
+      ]
+    },
+    {
+      "book_id": "ncert-lemh2",
+      "book_code": "lemh2",
+      "class": 12,
+      "subject": "Mathematics",
+      "part": 2,
+      "title": "Mathematics, Part 2, Class 12",
+      "edition_label": "Reprint 2026-27 (as marked in downloaded source PDFs)",
+      "archive": "source_archives/lemh2dd.zip",
+      "official_download_url": "https://ncert.nic.in/textbook/pdf/lemh2dd.zip",
+      "chapters": [
+        {
+          "chapter_code": "lemh201",
+          "chapter_title": "Integrals",
+          "source_pdf": "source_pdfs/lemh2/lemh201.pdf",
+          "pdf_pages": 67,
+          "word_count": 21166
+        },
+        {
+          "chapter_code": "lemh202",
+          "chapter_title": "Applications of Integrals",
+          "source_pdf": "source_pdfs/lemh2/lemh202.pdf",
+          "pdf_pages": 8,
+          "word_count": 2140
+        },
+        {
+          "chapter_code": "lemh203",
+          "chapter_title": "Differential Equations",
+          "source_pdf": "source_pdfs/lemh2/lemh203.pdf",
+          "pdf_pages": 38,
+          "word_count": 10768
+        },
+        {
+          "chapter_code": "lemh204",
+          "chapter_title": "Vector Algebra",
+          "source_pdf": "source_pdfs/lemh2/lemh204.pdf",
+          "pdf_pages": 39,
+          "word_count": 9229
+        },
+        {
+          "chapter_code": "lemh205",
+          "chapter_title": "Three Dimensional Geometry",
+          "source_pdf": "source_pdfs/lemh2/lemh205.pdf",
+          "pdf_pages": 17,
+          "word_count": 5546
+        },
+        {
+          "chapter_code": "lemh206",
+          "chapter_title": "Linear Programming",
+          "source_pdf": "source_pdfs/lemh2/lemh206.pdf",
+          "pdf_pages": 12,
+          "word_count": 3646
+        },
+        {
+          "chapter_code": "lemh207",
+          "chapter_title": "Probability",
+          "source_pdf": "source_pdfs/lemh2/lemh207.pdf",
+          "pdf_pages": 33,
+          "word_count": 11027
+        },
+        {
+          "chapter_code": "lemh2an",
+          "chapter_title": "Answers",
+          "source_pdf": "source_pdfs/lemh2/lemh2an.pdf",
+          "pdf_pages": 20,
+          "word_count": 4217
+        },
+        {
+          "chapter_code": "lemh2ps",
+          "chapter_title": "Prelims",
+          "source_pdf": "source_pdfs/lemh2/lemh2ps.pdf",
+          "pdf_pages": 14,
+          "word_count": 2369
+        }
+      ]
+    }
+  ]
+}

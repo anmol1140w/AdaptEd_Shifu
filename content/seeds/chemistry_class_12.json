@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "seed_id": "seed-chem_class12-learner-evidence",
+  "subject": "Chemistry",
+  "class": 12,
+  "synthetic": true,
+  "learners": [
+    {
+      "learner_id": "learner-chem_class12-1",
+      "display_name": "Chemistry Learner 1",
+      "subject": "Chemistry",
+      "class": 12,
+      "evidence_note": "Fictional learner record for local development; not a real student."
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "seed-chem_class12-attempt-01",
+      "learner_id": "learner-chem_class12-1",
+      "item_id": "item-chem-12-solutions-colligative-properties-recall-01",
+      "concept_id": "chem-12-solutions-colligative-properties",
+      "is_correct": true,
+      "difficulty": "medium",
+      "hint_count": 0,
+      "confidence_signal": 0.65,
+      "response_ms": 45000
+    },
+    {
+      "attempt_id": "seed-chem_class12-attempt-02",
+      "learner_id": "learner-chem_class12-1",
+      "item_id": "item-chem-12-electrochemical-cells-recall-01",
+      "concept_id": "chem-12-electrochemical-cells",
+      "is_correct": false,
+      "difficulty": "medium",
+      "hint_count": 1,
+      "confidence_signal": 0.4,
+      "response_ms": 50000
+    },
+    {
+      "attempt_id": "seed-chem_class12-attempt-03",
+      "learner_id": "learner-chem_class12-1",
+      "item_id": "item-chem-12-chemical-kinetics-rate-law-recall-01",
+      "concept_id": "chem-12-chemical-kinetics-rate-law",
+      "is_correct": true,
+      "difficulty": "medium",
+      "hint_count": 0,
+      "confidence_signal": 0.65,
+      "response_ms": 55000
+    },
+    {
+      "attempt_id": "seed-chem_class12-attempt-04",
+      "learner_id": "learner-chem_class12-1",
+      "item_id": "item-chem-12-nernst-equation-recall-01",
+      "concept_id": "chem-12-nernst-equation",
+      "is_correct": false,
+      "difficulty": "medium",
+      "hint_count": 0,
+      "confidence_signal": 0.4,
+      "response_ms": 60000
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "subject": "Mathematics",
+  "class": 11,
+  "concepts": [
+    {
+      "concept_id": "math-11-quadratic-equations",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Complex Numbers and Quadratic Equations",
+      "name": "Quadratic equations and discriminant",
+      "description": "A quadratic equation has the form ax^2 + bx + c = 0 with a ≠ 0. Its discriminant is D = b^2 - 4ac. For real coefficients, D > 0 gives two distinct real roots, D = 0 gives equal real roots, and D < 0 gives a complex-conjugate pair.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-11-quadratic-equations-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-arithmetic-progression",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Sequences and Series",
+      "name": "Arithmetic progressions",
+      "description": "An arithmetic progression (AP) is a sequence with a constant difference d between consecutive terms. Its nth term is a_n = a + (n - 1)d. The sum of the first n terms is S_n = n/2[2a + (n - 1)d], or n/2(a + l) when the last term l is known.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-11-arithmetic-progression-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-trigonometric-functions",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Trigonometric Functions",
+      "name": "Trigonometric identities and values",
+      "description": "Trigonometric functions describe ratios and periodic relationships associated with angles. The identity sin^2 θ + cos^2 θ = 1 holds for every real angle. When a ratio is known, this identity can determine another squared ratio, but the sign of a function also depends on the angle's quadrant.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-11-trigonometric-functions-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-binomial-general-term",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Binomial Theorem",
+      "name": "General term in a binomial expansion",
+      "description": "For a non-negative integer n, (a + b)^n expands into terms whose coefficients are binomial coefficients. The general term is T_(r+1) = C(n,r)a^(n-r)b^r for r = 0,...,n. The exponent of a decreases as the exponent of b increases.",
+      "prerequisite_ids": [
+        "math-11-quadratic-equations"
+      ],
+      "misconception_chunk_ids": [
+        "math11-binomial-general-term-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-straight-line-slope",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Straight Lines",
+      "name": "Slope and point-slope equation",
+      "description": "The slope of a non-vertical line through (x₁,y₁) and (x₂,y₂) is (y₂−y₁)/(x₂−x₁). A line of slope m through (x₁,y₁) has equation y−y₁ = m(x−x₁). A vertical line has undefined slope and equation x = constant.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math11-straight-line-slope-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-sample-space-probability",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Probability",
+      "name": "Sample spaces and event probability",
+      "description": "For equally likely outcomes in a finite sample space, P(A) = number of outcomes in A divided by total outcomes. An event is a subset of the sample space. First define the outcomes carefully; equally likely counting does not apply if outcomes have unequal probabilities.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math11-sample-space-probability-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-set-operations",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Sets",
+      "name": "Union, intersection, and complement",
+      "description": "The union A∪B contains elements in A or B or both; the intersection A∩B contains elements common to both. A complement depends on a stated universal set. Venn diagrams help represent overlap and avoid double-counting.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-11-set-operations-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-complex-modulus",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Complex Numbers",
+      "name": "Modulus and conjugate",
+      "description": "For z=a+ib, its conjugate is z̄=a−ib and modulus is |z|=√(a²+b²). The product z z̄=a²+b²=|z|² is real and non-negative. Complex conjugation reverses the sign of the imaginary part.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-11-complex-modulus-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-mathematical-induction",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Principle of Mathematical Induction",
+      "name": "Base case and inductive step",
+      "description": "A proof by induction has a base case and an inductive step. First establish the statement for the starting integer. Then assume it holds for an arbitrary n in the domain and prove it for n+1. This establishes the statement for all integers from the base onward.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-11-mathematical-induction-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-permutations-combinations",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Permutations and Combinations",
+      "name": "Choosing and arranging objects",
+      "description": "A permutation counts ordered selections; a combination counts selections where order does not matter. For n distinct objects chosen r at a time, nPr=n!/(n−r)! and nCr=n!/[r!(n−r)!]. The question’s meaning determines which count applies.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-11-permutations-combinations-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-circle-equation",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Conic Sections",
+      "name": "Circle equation and centre-radius form",
+      "description": "A circle is the set of points at fixed distance r from a centre (h,k). Its standard equation is (x−h)²+(y−k)²=r². Completing squares converts many general quadratic equations into this form, when the x² and y² coefficients match and there is no xy term.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-11-circle-equation-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-derivative-limit",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Limits and Derivatives",
+      "name": "Derivative as a limit",
+      "description": "The derivative at a point is the limiting rate of change: f′(a)=lim(h→0)[f(a+h)−f(a)]/h when the limit exists. Geometrically it is the tangent slope; in motion, it can represent instantaneous velocity from position.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-11-derivative-limit-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-linear-inequalities",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Linear Inequalities",
+      "name": "Graphical solution of two-variable inequalities",
+      "description": "A linear inequality in x and y describes a half-plane bounded by its boundary line. Use a solid boundary for ≤ or ≥ and a dashed boundary for < or >. Test a point not on the line to determine which side satisfies the inequality.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-11-linear-inequalities-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-complement-events",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Probability",
+      "name": "Complementary events",
+      "description": "The complement A′ contains outcomes in the sample space that are not in A. Since A and A′ are disjoint and exhaustive, P(A′)=1−P(A). Complement reasoning is useful when counting “at least one” events is harder than counting “none.”",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "math-11-complement-events-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    }
+  ]
+}

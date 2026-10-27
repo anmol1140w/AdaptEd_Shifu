@@ -32,6 +32,7 @@ from .infrastructure.ai.llm import (
     CuratedTutorFallback,
     DeterministicQuizGenerator,
     DeterministicTutorGenerator,
+    OllamaCloudGenerator,
 )
 from .infrastructure.ai.retrieval import InMemoryLearningRetriever
 from .infrastructure.ai.validators import StructuredLearningOutputValidator
@@ -82,8 +83,12 @@ def build_in_memory_assessment_runtime(
     session_id_prefix: str = "session",
     grader: AssessmentGraderPort | None = None,
     sources: Iterable[RetrievedSource] = (),
+    retriever: RetrievalPort | None = None,
+    tutor_generator: TutorGenerationPort | None = None,
+    quiz_generator: QuizGenerationPort | None = None,
+    use_ollama_cloud: bool = False,
 ) -> InMemoryAssessmentRuntime:
-    """Build a complete assessment runtime without a database or HTTP server."""
+    """Build a local runtime; optionally use Qdrant and Ollama Cloud AI adapters."""
 
     concept_list = tuple(concepts)
     subject_name_map = dict(subject_names)
@@ -110,7 +115,10 @@ def build_in_memory_assessment_runtime(
     mastery_states = InMemoryMasteryStates()
     recommendations = InMemoryRecommendations()
     ai_audit = InMemoryAIAudit()
-    retriever = InMemoryLearningRetriever(sources)
+    active_retriever = retriever or InMemoryLearningRetriever(sources)
+    ollama_generator = OllamaCloudGenerator() if use_ollama_cloud else None
+    active_tutor_generator = tutor_generator or ollama_generator or DeterministicTutorGenerator()
+    active_quiz_generator = quiz_generator or ollama_generator or DeterministicQuizGenerator()
     validator = StructuredLearningOutputValidator()
     learning_engine = LearningEngine(concept_list)
     start_assessment = StartAssessment(
@@ -139,8 +147,8 @@ def build_in_memory_assessment_runtime(
     )
     provide_tutor_support = ProvideTutorSupport(
         concepts=concept_catalog,
-        retriever=retriever,
-        generator=DeterministicTutorGenerator(),
+        retriever=active_retriever,
+        generator=active_tutor_generator,
         fallback_generator=CuratedTutorFallback(),
         validator=validator,
         audit=ai_audit,
@@ -149,8 +157,8 @@ def build_in_memory_assessment_runtime(
     )
     generate_weak_area_quiz = GenerateWeakAreaQuiz(
         concepts=concept_catalog,
-        retriever=retriever,
-        generator=DeterministicQuizGenerator(),
+        retriever=active_retriever,
+        generator=active_quiz_generator,
         fallback_generator=CuratedQuizFallback(),
         validator=validator,
         audit=ai_audit,

@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "subject": "Chemistry",
+  "class": 12,
+  "concepts": [
+    {
+      "concept_id": "chem-12-solutions-colligative-properties",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Solutions",
+      "name": "Colligative properties and molar mass",
+      "description": "Colligative properties depend on the number of dissolved solute particles relative to solvent particles, rather than the solute's chemical identity in the ideal dilute model. Examples include relative lowering of vapour pressure, boiling-point elevation, freezing-point depression, and osmotic pressure. Dissociation or association can change the effective particle count.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-12-solutions-colligative-properties-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-electrochemical-cells",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Electrochemistry",
+      "name": "Galvanic cells and cell potential",
+      "description": "A galvanic cell converts energy from a spontaneous redox reaction into electrical energy. Oxidation occurs at the anode and reduction at the cathode. Under standard conditions, E°cell = E°cathode - E°anode when tabulated reduction potentials are used; a positive value indicates spontaneity for the cell reaction as written under those conditions.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-12-electrochemical-cells-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-chemical-kinetics-rate-law",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Chemical Kinetics",
+      "name": "Rate laws and reaction order",
+      "description": "A rate law expresses how reaction rate depends on reactant concentrations, usually as rate = k[A]^m[B]^n. The exponents are determined experimentally and their sum is the overall order. The rate-law exponents cannot generally be read directly from the balanced equation unless the reaction is an elementary step.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-12-chemical-kinetics-rate-law-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-nernst-equation",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Electrochemistry",
+      "name": "Nernst equation and concentration effects",
+      "description": "The Nernst equation relates cell potential to concentrations and temperature. At 298 K, E = E° − (0.0591/n)log₁₀Q for a reaction involving n electrons. Q is built from activities (often approximated by concentrations) of products over reactants; pure solids and liquids are omitted.",
+      "prerequisite_ids": [
+        "chem-12-electrochemical-cells"
+      ],
+      "misconception_chunk_ids": [
+        "chem12-nernst-equation-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-coordination-basics",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Coordination Compounds",
+      "name": "Ligands, coordination number, and naming",
+      "description": "A coordination entity contains a central atom or ion bonded to surrounding ligands through coordinate bonds. The coordination number counts donor atoms directly attached to the central species, not simply the number of ligand names; a multidentate ligand can attach at several sites.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem12-coordination-basics-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-amine-basicity",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Amines",
+      "name": "Basicity of amines",
+      "description": "Amines can accept a proton because nitrogen has a lone pair. Basicity depends on how available that lone pair is, as well as solvent stabilization and structural effects. In aqueous solution, comparisons should account for both electron donation and solvation of the resulting ammonium ion.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem12-amine-basicity-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-transition-metal-properties",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "d- and f-Block Elements",
+      "name": "Transition-metal oxidation states and colour",
+      "description": "Transition elements often show variable oxidation states because ns and (n−1)d electrons can have similar energies. Many ions are coloured when electronic transitions absorb visible light; d⁰ and d¹⁰ ions are often colourless in simple cases, though other effects can matter.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-12-transition-metal-properties-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-nucleophilic-substitution",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Haloalkanes and Haloarenes",
+      "name": "Nucleophilic substitution",
+      "description": "In nucleophilic substitution, a nucleophile donates an electron pair to replace a leaving group. Rate and mechanism depend on substrate structure, nucleophile, solvent, and conditions. The SN2 pathway is concerted and is favoured by less hindered substrates in suitable conditions.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-12-nucleophilic-substitution-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-proteins-peptide-bond",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Biomolecules",
+      "name": "Proteins, amino acids, and peptide bonds",
+      "description": "Proteins are polymers built from amino-acid residues joined by peptide bonds. The sequence of residues is a primary structure; folding produces higher levels of structure that support function. Changes in temperature or pH can disrupt interactions and alter protein shape.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-12-proteins-peptide-bond-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-alcohol-phenol-ether-groups",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Alcohols, Phenols and Ethers",
+      "name": "Alcohols, phenols, and ethers: functional groups",
+      "description": "Alcohols contain an –OH group bonded to a saturated carbon; phenols have –OH directly attached to an aromatic ring; ethers contain an oxygen between two carbon groups. These structural differences affect acidity, hydrogen bonding, boiling points, and characteristic reactions.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-12-alcohol-phenol-ether-groups-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-carbonyl-group",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+      "name": "Aldehydes and ketones: carbonyl group",
+      "description": "The carbonyl group C=O is polar because oxygen attracts electron density. In aldehydes, the carbonyl carbon is bonded to at least one hydrogen; in ketones, it is bonded to two carbon groups. This polarity helps explain nucleophilic addition reactions.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-12-carbonyl-group-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-carboxylic-acid",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+      "name": "Carboxylic acids and acidity",
+      "description": "Carboxylic acids contain the –COOH group. They donate a proton to form a carboxylate ion; resonance delocalization stabilizes that conjugate base. Electron-withdrawing substituents near the group can increase acidity by stabilizing the negative charge.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-12-carboxylic-acid-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-coordination-isomerism",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Coordination Compounds",
+      "name": "Geometrical isomerism in coordination compounds",
+      "description": "Coordination compounds can have the same overall composition but different spatial arrangements of ligands. Geometrical isomerism includes cis/trans arrangements in suitable square-planar or octahedral complexes. Isomerism depends on the coordination geometry and ligand positions.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-12-coordination-isomerism-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-12-diazonium-salts",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Amines",
+      "name": "Diazonium salts in aromatic synthesis",
+      "description": "Aromatic diazonium salts are prepared from primary aromatic amines under cold conditions and provide a useful route to substituted aromatic compounds. The diazonium group can be replaced by several groups under suitable reaction conditions, making these salts valuable synthetic intermediates.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-12-diazonium-salts-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    }
+  ]
+}

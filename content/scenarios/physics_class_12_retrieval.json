@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "scenario-phy_class12-retrieval-and-practice",
+  "title": "Physics Class 12: explain, retrieve, and check understanding",
+  "subject": "Physics",
+  "class": 12,
+  "seed_id": "seed-phy_class12-learner-evidence",
+  "learner_id": "learner-phy_class12-1",
+  "focus_concept_id": "phy-12-ohms-law",
+  "learner_prompt": "I am unsure about ohm's law and resistance. Can you explain the main idea and help me try a question?",
+  "retrieval_expectations": {
+    "required_subject": "Physics",
+    "required_class": 12,
+    "concept_id": "phy-12-ohms-law",
+    "expected_chunk_ids": [
+      "phy12-ohm-explanation-001",
+      "phy12-ohm-example-001"
+    ],
+    "required_reference_id": "adapted-original-physics-12"
+  },
+  "expected_flow": [
+    "retrieve the linked explanation or worked example",
+    "answer using retrieved material and cite its source reference",
+    "offer a suitable linked practice item",
+    "record learner response as evidence for this concept"
+  ],
+  "synthetic": true
+}
