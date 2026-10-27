@@ -58,6 +58,38 @@ The current learning flow supports PCM for Classes 11 and 12. Subject and concep
 
 ## Application status and local run
 
+### Start the full app (Windows, macOS, or Linux)
+
+The easiest way to run the complete app is with Docker Desktop (Windows/macOS) or Docker Engine plus the Docker Compose plugin (Linux). No host-installed Python, Node.js, or PostgreSQL is needed.
+
+1. Install and start Docker Desktop / Docker Engine.
+2. From the repository folder, run the matching command:
+
+   **Windows PowerShell**
+   ```powershell
+   .\scripts\start.ps1
+   ```
+
+   **Windows Command Prompt**
+   ```bat
+   scripts\start.bat
+   ```
+
+   **macOS / Linux**
+   ```sh
+   sh scripts/start.sh
+   ```
+
+The first start creates an ignored root `.env` with private random database and session-signing secrets, builds the containers, and starts PostgreSQL, the API, and the web app. Open [http://localhost:5173](http://localhost:5173). The API health check is at [http://localhost:8000/api/v1/health](http://localhost:8000/api/v1/health). The database volume survives app/container restarts and `docker compose down`; `docker compose down --volumes` permanently deletes local database data.
+
+Email/password sign-in and the core app work without external AI credentials. To enable Google sign-in, set `ADAPTED_GOOGLE_CLIENT_ID` and `ADAPTED_GOOGLE_CLIENT_SECRET` in the root `.env`, set `VITE_GOOGLE_OAUTH_ENABLED=true`, confirm the Google OAuth redirect URI matches `ADAPTED_GOOGLE_REDIRECT_URI`, then rebuild with `docker compose up --build -d`. The OAuth client must also allow the app's browser origin. Ollama Cloud and Qdrant are optional: add their credentials to the root `.env` to enable tutor, generated quiz, and retrieval-backed features. Never commit `.env` or share its secret values.
+
+To stop the app while keeping student accounts and learning records, run `docker compose down`. To start it again, run the same platform start command. To inspect startup problems, run `docker compose logs -f backend frontend db`.
+
+By default the app binds to localhost ports 5173 and 8000. If a port is occupied, change `ADAPTED_WEB_PORT` or `ADAPTED_API_PORT` in `.env`; if changing the web origin (for example, to use the app from another device), also update `ADAPTED_FRONTEND_URL`, `ADAPTED_CORS_ORIGINS`, and the Google OAuth allowed origin. If changing the API port, update `ADAPTED_GOOGLE_REDIRECT_URI` and its authorized redirect URI in Google Cloud. A deployment exposed to the public internet needs HTTPS and production secrets/domains configured.
+
+### Manual developer run (without Docker)
+
 The repository contains a connected React and FastAPI application:
 
 - `backend/src/backend/` — FastAPI routes, PostgreSQL persistence, sign-in, adaptive assessments, AI support and teacher review.
@@ -73,6 +105,8 @@ uv sync
 uv run backend
 ```
 
+For a local PostgreSQL service, copy `backend/.env.example` to `backend/.env`, then run `bash scripts/setup-local-postgres.sh` from the repository root. It creates the app's `adapted_user` role and `adapted` database using the password in the ignored `backend/.env`; `sudo` will ask for your local administrator password. PostgreSQL must be running on `127.0.0.1:5432`.
+
 The API creates its schema and seeds the PCM concept/question catalog on first database access. Register a teacher with the configured invite code, create a classroom, then have student accounts join it. Teachers approve items before student assessments can use them.
 
 Run the web app from `frontend/`:
@@ -83,5 +117,7 @@ npm run dev
 ```
 
 Set `VITE_API_BASE_URL` in `frontend/.env` if the API is not at `http://localhost:8000/api/v1`. Google sign-in requires `ADAPTED_GOOGLE_CLIENT_ID`, `ADAPTED_GOOGLE_CLIENT_SECRET`, and matching redirect settings. Ollama Cloud tutor and quiz generation require `OLLAMA_API_KEY` and a configured model. NCERT grounding also requires Qdrant Cloud credentials and the `ncert_pcm_active` alias to point at an ingested collection. AI routes return a clear service error when those integrations or mapped source chunks are unavailable; they do not silently switch to another model.
+
+For Google sign-in, set the existing Web OAuth client ID and secret in `backend/.env`, register `http://localhost:8000/api/v1/auth/google/callback` as an authorized redirect URI, and set `VITE_GOOGLE_OAUTH_ENABLED=true` in `frontend/.env`. Restart both servers after changing environment files. Keep the client secret only in the ignored backend environment file.
 
 The app code is wired end to end, but a successful live demonstration still depends on a reachable database, teacher-approved questions, and a populated Qdrant collection for grounded AI support.

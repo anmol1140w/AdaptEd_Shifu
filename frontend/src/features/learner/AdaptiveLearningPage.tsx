@@ -5,15 +5,25 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useAuth } from '../../app/AuthProvider'
 import { StudentNav } from './StudentNav'
-import { askTutor, generateWeakQuiz, getAILearningRecommendations, getProgress, startAdaptiveAssessment, submitAdaptiveAttempt, type AdaptiveConcept, type AdaptiveQuestion, type AILearningRecommendation, type LearningCitation, type LearningPathStep } from '../../services/adaptiveApi'
+import { askTutor, generateWeakQuiz, getAILearningRecommendations, getLearningPreferences, getProgress, getTutorHistory, saveLearningPreferences, startAdaptiveAssessment, submitAdaptiveAttempt, type AdaptiveConcept, type AdaptiveQuestion, type AILearningRecommendation, type GeneratedWeakQuiz, type LearningCitation, type LearningPathStep, type TutorMemory } from '../../services/adaptiveApi'
 import './adaptive-learning.css'
 
 const subjects = [{ id: 'physics', label: 'Physics' }, { id: 'chemistry', label: 'Chemistry' }, { id: 'mathematics', label: 'Mathematics' }]
+const tutorModes = [
+  { id: 'hint', label: 'Hint', description: 'Nudge me without giving away the answer.' },
+  { id: 'explanation', label: 'Explain', description: 'Walk through the concept from the source text.' },
+  { id: 'check_question', label: 'Check my thinking', description: 'Help me test my current understanding.' },
+] as const
+
+function SourceEvidence({ source }: { source: LearningCitation }) {
+  return <details className="rag-source"><summary><span>{source.citation}</span><small>Match {Math.round(source.score * 100)}%</small></summary><p>{source.text}</p><code>{source.source_id}</code></details>
+}
 
 export function AdaptiveLearningPage() {
   const { session } = useAuth()
   const [subject, setSubject] = useState('physics')
   const [classLevel, setClassLevel] = useState(11)
+  const [preferencesLoaded, setPreferencesLoaded] = useState(false)
   const [concepts, setConcepts] = useState<AdaptiveConcept[]>([])
   const [learningPath, setLearningPath] = useState<LearningPathStep[]>([])
   const [selectedConcept, setSelectedConcept] = useState('')
@@ -28,8 +38,10 @@ export function AdaptiveLearningPage() {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [tutorQuestion, setTutorQuestion] = useState('')
-  const [tutor, setTutor] = useState<{ message: string; check_question: string; citations: { source_id: string; citation: string; text: string; score: number }[] } | null>(null)
-  const [quizNotice, setQuizNotice] = useState('')
+  const [tutorMode, setTutorMode] = useState<'hint' | 'explanation' | 'check_question'>('explanation')
+  const [tutor, setTutor] = useState<{ message: string; check_question: string; citations: LearningCitation[]; provider: string } | null>(null)
+  const [tutorHistory, setTutorHistory] = useState<TutorMemory[]>([])
+  const [quizResult, setQuizResult] = useState<GeneratedWeakQuiz | null>(null)
   const [aiRecommendations, setAiRecommendations] = useState<AILearningRecommendation[]>([])
   const [recommendationCitations, setRecommendationCitations] = useState<LearningCitation[]>([])
   const [recommendationNotice, setRecommendationNotice] = useState('')
@@ -43,7 +55,30 @@ export function AdaptiveLearningPage() {
       setError('')
     } catch (reason) { setError(reason instanceof Error ? reason.message : 'Could not load learning progress.') }
   }
+  useEffect(() => {
+    let active = true
+    getLearningPreferences().then(({ preferences }) => {
+      if (!active) return
+      setSubject(preferences.subject)
+      setClassLevel(preferences.class_level)
+      setPreferencesLoaded(true)
+    }).catch(() => { if (active) setPreferencesLoaded(true) })
+    return () => { active = false }
+  }, [])
+  useEffect(() => {
+    if (!preferencesLoaded) return
+    const timeout = window.setTimeout(() => { void saveLearningPreferences(subject, classLevel).catch(() => {}) }, 300)
+    return () => window.clearTimeout(timeout)
+  }, [subject, classLevel, preferencesLoaded])
   useEffect(() => { setSelectedConcept(''); void refresh() }, [subject, classLevel])
+  useEffect(() => {
+    if (!selectedConcept) { setTutorHistory([]); return }
+    let active = true
+    getTutorHistory(subject, classLevel, selectedConcept)
+      .then((data) => { if (active) setTutorHistory(data.items) })
+      .catch(() => { if (active) setTutorHistory([]) })
+    return () => { active = false }
+  }, [selectedConcept, subject, classLevel])
 
   const selected = useMemo(() => concepts.find((concept) => concept.concept_id === selectedConcept), [concepts, selectedConcept])
   if (!session) return <Navigate to="/sign-in" replace />
@@ -74,17 +109,22 @@ export function AdaptiveLearningPage() {
     event.preventDefault()
     if (!selected || !tutorQuestion.trim()) return
     setBusy(true); setError(''); setTutor(null)
-    try { setTutor(await askTutor({ subject, class_level: classLevel, concept_id: selected.concept_id, question: tutorQuestion, mode: 'explanation' })) }
+    try {
+      const answer = await askTutor({ subject, class_level: classLevel, concept_id: selected.concept_id, question: tutorQuestion, mode: tutorMode })
+      setTutor(answer)
+      setTutorQuestion('')
+      void getTutorHistory(subject, classLevel, selected.concept_id).then((history) => setTutorHistory(history.items)).catch(() => {})
+    }
     catch (reason) { setError(reason instanceof Error ? reason.message : 'Tutor support is unavailable.') }
     finally { setBusy(false) }
   }
 
   const makeQuiz = async () => {
     if (!selected) return
-    setBusy(true); setError(''); setQuizNotice('')
+    setBusy(true); setError(''); setQuizResult(null)
     try {
       const draft = await generateWeakQuiz({ subject, class_level: classLevel, concept_id: selected.concept_id, item_count: 5 })
-      setQuizNotice(`Generated ${draft.question_count} questions. They are saved for teacher review before students can attempt them.`)
+      setQuizResult(draft)
     } catch (reason) { setError(reason instanceof Error ? reason.message : 'Could not generate a quiz.') }
     finally { setBusy(false) }
   }
@@ -106,7 +146,7 @@ export function AdaptiveLearningPage() {
       <label>Class <select value={classLevel} onChange={(event) => setClassLevel(Number(event.target.value))}><option value={11}>Class 11</option><option value={12}>Class 12</option></select></label>
     </section>
     {error && <div className="adaptive-alert" role="alert">{error}</div>}
-    <section className="adaptive-path-card"><div className="path-title"><span className="adaptive-kicker">YOUR RECOMMENDED PATH</span><b>Small steps, in the right order</b><small>Prerequisites come first. Your results update this path after each assessment.</small><Button variant="neutral" disabled={busy} onClick={() => void requestRecommendations()}>{busy ? <LoaderCircle className="spin" size={15} /> : <Sparkles size={15} />} Get AI study recommendations</Button></div>{learningPath.slice(0, 4).map((step, index) => <article className="path-step" key={step.concept_id}><span className="path-step-number">{String(index + 1).padStart(2, '0')}</span><div><b>{step.name}</b><small>{step.chapter} · {step.action}</small></div><span className={`path-status status-${step.mastery_status}`}>{step.mastery_status.replaceAll('_', ' ')}</span></article>)}{recommendationNotice && <p className="recommendation-status">{recommendationNotice}</p>}{aiRecommendations.map((item) => <article className="ai-recommendation" key={item.concept_id}><b>{item.concept_name} · {item.chapter}</b><p>{item.action}</p><small>{item.reason}</small>{item.source_ids.map((sourceId) => { const source = recommendationCitations.find((citation) => citation.source_id === sourceId); return source ? <details key={sourceId}><summary>NCERT source: {source.citation}</summary><p>{source.text}</p></details> : null })}</article>)}</section>
+    <section className="adaptive-path-card"><div className="path-title"><span className="adaptive-kicker">YOUR RECOMMENDED PATH</span><b>Small steps, in the right order</b><small>Prerequisites come first. Your results update this path after each assessment.</small><Button variant="neutral" disabled={busy} onClick={() => void requestRecommendations()}>{busy ? <LoaderCircle className="spin" size={15} /> : <Sparkles size={15} />} Get AI study recommendations</Button></div>{learningPath.slice(0, 4).map((step, index) => <article className="path-step" key={step.concept_id}><span className="path-step-number">{String(index + 1).padStart(2, '0')}</span><div><b>{step.name}</b><small>{step.chapter} · {step.action}</small></div><span className={`path-status status-${step.mastery_status}`}>{step.mastery_status.replaceAll('_', ' ')}</span></article>)}{recommendationNotice && <p className="recommendation-status">{recommendationNotice}</p>}{aiRecommendations.map((item) => <article className="ai-recommendation" key={item.concept_id}><b>{item.concept_name} · {item.chapter}</b><p>{item.action}</p><small>{item.reason}</small>{item.source_ids.map((sourceId) => { const source = recommendationCitations.find((citation) => citation.source_id === sourceId); return source ? <SourceEvidence key={sourceId} source={source} /> : null })}</article>)}</section>
     <div className="adaptive-grid">
       <section className="adaptive-card progress-card"><div className="adaptive-card-heading"><div><span className="adaptive-kicker">CONCEPT MASTERY</span><h2>Know what to work on</h2></div><BookOpenCheck size={20} /></div>
         {concepts.length ? <div className="concept-progress-list">{concepts.map((concept) => <button key={concept.concept_id} className={`concept-progress-row ${selectedConcept === concept.concept_id ? 'selected' : ''}`} onClick={() => { setSelectedConcept(concept.concept_id); setTutor(null); setResult(null) }}><span className="concept-progress-copy"><b>{concept.name}</b><small>{concept.chapter} · {concept.attempts ?? 0} attempts</small></span><span className={`mastery-pill mastery-${concept.mastery_status ?? 'new'}`}>{concept.attempts ? `${Math.round((concept.accuracy ?? 0) * 100)}%` : 'New'}</span></button>)}</div> : <p className="adaptive-empty">Loading your PCM concept map…</p>}
@@ -114,7 +154,7 @@ export function AdaptiveLearningPage() {
       <section className="adaptive-card practice-card"><div className="adaptive-card-heading"><div><span className="adaptive-kicker">TARGETED ASSESSMENT</span><h2>{question ? `Question ${questionIndex}` : result ? 'Assessment complete' : 'Practice at your pace'}</h2></div><Sparkles size={20} /></div>
         {question ? <form onSubmit={submit} className="adaptive-question"><div className="question-tags"><span>{question.chapter}</span><span>{question.difficulty}</span><span>Bloom · {question.bloom_level}</span></div><p>{question.question}</p><label className="adaptive-answer-label" htmlFor="adaptive-answer">Your answer</label><Input id="adaptive-answer" value={answer} disabled={busy || Boolean(feedback)} onChange={(event) => setAnswer(event.target.value)} placeholder="Show your thinking in a few words" autoComplete="off" />{feedback && <div className={`answer-feedback-box ${feedback.correct ? 'correct' : 'incorrect'}`}><b>{feedback.correct ? 'That matches the answer guide.' : 'Let’s use this as a learning signal.'}</b><p>{feedback.explanation}</p><small>Answer guide: {feedback.answerGuide}</small></div>}{feedback && nextQuestion ? <Button type="button" disabled={busy} className="adaptive-primary" onClick={() => { setQuestion(nextQuestion); setNextQuestion(null); setFeedback(null); setAnswer(''); setQuestionStartedAt(Date.now()) }}>Continue to the next question <ArrowRight size={15} /></Button> : <Button type="submit" disabled={busy || !answer.trim()} className="adaptive-primary">{busy ? <LoaderCircle className="spin" size={16} /> : <Send size={15} />} Submit answer</Button>}</form> : result ? <div className="assessment-result"><span className="result-score">{result.correct}<small> / {result.attempts}</small></span><p>{Math.round(result.accuracy * 100)}% correct. Your progress has been saved and will shape future practice.</p><Button onClick={start} className="adaptive-primary">Try another set <ArrowRight size={15} /></Button></div> : <div className="adaptive-start"><p>{selected?.recommendation ?? 'Start a short assessment. Questions will adapt to your responses and saved learning history.'}</p><Button disabled={busy} onClick={start} className="adaptive-primary">{busy ? <LoaderCircle className="spin" size={16} /> : <ArrowRight size={15} />} Start adaptive practice</Button><small>Questions are teacher-reviewed before they appear here.</small></div>}
       </section>
-      <section className="adaptive-card tutor-card"><div className="adaptive-card-heading"><div><span className="adaptive-kicker">AI STUDY ASSISTANT</span><h2>Talk through a hard idea</h2></div><CircleHelp size={20} /></div><p className="tutor-caption">Ask about {selected?.name ?? 'a PCM concept'} and get an explanation grounded in the indexed NCERT text.</p><form className="tutor-form" onSubmit={ask}><Input value={tutorQuestion} onChange={(event) => setTutorQuestion(event.target.value)} placeholder="What part feels confusing?" /><Button disabled={busy || !selected} className="adaptive-primary" aria-label="Ask tutor">{busy ? <LoaderCircle className="spin" size={16} /> : <Send size={15} />}</Button></form>{tutor && <article className="tutor-answer"><p>{tutor.message}</p><b>Check your understanding</b><p>{tutor.check_question}</p><div className="citation-list">{tutor.citations.map((citation) => <details key={citation.source_id}><summary>{citation.citation}</summary><p>{citation.text}</p></details>)}</div></article>}<div className="weak-quiz-action"><span>Need more practice on this concept?</span><Button variant="neutral" onClick={makeQuiz} disabled={busy || !selected}>Generate a quiz <Sparkles size={14} /></Button></div>{quizNotice && <div className="adaptive-success"><Check size={15} />{quizNotice}</div>}</section>
+      <section className="adaptive-card tutor-card"><div className="adaptive-card-heading"><div><span className="adaptive-kicker">RETRIEVAL-GROUNDED AI</span><h2>Study with your NCERT sources</h2></div><CircleHelp size={20} /></div><p className="tutor-caption">Choose how you want help with <b>{selected?.name ?? 'a PCM concept'}</b>. AdaptEd retrieves relevant indexed passages, then asks Ollama to answer from that evidence. Your tutor history is saved to your account.</p><div className="tutor-modes" role="group" aria-label="Choose tutor response style">{tutorModes.map((mode) => <button key={mode.id} type="button" className={tutorMode === mode.id ? 'active' : ''} aria-pressed={tutorMode === mode.id} title={mode.description} onClick={() => setTutorMode(mode.id)}>{mode.label}</button>)}</div><form className="tutor-form" onSubmit={ask}><Input value={tutorQuestion} onChange={(event) => setTutorQuestion(event.target.value)} placeholder={tutorMode === 'hint' ? 'Where are you getting stuck? I’ll give a nudge.' : tutorMode === 'check_question' ? 'What have you tried or what do you think is happening?' : 'What part feels confusing?'} /><Button disabled={busy || !selected || tutorQuestion.trim().length < 3} className="adaptive-primary" aria-label="Ask tutor">{busy ? <LoaderCircle className="spin" size={16} /> : <Send size={15} />}</Button></form>{tutor && <article className="tutor-answer"><div className="rag-answer-meta"><span>Grounded answer</span><small>{tutor.provider}</small></div><p>{tutor.message}</p><b>Check your understanding</b><p>{tutor.check_question}</p><div className="citation-list"><h3>Retrieved NCERT evidence · {tutor.citations.length} sources</h3>{tutor.citations.map((citation) => <SourceEvidence key={citation.source_id} source={citation} />)}</div></article>}{tutorHistory.length > 0 && <details className="tutor-history"><summary>Saved tutor history · {tutorHistory.length} exchanges</summary><div className="tutor-history-list">{tutorHistory.map((turn) => <article key={turn.id}><small>{turn.mode.replaceAll('_', ' ')} · {new Date(turn.created_at).toLocaleString()}</small><b>You asked</b><p>{turn.question}</p><b>AdaptEd</b><p>{turn.message}</p><b>Check your understanding</b><p>{turn.check_question}</p><div className="citation-list"><h3>Saved evidence · {turn.sources.length} sources</h3>{turn.sources.map((source) => <SourceEvidence key={source.source_id} source={source} />)}</div></article>)}</div></details>}<div className="weak-quiz-action"><span>Need more practice on {selected?.name ?? 'this concept'}?</span><Button variant="neutral" onClick={makeQuiz} disabled={busy || !selected}>{busy ? <LoaderCircle className="spin" size={14} /> : <Sparkles size={14} />} Generate cited quiz</Button></div>{quizResult && <div className="adaptive-success quiz-result"><Check size={15} /><div><b>{quizResult.question_count} question drafts created</b><p>Saved for teacher review. Once approved, they can be added to the practice bank.</p><small>Generated with {quizResult.status.replaceAll('_', ' ')} · Draft ID {quizResult.id}</small><div className="citation-list"><h3>Sources used for this quiz · {quizResult.citations.length}</h3>{quizResult.citations.map((citation) => <SourceEvidence key={citation.source_id} source={citation} />)}</div></div></div>}</section>
     </div>
   </main></div>
 }

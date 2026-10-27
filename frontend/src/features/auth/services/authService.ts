@@ -1,5 +1,5 @@
 import type { AuthProvider, AuthSession, AuthUser } from '../../../types'
-import { getSession, setAccessToken, setSession } from '../../../services/session'
+import { getSession, setSession } from '../../../services/session'
 
 /**
  * Phase 1 authentication service.
@@ -42,9 +42,9 @@ export async function completeGoogleCallback(): Promise<AuthResult<AuthSession>>
   try {
     const response = await fetch(`${API_BASE}/auth/me`, { credentials: 'include' })
     if (!response.ok) return { ok: false, message: 'Google sign-in could not be completed. Please try again.', field: 'form' }
-    const body = await response.json() as { user: { id: string; name: string; email: string; role: 'student' | 'teacher' } }
+    const body = await response.json() as { user: { id: string; name: string; email: string; role: 'student' | 'teacher'; onboarding_complete?: boolean } }
     const session: AuthSession = {
-      user: { ...body.user, onboardingComplete: false },
+      user: { ...body.user, onboardingComplete: Boolean(body.user.onboarding_complete) },
       provider: 'google',
       issuedAt: new Date().toISOString(),
       isDemo: false,
@@ -94,12 +94,11 @@ export async function signInWithPassword(input: { email: string; password: strin
   if (passwordError) return { ok: false, message: passwordError, field: 'password' }
 
   try {
-    const response = await fetch(`${API_BASE}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: input.email.trim(), password: input.password }) })
+    const response = await fetch(`${API_BASE}/auth/login`, { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: input.email.trim(), password: input.password }) })
     const body = await response.json()
     if (!response.ok) return { ok: false, message: body.detail ?? 'Could not sign in.', field: 'form' }
     const session = createSession(body.user.name, body.user.email, 'password')
-    session.user = { ...body.user, onboardingComplete: false }
-    setAccessToken(body.access_token)
+    session.user = { ...body.user, onboardingComplete: Boolean(body.user.onboarding_complete) }
     setSession(session)
     return { ok: true, data: session }
   } catch { return { ok: false, message: 'Could not reach the AdaptEd authentication server.', field: 'form' } }
@@ -126,12 +125,11 @@ export async function signUpWithPassword(input: {
   }
 
   try {
-    const response = await fetch(`${API_BASE}/auth/register`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: input.name.trim(), email: input.email.trim(), password: input.password, ...(input.teacherInviteCode?.trim() ? { teacher_invite_code: input.teacherInviteCode.trim() } : {}) }) })
+    const response = await fetch(`${API_BASE}/auth/register`, { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: input.name.trim(), email: input.email.trim(), password: input.password, ...(input.teacherInviteCode?.trim() ? { teacher_invite_code: input.teacherInviteCode.trim() } : {}) }) })
     const body = await response.json()
     if (!response.ok) return { ok: false, message: body.detail ?? 'Could not create the account.', field: 'form' }
     const session = createSession(body.user.name, body.user.email, 'password')
-    session.user = { ...body.user, onboardingComplete: false }
-    setAccessToken(body.access_token)
+    session.user = { ...body.user, onboardingComplete: Boolean(body.user.onboarding_complete) }
     setSession(session)
     return { ok: true, data: session }
   } catch { return { ok: false, message: 'Could not reach the AdaptEd authentication server.', field: 'form' } }

@@ -15,6 +15,7 @@ router = APIRouter(prefix="/classrooms", tags=["classrooms"])
 class CreateClassroomRequest(BaseModel):
     name: str = Field(min_length=1, max_length=160)
     description: str | None = Field(default=None, max_length=2000)
+    class_level: int = Field(default=12, ge=11, le=12)
 
 
 class JoinClassroomRequest(BaseModel):
@@ -41,6 +42,7 @@ def classroom_view(row, *, join_code: str | None = None) -> dict:
         "slug": row["public_slug"],
         "name": row["name"],
         "description": row["description"],
+        "class_level": row["class_level"],
         "owner_id": row["owner_id"],
         "created_at": row["created_at"],
     }
@@ -55,12 +57,17 @@ def create_classroom(payload: CreateClassroomRequest, user=Depends(teacher_only)
     classroom_id, slug, join_code = unique_values(connection)
     try:
         connection.execute(
-            "INSERT INTO classrooms (id, public_slug, name, description, owner_id, join_code_hash) VALUES (%s, %s, %s, %s, %s, %s)",
-            (classroom_id, slug, payload.name.strip(), payload.description, user["id"], hash_secret(join_code, settings.secret_key)),
+            "INSERT INTO classrooms (id, public_slug, name, description, class_level, owner_id, join_code_hash) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+            (classroom_id, slug, payload.name.strip(), payload.description, payload.class_level, user["id"], hash_secret(join_code, settings.secret_key)),
         )
         connection.execute(
             "INSERT INTO classroom_memberships (classroom_id, user_id, role) VALUES (%s, %s, 'owner')",
             (classroom_id, user["id"]),
+        )
+        connection.execute(
+            """INSERT INTO user_learning_preferences (user_id, subject, class_level) VALUES (%s, 'physics', %s)
+               ON CONFLICT (user_id) DO UPDATE SET class_level=EXCLUDED.class_level, updated_at=CURRENT_TIMESTAMP""",
+            (user["id"], payload.class_level),
         )
         connection.commit()
         row = connection.execute("SELECT * FROM classrooms WHERE id = %s", (classroom_id,)).fetchone()
@@ -84,6 +91,11 @@ def join_classroom(payload: JoinClassroomRequest, user=Depends(current_user)):
         connection.execute(
             "INSERT INTO classroom_memberships (classroom_id, user_id, role) VALUES (%s, %s, 'student')",
             (classroom["id"], user["id"]),
+        )
+        connection.execute(
+            """INSERT INTO user_learning_preferences (user_id, subject, class_level) VALUES (%s, 'physics', %s)
+               ON CONFLICT (user_id) DO UPDATE SET class_level=EXCLUDED.class_level, updated_at=CURRENT_TIMESTAMP""",
+            (user["id"], classroom["class_level"]),
         )
         connection.commit()
         already_member = False
