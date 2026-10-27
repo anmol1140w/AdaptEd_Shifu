@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "scenario-chem_class12-retrieval-and-practice",
+  "title": "Chemistry Class 12: explain, retrieve, and check understanding",
+  "subject": "Chemistry",
+  "class": 12,
+  "seed_id": "seed-chem_class12-learner-evidence",
+  "learner_id": "learner-chem_class12-1",
+  "focus_concept_id": "chem-12-electrochemical-cells",
+  "learner_prompt": "I am unsure about galvanic cells and cell potential. Can you explain the main idea and help me try a question?",
+  "retrieval_expectations": {
+    "required_subject": "Chemistry",
+    "required_class": 12,
+    "concept_id": "chem-12-electrochemical-cells",
+    "expected_chunk_ids": [
+      "chem12-galvanic-explanation-001",
+      "chem12-galvanic-example-001"
+    ],
+    "required_reference_id": "adapted-original-chemistry-12"
+  },
+  "expected_flow": [
+    "retrieve the linked explanation or worked example",
+    "answer using retrieved material and cite its source reference",
+    "offer a suitable linked practice item",
+    "record learner response as evidence for this concept"
+  ],
+  "synthetic": true
+}

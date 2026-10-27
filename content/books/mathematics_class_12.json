@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "book_id": "adapted-mathematics-12",
+  "title": "AdaptEd Mathematics Learning Book — Class 12",
+  "subject": "Mathematics",
+  "class": 12,
+  "edition": "1.0.0",
+  "language": "en",
+  "content_origin": "original_authored_material",
+  "authoring_note": "Original concise instructional content prepared for this learning platform; review by a qualified subject teacher before classroom use.",
+  "primary_reference_id": "adapted-original-mathematics-12",
+  "syllabus_reference_id": "cbse-2026-27-mathematics-041",
+  "chapters": [
+    {
+      "chapter_id": "math_class12-chapter-01",
+      "chapter_title": "Matrices",
+      "topic_id": "math-12-matrices",
+      "concept_id": "math-12-matrices",
+      "lesson_id": "lesson-math-12-matrices",
+      "chunk_ids": [
+        "math12-matrix-explanation-001",
+        "math12-matrix-example-001",
+        "math-12-matrices-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-02",
+      "chapter_title": "Applications of Derivatives",
+      "topic_id": "math-12-derivatives-applications",
+      "concept_id": "math-12-derivatives-applications",
+      "lesson_id": "lesson-math-12-derivatives-applications",
+      "chunk_ids": [
+        "math12-monotonicity-explanation-001",
+        "math12-monotonicity-example-001",
+        "math-12-derivatives-applications-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-03",
+      "chapter_title": "Integrals",
+      "topic_id": "math-12-definite-integrals",
+      "concept_id": "math-12-definite-integrals",
+      "lesson_id": "lesson-math-12-definite-integrals",
+      "chunk_ids": [
+        "math12-integral-explanation-001",
+        "math12-integral-example-001",
+        "math-12-definite-integrals-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-04",
+      "chapter_title": "Continuity and Differentiability",
+      "topic_id": "math-12-continuity-at-a-point",
+      "concept_id": "math-12-continuity-at-a-point",
+      "lesson_id": "lesson-math-12-continuity-at-a-point",
+      "chunk_ids": [
+        "math12-continuity-at-a-point-explanation-001",
+        "math12-continuity-at-a-point-example-001",
+        "math12-continuity-at-a-point-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-05",
+      "chapter_title": "Differential Equations",
+      "topic_id": "math-12-separation-of-variables",
+      "concept_id": "math-12-separation-of-variables",
+      "lesson_id": "lesson-math-12-separation-of-variables",
+      "chunk_ids": [
+        "math12-separation-of-variables-explanation-001",
+        "math12-separation-of-variables-example-001",
+        "math12-separation-of-variables-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-06",
+      "chapter_title": "Vectors",
+      "topic_id": "math-12-vector-dot-product",
+      "concept_id": "math-12-vector-dot-product",
+      "lesson_id": "lesson-math-12-vector-dot-product",
+      "chunk_ids": [
+        "math12-vector-dot-product-explanation-001",
+        "math12-vector-dot-product-example-001",
+        "math12-vector-dot-product-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-07",
+      "chapter_title": "Inverse Trigonometric Functions",
+      "topic_id": "math-12-inverse-sine",
+      "concept_id": "math-12-inverse-sine",
+      "lesson_id": "lesson-math-12-inverse-sine",
+      "chunk_ids": [
+        "math-12-inverse-sine-explanation-001",
+        "math-12-inverse-sine-example-001",
+        "math-12-inverse-sine-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-08",
+      "chapter_title": "Determinants",
+      "topic_id": "math-12-determinants-invertibility",
+      "concept_id": "math-12-determinants-invertibility",
+      "lesson_id": "lesson-math-12-determinants-invertibility",
+      "chunk_ids": [
+        "math-12-determinants-invertibility-explanation-001",
+        "math-12-determinants-invertibility-example-001",
+        "math-12-determinants-invertibility-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-09",
+      "chapter_title": "Integrals",
+      "topic_id": "math-12-integration-substitution",
+      "concept_id": "math-12-integration-substitution",
+      "lesson_id": "lesson-math-12-integration-substitution",
+      "chunk_ids": [
+        "math-12-integration-substitution-explanation-001",
+        "math-12-integration-substitution-example-001",
+        "math-12-integration-substitution-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-10",
+      "chapter_title": "Differential Equations",
+      "topic_id": "math-12-order-degree",
+      "concept_id": "math-12-order-degree",
+      "lesson_id": "lesson-math-12-order-degree",
+      "chunk_ids": [
+        "math-12-order-degree-explanation-001",
+        "math-12-order-degree-example-001",
+        "math-12-order-degree-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-11",
+      "chapter_title": "Three-Dimensional Geometry",
+      "topic_id": "math-12-direction-cosines",
+      "concept_id": "math-12-direction-cosines",
+      "lesson_id": "lesson-math-12-direction-cosines",
+      "chunk_ids": [
+        "math-12-direction-cosines-explanation-001",
+        "math-12-direction-cosines-example-001",
+        "math-12-direction-cosines-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-12",
+      "chapter_title": "Application of Integrals",
+      "topic_id": "math-12-area-between-curves",
+      "concept_id": "math-12-area-between-curves",
+      "lesson_id": "lesson-math-12-area-between-curves",
+      "chunk_ids": [
+        "math-12-area-between-curves-explanation-001",
+        "math-12-area-between-curves-worked_example-001",
+        "math-12-area-between-curves-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-13",
+      "chapter_title": "Linear Programming",
+      "topic_id": "math-12-linear-programming",
+      "concept_id": "math-12-linear-programming",
+      "lesson_id": "lesson-math-12-linear-programming",
+      "chunk_ids": [
+        "math-12-linear-programming-explanation-001",
+        "math-12-linear-programming-worked_example-001",
+        "math-12-linear-programming-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class12-chapter-14",
+      "chapter_title": "Probability",
+      "topic_id": "math-12-conditional-probability",
+      "concept_id": "math-12-conditional-probability",
+      "lesson_id": "lesson-math-12-conditional-probability",
+      "chunk_ids": [
+        "math-12-conditional-probability-explanation-001",
+        "math-12-conditional-probability-worked_example-001",
+        "math-12-conditional-probability-misconception-001"
+      ]
+    }
+  ],
+  "chapter_count": 14,
+  "lesson_content_file": "content/lessons/mathematics_class_12.json",
+  "concept_catalog_file": "content/concepts/mathematics_class_12.json",
+  "item_bank_file": "content/items/mathematics_class_12.json",
+  "supplemental_ncert_reference_ids": [
+    "ncert-lemh1",
+    "ncert-lemh2"
+  ]
+}

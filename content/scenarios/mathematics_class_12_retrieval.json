@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "scenario-math_class12-retrieval-and-practice",
+  "title": "Mathematics Class 12: explain, retrieve, and check understanding",
+  "subject": "Mathematics",
+  "class": 12,
+  "seed_id": "seed-math_class12-learner-evidence",
+  "learner_id": "learner-math_class12-1",
+  "focus_concept_id": "math-12-derivatives-applications",
+  "learner_prompt": "I am unsure about increasing and decreasing functions. Can you explain the main idea and help me try a question?",
+  "retrieval_expectations": {
+    "required_subject": "Mathematics",
+    "required_class": 12,
+    "concept_id": "math-12-derivatives-applications",
+    "expected_chunk_ids": [
+      "math12-monotonicity-explanation-001",
+      "math12-monotonicity-example-001"
+    ],
+    "required_reference_id": "adapted-original-mathematics-12"
+  },
+  "expected_flow": [
+    "retrieve the linked explanation or worked example",
+    "answer using retrieved material and cite its source reference",
+    "offer a suitable linked practice item",
+    "record learner response as evidence for this concept"
+  ],
+  "synthetic": true
+}

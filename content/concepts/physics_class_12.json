@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "subject": "Physics",
+  "class": 12,
+  "concepts": [
+    {
+      "concept_id": "phy-12-coulombs-law",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electric Charges and Fields",
+      "name": "Coulomb's law and superposition",
+      "description": "Coulomb's law gives the magnitude of the force between two point charges as F = k|q1q2|/r^2 in vacuum. Like charges repel and unlike charges attract. For several charges, calculate each force on the target charge and add the force vectors; this is the superposition principle.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-12-coulombs-law-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-ohms-law",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Current Electricity",
+      "name": "Ohm's law and resistance",
+      "description": "For an ohmic conductor at fixed physical conditions, potential difference V is proportional to current I, so V = IR. Resistance measures opposition to current and is measured in ohms. The relation is a model for ohmic behavior; not every device has a linear V-I relationship.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-12-ohms-law-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-photoelectric-effect",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Dual Nature of Radiation and Matter",
+      "name": "Photoelectric effect",
+      "description": "In the photoelectric effect, light can eject electrons from a material when its frequency exceeds a threshold frequency. Einstein's relation is K_max = hf - φ, where φ is the work function. Increasing intensity at an above-threshold frequency increases the number of emitted electrons, while frequency controls the maximum kinetic energy in the ideal introductory model.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-12-photoelectric-effect-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-capacitor-combinations",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electrostatic Potential and Capacitance",
+      "name": "Capacitors in series and parallel",
+      "description": "For capacitors in parallel, each has the same potential difference and equivalent capacitance is the sum. In series, each carries equal-magnitude charge and reciprocal capacitances add. These rules follow from the circuit connections.",
+      "prerequisite_ids": [
+        "phy-12-coulombs-law"
+      ],
+      "misconception_chunk_ids": [
+        "phy12-capacitor-combinations-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-electromagnetic-induction",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electromagnetic Induction",
+      "name": "Faraday’s law and Lenz’s law",
+      "description": "An emf is induced when magnetic flux through a circuit changes. Faraday’s law gives ε = −dΦB/dt for one loop; the negative sign expresses Lenz’s law: induced effects oppose the change in flux that produced them.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy12-electromagnetic-induction-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-thin-lenses",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Ray Optics",
+      "name": "Thin lenses and image formation",
+      "description": "For a thin lens under the usual Cartesian sign convention, the lens equation is 1/f = 1/v − 1/u. Magnification is m = v/u. The signs of object distance, image distance, and focal length indicate the physical arrangement and image type.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy12-thin-lenses-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-electric-dipole",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electric Charges and Fields",
+      "name": "Electric dipole and dipole moment",
+      "description": "An electric dipole consists of equal and opposite charges separated by a distance. Its dipole moment points from negative to positive charge and has magnitude p=qd, where d is the separation. In a uniform electric field, the dipole experiences a torque tending to align p with the field.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-12-electric-dipole-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-gauss-law",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electric Charges and Fields",
+      "name": "Gauss law and symmetric charge distributions",
+      "description": "Gauss law states that electric flux through a closed surface equals enclosed charge divided by ε₀. It is especially useful when charge distributions have spherical, cylindrical, or planar symmetry, allowing the field magnitude to be constant over useful parts of a Gaussian surface.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-12-gauss-law-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-emf-internal-resistance",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Current Electricity",
+      "name": "Emf and internal resistance",
+      "description": "A real cell can be modelled as emf ε in series with internal resistance r. When it supplies current I, terminal voltage is V=ε−Ir. The emf is energy supplied per unit charge, while terminal voltage is the potential difference available at the external terminals.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-12-emf-internal-resistance-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-magnetic-force",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Moving Charges and Magnetism",
+      "name": "Magnetic force on a moving charge",
+      "description": "A charge q moving with velocity v in magnetic field B experiences force F=q(v×B), with magnitude |q|vB sinθ. The force is perpendicular to velocity and field, so it changes direction of motion but does no work in a static magnetic field.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-12-magnetic-force-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-ac-rms",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Alternating Current",
+      "name": "RMS value and AC power",
+      "description": "For a sinusoidal alternating current, the rms value is the equivalent steady current that would produce the same average heating in a resistor. Irms=I₀/√2 and Vrms=V₀/√2. For a pure resistor, average power is Vrms Irms.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-12-ac-rms-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-binding-energy",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Nuclei",
+      "name": "Mass defect and binding energy",
+      "description": "The mass of a bound nucleus is less than the sum of the masses of its separated nucleons. The mass defect Δm corresponds to binding energy E=Δmc². Binding energy per nucleon helps compare nuclear stability, with a broad maximum among medium-mass nuclei.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-12-binding-energy-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-young-double-slit",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Wave Optics",
+      "name": "Young double-slit interference",
+      "description": "In Young’s double-slit experiment, coherent light from two slits produces alternating bright and dark fringes. For small angles, fringe width is β=λD/d, where λ is wavelength, D is screen distance, and d is slit separation. Increasing λ or D widens fringes; increasing d narrows them.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-12-young-double-slit-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-em-spectrum",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electromagnetic Waves",
+      "name": "Electromagnetic spectrum and wave properties",
+      "description": "Electromagnetic waves are transverse waves of coupled electric and magnetic fields and can propagate through vacuum. In vacuum they travel at c; the spectrum is ordered by frequency or wavelength, with c=fλ. Higher frequency means shorter wavelength at fixed c.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-12-em-spectrum-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    }
+  ]
+}

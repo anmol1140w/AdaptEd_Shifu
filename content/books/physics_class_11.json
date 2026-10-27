@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "book_id": "adapted-physics-11",
+  "title": "AdaptEd Physics Learning Book — Class 11",
+  "subject": "Physics",
+  "class": 11,
+  "edition": "1.0.0",
+  "language": "en",
+  "content_origin": "original_authored_material",
+  "authoring_note": "Original concise instructional content prepared for this learning platform; review by a qualified subject teacher before classroom use.",
+  "primary_reference_id": "adapted-original-physics-11",
+  "syllabus_reference_id": "cbse-2026-27-physics-042",
+  "chapters": [
+    {
+      "chapter_id": "phy_class11-chapter-01",
+      "chapter_title": "Laws of Motion",
+      "topic_id": "phy-11-newtons-second-law",
+      "concept_id": "phy-11-newtons-second-law",
+      "lesson_id": "lesson-phy-11-newtons-second-law",
+      "chunk_ids": [
+        "phy11-newtons-law-explanation-001",
+        "phy11-newtons-law-example-001",
+        "phy-11-newtons-second-law-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-02",
+      "chapter_title": "Motion in a Plane",
+      "topic_id": "phy-11-projectile-motion",
+      "concept_id": "phy-11-projectile-motion",
+      "lesson_id": "lesson-phy-11-projectile-motion",
+      "chunk_ids": [
+        "phy11-projectile-explanation-001",
+        "phy11-projectile-example-001",
+        "phy-11-projectile-motion-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-03",
+      "chapter_title": "Work, Energy and Power",
+      "topic_id": "phy-11-work-energy-theorem",
+      "concept_id": "phy-11-work-energy-theorem",
+      "lesson_id": "lesson-phy-11-work-energy-theorem",
+      "chunk_ids": [
+        "phy11-work-energy-explanation-001",
+        "phy11-work-energy-example-001",
+        "phy-11-work-energy-theorem-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-04",
+      "chapter_title": "Laws of Motion",
+      "topic_id": "phy-11-friction",
+      "concept_id": "phy-11-friction",
+      "lesson_id": "lesson-phy-11-friction",
+      "chunk_ids": [
+        "phy11-friction-explanation-001",
+        "phy11-friction-example-001",
+        "phy11-friction-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-05",
+      "chapter_title": "Gravitation",
+      "topic_id": "phy-11-gravitation",
+      "concept_id": "phy-11-gravitation",
+      "lesson_id": "lesson-phy-11-gravitation",
+      "chunk_ids": [
+        "phy11-gravitation-explanation-001",
+        "phy11-gravitation-example-001",
+        "phy11-gravitation-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-06",
+      "chapter_title": "Oscillations",
+      "topic_id": "phy-11-simple-harmonic-motion",
+      "concept_id": "phy-11-simple-harmonic-motion",
+      "lesson_id": "lesson-phy-11-simple-harmonic-motion",
+      "chunk_ids": [
+        "phy11-simple-harmonic-motion-explanation-001",
+        "phy11-simple-harmonic-motion-example-001",
+        "phy11-simple-harmonic-motion-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-07",
+      "chapter_title": "Units and Measurements",
+      "topic_id": "phy-11-measurement-uncertainty",
+      "concept_id": "phy-11-measurement-uncertainty",
+      "lesson_id": "lesson-phy-11-measurement-uncertainty",
+      "chunk_ids": [
+        "phy-11-measurement-uncertainty-explanation-001",
+        "phy-11-measurement-uncertainty-example-001",
+        "phy-11-measurement-uncertainty-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-08",
+      "chapter_title": "Motion in a Straight Line",
+      "topic_id": "phy-11-velocity",
+      "concept_id": "phy-11-velocity",
+      "lesson_id": "lesson-phy-11-velocity",
+      "chunk_ids": [
+        "phy-11-velocity-explanation-001",
+        "phy-11-velocity-example-001",
+        "phy-11-velocity-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-09",
+      "chapter_title": "Motion in a Plane",
+      "topic_id": "phy-11-vector-components",
+      "concept_id": "phy-11-vector-components",
+      "lesson_id": "lesson-phy-11-vector-components",
+      "chunk_ids": [
+        "phy-11-vector-components-explanation-001",
+        "phy-11-vector-components-example-001",
+        "phy-11-vector-components-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-10",
+      "chapter_title": "Laws of Motion",
+      "topic_id": "phy-11-impulse-momentum",
+      "concept_id": "phy-11-impulse-momentum",
+      "lesson_id": "lesson-phy-11-impulse-momentum",
+      "chunk_ids": [
+        "phy-11-impulse-momentum-explanation-001",
+        "phy-11-impulse-momentum-example-001",
+        "phy-11-impulse-momentum-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-11",
+      "chapter_title": "System of Particles and Rotational Motion",
+      "topic_id": "phy-11-torque-equilibrium",
+      "concept_id": "phy-11-torque-equilibrium",
+      "lesson_id": "lesson-phy-11-torque-equilibrium",
+      "chunk_ids": [
+        "phy-11-torque-equilibrium-explanation-001",
+        "phy-11-torque-equilibrium-example-001",
+        "phy-11-torque-equilibrium-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-12",
+      "chapter_title": "Thermal Properties of Matter",
+      "topic_id": "phy-11-thermal-expansion",
+      "concept_id": "phy-11-thermal-expansion",
+      "lesson_id": "lesson-phy-11-thermal-expansion",
+      "chunk_ids": [
+        "phy-11-thermal-expansion-explanation-001",
+        "phy-11-thermal-expansion-example-001",
+        "phy-11-thermal-expansion-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-13",
+      "chapter_title": "Waves",
+      "topic_id": "phy-11-standing-waves",
+      "concept_id": "phy-11-standing-waves",
+      "lesson_id": "lesson-phy-11-standing-waves",
+      "chunk_ids": [
+        "phy-11-standing-waves-explanation-001",
+        "phy-11-standing-waves-worked_example-001",
+        "phy-11-standing-waves-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class11-chapter-14",
+      "chapter_title": "System of Particles and Rotational Motion",
+      "topic_id": "phy-11-moment-of-inertia",
+      "concept_id": "phy-11-moment-of-inertia",
+      "lesson_id": "lesson-phy-11-moment-of-inertia",
+      "chunk_ids": [
+        "phy-11-moment-of-inertia-explanation-001",
+        "phy-11-moment-of-inertia-worked_example-001",
+        "phy-11-moment-of-inertia-misconception-001"
+      ]
+    }
+  ],
+  "chapter_count": 14,
+  "lesson_content_file": "content/lessons/physics_class_11.json",
+  "concept_catalog_file": "content/concepts/physics_class_11.json",
+  "item_bank_file": "content/items/physics_class_11.json",
+  "supplemental_ncert_reference_ids": [
+    "ncert-keph1",
+    "ncert-keph2"
+  ]
+}
