@@ -16,7 +16,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
 
 export type AdaptiveConcept = {
   concept_id: string; subject: string; class_level: number; chapter: string; name: string
-  description: string; prerequisite_ids: string[]; approved_items: number
+  description: string; prerequisite_ids: string[]; approved_items?: number; available_items?: number
   attempts?: number; correct?: number; accuracy?: number; mastery_status?: string
   recommendation?: string; last_practiced?: string | null
   learners?: number; intervention?: string
@@ -47,13 +47,13 @@ export function saveLearningPreferences(subject: string, classLevel: number) {
     method: 'PUT', body: JSON.stringify({ subject, class_level: classLevel }),
   })
 }
-export function startAdaptiveAssessment(subject: string, classLevel: number) {
+export function startAdaptiveAssessment(subject: string, classLevel: number, conceptId?: string) {
   return request<{ assessment_id: string; status: string; question_count: number; index: number; question: AdaptiveQuestion }>('/assessments/start', {
-    method: 'POST', body: JSON.stringify({ subject, class_level: classLevel, question_count: 5 }),
+    method: 'POST', body: JSON.stringify({ subject, class_level: classLevel, question_count: 5, ...(conceptId ? { concept_id: conceptId } : {}) }),
   })
 }
 export function submitAdaptiveAttempt(assessmentId: string, answer: string, timeTaken: number) {
-  return request<{ correct: boolean; answer_guide: string; explanation: string; completed: boolean; index: number; question?: AdaptiveQuestion; summary?: { attempts: number; correct: number; accuracy: number } }>(`/assessments/${assessmentId}/attempt`, {
+  return request<{ correct: boolean; answer_guide: string; explanation: string; grading: { correct: boolean; score: number; method: 'ollama' | 'exact' | 'similarity'; feedback: string }; completed: boolean; index: number; adaptation?: string; adaptation_reason?: string; question?: AdaptiveQuestion; summary?: { attempts: number; correct: number; accuracy: number } }>(`/assessments/${assessmentId}/attempt`, {
     method: 'POST', body: JSON.stringify({ answer, time_taken: timeTaken }),
   })
 }

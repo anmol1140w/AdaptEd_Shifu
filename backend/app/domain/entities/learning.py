@@ -97,6 +97,7 @@ class AssessmentItem:
     misconception_tag: str | None = None
     source_id: str | None = None
     approved: bool = True
+    bloom_level: int = 1
 
     def __post_init__(self) -> None:
         for field_name in ("id", "subject_id", "concept_id", "question", "answer"):
@@ -106,6 +107,8 @@ class AssessmentItem:
             object.__setattr__(self, "difficulty", Difficulty(self.difficulty))
         if not isinstance(self.approved, bool):
             raise ValueError("approved must be a boolean")
+        if isinstance(self.bloom_level, bool) or not 1 <= self.bloom_level <= 6:
+            raise ValueError("bloom level must be an integer from 1 through 6")
 
 
 @dataclass(frozen=True, slots=True)
