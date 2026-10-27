@@ -25,6 +25,16 @@ export type AdaptiveQuestion = {
   item_id: string; concept_id: string; subject: string; class_level: number
   chapter: string; item_type: string; bloom_level: string; difficulty: string; question: string
 }
+export type TopicScore = {
+  topic: string
+  attempts: number
+  correct: number
+  accuracy: number
+  mastery_score: number
+  confidence: number
+  trend: string
+}
+export type TopicScores = Record<string, TopicScore>
 export type LearningPathStep = { concept_id: string; name: string; chapter: string; mastery_status: string; action: string; reason: string }
 export type LearnerSummary = { learner_id: string; name: string; attempts: number; accuracy: number; weak_concepts: string[]; intervention: string }
 export type AILearningRecommendation = { concept_id: string; concept_name: string; chapter: string; action: string; reason: string; source_ids: string[] }
@@ -65,11 +75,11 @@ export function startAdaptiveAssessment(subject: string, classLevel: number, con
   })
 }
 export function submitAdaptiveAttempt(assessmentId: string, answer: string, timeTaken: number) {
-  return request<{ correct: boolean; answer_guide: string; explanation: string; grading: { correct: boolean; score: number; method: 'ollama' | 'exact' | 'similarity'; feedback: string }; completed: boolean; index: number; adaptation?: string; adaptation_reason?: string; question?: AdaptiveQuestion; summary?: { attempts: number; correct: number; accuracy: number } }>(`/assessments/${assessmentId}/attempt`, {
+  return request<{ correct: boolean; answer_guide: string; explanation: string; grading: { correct: boolean; score: number; method: 'ollama' | 'exact' | 'similarity'; feedback: string }; completed: boolean; index: number; adaptation?: string; adaptation_reason?: string; question?: AdaptiveQuestion; summary?: { attempts: number; correct: number; accuracy: number; topic_scores: TopicScores } }>(`/assessments/${assessmentId}/attempt`, {
     method: 'POST', body: JSON.stringify({ answer, time_taken: timeTaken }),
   })
 }
-export function askTutor(input: { subject: string; class_level: number; concept_id: string; question: string; mode: 'hint' | 'explanation' | 'check_question' }) {
+export function askTutor(input: { subject: string; class_level: number; concept_id: string; question: string; mode: 'hint' | 'explanation' | 'check_question'; topic_scores?: TopicScores }) {
   return request<{ id: string; message: string; check_question: string; citations: LearningCitation[]; provider: string }>('/ai/tutor', {
     method: 'POST', body: JSON.stringify(input),
   })

@@ -12,6 +12,7 @@ import { TeacherQuizAttemptPage, TopicQuizAttemptPage, TopicQuizzesPage } from '
 import { TeacherDashboardPage, TeacherLoginPage } from '../teacher/TeacherPages'
 import { StudentProfilePage } from '../profile/StudentProfilePage'
 import { AdaptiveLearningPage } from '../learner/AdaptiveLearningPage'
+import { AITutoringPage } from '../learner/AITutoringPage'
 import { TeacherLearningDashboard } from '../teacher/TeacherLearningDashboard'
 import { ACADEMIC_YEARS, CLASS_LEVELS, EXAM_TARGETS, JEE_SUBJECTS, subjectLabel } from '../onboarding/services/classroomService'
 import type { AuthSession, ClassLevel, Classroom, CreateClassroomInput, ExamTarget, JeeSubjectId, StudentClassLevel, StudentImprovementSubject, StudentJeeGoal, StudentLearningStyle, StudentOnboardingProfile, StudentStrengthSubject } from '../../types'
@@ -343,6 +344,7 @@ export function PhaseOneApp() {
     <Route path="/classroom/join" element={<Protected><JoinClassroomPage /></Protected>} />
     <Route path="/classroom/created" element={<ProtectedTeacher><CreatedPage /></ProtectedTeacher>} />
     <Route path="/student/learn" element={<Protected><AdaptiveLearningPage /></Protected>} />
+    <Route path="/student/ai-tutoring" element={<Protected><AITutoringPage /></Protected>} />
     <Route path="/student/profile" element={<ProtectedStudentProfile><StudentProfilePage /></ProtectedStudentProfile>} />
     <Route path="/student/problems" element={<Protected><TopicWiseProblemsPage /></Protected>} />
     <Route path="/student/topics/:subject/:slug" element={<Protected><TopicProblemsPage /></Protected>} />
