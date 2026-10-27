@@ -93,6 +93,31 @@ class AIAdapterTests(unittest.TestCase):
                 sources=(self.source,),
             )
 
+    def test_validator_rejects_textual_spoiler_even_when_flag_is_false(self) -> None:
+        request = TutorRequest(
+            learner_id="learner-riya",
+            subject_id="maths-9",
+            concept_id="ALG-DIST-01",
+            mode=TutorMode.HINT,
+        )
+        spoiler = TutorDraft(
+            mode=TutorMode.HINT,
+            message="The answer is -2x - 6.",
+            check_question="What did you get?",
+            source_ids=(self.source.source_id,),
+            confidence=0.9,
+            teacher_review_required=False,
+            answer_revealed=False,
+            provider="test",
+        )
+
+        with self.assertRaises(AIValidationError):
+            self.validator.validate_tutor(
+                request=request,
+                draft=spoiler,
+                sources=(self.source,),
+            )
+
     def test_quiz_generator_keeps_requested_concept_and_count(self) -> None:
         request = QuizRequest(
             learner_id="learner-riya",

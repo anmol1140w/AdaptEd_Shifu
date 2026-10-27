@@ -13,6 +13,8 @@ if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from backend.app.api.v1.routes.assessment import LearnerRequestContext
+from backend.app.api.v1.routes.teacher_interventions import TeacherRequestContext
+from backend.app.application.ports.ai import RetrievedSource
 from backend.app.bootstrap import InMemoryAssessmentRuntime, build_in_memory_assessment_runtime
 from backend.app.domain.entities.learning import AssessmentItem, Concept, Difficulty
 
@@ -50,9 +52,46 @@ def build_demo_runtime() -> InMemoryAssessmentRuntime:
     return build_in_memory_assessment_runtime(
         learner_ids=("learner-riya", "learner-arjun"),
         concepts=(concept,),
-        items=(medium_item, hard_item),
+        items=(
+            medium_item,
+            AssessmentItem(
+                id="demo-item-medium-2",
+                subject_id=SUBJECT_ID,
+                concept_id=CONCEPT_ID,
+                difficulty=Difficulty.MEDIUM,
+                question="Solve x + 4 = 9.",
+                answer="x = 5",
+            ),
+            AssessmentItem(
+                id="demo-item-easy",
+                subject_id=SUBJECT_ID,
+                concept_id=CONCEPT_ID,
+                difficulty=Difficulty.EASY,
+                question="Solve x + 1 = 2.",
+                answer="x = 1",
+            ),
+            hard_item,
+            AssessmentItem(
+                id="demo-item-hard-2",
+                subject_id=SUBJECT_ID,
+                concept_id=CONCEPT_ID,
+                difficulty=Difficulty.HARD,
+                question="Solve 4(x + 1) - 3 = 25.",
+                answer="x = 6",
+            ),
+        ),
         subject_names={SUBJECT_ID: SUBJECT_NAME},
         session_id_prefix="demo-session",
+        sources=(
+            RetrievedSource(
+                source_id="demo-lesson-equations-01",
+                subject_id=SUBJECT_ID,
+                concept_id=CONCEPT_ID,
+                title="Two-step equations lesson",
+                text="Undo addition before division and check each operation.",
+                confidence=0.95,
+            ),
+        ),
     )
 
 
@@ -68,8 +107,7 @@ def run_demo() -> dict[str, Any]:
     riya_session_id = riya_start["session"]["id"]
     arjun_session_id = arjun_start["session"]["id"]
 
-    riya_submissions = [
-        _submit(
+    riya_first = _submit(
             runtime,
             learner_id="learner-riya",
             session_id=riya_session_id,
@@ -78,20 +116,18 @@ def run_demo() -> dict[str, Any]:
             item_id="demo-item-medium",
             answer="x = 5",
             hint_count=2,
-        ),
-        _submit(
+        )
+    riya_submissions = [riya_first, _submit(
             runtime,
             learner_id="learner-riya",
             session_id=riya_session_id,
             context=riya_context,
             attempt_id="demo-riya-2",
-            item_id="demo-item-medium",
+            item_id=_next_item_id(riya_first, "demo-item-medium-2"),
             answer="x = 6",
             hint_count=2,
-        ),
-    ]
-    arjun_submissions = [
-        _submit(
+        )]
+    arjun_first = _submit(
             runtime,
             learner_id="learner-arjun",
             session_id=arjun_session_id,
@@ -99,35 +135,64 @@ def run_demo() -> dict[str, Any]:
             attempt_id="demo-arjun-1",
             item_id="demo-item-medium",
             answer="x = 4",
-        ),
-        _submit(
+        )
+    arjun_second = _submit(
             runtime,
             learner_id="learner-arjun",
             session_id=arjun_session_id,
             context=arjun_context,
             attempt_id="demo-arjun-2",
-            item_id="demo-item-medium",
-            answer="x = 4",
-        ),
-        _submit(
+            item_id=_next_item_id(arjun_first, "demo-item-medium-2"),
+            answer="x = 5",
+        )
+    arjun_third = _submit(
             runtime,
             learner_id="learner-arjun",
             session_id=arjun_session_id,
             context=arjun_context,
             attempt_id="demo-arjun-3",
-            item_id="demo-item-hard",
-            answer="x = 14",
-        ),
-        _submit(
+            item_id=_next_item_id(arjun_second, "demo-item-easy"),
+            answer="x = 1",
+        )
+    arjun_submissions = [arjun_first, arjun_second, arjun_third, _submit(
             runtime,
             learner_id="learner-arjun",
             session_id=arjun_session_id,
             context=arjun_context,
             attempt_id="demo-arjun-4",
-            item_id="demo-item-hard",
+            item_id=_next_item_id(arjun_third, "demo-item-hard"),
             answer="x = 14",
+        )]
+
+    tutor = runtime.support_api.tutor(
+        {
+            "contract_version": "v1",
+            "learner_id": "learner-riya",
+            "subject_id": SUBJECT_ID,
+            "concept_id": CONCEPT_ID,
+            "mode": "hint",
+            "learner_answer": "x = 6",
+        },
+        context=riya_context,
+    )
+    quiz = runtime.support_api.weak_area_quiz(
+        {
+            "contract_version": "v1",
+            "learner_id": "learner-riya",
+            "subject_id": SUBJECT_ID,
+            "concept_id": CONCEPT_ID,
+            "difficulty": "hard",
+            "item_count": 2,
+        },
+        context=riya_context,
+    )
+    teacher_queue = runtime.intervention_api.queue(
+        {"contract_version": "v1", "subject_id": SUBJECT_ID},
+        context=TeacherRequestContext(
+            principal_id="teacher-demo",
+            allowed_learner_ids=("learner-riya", "learner-arjun"),
         ),
-    ]
+    )
 
     return {
         "demo": {
@@ -154,6 +219,11 @@ def run_demo() -> dict[str, Any]:
                 ),
             },
         },
+        "support": {
+            "tutor": tutor.body,
+            "quiz": quiz.body,
+        },
+        "teacher_interventions": teacher_queue.body,
     }
 
 
@@ -222,6 +292,13 @@ def _attempt_count(runtime: InMemoryAssessmentRuntime, learner_id: str) -> int:
         len(attempts)
         for attempts in runtime.attempts.list_attempts(learner_id).values()
     )
+
+
+def _next_item_id(response: dict[str, Any], fallback: str) -> str:
+    next_item = response.get("next_item")
+    if isinstance(next_item, dict) and isinstance(next_item.get("id"), str):
+        return next_item["id"]
+    return fallback
 
 
 def _recommendation_payload(recommendation: object) -> dict[str, Any] | None:

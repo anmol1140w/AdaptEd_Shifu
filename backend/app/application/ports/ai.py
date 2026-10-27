@@ -116,6 +116,11 @@ class TutorRequest:
     learner_answer: str | None = None
     misconception: str | None = None
     learner_level: str = "class_9"
+    evidence_ids: tuple[str, ...] = ()
+    evidence_count: int = 0
+    mastery_score: float | None = None
+    mastery_confidence: float | None = None
+    gap_status: str | None = None
 
     def __post_init__(self) -> None:
         for field_name in ("learner_id", "subject_id", "concept_id", "learner_level"):
@@ -127,6 +132,20 @@ class TutorRequest:
             raise ValueError("learner answer must not be empty when provided")
         if self.misconception is not None and not self.misconception.strip():
             raise ValueError("misconception must not be empty when provided")
+        evidence_ids = tuple(self.evidence_ids)
+        if len(evidence_ids) != len(set(evidence_ids)):
+            raise ValueError("tutor evidence IDs must be unique")
+        if not isinstance(self.evidence_count, int) or isinstance(self.evidence_count, bool):
+            raise ValueError("tutor evidence count must be an integer")
+        if self.evidence_count < 0:
+            raise ValueError("tutor evidence count must not be negative")
+        for field_name in ("mastery_score", "mastery_confidence"):
+            value = getattr(self, field_name)
+            if value is not None and not 0.0 <= value <= 1.0:
+                raise ValueError(f"tutor {field_name} must be in [0, 1] or null")
+        if self.gap_status is not None and not self.gap_status.strip():
+            raise ValueError("tutor gap status must not be empty when provided")
+        object.__setattr__(self, "evidence_ids", evidence_ids)
 
 
 @dataclass(frozen=True, slots=True)
@@ -187,6 +206,11 @@ class QuizRequest:
     item_count: int = 3
     misconception: str | None = None
     include_transfer: bool = True
+    evidence_ids: tuple[str, ...] = ()
+    evidence_count: int = 0
+    mastery_score: float | None = None
+    mastery_confidence: float | None = None
+    gap_status: str | None = None
 
     def __post_init__(self) -> None:
         for field_name in ("learner_id", "subject_id", "concept_id"):
@@ -202,6 +226,20 @@ class QuizRequest:
             raise ValueError("misconception must not be empty when provided")
         if not isinstance(self.include_transfer, bool):
             raise ValueError("include_transfer must be a boolean")
+        evidence_ids = tuple(self.evidence_ids)
+        if len(evidence_ids) != len(set(evidence_ids)):
+            raise ValueError("quiz evidence IDs must be unique")
+        if not isinstance(self.evidence_count, int) or isinstance(self.evidence_count, bool):
+            raise ValueError("quiz evidence count must be an integer")
+        if self.evidence_count < 0:
+            raise ValueError("quiz evidence count must not be negative")
+        for field_name in ("mastery_score", "mastery_confidence"):
+            value = getattr(self, field_name)
+            if value is not None and not 0.0 <= value <= 1.0:
+                raise ValueError(f"quiz {field_name} must be in [0, 1] or null")
+        if self.gap_status is not None and not self.gap_status.strip():
+            raise ValueError("quiz gap status must not be empty when provided")
+        object.__setattr__(self, "evidence_ids", evidence_ids)
 
 
 @dataclass(frozen=True, slots=True)

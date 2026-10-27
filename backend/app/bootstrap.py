@@ -7,11 +7,14 @@ from dataclasses import dataclass
 
 from .api.v1.routes.assessment import AssessmentApi
 from .api.v1.routes.learning_support import LearningSupportApi
+from .api.v1.routes.teacher_interventions import TeacherInterventionApi
 from .application.assessment_facade import AssessmentFacade
 from .application.learning_support_facade import LearningSupportFacade
+from .application.teacher_intervention_facade import TeacherInterventionFacade
 from .application.ports.ai import RetrievedSource
 from .application.ports.assessment import AssessmentGraderPort
 from .application.use_cases.build_subject_summary import BuildSubjectSummary
+from .application.use_cases.build_intervention_queue import BuildInterventionQueue
 from .application.use_cases.generate_weak_area_quiz import GenerateWeakAreaQuiz
 from .application.use_cases.prepare_attempt import PrepareAttempt
 from .application.use_cases.provide_tutor_support import ProvideTutorSupport
@@ -57,6 +60,8 @@ class InMemoryAssessmentRuntime:
     recommendations: InMemoryRecommendations
     support_api: LearningSupportApi
     support_facade: LearningSupportFacade
+    intervention_api: TeacherInterventionApi
+    intervention_facade: TeacherInterventionFacade
     ai_audit: InMemoryAIAudit
 
 
@@ -131,6 +136,8 @@ def build_in_memory_assessment_runtime(
         fallback_generator=CuratedTutorFallback(),
         validator=validator,
         audit=ai_audit,
+        attempts=attempts,
+        mastery_states=mastery_states,
     )
     generate_weak_area_quiz = GenerateWeakAreaQuiz(
         concepts=concept_catalog,
@@ -139,6 +146,8 @@ def build_in_memory_assessment_runtime(
         fallback_generator=CuratedQuizFallback(),
         validator=validator,
         audit=ai_audit,
+        attempts=attempts,
+        mastery_states=mastery_states,
     )
     facade = AssessmentFacade(
         start_assessment=start_assessment,
@@ -156,6 +165,18 @@ def build_in_memory_assessment_runtime(
         generate_weak_area_quiz=generate_weak_area_quiz,
     )
     support_api = LearningSupportApi(facade=support_facade)
+    build_intervention_queue = BuildInterventionQueue(
+        learners=learners,
+        concepts=concept_catalog,
+        attempts=attempts,
+        mastery_states=mastery_states,
+        recommendations=recommendations,
+    )
+    intervention_facade = TeacherInterventionFacade(
+        build_intervention_queue=build_intervention_queue,
+        subject_names=subject_name_map,
+    )
+    intervention_api = TeacherInterventionApi(facade=intervention_facade)
     return InMemoryAssessmentRuntime(
         api=api,
         facade=facade,
@@ -169,5 +190,7 @@ def build_in_memory_assessment_runtime(
         recommendations=recommendations,
         support_api=support_api,
         support_facade=support_facade,
+        intervention_api=intervention_api,
+        intervention_facade=intervention_facade,
         ai_audit=ai_audit,
     )

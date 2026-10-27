@@ -43,6 +43,13 @@ class ActionType(str, Enum):
     TRANSFER_PRACTICE = "transfer_practice"
 
 
+class NextItemStatus(str, Enum):
+    """Outcome of selecting the next approved assessment item."""
+
+    SELECTED = "selected"
+    NO_SUITABLE_ITEM = "no_suitable_item"
+
+
 class AssessmentSessionStatus(str, Enum):
     """Lifecycle state for an assessment session."""
 
@@ -214,3 +221,27 @@ class LearningOutcome:
     def __post_init__(self) -> None:
         if not isinstance(self.gap_status, GapStatus):
             object.__setattr__(self, "gap_status", GapStatus(self.gap_status))
+
+
+@dataclass(frozen=True, slots=True)
+class NextItemSelection:
+    """Explainable result of turning a recommendation into an item."""
+
+    target_concept_id: str
+    status: NextItemStatus
+    reason: str
+    item: AssessmentItem | None = None
+
+    def __post_init__(self) -> None:
+        if not self.target_concept_id.strip():
+            raise ValueError("next-item target concept id must not be empty")
+        if not self.reason.strip():
+            raise ValueError("next-item selection reason must not be empty")
+        if not isinstance(self.status, NextItemStatus):
+            object.__setattr__(self, "status", NextItemStatus(self.status))
+        if self.status is NextItemStatus.SELECTED and self.item is None:
+            raise ValueError("selected next item must be present")
+        if self.status is NextItemStatus.NO_SUITABLE_ITEM and self.item is not None:
+            raise ValueError("no-suitable-item result must not contain an item")
+        if self.item is not None and self.item.concept_id != self.target_concept_id:
+            raise ValueError("next item concept must match selection target")

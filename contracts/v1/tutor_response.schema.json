@@ -16,6 +16,11 @@
     "confidence",
     "teacher_review_required",
     "answer_revealed",
+    "evidence_reference_ids",
+    "evidence_count",
+    "mastery_score",
+    "mastery_confidence",
+    "gap_status",
     "fallback_used",
     "provider",
     "audit_event_id"
@@ -64,6 +69,28 @@
     },
     "answer_revealed": {
       "type": "boolean"
+    },
+    "evidence_reference_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "evidence_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "mastery_score": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "mastery_confidence": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "gap_status": {
+      "type": ["string", "null"],
+      "enum": ["not_enough_evidence", "prerequisite_blocked", "needs_support", "developing", "fragile", "secure", null]
     },
     "fallback_used": {
       "type": "boolean"

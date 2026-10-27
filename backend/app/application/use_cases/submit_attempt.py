@@ -7,8 +7,11 @@ from dataclasses import dataclass, replace
 from ...domain.entities.learning import (
     AssessmentSession,
     AssessmentSessionStatus,
+    AssessmentItem,
     AttemptEvidence,
     LearningOutcome,
+    NextItemSelection,
+    NextItemStatus,
 )
 from ...domain.services.learning_engine import LearningEngine
 from ..ports.assessment import AssessmentSessionPort, ItemCatalogPort
@@ -38,6 +41,9 @@ class SubmitAttemptResult:
     learner_id: str
     attempt: AttemptEvidence
     outcome: LearningOutcome
+    next_item: AssessmentItem | None = None
+    next_item_status: NextItemStatus = NextItemStatus.NO_SUITABLE_ITEM
+    next_item_reason: str = "No next item was selected."
 
 
 class SubmitAttempt:
@@ -106,6 +112,12 @@ class SubmitAttempt:
             attempts_by_concept=attempts_by_concept,
             existing_states=self._mastery_states.get_states(command.learner_id),
         )
+        next_item_selection: NextItemSelection = self._learning_engine.select_next_item(
+            recommendation=outcome.recommendation,
+            subject_id=session.subject_id,
+            items=self._items.list_items(session.subject_id),
+            attempts_by_concept=attempts_by_concept,
+        )
 
         self._attempts.record_attempt(command.learner_id, command.attempt)
         self._mastery_states.save_state(
@@ -126,6 +138,9 @@ class SubmitAttempt:
             learner_id=command.learner_id,
             attempt=command.attempt,
             outcome=outcome,
+            next_item=next_item_selection.item,
+            next_item_status=next_item_selection.status,
+            next_item_reason=next_item_selection.reason,
         )
 
     @staticmethod

@@ -14,6 +14,8 @@ from ..entities.learning import (
     GapStatus,
     LearningOutcome,
     MasteryState,
+    NextItemSelection,
+    NextItemStatus,
     Recommendation,
     Trend,
 )
@@ -73,6 +75,86 @@ class LearningEngine:
         return min(
             candidates,
             key=lambda item: (difficulty_order[item.difficulty], item.id),
+        )
+
+    def select_next_item(
+        self,
+        *,
+        recommendation: Recommendation,
+        subject_id: str,
+        items: Iterable[AssessmentItem],
+        attempts_by_concept: Mapping[str, Sequence[AttemptEvidence]],
+    ) -> NextItemSelection:
+        """Turn a recommendation into one deterministic unseen item.
+
+        Prerequisite support starts with the easiest approved item, targeted
+        practice prefers scaffolded difficulty, and transfer practice requires
+        an approved hard item. Previously attempted item IDs are excluded so a
+        missing or exhausted content bank is visible to the caller.
+        """
+
+        target_concept = self._require_concept(recommendation.target_concept_id)
+        if target_concept.subject_id != subject_id:
+            raise ValueError("recommendation target does not belong to subject")
+
+        attempted_ids = {
+            attempt.item_id
+            for attempt in attempts_by_concept.get(target_concept.id, ())
+        }
+        candidates = tuple(
+            item
+            for item in items
+            if item.approved
+            and item.subject_id == subject_id
+            and item.concept_id == target_concept.id
+            and item.id not in attempted_ids
+        )
+
+        if recommendation.action_type is ActionType.TRANSFER_PRACTICE:
+            candidates = tuple(item for item in candidates if item.difficulty is Difficulty.HARD)
+            difficulty_order = {Difficulty.HARD: 0}
+            policy_reason = "selected the next unseen approved hard item for transfer practice"
+        elif recommendation.action_type is ActionType.PREREQUISITE_SUPPORT:
+            difficulty_order = {
+                Difficulty.EASY: 0,
+                Difficulty.MEDIUM: 1,
+                Difficulty.HARD: 2,
+            }
+            policy_reason = "selected the next unseen approved scaffolded prerequisite item"
+        elif recommendation.action_type is ActionType.TARGETED_PRACTICE:
+            difficulty_order = {
+                Difficulty.EASY: 0,
+                Difficulty.MEDIUM: 1,
+                Difficulty.HARD: 2,
+            }
+            policy_reason = "selected the next unseen approved scaffolded practice item"
+        else:
+            difficulty_order = {
+                Difficulty.MEDIUM: 0,
+                Difficulty.EASY: 1,
+                Difficulty.HARD: 2,
+            }
+            policy_reason = "selected the next unseen approved baseline item"
+
+        if not candidates:
+            return NextItemSelection(
+                target_concept_id=target_concept.id,
+                status=NextItemStatus.NO_SUITABLE_ITEM,
+                reason=(
+                    f"No unseen approved item is available for {target_concept.name} "
+                    f"under {recommendation.action_type.value}."
+                ),
+            )
+
+        selected = min(
+            candidates,
+            key=lambda item: (difficulty_order[item.difficulty], item.id),
+        )
+        return NextItemSelection(
+            target_concept_id=target_concept.id,
+            status=NextItemStatus.SELECTED,
+            reason=f"{policy_reason}; stable item ordering was used.",
+            item=selected,
         )
 
     def evaluate(

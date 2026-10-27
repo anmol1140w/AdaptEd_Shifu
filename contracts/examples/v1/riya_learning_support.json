@@ -30,6 +30,14 @@
       "confidence": 0.95,
       "teacher_review_required": false,
       "answer_revealed": false,
+      "evidence_reference_ids": [
+        "dist-riya-1",
+        "dist-riya-2"
+      ],
+      "evidence_count": 2,
+      "mastery_score": 0.09,
+      "mastery_confidence": 0.5,
+      "gap_status": "needs_support",
       "fallback_used": false,
       "provider": "mock-deterministic",
       "audit_event_id": "ai-audit-1"
@@ -100,6 +108,14 @@
       ],
       "confidence": 0.95,
       "teacher_review_required": false,
+      "evidence_reference_ids": [
+        "dist-riya-1",
+        "dist-riya-2"
+      ],
+      "evidence_count": 2,
+      "mastery_score": 0.09,
+      "mastery_confidence": 0.5,
+      "gap_status": "needs_support",
       "fallback_used": false,
       "provider": "mock-deterministic",
       "audit_event_id": "ai-audit-2"

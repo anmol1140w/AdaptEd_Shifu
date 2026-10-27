@@ -227,6 +227,34 @@ class InMemoryAssessmentRuntimeTests(unittest.TestCase):
         self.assertTrue(all("answer" not in item for item in quiz.body["items"]))
         self.assertEqual(len(runtime.ai_audit.events), 2)
 
+    def test_support_fallback_does_not_block_assessment_learning_loop(self) -> None:
+        context = LearnerRequestContext(principal_id="learner-riya")
+        tutor = self.runtime.support_api.tutor(
+            {
+                "contract_version": "v1",
+                "learner_id": "learner-riya",
+                "subject_id": "maths-9",
+                "concept_id": "ALG-EQ-02",
+                "mode": "hint",
+            },
+            context=context,
+        )
+        self.assertEqual(tutor.status_code, 200)
+        self.assertTrue(tutor.body["fallback_used"])
+
+        started = self._start("learner-riya", context)
+        submitted = self._submit(
+            learner_id="learner-riya",
+            session_id=started,
+            context=context,
+            attempt_id="riya-after-support-failure",
+            item_id=self.medium_item.id,
+            answer="x = 4",
+        )
+
+        self.assertEqual(submitted.status_code, 200)
+        self.assertEqual(submitted.body["evidence"]["is_correct"], True)
+
     def _start(self, learner_id: str, context: LearnerRequestContext) -> str:
         response = self.runtime.api.start(
             {

@@ -1,0 +1,90 @@
+{
+  "scenario": {
+    "id": "riya-foundation-intervention",
+    "learner_label": "Riya",
+    "synthetic": true,
+    "summary": "Repeated hinted errors create a high-priority prerequisite intervention."
+  },
+  "request": {
+    "contract_version": "v1",
+    "subject_id": "maths-9",
+    "learner_ids": ["learner-riya"]
+  },
+  "response": {
+    "contract_version": "v1",
+    "subject": {
+      "id": "maths-9",
+      "name": "Class 9 Mathematics — Algebra and Linear Equations"
+    },
+    "interventions": [
+      {
+        "id": "intervention-learner-riya-ALG-DIST-01",
+        "learner_id": "learner-riya",
+        "subject_id": "maths-9",
+        "concept": {
+          "id": "ALG-DIST-01",
+          "subject_id": "maths-9",
+          "name": "Distributive property",
+          "prerequisite_ids": []
+        },
+        "priority": "high",
+        "gap_status": "prerequisite_blocked",
+        "action_type": "prerequisite_support",
+        "reason": "Two-step equations depends on Distributive property, but its mastery is below the prerequisite threshold.",
+        "teacher_review_required": true,
+        "mastery": {
+          "concept_id": "ALG-DIST-01",
+          "score": 0.09,
+          "confidence": 0.5,
+          "evidence_count": 2,
+          "trend": "stable",
+          "likely_misconception": "negative sign not distributed",
+          "recent_correctness": 0.0,
+          "independence_score": 0.4
+        },
+        "evidence_reference_ids": ["dist-riya-1", "dist-riya-2", "eq-riya-1", "eq-riya-2"],
+        "evidence_count": 4,
+        "repeated_error_count": 4,
+        "average_hint_count": 1.5,
+        "evidence": [
+          {
+            "id": "dist-riya-1",
+            "item_id": "item-dist-riya-1",
+            "concept_id": "ALG-DIST-01",
+            "is_correct": false,
+            "difficulty": "medium",
+            "hint_count": 2,
+            "misconception": "negative sign not distributed"
+          },
+          {
+            "id": "dist-riya-2",
+            "item_id": "item-dist-riya-2",
+            "concept_id": "ALG-DIST-01",
+            "is_correct": false,
+            "difficulty": "medium",
+            "hint_count": 2,
+            "misconception": "negative sign not distributed"
+          },
+          {
+            "id": "eq-riya-1",
+            "item_id": "item-eq-riya-1",
+            "concept_id": "ALG-EQ-02",
+            "is_correct": false,
+            "difficulty": "medium",
+            "hint_count": 1,
+            "misconception": null
+          },
+          {
+            "id": "eq-riya-2",
+            "item_id": "item-eq-riya-2",
+            "concept_id": "ALG-EQ-02",
+            "is_correct": false,
+            "difficulty": "medium",
+            "hint_count": 1,
+            "misconception": null
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -8,6 +8,14 @@ from typing import Protocol
 from ...domain.entities.learning import AttemptEvidence, MasteryState, Recommendation
 
 
+class LearnerRosterPort(Protocol):
+    """Load learner IDs visible to a reporting use case."""
+
+    def list_learner_ids(self, subject_id: str) -> Sequence[str]:
+        """Return learners enrolled in a subject in stable or provider order."""
+        ...
+
+
 class AttemptPort(Protocol):
     """Load and record learner attempt evidence."""
 
@@ -44,4 +52,8 @@ class RecommendationPort(Protocol):
         recommendation: Recommendation,
     ) -> None:
         """Persist one recommendation after successful domain evaluation."""
+        ...
+
+    def latest(self, learner_id: str) -> Recommendation | None:
+        """Return the latest recommendation for a learner when one exists."""
         ...

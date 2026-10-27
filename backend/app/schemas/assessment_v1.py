@@ -23,6 +23,7 @@ from ..domain.entities.learning import (
     Difficulty,
     MasteryState,
     Recommendation,
+    NextItemStatus,
 )
 
 
@@ -255,6 +256,18 @@ def submit_attempt_response(
         raise AssessmentContractError(
             "session current concept must match the recommendation target"
         )
+    if result.next_item_status is NextItemStatus.SELECTED:
+        if result.next_item is None:
+            raise AssessmentContractError("selected next item is missing")
+        _require_next_item_context(
+            result.next_item,
+            subject_id=result.session.subject_id,
+            target_concept_id=recommendation.target_concept_id,
+        )
+        if result.next_item.id == result.attempt.item_id:
+            raise AssessmentContractError("next item must not repeat the submitted item")
+    elif result.next_item is not None:
+        raise AssessmentContractError("no-suitable next-item response must not contain an item")
 
     return {
         "contract_version": CONTRACT_VERSION,
@@ -270,6 +283,11 @@ def submit_attempt_response(
         "mastery": _mastery_payload(result.outcome.mastery_state),
         "gap_status": result.outcome.gap_status.value,
         "recommendation": _recommendation_payload(recommendation),
+        "next_item": (
+            None if result.next_item is None else _item_payload(result.next_item)
+        ),
+        "next_item_status": result.next_item_status.value,
+        "next_item_reason": result.next_item_reason,
         "evidence_references": [
             _evidence_reference_payload(reference) for reference in references
         ],
@@ -422,3 +440,17 @@ def _require_item_context(item: AssessmentItem, concept: Concept) -> None:
         raise AssessmentContractError("item subject does not match concept subject")
     if item.concept_id != concept.id:
         raise AssessmentContractError("item concept does not match response concept")
+
+
+def _require_next_item_context(
+    item: AssessmentItem,
+    *,
+    subject_id: str,
+    target_concept_id: str,
+) -> None:
+    if not item.approved:
+        raise AssessmentContractError("next item must be approved")
+    if item.subject_id != subject_id:
+        raise AssessmentContractError("next item subject does not match session subject")
+    if item.concept_id != target_concept_id:
+        raise AssessmentContractError("next item concept does not match recommendation target")

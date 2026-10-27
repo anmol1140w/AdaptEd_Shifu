@@ -122,6 +122,15 @@
         ],
         "teacher_review_required": false
       },
+      "next_item": {
+        "id": "item-eq-arjun-hard-3",
+        "subject_id": "maths-9",
+        "concept_id": "ALG-EQ-02",
+        "difficulty": "hard",
+        "question": "Solve 4(x + 1) - 3 = 25."
+      },
+      "next_item_status": "selected",
+      "next_item_reason": "selected the next unseen approved hard item for transfer practice; stable item ordering was used.",
       "evidence_references": [
         {
           "id": "eq-arjun-1",

@@ -121,6 +121,15 @@
         ],
         "teacher_review_required": true
       },
+      "next_item": {
+        "id": "item-dist-riya-easy",
+        "subject_id": "maths-9",
+        "concept_id": "ALG-DIST-01",
+        "difficulty": "easy",
+        "question": "Expand -2(x + 1)."
+      },
+      "next_item_status": "selected",
+      "next_item_reason": "selected the next unseen approved scaffolded prerequisite item; stable item ordering was used.",
       "evidence_references": [
         {
           "id": "eq-riya-1",

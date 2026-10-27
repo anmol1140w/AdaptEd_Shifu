@@ -36,6 +36,10 @@ class StructuredLearningOutputValidator(GeneratedContentValidatorPort):
         )
         if request.mode is TutorMode.HINT and draft.answer_revealed:
             raise AIValidationError("hint response must not reveal the answer")
+        if request.mode is TutorMode.HINT and self._looks_like_spoiler(draft.message):
+            raise AIValidationError("hint response contains answer-revealing language")
+        if sources and not draft.source_ids:
+            raise AIValidationError("grounded tutor response must cite a source")
         if not draft.check_question.strip():
             raise AIValidationError("tutor response must include a check question")
 
@@ -64,6 +68,10 @@ class StructuredLearningOutputValidator(GeneratedContentValidatorPort):
                 raise AIValidationError("quiz item difficulty does not match request")
             if not set(item.source_ids).issubset(draft_source_ids):
                 raise AIValidationError("quiz item uses an undeclared source")
+        if request.include_transfer and not draft.items[-1].is_transfer:
+            raise AIValidationError("transfer-enabled quiz must include a transfer item")
+        if not request.include_transfer and any(item.is_transfer for item in draft.items):
+            raise AIValidationError("transfer-disabled quiz must not include a transfer item")
 
     @staticmethod
     def _validate_source_ids(
@@ -82,3 +90,16 @@ class StructuredLearningOutputValidator(GeneratedContentValidatorPort):
                 raise AIValidationError(f"generated content references unapproved source: {source_id}")
             if source.subject_id != subject_id or source.concept_id != concept_id:
                 raise AIValidationError(f"generated content source is outside the requested concept: {source_id}")
+
+    @staticmethod
+    def _looks_like_spoiler(message: str) -> bool:
+        normalized = " ".join(message.lower().split())
+        return any(
+            phrase in normalized
+            for phrase in (
+                "the answer is",
+                "correct answer",
+                "the solution is",
+                "therefore the answer",
+            )
+        )

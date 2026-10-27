@@ -15,6 +15,9 @@
     "mastery",
     "gap_status",
     "recommendation",
+    "next_item",
+    "next_item_status",
+    "next_item_reason",
     "evidence_references"
   ],
   "properties": {
@@ -55,6 +58,23 @@
     },
     "recommendation": {
       "$ref": "#/$defs/recommendation"
+    },
+    "next_item": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/item"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "next_item_status": {
+      "enum": ["selected", "no_suitable_item"]
+    },
+    "next_item_reason": {
+      "type": "string",
+      "minLength": 1
     },
     "evidence_references": {
       "type": "array",

@@ -196,6 +196,8 @@ class SubmitAttemptTests(unittest.TestCase):
             result.session.current_concept_id,
             self.concept.id,
         )
+        self.assertEqual(result.next_item_status.value, "selected")
+        self.assertEqual(result.next_item.id, "item-hard")
 
     def test_domain_failure_does_not_persist_partial_state(self) -> None:
         self.sessions.data["session-unknown"] = AssessmentSession(

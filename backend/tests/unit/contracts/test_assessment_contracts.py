@@ -26,6 +26,8 @@ class AssessmentContractTests(unittest.TestCase):
             "tutor_response.schema.json": "Tutor support response",
             "weak_area_quiz_request.schema.json": "Weak-area quiz request",
             "weak_area_quiz_response.schema.json": "Weak-area quiz response",
+            "teacher_intervention_queue_request.schema.json": "Teacher intervention queue request",
+            "teacher_intervention_queue_response.schema.json": "Teacher intervention queue response",
         }
 
         for filename, title in expected_titles.items():
@@ -121,6 +123,22 @@ class AssessmentContractTests(unittest.TestCase):
         self.assertEqual(quiz_response["concept_id"] if "concept_id" in quiz_response else quiz_response["concept"]["id"], "ALG-DIST-01")
         self.assertTrue(all("answer" not in item for item in quiz_response["items"]))
         self.assertTrue(quiz_response["items"][-1]["is_transfer"])
+
+    def test_riya_teacher_intervention_example_is_traceable(self) -> None:
+        example = self._load_example("riya_teacher_interventions.json")
+        self.assertTrue(example["scenario"]["synthetic"])
+        self._assert_matches_schema(
+            example["request"],
+            self._load_contract("teacher_intervention_queue_request.schema.json"),
+        )
+        self._assert_matches_schema(
+            example["response"],
+            self._load_contract("teacher_intervention_queue_response.schema.json"),
+        )
+        intervention = example["response"]["interventions"][0]
+        self.assertEqual(intervention["priority"], "high")
+        self.assertEqual(intervention["learner_id"], "learner-riya")
+        self.assertIn("dist-riya-1", intervention["evidence_reference_ids"])
 
     def _assert_assessment_example_matches_contracts(self, example: dict[str, Any]) -> None:
         self.assertTrue(example["scenario"]["synthetic"])

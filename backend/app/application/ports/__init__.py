@@ -2,6 +2,7 @@
 
 from .learning import (
     AttemptPort,
+    LearnerRosterPort,
     MasteryStatePort,
     RecommendationPort,
 )
@@ -38,6 +39,7 @@ from .ai import (
 
 __all__ = [
     "AttemptPort",
+    "LearnerRosterPort",
     "MasteryStatePort",
     "RecommendationPort",
     "AssessmentGraderPort",

@@ -169,11 +169,15 @@ class CuratedQuizFallback(QuizGenerationPort):
                 subject_id=request.subject_id,
                 concept_id=request.concept_id,
                 difficulty=request.difficulty,
-                question="Identify the first operation needed to solve this concept step.",
+                question=(
+                    "Transfer check: identify the first operation needed to solve this concept step."
+                    if request.include_transfer and index == request.item_count
+                    else "Identify the first operation needed to solve this concept step."
+                ),
                 answer="identify the first operation",
                 representation=QuizRepresentation.VERBAL,
                 source_ids=(),
-                is_transfer=False,
+                is_transfer=request.include_transfer and index == request.item_count,
             )
             for index in range(1, request.item_count + 1)
         )

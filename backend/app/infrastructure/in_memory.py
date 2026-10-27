@@ -14,6 +14,7 @@ from ..application.ports.assessment import (
 )
 from ..application.ports.learning import (
     AttemptPort,
+    LearnerRosterPort,
     MasteryStatePort,
     RecommendationPort,
 )
@@ -28,7 +29,7 @@ from ..domain.entities.learning import (
 )
 
 
-class InMemoryLearners(LearnerPort):
+class InMemoryLearners(LearnerPort, LearnerRosterPort):
     """Store known learner identifiers for local execution."""
 
     def __init__(self, learner_ids: Iterable[str]) -> None:
@@ -39,6 +40,13 @@ class InMemoryLearners(LearnerPort):
 
     def exists(self, learner_id: str) -> bool:
         return learner_id in self._learner_ids
+
+    def list_learner_ids(self, subject_id: str) -> Sequence[str]:
+        """Return all local demo learners for the requested subject."""
+
+        if not subject_id.strip():
+            raise ValueError("subject id must not be empty")
+        return tuple(sorted(self._learner_ids))
 
 
 class InMemoryConceptCatalog(ConceptCatalogPort):
