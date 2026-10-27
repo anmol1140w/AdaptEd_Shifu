@@ -1,0 +1,169 @@
+{
+  "scenario": {
+    "id": "riya-subject-summary",
+    "learner_label": "Riya",
+    "synthetic": true,
+    "summary": "Subject metrics retain the foundation gap and the evidence behind it."
+  },
+  "request": {
+    "contract_version": "v1",
+    "learner_id": "learner-riya",
+    "subject_id": "maths-9"
+  },
+  "response": {
+    "contract_version": "v1",
+    "learner_id": "learner-riya",
+    "subject": {
+      "id": "maths-9",
+      "name": "Class 9 Mathematics — Algebra and Linear Equations"
+    },
+    "summary": {
+      "mastery_score": 0.0675,
+      "confidence": 0.375,
+      "evidence_count": 3,
+      "concept_count": 3,
+      "assessed_concept_count": 2,
+      "gap_status_counts": [
+        {
+          "status": "not_enough_evidence",
+          "count": 1
+        },
+        {
+          "status": "prerequisite_blocked",
+          "count": 1
+        },
+        {
+          "status": "needs_support",
+          "count": 1
+        },
+        {
+          "status": "developing",
+          "count": 0
+        },
+        {
+          "status": "fragile",
+          "count": 0
+        },
+        {
+          "status": "secure",
+          "count": 0
+        }
+      ]
+    },
+    "concepts": [
+      {
+        "concept": {
+          "id": "ALG-DIST-01",
+          "subject_id": "maths-9",
+          "name": "Distributive property",
+          "prerequisite_ids": [],
+          "mastery_threshold": 0.72
+        },
+        "mastery": {
+          "concept_id": "ALG-DIST-01",
+          "score": 0.055,
+          "confidence": 0.5,
+          "evidence_count": 2,
+          "trend": "stable",
+          "likely_misconception": "negative sign not distributed",
+          "recent_correctness": 0.0,
+          "independence_score": 0.4
+        },
+        "gap_status": "needs_support",
+        "recommendation": {
+          "action_type": "targeted_practice",
+          "target_concept_id": "ALG-DIST-01",
+          "reason": "Distributive property is still developing; provide targeted practice and reassess before increasing difficulty.",
+          "evidence_reference_ids": [
+            "dist-riya-1",
+            "dist-riya-2"
+          ],
+          "teacher_review_required": true
+        },
+        "evidence": [
+          {
+            "id": "dist-riya-1",
+            "item_id": "item-dist-riya-1",
+            "concept_id": "ALG-DIST-01",
+            "is_correct": false,
+            "difficulty": "medium",
+            "hint_count": 2,
+            "response_ms": 1200,
+            "confidence_signal": 0.3,
+            "misconception": "negative sign not distributed"
+          },
+          {
+            "id": "dist-riya-2",
+            "item_id": "item-dist-riya-2",
+            "concept_id": "ALG-DIST-01",
+            "is_correct": false,
+            "difficulty": "medium",
+            "hint_count": 2,
+            "response_ms": 1300,
+            "confidence_signal": 0.3,
+            "misconception": "negative sign not distributed"
+          }
+        ]
+      },
+      {
+        "concept": {
+          "id": "ALG-EQ-02",
+          "subject_id": "maths-9",
+          "name": "Two-step equations",
+          "prerequisite_ids": [
+            "ALG-DIST-01"
+          ],
+          "mastery_threshold": 0.72
+        },
+        "mastery": {
+          "concept_id": "ALG-EQ-02",
+          "score": 0.08,
+          "confidence": 0.25,
+          "evidence_count": 1,
+          "trend": "insufficient_evidence",
+          "likely_misconception": null,
+          "recent_correctness": 0.0,
+          "independence_score": 0.65
+        },
+        "gap_status": "prerequisite_blocked",
+        "recommendation": {
+          "action_type": "prerequisite_support",
+          "target_concept_id": "ALG-DIST-01",
+          "reason": "Two-step equations depends on Distributive property, but its mastery is below the prerequisite threshold.",
+          "evidence_reference_ids": [
+            "eq-riya-1",
+            "dist-riya-1",
+            "dist-riya-2"
+          ],
+          "teacher_review_required": false
+        },
+        "evidence": [
+          {
+            "id": "eq-riya-1",
+            "item_id": "item-eq-riya-1",
+            "concept_id": "ALG-EQ-02",
+            "is_correct": false,
+            "difficulty": "medium",
+            "hint_count": 1,
+            "response_ms": 1400,
+            "confidence_signal": 0.3,
+            "misconception": null
+          }
+        ]
+      },
+      {
+        "concept": {
+          "id": "ALG-VAR-01",
+          "subject_id": "maths-9",
+          "name": "Variables and expressions",
+          "prerequisite_ids": [],
+          "mastery_threshold": 0.72
+        },
+        "mastery": null,
+        "gap_status": "not_enough_evidence",
+        "recommendation": null,
+        "evidence": []
+      }
+    ]
+  }
+}

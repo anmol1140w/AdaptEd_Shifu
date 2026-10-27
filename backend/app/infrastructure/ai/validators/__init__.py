@@ -1,37 +1,5 @@
-"""AI Validators Package."""
+"""Structured-output validators for generated learning support."""
 
-from backend.app.application.ports.ai_ports import (
-    BaseSchema,
-    QuizItem,
-    QuizRequest,
-    QuizResponse,
-    RetrievedChunk,
-    TutorRequest,
-    TutorResponse,
-    ValidationError,
-    ValidationResult,
-)
-from backend.app.infrastructure.ai.validators.validator import (
-    AntiSpoilerViolation,
-    ComprehensiveAIValidator,
-    GroundingViolation,
-    QuizValidator,
-    TutorValidator,
-)
+from .structured import StructuredLearningOutputValidator
 
-__all__ = [
-    "BaseSchema",
-    "TutorValidator",
-    "QuizValidator",
-    "ComprehensiveAIValidator",
-    "AntiSpoilerViolation",
-    "GroundingViolation",
-    "ValidationError",
-    "ValidationResult",
-    "RetrievedChunk",
-    "TutorRequest",
-    "TutorResponse",
-    "QuizRequest",
-    "QuizItem",
-    "QuizResponse",
-]
+__all__ = ["StructuredLearningOutputValidator"]

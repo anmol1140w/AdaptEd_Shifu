@@ -11,8 +11,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
-    "lucide-react": "latest",
+    "@vitejs/plugin-react": "5.0.4",
+    "lucide-react": "0.468.0",
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "latest"
@@ -20,9 +20,9 @@
   "devDependencies": {
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "typescript": "latest",
-    "vite": "latest",
-    "vitest": "latest",
-    "jsdom": "latest"
+    "jsdom": "latest",
+    "typescript": "5.9.3",
+    "vite": "7.1.12",
+    "vitest": "3.2.4"
   }
 }

@@ -1,13 +1,15 @@
-"""AI LLM Adapters Package."""
+"""Mock and provider-specific language-model adapters."""
 
-from backend.app.infrastructure.ai.llm.base import BaseLLMClient, LLMProviderError, LLMResponse
-from backend.app.infrastructure.ai.llm.live_llm import LiveLLMClient
-from backend.app.infrastructure.ai.llm.mock_llm import MockLLMClient
+from .mock import (
+    CuratedQuizFallback,
+    CuratedTutorFallback,
+    DeterministicQuizGenerator,
+    DeterministicTutorGenerator,
+)
 
 __all__ = [
-    "BaseLLMClient",
-    "MockLLMClient",
-    "LiveLLMClient",
-    "LLMResponse",
-    "LLMProviderError",
+    "CuratedQuizFallback",
+    "CuratedTutorFallback",
+    "DeterministicQuizGenerator",
+    "DeterministicTutorGenerator",
 ]

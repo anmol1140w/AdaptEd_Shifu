@@ -1,3 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.env
+.env.*
+Flow.md
+decision.md
 # Dependencies
 node_modules/
 

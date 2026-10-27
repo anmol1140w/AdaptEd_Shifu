@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "adapted/contracts/v1/weak_area_quiz_request",
+  "title": "Weak-area quiz request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "learner_id",
+    "subject_id",
+    "concept_id",
+    "difficulty"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "v1"
+    },
+    "learner_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "concept_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "difficulty": {
+      "enum": ["easy", "medium", "hard"]
+    },
+    "item_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "misconception": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "include_transfer": {
+      "type": "boolean"
+    }
+  }
+}

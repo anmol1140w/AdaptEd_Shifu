@@ -1,5 +1,5 @@
-"""AI Retrieval Package."""
+"""Retrieval adapters for approved learning sources."""
 
-from backend.app.infrastructure.ai.retrieval.mock_retriever import MockKnowledgeRetriever
+from .in_memory import InMemoryLearningRetriever
 
-__all__ = ["MockKnowledgeRetriever"]
+__all__ = ["InMemoryLearningRetriever"]
