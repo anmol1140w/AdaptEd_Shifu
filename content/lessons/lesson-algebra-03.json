@@ -1,0 +1,20 @@
+{
+  "id": "lesson-algebra-03",
+  "source_id": "lesson-algebra-03",
+  "concept_id": "ALG-DIST-01",
+  "title": "The Distributive Property: Multiplying Across Parentheses",
+  "grade": 9,
+  "subject": "Mathematics",
+  "prerequisites": ["ALG-VAR-01", "ALG-NUM-01"],
+  "text": "The Distributive Property states that multiplying a factor across a sum or difference requires applying the multiplier to every term inside the parentheses: a(b + c) = ab + ac. When the multiplier is a negative quantity, each term inside the parentheses must be multiplied by that negative number, reversing the signs: -a(b + c) = -ab - ac, and -a(b - c) = -ab + ac. A frequent misconception is multiplying only the first term and leaving subsequent terms unchanged, such as writing -2(x + 3) = -2x + 3 instead of distributing the -2 to both x and +3 to obtain -2x - 6. Always multiply the outer factor by each internal term individually before simplifying.",
+  "tags": [
+    "distributive property",
+    "brackets",
+    "parentheses",
+    "negative multiplier",
+    "sign change",
+    "linear expressions",
+    "algebra",
+    "ALG-DIST-01"
+  ]
+}
