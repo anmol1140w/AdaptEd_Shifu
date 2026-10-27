@@ -1052,6 +1052,25 @@
       "teacher_approved": false,
       "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
       "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-relations-functions-review-easy-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Relations and Functions",
+      "concept_id": "math-12-relations-functions",
+      "lesson_id": "lesson-math-12-relations-functions",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "A function maps two distinct domain elements to the same value. Is it one-one? Explain.",
+      "answer_guide": "No. A one-one function maps distinct inputs to distinct outputs.",
+      "explanation": "The definition of one-one requires that equal outputs can only come from equal inputs.",
+      "source_reference_ids": [],
+      "supporting_chunk_ids": [],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-042"
     }
   ]
 }
