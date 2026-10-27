@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adapted.example/contracts/v1/question_bank_import_request.schema.json",
+  "title": "Question bank import request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "title", "records"],
+  "properties": {
+    "contract_version": { "const": "v1" },
+    "title": { "type": "string", "minLength": 1 },
+    "records": { "type": "array", "minItems": 1, "items": { "$ref": "question_bank_preview_request.schema.json#/$defs/question" } }
+  }
+}

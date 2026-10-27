@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adapted.example/contracts/v1/question_bank_import_response.schema.json",
+  "title": "Question bank import response v1",
+  "type": "object",
+  "required": ["contract_version", "question_bank", "questions"],
+  "properties": {
+    "contract_version": { "const": "v1" },
+    "question_bank": { "type": "object", "required": ["id", "title", "question_count"], "properties": { "id": { "type": "string" }, "title": { "type": "string" }, "question_count": { "type": "integer", "minimum": 0 } } },
+    "questions": { "type": "array", "items": { "type": "object" } }
+  }
+}

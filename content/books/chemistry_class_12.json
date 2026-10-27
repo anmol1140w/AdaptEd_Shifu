@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "book_id": "adapted-chemistry-12",
+  "title": "AdaptEd Chemistry Learning Book — Class 12",
+  "subject": "Chemistry",
+  "class": 12,
+  "edition": "1.0.0",
+  "language": "en",
+  "content_origin": "original_authored_material",
+  "authoring_note": "Original concise instructional content prepared for this learning platform; review by a qualified subject teacher before classroom use.",
+  "primary_reference_id": "adapted-original-chemistry-12",
+  "syllabus_reference_id": "cbse-2026-27-chemistry-043",
+  "chapters": [
+    {
+      "chapter_id": "chem_class12-chapter-01",
+      "chapter_title": "Solutions",
+      "topic_id": "chem-12-solutions-colligative-properties",
+      "concept_id": "chem-12-solutions-colligative-properties",
+      "lesson_id": "lesson-chem-12-solutions-colligative-properties",
+      "chunk_ids": [
+        "chem12-colligative-explanation-001",
+        "chem12-colligative-example-001",
+        "chem-12-solutions-colligative-properties-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-02",
+      "chapter_title": "Electrochemistry",
+      "topic_id": "chem-12-electrochemical-cells",
+      "concept_id": "chem-12-electrochemical-cells",
+      "lesson_id": "lesson-chem-12-electrochemical-cells",
+      "chunk_ids": [
+        "chem12-galvanic-explanation-001",
+        "chem12-galvanic-example-001",
+        "chem-12-electrochemical-cells-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-03",
+      "chapter_title": "Chemical Kinetics",
+      "topic_id": "chem-12-chemical-kinetics-rate-law",
+      "concept_id": "chem-12-chemical-kinetics-rate-law",
+      "lesson_id": "lesson-chem-12-chemical-kinetics-rate-law",
+      "chunk_ids": [
+        "chem12-rate-law-explanation-001",
+        "chem12-rate-law-example-001",
+        "chem-12-chemical-kinetics-rate-law-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-04",
+      "chapter_title": "Electrochemistry",
+      "topic_id": "chem-12-nernst-equation",
+      "concept_id": "chem-12-nernst-equation",
+      "lesson_id": "lesson-chem-12-nernst-equation",
+      "chunk_ids": [
+        "chem12-nernst-equation-explanation-001",
+        "chem12-nernst-equation-example-001",
+        "chem12-nernst-equation-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-05",
+      "chapter_title": "Coordination Compounds",
+      "topic_id": "chem-12-coordination-basics",
+      "concept_id": "chem-12-coordination-basics",
+      "lesson_id": "lesson-chem-12-coordination-basics",
+      "chunk_ids": [
+        "chem12-coordination-basics-explanation-001",
+        "chem12-coordination-basics-example-001",
+        "chem12-coordination-basics-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-06",
+      "chapter_title": "Amines",
+      "topic_id": "chem-12-amine-basicity",
+      "concept_id": "chem-12-amine-basicity",
+      "lesson_id": "lesson-chem-12-amine-basicity",
+      "chunk_ids": [
+        "chem12-amine-basicity-explanation-001",
+        "chem12-amine-basicity-example-001",
+        "chem12-amine-basicity-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-07",
+      "chapter_title": "d- and f-Block Elements",
+      "topic_id": "chem-12-transition-metal-properties",
+      "concept_id": "chem-12-transition-metal-properties",
+      "lesson_id": "lesson-chem-12-transition-metal-properties",
+      "chunk_ids": [
+        "chem-12-transition-metal-properties-explanation-001",
+        "chem-12-transition-metal-properties-example-001",
+        "chem-12-transition-metal-properties-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-08",
+      "chapter_title": "Haloalkanes and Haloarenes",
+      "topic_id": "chem-12-nucleophilic-substitution",
+      "concept_id": "chem-12-nucleophilic-substitution",
+      "lesson_id": "lesson-chem-12-nucleophilic-substitution",
+      "chunk_ids": [
+        "chem-12-nucleophilic-substitution-explanation-001",
+        "chem-12-nucleophilic-substitution-example-001",
+        "chem-12-nucleophilic-substitution-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-09",
+      "chapter_title": "Biomolecules",
+      "topic_id": "chem-12-proteins-peptide-bond",
+      "concept_id": "chem-12-proteins-peptide-bond",
+      "lesson_id": "lesson-chem-12-proteins-peptide-bond",
+      "chunk_ids": [
+        "chem-12-proteins-peptide-bond-explanation-001",
+        "chem-12-proteins-peptide-bond-example-001",
+        "chem-12-proteins-peptide-bond-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-10",
+      "chapter_title": "Alcohols, Phenols and Ethers",
+      "topic_id": "chem-12-alcohol-phenol-ether-groups",
+      "concept_id": "chem-12-alcohol-phenol-ether-groups",
+      "lesson_id": "lesson-chem-12-alcohol-phenol-ether-groups",
+      "chunk_ids": [
+        "chem-12-alcohol-phenol-ether-groups-explanation-001",
+        "chem-12-alcohol-phenol-ether-groups-worked_example-001",
+        "chem-12-alcohol-phenol-ether-groups-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-11",
+      "chapter_title": "Aldehydes, Ketones and Carboxylic Acids",
+      "topic_id": "chem-12-carbonyl-group",
+      "concept_id": "chem-12-carbonyl-group",
+      "lesson_id": "lesson-chem-12-carbonyl-group",
+      "chunk_ids": [
+        "chem-12-carbonyl-group-explanation-001",
+        "chem-12-carbonyl-group-worked_example-001",
+        "chem-12-carbonyl-group-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-12",
+      "chapter_title": "Aldehydes, Ketones and Carboxylic Acids",
+      "topic_id": "chem-12-carboxylic-acid",
+      "concept_id": "chem-12-carboxylic-acid",
+      "lesson_id": "lesson-chem-12-carboxylic-acid",
+      "chunk_ids": [
+        "chem-12-carboxylic-acid-explanation-001",
+        "chem-12-carboxylic-acid-worked_example-001",
+        "chem-12-carboxylic-acid-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-13",
+      "chapter_title": "Coordination Compounds",
+      "topic_id": "chem-12-coordination-isomerism",
+      "concept_id": "chem-12-coordination-isomerism",
+      "lesson_id": "lesson-chem-12-coordination-isomerism",
+      "chunk_ids": [
+        "chem-12-coordination-isomerism-explanation-001",
+        "chem-12-coordination-isomerism-worked_example-001",
+        "chem-12-coordination-isomerism-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class12-chapter-14",
+      "chapter_title": "Amines",
+      "topic_id": "chem-12-diazonium-salts",
+      "concept_id": "chem-12-diazonium-salts",
+      "lesson_id": "lesson-chem-12-diazonium-salts",
+      "chunk_ids": [
+        "chem-12-diazonium-salts-explanation-001",
+        "chem-12-diazonium-salts-worked_example-001",
+        "chem-12-diazonium-salts-misconception-001"
+      ]
+    }
+  ],
+  "chapter_count": 14,
+  "lesson_content_file": "content/lessons/chemistry_class_12.json",
+  "concept_catalog_file": "content/concepts/chemistry_class_12.json",
+  "item_bank_file": "content/items/chemistry_class_12.json",
+  "supplemental_ncert_reference_ids": [
+    "ncert-lech1",
+    "ncert-lech2"
+  ]
+}
