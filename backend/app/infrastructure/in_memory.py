@@ -18,6 +18,7 @@ from ..application.ports.learning import (
     MasteryStatePort,
     RecommendationPort,
 )
+from ..application.ports.question_bank import QuestionBankIdPort, QuestionBankStorePort
 from ..domain.entities.learning import (
     AssessmentItem,
     AssessmentSession,
@@ -27,6 +28,7 @@ from ..domain.entities.learning import (
     MasteryState,
     Recommendation,
 )
+from ..domain.entities.question_bank import ClassifiedQuestion
 
 
 class InMemoryLearners(LearnerPort, LearnerRosterPort):
@@ -146,6 +148,40 @@ class InMemorySessionIds(SessionIdPort):
         session_id = f"{self._prefix}-{self._next_number}"
         self._next_number += 1
         return session_id
+
+
+class InMemoryQuestionBankIds(QuestionBankIdPort):
+    """Deterministic process-local identifiers for question-bank demos."""
+
+    def __init__(self) -> None:
+        self._bank_number = 1
+        self._question_number = 1
+
+    def next_bank_id(self) -> str:
+        value = f"question-bank-{self._bank_number}"
+        self._bank_number += 1
+        return value
+
+    def next_question_id(self) -> str:
+        value = f"question-{self._question_number}"
+        self._question_number += 1
+        return value
+
+
+class InMemoryQuestionBankStore(QuestionBankStorePort):
+    """Process-local persistence adapter for preview/import integration."""
+
+    def __init__(self) -> None:
+        self._banks: dict[str, tuple[str, str, tuple[ClassifiedQuestion, ...]]] = {}
+
+    def save_bank(self, *, bank_id: str, teacher_id: str, title: str, questions: Sequence[ClassifiedQuestion]) -> None:
+        if bank_id in self._banks:
+            raise ValueError(f"question bank already exists: {bank_id}")
+        self._banks[bank_id] = (teacher_id, title, tuple(questions))
+
+    @property
+    def banks(self) -> Mapping[str, tuple[str, str, tuple[ClassifiedQuestion, ...]]]:
+        return dict(self._banks)
 
 
 class InMemoryAttempts(AttemptPort):
