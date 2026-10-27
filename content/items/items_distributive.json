@@ -1,0 +1,144 @@
+[
+  {
+    "id": "item-dist-sym-01",
+    "concept_id": "ALG-DIST-01",
+    "difficulty": "medium",
+    "representation": "symbolic",
+    "misconception_tag": "loses the negative sign",
+    "question": "Expand and simplify the expression: -3(x + 4)",
+    "answer_type": "choice",
+    "options": [
+      "-3x + 12",
+      "-3x - 12",
+      "-3x + 4",
+      "3x - 12"
+    ],
+    "answer": "-3x - 12",
+    "explanation": "Distribute -3 to each term: (-3 * x) + (-3 * 4) = -3x - 12. Remember that multiplying a negative by a positive yields a negative product.",
+    "source_id": "lesson-algebra-03"
+  },
+  {
+    "id": "item-dist-sym-02",
+    "concept_id": "ALG-DIST-01",
+    "difficulty": "medium",
+    "representation": "symbolic",
+    "misconception_tag": "loses the negative sign",
+    "question": "Expand and simplify: -2(x - 5)",
+    "answer_type": "expression",
+    "options": null,
+    "answer": "-2x + 10",
+    "explanation": "Multiply -2 by x to get -2x. Multiply -2 by -5 to get +10. Result: -2x + 10.",
+    "source_id": "lesson-algebra-03"
+  },
+  {
+    "id": "item-dist-sym-03",
+    "concept_id": "ALG-DIST-01",
+    "difficulty": "easy",
+    "representation": "symbolic",
+    "misconception_tag": "multiplies only the first term",
+    "question": "Expand: 3(x + 4)",
+    "answer_type": "choice",
+    "options": [
+      "3x + 4",
+      "3x + 12",
+      "x + 12",
+      "7x"
+    ],
+    "answer": "3x + 12",
+    "explanation": "Distribute 3 to x and 3 to 4: 3*x + 3*4 = 3x + 12.",
+    "source_id": "lesson-algebra-03"
+  },
+  {
+    "id": "item-dist-err-01",
+    "concept_id": "ALG-DIST-01",
+    "difficulty": "medium",
+    "representation": "error_analysis",
+    "misconception_tag": "loses the negative sign",
+    "question": "A learner attempted to simplify -2(x + 3) and wrote -2x + 3. What error did the learner make?",
+    "answer_type": "choice",
+    "options": [
+      "The learner forgot to distribute the multiplier -2 to the constant term +3.",
+      "The learner made an error in multiplying -2 by x.",
+      "The learner should have added -2 and 3 before expanding.",
+      "There is no error in the student's solution."
+    ],
+    "answer": "The learner forgot to distribute the multiplier -2 to the constant term +3.",
+    "explanation": "The distributive property requires multiplying the outside factor by every term inside parentheses. -2 * 3 = -6, so the correct expression is -2x - 6.",
+    "source_id": "worked-example-07"
+  },
+  {
+    "id": "item-dist-err-02",
+    "concept_id": "ALG-DIST-01",
+    "difficulty": "medium",
+    "representation": "error_analysis",
+    "misconception_tag": "loses the negative sign",
+    "question": "In an exam, Riya simplified -4(2y - 5) as -8y - 20. Identify the mistake.",
+    "answer_type": "choice",
+    "options": [
+      "Multiplying -4 by -5 should result in +20, not -20.",
+      "Multiplying -4 by 2y should result in +8y.",
+      "The expression cannot be expanded because of different signs.",
+      "The constant term should be 9."
+    ],
+    "answer": "Multiplying -4 by -5 should result in +20, not -20.",
+    "explanation": "When multiplying two negative numbers (-4 and -5), the product is positive (+20). The correct result is -8y + 20.",
+    "source_id": "lesson-algebra-03"
+  },
+  {
+    "id": "item-dist-verb-01",
+    "concept_id": "ALG-DIST-01",
+    "difficulty": "medium",
+    "representation": "verbal",
+    "misconception_tag": "multiplies only the first term",
+    "question": "In your own words, explain why the factor outside the parentheses must be multiplied by every term inside the parentheses.",
+    "answer_type": "explanation",
+    "options": null,
+    "answer": "Parentheses group terms into a single quantity, so multiplying the group means scaling every component part by that factor.",
+    "explanation": "Because parentheses group individual quantities together, scaling the group scales every component within it equally.",
+    "source_id": "lesson-algebra-03"
+  },
+  {
+    "id": "item-dist-verb-02",
+    "concept_id": "ALG-DIST-01",
+    "difficulty": "medium",
+    "representation": "visual",
+    "misconception_tag": "multiplies only the first term",
+    "question": "Imagine a rectangular garden divided into two sections with width 4 meters, section A length x meters, and section B length 5 meters. What does the total area 4(x + 5) represent in terms of the two sub-areas?",
+    "answer_type": "choice",
+    "options": [
+      "The area is 4x + 5 square meters.",
+      "The area is the sum of the two rectangles: 4x square meters plus 20 square meters.",
+      "The area is 20x square meters.",
+      "The area is 4 + x + 5 = 9 + x square meters."
+    ],
+    "answer": "The area is the sum of the two rectangles: 4x square meters plus 20 square meters.",
+    "explanation": "The area of the entire rectangle is width * total length: 4 * (x + 5) = 4*x + 4*5 = 4x + 20.",
+    "source_id": "lesson-algebra-03"
+  },
+  {
+    "id": "item-dist-trans-01",
+    "concept_id": "ALG-DIST-01",
+    "difficulty": "hard",
+    "representation": "transfer",
+    "misconception_tag": "loses the negative sign",
+    "question": "Solve the equation -3(2x - 1) = 15. What is the value of x?",
+    "answer_type": "numeric",
+    "options": null,
+    "answer": "-2",
+    "explanation": "Step 1: Distribute -3: -6x + 3 = 15. Step 2: Subtract 3: -6x = 12. Step 3: Divide by -6: x = -2.",
+    "source_id": "worked-example-07"
+  },
+  {
+    "id": "item-dist-trans-02",
+    "concept_id": "ALG-DIST-01",
+    "difficulty": "hard",
+    "representation": "transfer",
+    "misconception_tag": "loses the negative sign",
+    "question": "Expand and combine like terms: -2(3x + 4) + 5x - 7",
+    "answer_type": "expression",
+    "options": null,
+    "answer": "-x - 15",
+    "explanation": "Distribute: -6x - 8 + 5x - 7. Combine like terms: (-6x + 5x) + (-8 - 7) = -x - 15.",
+    "source_id": "lesson-algebra-03"
+  }
+]

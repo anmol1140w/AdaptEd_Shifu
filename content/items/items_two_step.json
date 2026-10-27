@@ -1,0 +1,95 @@
+[
+  {
+    "id": "item-twostep-sym-01",
+    "concept_id": "ALG-TWOSTEP-01",
+    "difficulty": "medium",
+    "representation": "symbolic",
+    "misconception_tag": "incorrect inverse operation order",
+    "question": "Solve the two-step equation: 2x + 5 = 13",
+    "answer_type": "numeric",
+    "options": null,
+    "answer": "4",
+    "explanation": "Subtract 5 from both sides: 2x = 8. Divide both sides by 2: x = 4.",
+    "source_id": "lesson-algebra-04"
+  },
+  {
+    "id": "item-twostep-sym-02",
+    "concept_id": "ALG-TWOSTEP-01",
+    "difficulty": "medium",
+    "representation": "symbolic",
+    "misconception_tag": "sign inversion error",
+    "question": "Solve the equation: -4y - 3 = 17",
+    "answer_type": "choice",
+    "options": [
+      "-5",
+      "5",
+      "-3.5",
+      "-5.5"
+    ],
+    "answer": "-5",
+    "explanation": "Add 3 to both sides: -4y = 20. Divide by -4: y = -5.",
+    "source_id": "lesson-algebra-04"
+  },
+  {
+    "id": "item-twostep-err-01",
+    "concept_id": "ALG-TWOSTEP-01",
+    "difficulty": "medium",
+    "representation": "error_analysis",
+    "misconception_tag": "incorrect inverse operation order",
+    "question": "To solve 3x + 6 = 21, a student divided the entire left side by 3 and wrote x + 6 = 7. What was the mistake?",
+    "answer_type": "choice",
+    "options": [
+      "The constant 6 was not divided by 3.",
+      "The student should have multiplied 21 by 3.",
+      "3x divided by 3 is not x.",
+      "There is no mistake in dividing first."
+    ],
+    "answer": "The constant 6 was not divided by 3.",
+    "explanation": "When dividing both sides of an equation by a number, every term on both sides must be divided. 6 / 3 = 2, so dividing first yields x + 2 = 7.",
+    "source_id": "lesson-algebra-04"
+  },
+  {
+    "id": "item-twostep-verb-01",
+    "concept_id": "ALG-TWOSTEP-01",
+    "difficulty": "medium",
+    "representation": "verbal",
+    "misconception_tag": "incorrect inverse operation order",
+    "question": "When solving ax + b = c, why do mathematicians recommend undoing addition or subtraction before undoing multiplication or division?",
+    "answer_type": "explanation",
+    "options": null,
+    "answer": "Undoing addition or subtraction first eliminates fractional constants and isolates the term containing the variable cleanly.",
+    "explanation": "Undoing addition/subtraction first avoids creating fractions across the constant terms, simplifying calculation.",
+    "source_id": "lesson-algebra-04"
+  },
+  {
+    "id": "item-twostep-trans-01",
+    "concept_id": "ALG-TWOSTEP-01",
+    "difficulty": "hard",
+    "representation": "transfer",
+    "misconception_tag": "contextual modeling error",
+    "question": "A taxi charges a fixed base fee of $4 plus $2.50 per kilometer. If a trip cost $19, write and solve the equation to find the distance d in kilometers.",
+    "answer_type": "choice",
+    "options": [
+      "4 + 2.50d = 19, so d = 6 km",
+      "2.50 + 4d = 19, so d = 4.125 km",
+      "4d = 19, so d = 4.75 km",
+      "4 + 2.50d = 19, so d = 9.2 km"
+    ],
+    "answer": "4 + 2.50d = 19, so d = 6 km",
+    "explanation": "The linear model is 2.50d + 4 = 19. Subtract 4: 2.50d = 15. Divide by 2.50: d = 6 km.",
+    "source_id": "lesson-algebra-04"
+  },
+  {
+    "id": "item-twostep-trans-02",
+    "concept_id": "ALG-TWOSTEP-01",
+    "difficulty": "transfer",
+    "representation": "transfer",
+    "misconception_tag": "combining brackets and multi-step transfer",
+    "question": "Solve the multi-step equation combining distributive property and two-step solving: -3(2x - 4) + 5x = 22. What is x?",
+    "answer_type": "numeric",
+    "options": null,
+    "answer": "-10",
+    "explanation": "Step 1 (Expand): -6x + 12 + 5x = 22. Step 2 (Combine like terms): -x + 12 = 22. Step 3 (Subtract 12): -x = 10. Step 4 (Divide by -1): x = -10.",
+    "source_id": "worked-example-08"
+  }
+]
