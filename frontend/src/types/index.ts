@@ -172,6 +172,67 @@ export interface TeacherIntervention {
   createdAt: string
 }
 
+// --- Phase 1: authentication, onboarding and classrooms (frontend-only UI state) ---
+
+/** Subjects AdaptEd supports. Phase 1 is restricted to PCM. */
+export type JeeSubjectId = 'physics' | 'chemistry' | 'mathematics'
+export type ClassLevel = 'Class 11' | 'Class 12'
+export type ExamTarget = 'JEE Main' | 'JEE Advanced' | 'JEE Main + Advanced'
+export type ClassroomRole = 'teacher' | 'student'
+export type AuthProvider = 'password' | 'google'
+
+export interface AuthUser {
+  id: string
+  name: string
+  email: string
+  role: Role
+  onboardingComplete: boolean
+}
+
+export interface AuthSession {
+  user: AuthUser
+  provider: AuthProvider
+  issuedAt: string
+  /** True while authentication is served by the local UI-only demo service. */
+  isDemo: boolean
+}
+
+export interface ClassroomMember {
+  userId: string
+  name: string
+  role: ClassroomRole
+  joinedAt: string
+}
+
+export interface Classroom {
+  id: string
+  name: string
+  code: string
+  classLevel: ClassLevel
+  academicYear: string
+  examTarget: ExamTarget
+  subjects: JeeSubjectId[]
+  creatorId: string
+  creatorName: string
+  members: ClassroomMember[]
+  createdAt: string
+  /** True while classrooms are served by the local UI-only demo service. */
+  isDemo: boolean
+}
+
+export interface CreateClassroomInput {
+  name: string
+  teacherName: string
+  classLevel: ClassLevel
+  academicYear: string
+  examTarget: ExamTarget
+  subjects: JeeSubjectId[]
+}
+
+export interface JoinClassroomInput {
+  code: string
+}
+
 export interface DemoState {
   selectedRole: Role | null
   activity: LearningActivity[]
