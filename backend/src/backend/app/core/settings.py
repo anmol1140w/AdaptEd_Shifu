@@ -3,8 +3,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     app_name: str = "AdaptEd API"
+    database_url: str = "postgresql://adapted_user@127.0.0.1:5432/adapted"
+    database_password: str = ""
     secret_key: str = "change-me-in-production"
-    access_token_ttl_seconds: int = 60 * 60 * 24
+    # Keep an authenticated browser session for 30 days across visits.
+    access_token_ttl_seconds: int = 60 * 60 * 24 * 30
     teacher_invite_code: str | None = None
     google_client_id: str = ""
     google_client_secret: str = ""

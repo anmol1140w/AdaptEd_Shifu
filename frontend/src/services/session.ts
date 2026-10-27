@@ -1,15 +1,10 @@
 import type { AuthSession } from '../types'
 
 /**
- * Session store for Phase 1.
- *
- * No authentication provider is configured in this repository yet, so the session
- * lives in the browser and is clearly flagged with `isDemo: true`. When a real
- * provider is added, only this module and `authService` need to change — every
- * consumer reads through the same subscribe/get/set/clear API.
+ * In-memory identity cache. Demo identities are stored locally; real identities
+ * are rehydrated from the backend's HttpOnly session cookie on app startup.
  */
 const SESSION_KEY = 'adapted-local-session-v1'
-const ACCESS_TOKEN_KEY = 'adapted-api-access-token-v1'
 
 type Listener = (session: AuthSession | null) => void
 
@@ -32,6 +27,7 @@ function readPersisted(): AuthSession | null {
 function hydrate() {
   if (hydrated) return
   hydrated = true
+  try { window.localStorage.removeItem('adapted-api-access-token-v1') } catch { /* use the HttpOnly cookie only */ }
   memorySession = readPersisted()
 }
 
@@ -53,14 +49,6 @@ export function setSession(session: AuthSession): void {
   emit()
 }
 
-export function setAccessToken(token: string): void {
-  try { window.localStorage.setItem(ACCESS_TOKEN_KEY, token) } catch { /* keep the active session usable */ }
-}
-
-export function getAccessToken(): string | null {
-  try { return window.localStorage.getItem(ACCESS_TOKEN_KEY) } catch { return null }
-}
-
 export function patchSession(patch: Partial<AuthSession['user']>): void {
   hydrate()
   if (!memorySession) return
@@ -80,7 +68,6 @@ export function clearSession(): void {
   memorySession = null
   try {
     window.localStorage.removeItem(SESSION_KEY)
-    window.localStorage.removeItem(ACCESS_TOKEN_KEY)
   } catch {
     /* ignore */
   }

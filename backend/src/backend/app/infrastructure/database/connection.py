@@ -32,6 +32,9 @@ CREATE TABLE IF NOT EXISTS classrooms (
     join_code_hash TEXT NOT NULL UNIQUE,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+ALTER TABLE classrooms ADD COLUMN IF NOT EXISTS class_level INTEGER NOT NULL DEFAULT 12 CHECK (class_level IN (11, 12));
+UPDATE classrooms SET class_level = CASE WHEN description ~* '^class[[:space:]]+11' THEN 11 ELSE 12 END
+WHERE description ~* '^class[[:space:]]+1[12]' AND class_level = 12;
 CREATE TABLE IF NOT EXISTS classroom_memberships (
     classroom_id TEXT NOT NULL REFERENCES classrooms(id) ON DELETE CASCADE,
     user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -199,6 +202,35 @@ CREATE TABLE IF NOT EXISTS ai_request_audit (
     source_ids JSONB NOT NULL DEFAULT '[]'::jsonb,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+CREATE TABLE IF NOT EXISTS ai_tutor_memory (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    subject TEXT NOT NULL CHECK (subject IN ('physics', 'chemistry', 'mathematics')),
+    class_level INTEGER NOT NULL CHECK (class_level IN (11, 12)),
+    concept_id TEXT NOT NULL REFERENCES learning_concepts(concept_id) ON DELETE CASCADE,
+    mode TEXT NOT NULL CHECK (mode IN ('hint', 'explanation', 'check_question')),
+    question TEXT NOT NULL,
+    response TEXT NOT NULL,
+    check_question TEXT NOT NULL,
+    source_ids JSONB NOT NULL DEFAULT '[]'::jsonb,
+    sources JSONB NOT NULL DEFAULT '[]'::jsonb,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+ALTER TABLE ai_tutor_memory ADD COLUMN IF NOT EXISTS sources JSONB NOT NULL DEFAULT '[]'::jsonb;
+CREATE INDEX IF NOT EXISTS idx_ai_tutor_memory_context
+    ON ai_tutor_memory(user_id, subject, class_level, concept_id, created_at DESC);
+CREATE TABLE IF NOT EXISTS user_learning_preferences (
+    user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    subject TEXT NOT NULL DEFAULT 'physics' CHECK (subject IN ('physics', 'chemistry', 'mathematics')),
+    class_level INTEGER NOT NULL DEFAULT 11 CHECK (class_level IN (11, 12)),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+INSERT INTO user_learning_preferences (user_id, subject, class_level)
+SELECT DISTINCT ON (membership.user_id) membership.user_id, 'physics', classroom.class_level
+FROM classroom_memberships membership
+JOIN classrooms classroom ON classroom.id = membership.classroom_id
+ORDER BY membership.user_id, membership.joined_at DESC
+ON CONFLICT (user_id) DO NOTHING;
 DO $$ BEGIN
     IF NOT EXISTS (
         SELECT 1 FROM pg_constraint
@@ -247,8 +279,8 @@ def seed_pcm_learning_content(connection: psycopg.Connection) -> None:
                     """INSERT INTO learning_items
                        (item_id, concept_id, subject, class_level, chapter, item_type, bloom_level,
                         difficulty, question, answer_guide, explanation, source_reference_ids,
-                        supporting_chunk_ids, citation_status, approved)
-                       VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s::jsonb,%s,%s)
+                        supporting_chunk_ids, citation_status)
+                       VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s::jsonb,%s)
                        ON CONFLICT (item_id) DO UPDATE SET concept_id=EXCLUDED.concept_id,
                          subject=EXCLUDED.subject, class_level=EXCLUDED.class_level, chapter=EXCLUDED.chapter,
                          item_type=EXCLUDED.item_type, bloom_level=EXCLUDED.bloom_level,
@@ -272,11 +304,16 @@ def seed_pcm_learning_content(connection: psycopg.Connection) -> None:
 
 def connect() -> psycopg.Connection:
     connection = psycopg.connect(settings.database_url, password=settings.database_password, row_factory=dict_row)
-    connection.execute(SCHEMA)
-    seed_granular_content(connection)
-    seed_pcm_learning_content(connection)
-    connection.commit()
-    return connection
+    try:
+        connection.execute(SCHEMA)
+        seed_granular_content(connection)
+        seed_pcm_learning_content(connection)
+        connection.commit()
+        return connection
+    except Exception:
+        connection.rollback()
+        connection.close()
+        raise
 
 
 @contextmanager

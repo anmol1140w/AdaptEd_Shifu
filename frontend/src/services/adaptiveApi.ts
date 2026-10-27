@@ -1,15 +1,11 @@
-import { getAccessToken } from './session'
-
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/api/v1'
 
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
-  const token = getAccessToken()
   const response = await fetch(`${API_BASE}${path}`, {
     credentials: 'include',
     ...init,
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...init.headers,
     },
   })
@@ -33,12 +29,23 @@ export type LearningPathStep = { concept_id: string; name: string; chapter: stri
 export type LearnerSummary = { learner_id: string; name: string; attempts: number; accuracy: number; weak_concepts: string[]; intervention: string }
 export type AILearningRecommendation = { concept_id: string; concept_name: string; chapter: string; action: string; reason: string; source_ids: string[] }
 export type LearningCitation = { source_id: string; citation: string; text: string; score: number }
+export type GeneratedWeakQuiz = { id: string; status: string; question_count: number; citations: LearningCitation[] }
+export type TutorMemory = { id: string; mode: 'hint' | 'explanation' | 'check_question'; question: string; message: string; check_question: string; source_ids: string[]; sources: LearningCitation[]; created_at: string }
+export type LearningPreferences = { subject: string; class_level: number; updated_at: string | null }
 
 export function getConcepts(subject: string, classLevel: number) {
   return request<{ concepts: AdaptiveConcept[] }>(`/learning/concepts?subject=${subject}&class_level=${classLevel}`)
 }
 export function getProgress(subject: string, classLevel: number) {
   return request<{ subject: string; class_level: number; concepts: AdaptiveConcept[]; learning_path: LearningPathStep[] }>(`/learning/progress?subject=${subject}&class_level=${classLevel}`)
+}
+export function getLearningPreferences() {
+  return request<{ preferences: LearningPreferences }>('/learning/preferences')
+}
+export function saveLearningPreferences(subject: string, classLevel: number) {
+  return request<{ preferences: LearningPreferences }>('/learning/preferences', {
+    method: 'PUT', body: JSON.stringify({ subject, class_level: classLevel }),
+  })
 }
 export function startAdaptiveAssessment(subject: string, classLevel: number) {
   return request<{ assessment_id: string; status: string; question_count: number; index: number; question: AdaptiveQuestion }>('/assessments/start', {
@@ -51,9 +58,13 @@ export function submitAdaptiveAttempt(assessmentId: string, answer: string, time
   })
 }
 export function askTutor(input: { subject: string; class_level: number; concept_id: string; question: string; mode: 'hint' | 'explanation' | 'check_question' }) {
-  return request<{ message: string; check_question: string; citations: { source_id: string; citation: string; text: string; score: number }[]; provider: string }>('/ai/tutor', {
+  return request<{ id: string; message: string; check_question: string; citations: LearningCitation[]; provider: string }>('/ai/tutor', {
     method: 'POST', body: JSON.stringify(input),
   })
+}
+export function getTutorHistory(subject: string, classLevel: number, conceptId: string) {
+  const params = new URLSearchParams({ subject, class_level: String(classLevel), concept_id: conceptId })
+  return request<{ items: TutorMemory[] }>(`/ai/tutor-history?${params.toString()}`)
 }
 export function getAILearningRecommendations(subject: string, classLevel: number) {
   return request<{ recommendations: AILearningRecommendation[]; citations: LearningCitation[]; provider: string }>('/ai/learning-recommendations', {
@@ -61,7 +72,7 @@ export function getAILearningRecommendations(subject: string, classLevel: number
   })
 }
 export function generateWeakQuiz(input: { subject: string; class_level: number; concept_id: string; item_count?: number }) {
-  return request<{ id: string; status: string; question_count: number; citations: { source_id: string; citation: string }[] }>('/ai/weak-area-quiz', {
+  return request<GeneratedWeakQuiz>('/ai/weak-area-quiz', {
     method: 'POST', body: JSON.stringify(input),
   })
 }

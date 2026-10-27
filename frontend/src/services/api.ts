@@ -1,13 +1,6 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/api/v1'
-import { getAccessToken } from './session'
-
-function authHeaders(extra?: HeadersInit): HeadersInit {
-  const token = getAccessToken()
-  return { ...(extra ?? {}), ...(token ? { Authorization: `Bearer ${token}` } : {}) }
-}
-
 async function apiFetch(path: string, init: RequestInit = {}) {
-  return fetch(`${API_BASE}${path}`, { credentials: 'include', ...init, headers: authHeaders(init.headers) })
+  return fetch(`${API_BASE}${path}`, { credentials: 'include', ...init })
 }
 
 import type { Classroom, CreateClassroomInput } from '../types'
@@ -15,13 +8,13 @@ import type { Classroom, CreateClassroomInput } from '../types'
 export type JeeTopic = { id: string; subject: 'physics' | 'chemistry' | 'mathematics'; name: string; slug: string; problem_count: number }
 export type JeeProblem = { id: string; title: string; subject: string; chapter: string; statement: string; question_type: 'MCQ' | 'Numerical'; difficulty: 'Easy' | 'Medium' | 'Hard'; choices?: string[]; answer: string; explanation: string; hints: string[]; formula?: string; exam_relevance: string[]; estimated_minutes: number; topics: string[]; solved?: boolean; attempted?: boolean; attempts?: { correct: boolean; created_at: string }[] }
 
-export type AuthUser = { id: string; email: string; name: string; role: 'student' | 'teacher'; unique_id?: string }
+export type AuthUser = { id: string; email: string; name: string; role: 'student' | 'teacher'; unique_id?: string; onboardingComplete: boolean }
 
 export async function getCurrentUser(): Promise<AuthUser | null> {
   const response = await apiFetch('/auth/me')
   if (!response.ok) return null
   const body = await response.json()
-  return body.user
+  return { ...body.user, onboardingComplete: Boolean(body.user.onboarding_complete ?? body.user.onboardingComplete) }
 }
 
 export function startGoogleLogin() {
@@ -45,7 +38,7 @@ export async function createClassroom(input: CreateClassroomInput) {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: input.name, description: `${input.classLevel} · ${input.examTarget}` }),
+    body: JSON.stringify({ name: input.name, class_level: Number(input.classLevel.replace('Class ', '')), description: `${input.classLevel} · ${input.examTarget}` }),
   })
   const body = await response.json()
   if (!response.ok) throw new Error(body.detail ?? 'Could not create classroom')
@@ -64,7 +57,7 @@ function toFrontendClassroom(row: Record<string, string>, code = ''): Classroom 
     id: row.id,
     name: row.name,
     code: code || 'Invite code hidden',
-    classLevel: 'Class 12',
+    classLevel: row.class_level ? `Class ${row.class_level}` as Classroom['classLevel'] : 'Class 12',
     academicYear: '2026–27',
     examTarget: 'JEE Main + Advanced',
     subjects: ['physics', 'chemistry', 'mathematics'],
@@ -107,7 +100,7 @@ async function authRequest(path: string, payload: unknown) {
 }
 
 export const teacherLogin = (uniqueId: string, password: string) => authRequest('/auth/teacher/login', { unique_id: uniqueId, password })
-export const teacherRegister = (name: string, uniqueId: string, password: string, teacherInviteCode: string) => authRequest('/auth/teacher/register', { name, unique_id: uniqueId, password, teacher_invite_code: teacherInviteCode })
+export const teacherRegister = (name: string, uniqueId: string, password: string, teacherInviteCode: string) => authRequest('/auth/teacher/register', { name, unique_id: uniqueId, password, teacher_invite_code: teacherInviteCode.trim() })
 
 export async function teacherClassrooms() {
   const response = await fetch(`${API_BASE}/teacher/classrooms`, { credentials: 'include' })

@@ -136,14 +136,6 @@ export interface LearningPathItem {
   locked: boolean
 }
 
-export interface TutorMessage {
-  id: string
-  role: 'user' | 'assistant'
-  content: string
-  timestamp: string
-  sourceLabel?: string
-}
-
 export interface TeacherStudent {
   id: string
   name: string
@@ -242,6 +234,5 @@ export interface DemoState {
   completedPathItems: string[]
   bookmarks: string[]
   masteryAdjustments: Record<string, number>
-  tutorMessages: TutorMessage[]
   interventions: TeacherIntervention[]
 }

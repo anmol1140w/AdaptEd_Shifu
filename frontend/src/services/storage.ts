@@ -1,4 +1,4 @@
-import type { DemoState, LearningActivity, ProblemAttempt, TutorMessage, TeacherIntervention } from '../types'
+import type { DemoState, LearningActivity, ProblemAttempt, TeacherIntervention } from '../types'
 import { BASE_INTERVENTIONS, CONCEPTS, PROBLEMS, STUDENT } from './data'
 
 const STORAGE_KEY = 'adapted-demo-state-v1'
@@ -48,9 +48,6 @@ const initialState: DemoState = {
   completedPathItems: ['path-1'],
   bookmarks: ['PHY-002', 'MATH-005'],
   masteryAdjustments: {},
-  tutorMessages: [
-    { id: 'tutor-welcome', role: 'assistant', content: 'Hi Aarav. I can help you reason through a concept, review a mistake, or build a focused practice set. What would you like to work on?', timestamp: dateAtOffset(0, 8), sourceLabel: 'Demo tutor · teacher-reviewed content' },
-  ],
   interventions: BASE_INTERVENTIONS,
 }
 
@@ -70,7 +67,6 @@ function safeParse(raw: string | null): DemoState | null {
       completedPathItems: Array.isArray(parsed.completedPathItems) ? parsed.completedPathItems : initialState.completedPathItems,
       bookmarks: Array.isArray(parsed.bookmarks) ? parsed.bookmarks : initialState.bookmarks,
       masteryAdjustments: isRecord(parsed.masteryAdjustments) ? parsed.masteryAdjustments as Record<string, number> : initialState.masteryAdjustments,
-      tutorMessages: Array.isArray(parsed.tutorMessages) ? parsed.tutorMessages : initialState.tutorMessages,
       interventions: Array.isArray(parsed.interventions) ? parsed.interventions : BASE_INTERVENTIONS,
     }
   } catch {
@@ -108,13 +104,6 @@ export function recordActivity(state: DemoState, input: Omit<LearningActivity, '
 
 export function recordProblemAttempt(state: DemoState, attempt: Omit<ProblemAttempt, 'id'>) {
   const next = { ...state, problemAttempts: [...state.problemAttempts, { ...attempt, id: `attempt-${Date.now()}` }] }
-  saveState(next)
-  return next
-}
-
-export function addTutorMessage(state: DemoState, message: Omit<TutorMessage, 'id' | 'timestamp'>) {
-  const nextMessage: TutorMessage = { ...message, id: `tutor-${Date.now()}`, timestamp: new Date().toISOString() }
-  const next = { ...state, tutorMessages: [...state.tutorMessages, nextMessage] }
   saveState(next)
   return next
 }

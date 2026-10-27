@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import type { AuthSession, Classroom, CreateClassroomInput, JoinClassroomInput, Role } from '../types'
-import { clearSession, getSession, patchSession, setAccessToken, setSession, subscribeSession } from '../services/session'
+import { clearSession, getSession, patchSession, setSession, subscribeSession } from '../services/session'
 import {
   completeAuthCallback,
   completeGoogleCallback,
@@ -51,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (getSession()?.isDemo) clearSession()
       if (!getSession()) {
         const user = await getCurrentUser()
-        if (active && user) setSession({ user: { ...user, onboardingComplete: false }, provider: 'google', issuedAt: new Date().toISOString(), isDemo: false })
+        if (active && user) setSession({ user, provider: 'google', issuedAt: new Date().toISOString(), isDemo: false })
       }
       if (active) setReady(true)
     }
@@ -91,8 +91,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (result.ok) void refreshClassrooms()
         return result
       },
-      teacherLogin: async (input) => { try { const result = await teacherLoginRemote(input.uniqueId, input.password); setAccessToken(result.access_token); const next = { user: { ...result.user, avatar: '', onboardingComplete: true }, provider: 'password' as const, issuedAt: new Date().toISOString(), isDemo: false }; setSession(next); return { ok: true, data: next } } catch (error) { return { ok: false, message: error instanceof Error ? error.message : 'Teacher login failed', field: 'form' as const } } },
-      teacherRegister: async (input) => { try { const result = await teacherRegisterRemote(input.name, input.uniqueId, input.password, input.teacherInviteCode); setAccessToken(result.access_token); const next = { user: { ...result.user, avatar: '', onboardingComplete: true }, provider: 'password' as const, issuedAt: new Date().toISOString(), isDemo: false }; setSession(next); return { ok: true, data: next } } catch (error) { return { ok: false, message: error instanceof Error ? error.message : 'Teacher registration failed', field: 'form' as const } } },
+      teacherLogin: async (input) => { try { const result = await teacherLoginRemote(input.uniqueId, input.password); const next = { user: { ...result.user, avatar: '', onboardingComplete: true }, provider: 'password' as const, issuedAt: new Date().toISOString(), isDemo: false }; setSession(next); return { ok: true, data: next } } catch (error) { return { ok: false, message: error instanceof Error ? error.message : 'Teacher login failed', field: 'form' as const } } },
+      teacherRegister: async (input) => { try { const result = await teacherRegisterRemote(input.name, input.uniqueId, input.password, input.teacherInviteCode); const next = { user: { ...result.user, avatar: '', onboardingComplete: true }, provider: 'password' as const, issuedAt: new Date().toISOString(), isDemo: false }; setSession(next); return { ok: true, data: next } } catch (error) { return { ok: false, message: error instanceof Error ? error.message : 'Teacher registration failed', field: 'form' as const } } },
       continueWithGoogle: () => { window.location.assign(`${import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/api/v1'}/auth/google/start`); return { ok: false, message: '', field: 'form' as const } },
       finishCallback: async () => {
         const result = await completeGoogleCallback()
