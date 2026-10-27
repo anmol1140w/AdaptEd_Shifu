@@ -1,0 +1,155 @@
+{
+  "scenario": {
+    "id": "riya-foundation-gap",
+    "learner_label": "Riya",
+    "synthetic": true,
+    "expected_next_action": "prerequisite_support",
+    "summary": "Repeated distributive-property errors with high hint use block a later equation concept."
+  },
+  "start": {
+    "request": {
+      "contract_version": "v1",
+      "learner_id": "learner-riya",
+      "subject_id": "maths-9"
+    },
+    "response": {
+      "contract_version": "v1",
+      "subject": {
+        "id": "maths-9",
+        "name": "Class 9 Mathematics — Algebra and Linear Equations"
+      },
+      "session": {
+        "id": "session-riya-001",
+        "learner_id": "learner-riya",
+        "subject_id": "maths-9",
+        "current_concept_id": "ALG-VAR-01",
+        "status": "active"
+      },
+      "concept": {
+        "id": "ALG-VAR-01",
+        "subject_id": "maths-9",
+        "name": "Variables and expressions",
+        "prerequisite_ids": [],
+        "mastery_threshold": 0.72
+      },
+      "item": {
+        "id": "item-var-medium",
+        "subject_id": "maths-9",
+        "concept_id": "ALG-VAR-01",
+        "difficulty": "medium",
+        "question": "Simplify 3x + 2x.",
+        "source_id": "lesson-algebra-variables-01"
+      }
+    }
+  },
+  "submit": {
+    "request": {
+      "contract_version": "v1",
+      "session_id": "session-riya-002",
+      "learner_id": "learner-riya",
+      "attempt": {
+        "id": "eq-riya-1",
+        "item_id": "item-eq-riya-medium",
+        "concept_id": "ALG-EQ-02",
+        "answer": "x = 11",
+        "response_ms": 94000,
+        "hint_count": 1,
+        "confidence_signal": 0.3
+      }
+    },
+    "response": {
+      "contract_version": "v1",
+      "learner_id": "learner-riya",
+      "subject": {
+        "id": "maths-9",
+        "name": "Class 9 Mathematics — Algebra and Linear Equations"
+      },
+      "session": {
+        "id": "session-riya-002",
+        "learner_id": "learner-riya",
+        "subject_id": "maths-9",
+        "current_concept_id": "ALG-DIST-01",
+        "status": "active"
+      },
+      "concept": {
+        "id": "ALG-EQ-02",
+        "subject_id": "maths-9",
+        "name": "Two-step equations",
+        "prerequisite_ids": [
+          "ALG-DIST-01"
+        ],
+        "mastery_threshold": 0.72
+      },
+      "item": {
+        "id": "item-eq-riya-medium",
+        "subject_id": "maths-9",
+        "concept_id": "ALG-EQ-02",
+        "difficulty": "medium",
+        "question": "Solve 2x + 3 = 25.",
+        "source_id": "lesson-algebra-equations-02"
+      },
+      "evidence": {
+        "id": "eq-riya-1",
+        "item_id": "item-eq-riya-medium",
+        "concept_id": "ALG-EQ-02",
+        "is_correct": false,
+        "difficulty": "medium",
+        "hint_count": 1,
+        "response_ms": 94000,
+        "confidence_signal": 0.3,
+        "misconception": null
+      },
+      "mastery": {
+        "concept_id": "ALG-EQ-02",
+        "score": 0.09,
+        "confidence": 0.25,
+        "evidence_count": 1,
+        "trend": "insufficient_evidence",
+        "likely_misconception": null,
+        "recent_correctness": 0.0,
+        "independence_score": 0.65
+      },
+      "gap_status": "prerequisite_blocked",
+      "recommendation": {
+        "action_type": "prerequisite_support",
+        "target_concept_id": "ALG-DIST-01",
+        "reason": "Two-step equations depends on Distributive property, but its mastery is below the prerequisite threshold.",
+        "evidence_reference_ids": [
+          "eq-riya-1",
+          "dist-riya-1",
+          "dist-riya-2"
+        ],
+        "teacher_review_required": true
+      },
+      "evidence_references": [
+        {
+          "id": "eq-riya-1",
+          "item_id": "item-eq-riya-medium",
+          "concept_id": "ALG-EQ-02",
+          "is_correct": false,
+          "difficulty": "medium",
+          "hint_count": 1,
+          "misconception": null
+        },
+        {
+          "id": "dist-riya-1",
+          "item_id": "item-dist-riya-1",
+          "concept_id": "ALG-DIST-01",
+          "is_correct": false,
+          "difficulty": "medium",
+          "hint_count": 2,
+          "misconception": "negative sign not distributed"
+        },
+        {
+          "id": "dist-riya-2",
+          "item_id": "item-dist-riya-2",
+          "concept_id": "ALG-DIST-01",
+          "is_correct": false,
+          "difficulty": "medium",
+          "hint_count": 2,
+          "misconception": "negative sign not distributed"
+        }
+      ]
+    }
+  }
+}

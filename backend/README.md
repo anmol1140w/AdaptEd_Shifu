@@ -12,4 +12,7 @@ Planned responsibilities:
 - Teacher analytics and intervention review.
 - Audit events for recommendations and generated content.
 
-The backend is intentionally scaffolded without implementation code at this stage.
+The backend currently contains a provider-independent learning slice,
+framework-independent assessment facade, v1 API adapter and reusable in-memory
+composition root. An HTTP server, production database adapters,
+authentication implementation and live AI adapters are still integration work.

@@ -1,0 +1,165 @@
+{
+  "scenario": {
+    "id": "arjun-ready-for-transfer",
+    "learner_label": "Arjun",
+    "synthetic": true,
+    "expected_next_action": "transfer_practice",
+    "summary": "Repeated independent success, including hard items, supports transfer practice."
+  },
+  "start": {
+    "request": {
+      "contract_version": "v1",
+      "learner_id": "learner-arjun",
+      "subject_id": "maths-9"
+    },
+    "response": {
+      "contract_version": "v1",
+      "subject": {
+        "id": "maths-9",
+        "name": "Class 9 Mathematics — Algebra and Linear Equations"
+      },
+      "session": {
+        "id": "session-arjun-001",
+        "learner_id": "learner-arjun",
+        "subject_id": "maths-9",
+        "current_concept_id": "ALG-VAR-01",
+        "status": "active"
+      },
+      "concept": {
+        "id": "ALG-VAR-01",
+        "subject_id": "maths-9",
+        "name": "Variables and expressions",
+        "prerequisite_ids": [],
+        "mastery_threshold": 0.72
+      },
+      "item": {
+        "id": "item-var-medium",
+        "subject_id": "maths-9",
+        "concept_id": "ALG-VAR-01",
+        "difficulty": "medium",
+        "question": "Simplify 3x + 2x.",
+        "source_id": "lesson-algebra-variables-01"
+      }
+    }
+  },
+  "submit": {
+    "request": {
+      "contract_version": "v1",
+      "session_id": "session-arjun-004",
+      "learner_id": "learner-arjun",
+      "attempt": {
+        "id": "eq-arjun-4",
+        "item_id": "item-eq-arjun-hard-2",
+        "concept_id": "ALG-EQ-02",
+        "answer": "x = 14",
+        "response_ms": 51000,
+        "hint_count": 0,
+        "confidence_signal": 0.9
+      }
+    },
+    "response": {
+      "contract_version": "v1",
+      "learner_id": "learner-arjun",
+      "subject": {
+        "id": "maths-9",
+        "name": "Class 9 Mathematics — Algebra and Linear Equations"
+      },
+      "session": {
+        "id": "session-arjun-004",
+        "learner_id": "learner-arjun",
+        "subject_id": "maths-9",
+        "current_concept_id": "ALG-EQ-02",
+        "status": "active"
+      },
+      "concept": {
+        "id": "ALG-EQ-02",
+        "subject_id": "maths-9",
+        "name": "Two-step equations",
+        "prerequisite_ids": [
+          "ALG-DIST-01"
+        ],
+        "mastery_threshold": 0.72
+      },
+      "item": {
+        "id": "item-eq-arjun-hard-2",
+        "subject_id": "maths-9",
+        "concept_id": "ALG-EQ-02",
+        "difficulty": "hard",
+        "question": "Solve 3(x - 2) + 5 = 41.",
+        "source_id": "lesson-algebra-equations-transfer-01"
+      },
+      "evidence": {
+        "id": "eq-arjun-4",
+        "item_id": "item-eq-arjun-hard-2",
+        "concept_id": "ALG-EQ-02",
+        "is_correct": true,
+        "difficulty": "hard",
+        "hint_count": 0,
+        "response_ms": 51000,
+        "confidence_signal": 0.9,
+        "misconception": null
+      },
+      "mastery": {
+        "concept_id": "ALG-EQ-02",
+        "score": 0.985,
+        "confidence": 1.0,
+        "evidence_count": 4,
+        "trend": "stable",
+        "likely_misconception": null,
+        "recent_correctness": 1.0,
+        "independence_score": 1.0
+      },
+      "gap_status": "secure",
+      "recommendation": {
+        "action_type": "transfer_practice",
+        "target_concept_id": "ALG-EQ-02",
+        "reason": "Two-step equations is secure with sufficient evidence and low support use; test transfer with a harder or new-format item.",
+        "evidence_reference_ids": [
+          "eq-arjun-1",
+          "eq-arjun-2",
+          "eq-arjun-3",
+          "eq-arjun-4"
+        ],
+        "teacher_review_required": false
+      },
+      "evidence_references": [
+        {
+          "id": "eq-arjun-1",
+          "item_id": "item-eq-arjun-medium-1",
+          "concept_id": "ALG-EQ-02",
+          "is_correct": true,
+          "difficulty": "medium",
+          "hint_count": 0,
+          "misconception": null
+        },
+        {
+          "id": "eq-arjun-2",
+          "item_id": "item-eq-arjun-medium-2",
+          "concept_id": "ALG-EQ-02",
+          "is_correct": true,
+          "difficulty": "medium",
+          "hint_count": 0,
+          "misconception": null
+        },
+        {
+          "id": "eq-arjun-3",
+          "item_id": "item-eq-arjun-hard-1",
+          "concept_id": "ALG-EQ-02",
+          "is_correct": true,
+          "difficulty": "hard",
+          "hint_count": 0,
+          "misconception": null
+        },
+        {
+          "id": "eq-arjun-4",
+          "item_id": "item-eq-arjun-hard-2",
+          "concept_id": "ALG-EQ-02",
+          "is_correct": true,
+          "difficulty": "hard",
+          "hint_count": 0,
+          "misconception": null
+        }
+      ]
+    }
+  }
+}

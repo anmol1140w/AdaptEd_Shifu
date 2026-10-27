@@ -1,11 +1,38 @@
-"""Ports required to start and persist assessment sessions."""
+"""Ports required to start, grade and persist assessment sessions."""
 
 from __future__ import annotations
 
 from collections.abc import Sequence
+from dataclasses import dataclass
 from typing import Protocol
 
 from ...domain.entities.learning import AssessmentItem, AssessmentSession, Concept
+
+
+class AssessmentGradingError(RuntimeError):
+    """Raised when an assessment item cannot be graded safely."""
+
+
+@dataclass(frozen=True, slots=True)
+class GradingResult:
+    """Provider-neutral output from grading one approved assessment item."""
+
+    is_correct: bool
+    misconception: str | None = None
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.is_correct, bool):
+            raise ValueError("grading result correctness must be a boolean")
+        if self.misconception is not None and not self.misconception.strip():
+            raise ValueError("grading misconception must not be empty")
+
+
+class AssessmentGraderPort(Protocol):
+    """Grade a learner answer without choosing mastery or progression policy."""
+
+    def grade(self, *, item: AssessmentItem, answer: str) -> GradingResult:
+        """Return correctness and optional misconception metadata for an item."""
+        ...
 
 
 class LearnerPort(Protocol):

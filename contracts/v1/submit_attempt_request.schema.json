@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "adapted/contracts/v1/submit_attempt_request",
+  "title": "Submit assessment attempt request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "session_id",
+    "learner_id",
+    "attempt"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "v1"
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "learner_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attempt": {
+      "$ref": "#/$defs/attempt"
+    }
+  },
+  "$defs": {
+    "attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "item_id",
+        "concept_id",
+        "answer",
+        "hint_count"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "item_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "concept_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "answer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "response_ms": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "hint_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "confidence_signal": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}

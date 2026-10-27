@@ -1,0 +1,108 @@
+{
+  "scenario": {
+    "id": "riya-grounded-support",
+    "learner_label": "Riya",
+    "synthetic": true,
+    "summary": "Riya receives a grounded non-spoiler hint and misconception-targeted practice."
+  },
+  "tutor": {
+    "request": {
+      "contract_version": "v1",
+      "learner_id": "learner-riya",
+      "subject_id": "maths-9",
+      "concept_id": "ALG-DIST-01",
+      "mode": "hint",
+      "learner_answer": "-2x + 3",
+      "misconception": "negative sign not distributed",
+      "learner_level": "class_9"
+    },
+    "response": {
+      "contract_version": "v1",
+      "learner_id": "learner-riya",
+      "subject_id": "maths-9",
+      "concept_id": "ALG-DIST-01",
+      "mode": "hint",
+      "message": "The negative multiplier applies to every term inside the bracket.",
+      "check_question": "Which term has not received the multiplier yet?",
+      "source_ids": [
+        "lesson-algebra-distributive-01"
+      ],
+      "confidence": 0.95,
+      "teacher_review_required": false,
+      "answer_revealed": false,
+      "fallback_used": false,
+      "provider": "mock-deterministic",
+      "audit_event_id": "ai-audit-1"
+    }
+  },
+  "quiz": {
+    "request": {
+      "contract_version": "v1",
+      "learner_id": "learner-riya",
+      "subject_id": "maths-9",
+      "concept_id": "ALG-DIST-01",
+      "difficulty": "medium",
+      "item_count": 3,
+      "misconception": "negative sign not distributed",
+      "include_transfer": true
+    },
+    "response": {
+      "contract_version": "v1",
+      "learner_id": "learner-riya",
+      "subject_id": "maths-9",
+      "concept": {
+        "id": "ALG-DIST-01",
+        "subject_id": "maths-9",
+        "name": "Distributive property",
+        "prerequisite_ids": []
+      },
+      "difficulty": "medium",
+      "items": [
+        {
+          "id": "mock-quiz-alg-dist-01-1",
+          "subject_id": "maths-9",
+          "concept_id": "ALG-DIST-01",
+          "difficulty": "medium",
+          "question": "Expand -2(x + 3).",
+          "representation": "symbolic",
+          "source_ids": [
+            "lesson-algebra-distributive-01"
+          ],
+          "is_transfer": false
+        },
+        {
+          "id": "mock-quiz-alg-dist-01-2",
+          "subject_id": "maths-9",
+          "concept_id": "ALG-DIST-01",
+          "difficulty": "medium",
+          "question": "A negative factor multiplies (y + 4). Which operation applies to y?",
+          "representation": "verbal",
+          "source_ids": [
+            "lesson-algebra-distributive-01"
+          ],
+          "is_transfer": false
+        },
+        {
+          "id": "mock-quiz-alg-dist-01-3",
+          "subject_id": "maths-9",
+          "concept_id": "ALG-DIST-01",
+          "difficulty": "medium",
+          "question": "Transfer check for Alg Dist 01: A rectangle has side length (n + 2) and width 3. Write its area.",
+          "representation": "story",
+          "source_ids": [
+            "lesson-algebra-distributive-01"
+          ],
+          "is_transfer": true
+        }
+      ],
+      "source_ids": [
+        "lesson-algebra-distributive-01"
+      ],
+      "confidence": 0.95,
+      "teacher_review_required": false,
+      "fallback_used": false,
+      "provider": "mock-deterministic",
+      "audit_event_id": "ai-audit-2"
+    }
+  }
+}
