@@ -186,6 +186,50 @@
         "phy-11-moment-of-inertia-misconception-001"
       ],
       "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-elasticity",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Mechanical Properties of Solids",
+      "name": "Stress, strain, and elasticity",
+      "description": "Deforming forces produce stress and strain in solids. In the elastic region, stress is proportional to strain (Hooke’s law); elastic moduli describe the response to tensile, shear, or volume deformation. The linear relation applies only within the material’s elastic limit.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-fluid-mechanics",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Mechanical Properties of Fluids",
+      "name": "Fluid pressure, flow, and viscosity",
+      "description": "Fluid statics relates pressure to depth and includes Pascal’s law and buoyancy. For ideal steady flow, continuity and Bernoulli’s equation relate speed, pressure, and height. Viscosity and surface tension describe effects omitted by the ideal-fluid model.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-thermodynamics",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Thermodynamics",
+      "name": "Thermal equilibrium, heat, and the first law",
+      "description": "Thermodynamics describes macroscopic states using variables such as pressure, volume, and temperature. Heat and work transfer energy across a system boundary; the first law accounts for their effect on internal energy. Thermodynamic processes and heat engines depend on stated conditions and sign conventions.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-kinetic-theory",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Kinetic Theory",
+      "name": "Ideal gas model and molecular motion",
+      "description": "Kinetic theory connects the macroscopic pressure and temperature of a gas to molecular motion. For an ideal gas, pressure arises from molecular collisions and average translational kinetic energy is proportional to absolute temperature. The model assumes negligible intermolecular forces except during collisions.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
     }
   ]
 }

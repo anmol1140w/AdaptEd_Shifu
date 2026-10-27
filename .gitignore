@@ -38,3 +38,4 @@ venv/
 # Downloaded NCERT source files (keep derived chunks and metadata in Git)
 /content/books/ncert/source_archives/
 /content/books/ncert/source_pdfs/
+/content/datasets/ncert/backups/

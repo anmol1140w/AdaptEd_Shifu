@@ -178,9 +178,36 @@
         "phy-12-em-spectrum-worked_example-001",
         "phy-12-em-spectrum-misconception-001"
       ]
+    },
+    {
+      "chapter_id": "adapted-physics-12-ncert-leph105",
+      "chapter_title": "Magnetism and Matter",
+      "topic_id": "phy-12-magnetism-matter",
+      "concept_id": "phy-12-magnetism-matter",
+      "lesson_id": "lesson-phy-12-magnetism-matter",
+      "chunk_ids": [],
+      "ncert_chapter_code": "leph105"
+    },
+    {
+      "chapter_id": "adapted-physics-12-ncert-leph204",
+      "chapter_title": "Atoms",
+      "topic_id": "phy-12-atoms",
+      "concept_id": "phy-12-atoms",
+      "lesson_id": "lesson-phy-12-atoms",
+      "chunk_ids": [],
+      "ncert_chapter_code": "leph204"
+    },
+    {
+      "chapter_id": "adapted-physics-12-ncert-leph206",
+      "chapter_title": "Semiconductor Electronics",
+      "topic_id": "phy-12-semiconductors",
+      "concept_id": "phy-12-semiconductors",
+      "lesson_id": "lesson-phy-12-semiconductors",
+      "chunk_ids": [],
+      "ncert_chapter_code": "leph206"
     }
   ],
-  "chapter_count": 14,
+  "chapter_count": 17,
   "lesson_content_file": "content/lessons/physics_class_12.json",
   "concept_catalog_file": "content/concepts/physics_class_12.json",
   "item_bank_file": "content/items/physics_class_12.json",

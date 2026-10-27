@@ -186,6 +186,17 @@
         "math-12-conditional-probability-misconception-001"
       ],
       "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-12-relations-functions",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Relations and Functions",
+      "name": "Relations, functions, and invertibility",
+      "description": "Relations can be tested for properties such as reflexivity, symmetry, and transitivity. A function is one-one when distinct inputs have distinct outputs and onto when every codomain element is attained. Inverses require a one-one correspondence between domain and range.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-042"
     }
   ]
 }

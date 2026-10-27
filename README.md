@@ -116,7 +116,7 @@ npm ci
 npm run dev
 ```
 
-Set `VITE_API_BASE_URL` in `frontend/.env` if the API is not at `http://localhost:8000/api/v1`. Google sign-in requires `ADAPTED_GOOGLE_CLIENT_ID`, `ADAPTED_GOOGLE_CLIENT_SECRET`, and matching redirect settings. Ollama Cloud tutor and quiz generation require `OLLAMA_API_KEY` and a configured model. NCERT grounding also requires Qdrant Cloud credentials and the `ncert_pcm_active` alias to point at an ingested collection. AI routes return a clear service error when those integrations or mapped source chunks are unavailable; they do not silently switch to another model.
+Set `VITE_API_BASE_URL` in `frontend/.env` if the API is not at `http://localhost:8000/api/v1`. Google sign-in requires `ADAPTED_GOOGLE_CLIENT_ID`, `ADAPTED_GOOGLE_CLIENT_SECRET`, and matching redirect settings. Ollama Cloud tutor and quiz generation require `OLLAMA_API_KEY` and a configured model. NCERT grounding also requires Qdrant Cloud credentials and the dedicated `ncert_pcm_official_active` alias to point at the versioned official corpus; the legacy `ncert_pcm_active` alias remains separate. AI routes return a clear service error when those integrations or mapped source chunks are unavailable; they do not silently switch to another model.
 
 For Google sign-in, set the existing Web OAuth client ID and secret in `backend/.env`, register `http://localhost:8000/api/v1/auth/google/callback` as an authorized redirect URI, and set `VITE_GOOGLE_OAUTH_ENABLED=true` in `frontend/.env`. Restart both servers after changing environment files. Keep the client secret only in the ignored backend environment file.
 

@@ -10,10 +10,11 @@ from backend.app.application.ports.ai import (
     RetrievedSource,
 )
 from backend.app.infrastructure.ai.settings import AISettings
+from .policy import CORPUS_ID, EMBEDDING_MODEL, MIN_RELEVANCE_SCORE, OFFICIAL_ALIAS, SOURCE_KIND
 from qdrant_client import QdrantClient, models
 
-ACTIVE_ALIAS = "ncert_pcm_active"
-MODEL = "sentence-transformers/all-minilm-l6-v2"
+ACTIVE_ALIAS = OFFICIAL_ALIAS
+MODEL = EMBEDDING_MODEL
 
 
 def _read_client() -> QdrantClient:
@@ -62,6 +63,8 @@ class QdrantNcertRetriever(RetrievalPort):
             return RetrievalResult()
         grade = int(grade_match.group(1))
         filters = [
+            models.FieldCondition(key="corpus_id", match=models.MatchValue(value=CORPUS_ID)),
+            models.FieldCondition(key="source_kind", match=models.MatchValue(value=SOURCE_KIND)),
             models.FieldCondition(key="subject", match=models.MatchValue(value=subject)),
             models.FieldCondition(key="class", match=models.MatchValue(value=grade)),
             models.FieldCondition(key="concept_ids", match=models.MatchValue(value=request.concept_id)),
@@ -80,10 +83,14 @@ class QdrantNcertRetriever(RetrievalPort):
         sources: list[RetrievedSource] = []
         for point in response.points:
             payload = point.payload or {}
+            if payload.get("corpus_id") != CORPUS_ID or payload.get("source_kind") != SOURCE_KIND:
+                continue
             text = str(payload.get("page_content", "")).strip()
             if not text:
                 continue
             score = max(0.0, min(1.0, float(point.score or 0.0)))
+            if score < MIN_RELEVANCE_SCORE:
+                continue
             parent_id = str(payload.get("parent_chunk_id", payload.get("chunk_id", point.id)))
             segment = int(payload.get("embedding_segment", 0))
             source_id = f"{parent_id}:segment:{segment}"
