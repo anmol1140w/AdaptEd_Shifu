@@ -1,15 +1,11 @@
 import type { AuthProvider, AuthSession, AuthUser } from '../../../types'
-import { getSession, setSession } from '../../../services/session'
-import { membershipsFor } from '../../onboarding/services/classroomService'
+import { getSession, setAccessToken, setSession } from '../../../services/session'
 
 /**
  * Phase 1 authentication service.
  *
- * This repository contains no authentication provider: the backend exposes only
- * a health route, and no OAuth client id is configured anywhere. So this service
- * performs client-side validation and keeps a local, clearly-flagged demo session
- * (`isDemo: true`). It never stores passwords and never fabricates a provider
- * callback — `googleAuth()` reports that the provider is not configured instead.
+ * Password accounts use the FastAPI auth API. Local validation runs first so the
+ * form can show useful errors without making a request.
  */
 
 export type AuthResult<T> =
@@ -30,10 +26,11 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/api
 
 /** Reports whether the frontend has a real backend OAuth flow wired up. */
 export function googleAuthStatus(): GoogleAuthStatus {
+  const configured = import.meta.env.VITE_GOOGLE_OAUTH_ENABLED === 'true'
   return {
-    configured: true,
-    message: '',
-    requiredEnv: [],
+    configured,
+    message: configured ? '' : 'Google OAuth requires backend client credentials and redirect settings.',
+    requiredEnv: ['ADAPTED_GOOGLE_CLIENT_ID', 'ADAPTED_GOOGLE_CLIENT_SECRET'],
   }
 }
 
@@ -79,48 +76,42 @@ function createSession(name: string, email: string, provider: AuthProvider): Aut
     id: `local-${email.trim().toLowerCase()}`,
     name: name.trim(),
     email: email.trim().toLowerCase(),
-    role: 'teacher',
+    role: 'student',
     onboardingComplete: false,
   }
   return {
     user,
     provider,
     issuedAt: new Date(Date.now() + SESSION_HOURS * 60 * 60 * 1000).toISOString(),
-    isDemo: true,
+    isDemo: false,
   }
 }
 
-export function signInWithPassword(input: { email: string; password: string }): AuthResult<AuthSession> {
+export async function signInWithPassword(input: { email: string; password: string }): Promise<AuthResult<AuthSession>> {
   const emailError = validateEmail(input.email)
   if (emailError) return { ok: false, message: emailError, field: 'email' }
   const passwordError = validatePassword(input.password, 'sign-in')
   if (passwordError) return { ok: false, message: passwordError, field: 'password' }
 
-  const existing = getSession()
-  const normalizedEmail = input.email.trim().toLowerCase()
-  const returning = existing?.user.email === normalizedEmail ? existing : null
-  const session = createSession(returning?.user.name ?? localNameFromEmail(input.email), input.email, 'password')
-  if (returning) {
-    session.user.onboardingComplete = returning.user.onboardingComplete
-    session.user.role = returning.user.role
-  }
-  const memberRecord = membershipsFor(session.user.id)
-    .flatMap((classroom) => classroom.members)
-    .find((member) => member.userId === session.user.id)
-  if (memberRecord) {
-    session.user.role = memberRecord.role
-    session.user.onboardingComplete = true
-  }
-  setSession(session)
-  return { ok: true, data: session }
+  try {
+    const response = await fetch(`${API_BASE}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: input.email.trim(), password: input.password }) })
+    const body = await response.json()
+    if (!response.ok) return { ok: false, message: body.detail ?? 'Could not sign in.', field: 'form' }
+    const session = createSession(body.user.name, body.user.email, 'password')
+    session.user = { ...body.user, onboardingComplete: false }
+    setAccessToken(body.access_token)
+    setSession(session)
+    return { ok: true, data: session }
+  } catch { return { ok: false, message: 'Could not reach the AdaptEd authentication server.', field: 'form' } }
 }
 
-export function signUpWithPassword(input: {
+export async function signUpWithPassword(input: {
   name: string
   email: string
   password: string
   confirm: string
-}): AuthResult<AuthSession> {
+  teacherInviteCode?: string
+}): Promise<AuthResult<AuthSession>> {
   if (!input.name.trim()) return { ok: false, message: 'Enter your full name.', field: 'name' }
   if (input.name.trim().length < 2) return { ok: false, message: 'That name looks too short.', field: 'name' }
 
@@ -134,9 +125,16 @@ export function signUpWithPassword(input: {
     return { ok: false, message: 'Both passwords must match.', field: 'confirm' }
   }
 
-  const session = createSession(input.name, input.email, 'password')
-  setSession(session)
-  return { ok: true, data: session }
+  try {
+    const response = await fetch(`${API_BASE}/auth/register`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: input.name.trim(), email: input.email.trim(), password: input.password, ...(input.teacherInviteCode?.trim() ? { teacher_invite_code: input.teacherInviteCode.trim() } : {}) }) })
+    const body = await response.json()
+    if (!response.ok) return { ok: false, message: body.detail ?? 'Could not create the account.', field: 'form' }
+    const session = createSession(body.user.name, body.user.email, 'password')
+    session.user = { ...body.user, onboardingComplete: false }
+    setAccessToken(body.access_token)
+    setSession(session)
+    return { ok: true, data: session }
+  } catch { return { ok: false, message: 'Could not reach the AdaptEd authentication server.', field: 'form' } }
 }
 
 /** Complete the password/Google sign-in round trip started at /sign-in. */
@@ -146,13 +144,4 @@ export function completeAuthCallback(): AuthResult<AuthSession> {
     return { ok: false, message: 'This sign-in link expired. Please sign in again.', field: 'form' }
   }
   return { ok: true, data: session }
-}
-
-function localNameFromEmail(email: string): string {
-  const local = email.trim().split('@')[0] ?? 'learner'
-  return local
-    .split(/[._-]+/)
-    .filter(Boolean)
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(' ') || 'Learner'
 }

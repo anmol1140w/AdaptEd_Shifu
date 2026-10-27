@@ -3,7 +3,7 @@ import { ArrowRight, Check, Clock3, Play } from 'lucide-react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '../../app/AuthProvider'
-import { StudentNav } from './ProblemsPage'
+import { StudentNav } from './StudentNav'
 import { getJeeProblem, listJeeProblems, listJeeTopics, studentQuizDetail, submitJeeAttempt, type JeeProblem, type JeeTopic } from '../../services/api'
 import './problems.css'
 

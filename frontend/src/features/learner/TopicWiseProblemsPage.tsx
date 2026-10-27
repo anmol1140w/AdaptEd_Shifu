@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Input } from '@/components/ui/input'
 import { useAuth } from '../../app/AuthProvider'
 import { listJeeTopics, type JeeTopic } from '../../services/api'
-import { StudentNav } from './ProblemsPage'
+import { StudentNav } from './StudentNav'
 import './problems.css'
 
 const subjects = [

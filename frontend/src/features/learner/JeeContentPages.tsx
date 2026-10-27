@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useAuth } from '../../app/AuthProvider'
-import { StudentNav } from './ProblemsPage'
+import { StudentNav } from './StudentNav'
 import { getJeeProblem, listJeeProblems, submitJeeAttempt, type JeeProblem } from '../../services/api'
 import './problems.css'
 

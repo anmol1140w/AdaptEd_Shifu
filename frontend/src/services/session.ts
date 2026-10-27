@@ -9,6 +9,7 @@ import type { AuthSession } from '../types'
  * consumer reads through the same subscribe/get/set/clear API.
  */
 const SESSION_KEY = 'adapted-local-session-v1'
+const ACCESS_TOKEN_KEY = 'adapted-api-access-token-v1'
 
 type Listener = (session: AuthSession | null) => void
 
@@ -52,6 +53,14 @@ export function setSession(session: AuthSession): void {
   emit()
 }
 
+export function setAccessToken(token: string): void {
+  try { window.localStorage.setItem(ACCESS_TOKEN_KEY, token) } catch { /* keep the active session usable */ }
+}
+
+export function getAccessToken(): string | null {
+  try { return window.localStorage.getItem(ACCESS_TOKEN_KEY) } catch { return null }
+}
+
 export function patchSession(patch: Partial<AuthSession['user']>): void {
   hydrate()
   if (!memorySession) return
@@ -71,6 +80,7 @@ export function clearSession(): void {
   memorySession = null
   try {
     window.localStorage.removeItem(SESSION_KEY)
+    window.localStorage.removeItem(ACCESS_TOKEN_KEY)
   } catch {
     /* ignore */
   }

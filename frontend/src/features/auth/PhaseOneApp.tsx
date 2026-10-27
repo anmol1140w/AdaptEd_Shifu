@@ -6,18 +6,17 @@ import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useAuth } from '../../app/AuthProvider'
 import { PrivacyPage, TermsPage } from '../../app/LegalPages'
-import { StudentProblemDetailPage } from '../learner/ProblemsPage'
-import { QuizAttemptPage } from '../learner/QuizAttemptPage'
-import { StudentQuizzesPage } from '../learner/StudentQuizzesPage'
 import { JeeProblemPage, TopicProblemsPage } from '../learner/JeeContentPages'
 import { TopicWiseProblemsPage } from '../learner/TopicWiseProblemsPage'
 import { TeacherQuizAttemptPage, TopicQuizAttemptPage, TopicQuizzesPage } from '../learner/TopicQuizzesPage'
 import { TeacherDashboardPage, TeacherLoginPage } from '../teacher/TeacherPages'
+import { AdaptiveLearningPage } from '../learner/AdaptiveLearningPage'
+import { TeacherLearningDashboard } from '../teacher/TeacherLearningDashboard'
 import { ACADEMIC_YEARS, CLASS_LEVELS, EXAM_TARGETS, JEE_SUBJECTS, subjectLabel } from '../onboarding/services/classroomService'
 import type { AuthSession, ClassLevel, Classroom, CreateClassroomInput, ExamTarget, JeeSubjectId } from '../../types'
 
 function postAuthRoute(session: AuthSession) {
-  return '/classroom'
+  return session.user.role === 'teacher' ? '/teacher' : '/classroom'
 }
 
 function Brand({ compact = false }: { compact?: boolean }) {
@@ -57,9 +56,9 @@ function SignInPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [googleMessage, setGoogleMessage] = useState('')
-  const submit = (event: FormEvent) => {
+  const submit = async (event: FormEvent) => {
     event.preventDefault()
-    const result = signIn({ email, password })
+    const result = await signIn({ email, password })
     if (!result.ok) { setError(result.message); return }
     navigate(postAuthRoute(result.data), { replace: true })
   }
@@ -69,17 +68,17 @@ function SignInPage() {
 function SignUpPage() {
   const { signUp, continueWithGoogle, google } = useAuth()
   const navigate = useNavigate()
-  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '' })
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '', teacherInviteCode: '' })
   const [error, setError] = useState('')
   const [googleMessage, setGoogleMessage] = useState('')
   const update = (key: keyof typeof form, value: string) => { setForm((current) => ({ ...current, [key]: value })); setError('') }
-  const submit = (event: FormEvent) => {
+  const submit = async (event: FormEvent) => {
     event.preventDefault()
-    const result = signUp(form)
+    const result = await signUp(form)
     if (!result.ok) { setError(result.message); return }
-    navigate('/classroom', { replace: true })
+    navigate(postAuthRoute(result.data), { replace: true })
   }
-  return <AuthLayout eyebrow="GET STARTED" title={<>Make room<br />to get better.</>} subtitle="A focused classroom and a useful next step can change your whole prep routine." mode="sign-up"><GoogleButton onClick={() => { const result = continueWithGoogle(); setGoogleMessage(result.ok ? '' : result.message) }} message={googleMessage || (google.configured ? '' : 'Google sign-in needs OAuth configuration before it can be used.')} /><Divider /><form onSubmit={submit} className="phase-form" noValidate><Field id="signup-name" label="Full name" autoComplete="name" placeholder="Your name" value={form.name} onChange={(event) => update('name', event.target.value)} /><Field id="signup-email" label="Email address" type="email" autoComplete="email" placeholder="you@example.com" value={form.email} onChange={(event) => update('email', event.target.value)} /><Field id="signup-password" label="Password" type="password" autoComplete="new-password" placeholder="At least 8 characters" value={form.password} onChange={(event) => update('password', event.target.value)} /><Field id="signup-confirm" label="Confirm password" type="password" autoComplete="new-password" placeholder="Enter it once more" value={form.confirm} onChange={(event) => update('confirm', event.target.value)} />{error && <Notice>{error}</Notice>}<Button type="submit" className="submit-button">Create account <ArrowRight size={17} /></Button></form></AuthLayout>
+  return <AuthLayout eyebrow="GET STARTED" title={<>Make room<br />to get better.</>} subtitle="A focused classroom and a useful next step can change your whole prep routine." mode="sign-up"><GoogleButton onClick={() => { const result = continueWithGoogle(); setGoogleMessage(result.ok ? '' : result.message) }} message={googleMessage || (google.configured ? '' : 'Google sign-in needs OAuth configuration before it can be used.')} /><Divider /><form onSubmit={submit} className="phase-form" noValidate><Field id="signup-name" label="Full name" autoComplete="name" placeholder="Your name" value={form.name} onChange={(event) => update('name', event.target.value)} /><Field id="signup-email" label="Email address" type="email" autoComplete="email" placeholder="you@example.com" value={form.email} onChange={(event) => update('email', event.target.value)} /><Field id="signup-password" label="Password" type="password" autoComplete="new-password" placeholder="At least 8 characters" value={form.password} onChange={(event) => update('password', event.target.value)} /><Field id="signup-confirm" label="Confirm password" type="password" autoComplete="new-password" placeholder="Enter it once more" value={form.confirm} onChange={(event) => update('confirm', event.target.value)} /><Field id="signup-teacher-code" label="Teacher invite code (optional)" type="password" autoComplete="off" placeholder="Provided by your project admin" value={form.teacherInviteCode} onChange={(event) => update('teacherInviteCode', event.target.value)} />{error && <Notice>{error}</Notice>}<Button type="submit" className="submit-button">Create account <ArrowRight size={17} /></Button></form></AuthLayout>
 }
 
 function Protected({ children }: { children: ReactNode }) {
@@ -101,7 +100,7 @@ function ClassroomHome() {
   const navigate = useNavigate()
   if (!session) return <Navigate to="/sign-in" replace />
   const openCreate = () => navigate('/classroom/create')
-  return <Frame side={<BrandPanel visual="classroom" eyebrow="YOUR LEARNING COMMUNITY" title={<>Your people.<br />Your pace.</>} copy="Bring your JEE prep group into one space and keep the next step clear." />}><div className="onboard-content"><Brand compact /><div className="auth-heading"><span className="section-kicker">CLASSROOM SETUP</span><h1>Where will you<br />learn today?</h1><p>Hi {session.user.name.split(' ')[0]}, create a classroom for your group or join one with a code.</p></div><Notice tone="info">{session.user.role === 'teacher' ? 'Teacher workspace ready.' : 'Signed in successfully.'}</Notice><div className="classroom-actions">{session.user.role === 'teacher' && <button className="choice-card choice-create" onClick={openCreate}><span className="choice-icon"><Plus size={21} /></span><span className="choice-copy"><b>Create classroom</b><small>Set up a space for your JEE batch</small></span><ArrowRight size={18} /></button>}<button className="choice-card choice-join" onClick={() => navigate('/classroom/join')}><span className="choice-icon"><Users size={21} /></span><span className="choice-copy"><b>Join classroom</b><small>Enter the invite code from your teacher</small></span><ArrowRight size={18} /></button></div>{classrooms.length > 0 && <div className="existing-classrooms"><div className="existing-heading"><span>YOUR CLASSROOMS</span><span>{classrooms.length} ACTIVE</span></div>{classrooms.map((classroom) => <ClassroomRow key={classroom.id} classroom={classroom} />)}</div>}<button className="text-button signout-button" onClick={() => { signOut(); navigate('/', { replace: true }) }}><LogOut size={15} /> Sign out</button></div></Frame>
+  return <Frame side={<BrandPanel visual="classroom" eyebrow="YOUR LEARNING COMMUNITY" title={<>Your people.<br />Your pace.</>} copy="Bring your JEE prep group into one space and keep the next step clear." />}><div className="onboard-content"><Brand compact /><div className="auth-heading"><span className="section-kicker">CLASSROOM SETUP</span><h1>Where will you<br />learn today?</h1><p>Hi {session.user.name.split(' ')[0]}, create a classroom for your group or join one with a code.</p></div><Notice tone="info">{session.isDemo ? 'You are using a local demo account. Classrooms are stored only in this browser.' : 'Signed in successfully.'}</Notice><div className="classroom-actions">{session.user.role === 'teacher' && <button className="choice-card choice-create" onClick={openCreate}><span className="choice-icon"><Plus size={21} /></span><span className="choice-copy"><b>Create classroom</b><small>Set up a space for your JEE batch</small></span><ArrowRight size={18} /></button>}<button className="choice-card choice-join" onClick={() => navigate('/classroom/join')}><span className="choice-icon"><Users size={21} /></span><span className="choice-copy"><b>Join classroom</b><small>Enter the invite code from your teacher</small></span><ArrowRight size={18} /></button></div>{classrooms.length > 0 && <div className="existing-classrooms"><div className="existing-heading"><span>YOUR CLASSROOMS</span><span>{classrooms.length} ACTIVE</span></div>{classrooms.map((classroom) => <ClassroomRow key={classroom.id} classroom={classroom} />)}</div>}{session.user.role === 'teacher' && <Link className="teacher-classroom-link" to="/teacher/learning">Open adaptive learning dashboard <ArrowRight size={14} /></Link>}<button className="text-button signout-button" onClick={() => { signOut(); navigate('/', { replace: true }) }}><LogOut size={15} /> Sign out</button></div></Frame>
 }
 
 function ClassroomRow({ classroom }: { classroom: Classroom }) {
@@ -187,6 +186,6 @@ function LandingPage() {
 
 export function PhaseOneApp() {
   const { status, session } = useAuth()
-  return <Routes><Route path="/" element={<LandingPage />} /><Route path="/terms" element={<TermsPage />} /><Route path="/privacy" element={<PrivacyPage />} /><Route path="/sign-in" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignInPage />} /><Route path="/sign-up" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignUpPage />} /><Route path="/teacher-login" element={status === 'authenticated' && session?.user.role === 'teacher' ? <Navigate to="/teacher" replace /> : <TeacherLoginPage />} /><Route path="/teacher" element={<ProtectedTeacher><TeacherDashboardPage /></ProtectedTeacher>} /><Route path="/auth/callback" element={<CallbackPage />} /><Route path="/classroom" element={<Protected><ClassroomHome /></Protected>} /><Route path="/classroom/create" element={<ProtectedTeacher><CreateClassroomPage /></ProtectedTeacher>} /><Route path="/classroom/join" element={<Protected><JoinClassroomPage /></Protected>} /><Route path="/classroom/created" element={<ProtectedTeacher><CreatedPage /></ProtectedTeacher>} /><Route path="/student/problems" element={<TopicWiseProblemsPage />} /><Route path="/student/topics/:subject/:slug" element={<TopicProblemsPage />} /><Route path="/student/problems/:id" element={<JeeProblemPage />} /><Route path="/student/quizzes" element={<TopicQuizzesPage />} /><Route path="/student/quizzes/topic/:subject/:slug" element={<TopicQuizAttemptPage />} /><Route path="/student/quizzes/:quizId" element={<TeacherQuizAttemptPage />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes>
+  return <Routes><Route path="/" element={<LandingPage />} /><Route path="/terms" element={<TermsPage />} /><Route path="/privacy" element={<PrivacyPage />} /><Route path="/sign-in" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignInPage />} /><Route path="/sign-up" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignUpPage />} /><Route path="/teacher-login" element={status === 'authenticated' && session?.user.role === 'teacher' ? <Navigate to="/teacher" replace /> : <TeacherLoginPage />} /><Route path="/teacher" element={<ProtectedTeacher><TeacherDashboardPage /></ProtectedTeacher>} /><Route path="/teacher/learning" element={<ProtectedTeacher><TeacherLearningDashboard /></ProtectedTeacher>} /><Route path="/auth/callback" element={<CallbackPage />} /><Route path="/classroom" element={<Protected><ClassroomHome /></Protected>} /><Route path="/classroom/create" element={<ProtectedTeacher><CreateClassroomPage /></ProtectedTeacher>} /><Route path="/classroom/join" element={<Protected><JoinClassroomPage /></Protected>} /><Route path="/classroom/created" element={<ProtectedTeacher><CreatedPage /></ProtectedTeacher>} /><Route path="/student/learn" element={<Protected><AdaptiveLearningPage /></Protected>} /><Route path="/student/problems" element={<Protected><TopicWiseProblemsPage /></Protected>} /><Route path="/student/topics/:subject/:slug" element={<Protected><TopicProblemsPage /></Protected>} /><Route path="/student/problems/:id" element={<Protected><JeeProblemPage /></Protected>} /><Route path="/student/quizzes" element={<Protected><TopicQuizzesPage /></Protected>} /><Route path="/student/quizzes/topic/:subject/:slug" element={<Protected><TopicQuizAttemptPage /></Protected>} /><Route path="/student/quizzes/:quizId" element={<Protected><TeacherQuizAttemptPage /></Protected>} /><Route path="*" element={<Navigate to="/" replace />} /></Routes>
 }
 
