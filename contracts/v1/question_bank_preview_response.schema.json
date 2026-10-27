@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adapted.example/contracts/v1/question_bank_preview_response.schema.json",
+  "title": "Question bank preview response v1",
+  "type": "object",
+  "required": ["contract_version", "valid", "questions", "errors"],
+  "properties": {
+    "contract_version": { "const": "v1" },
+    "valid": { "type": "boolean" },
+    "questions": { "type": "array", "items": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/classified_question" }] } },
+    "errors": { "type": "array", "items": { "type": "object", "required": ["row", "messages"], "properties": { "row": { "type": "integer", "minimum": 1 }, "messages": { "type": "array", "items": { "type": "string" } } } } }
+  },
+  "$defs": {
+    "classified_question": {
+      "type": "object",
+      "required": ["id", "question", "question_type", "bloom", "difficulty"],
+      "properties": {
+        "id": { "type": "string" }, "question": { "type": "string" }, "question_type": { "type": "string" },
+        "bloom": { "type": "object", "required": ["level", "suggested_level", "source", "confidence", "reason", "teacher_verified"], "properties": { "level": { "enum": ["BT1", "BT2", "BT3", "BT4", "BT5", "BT6"] }, "suggested_level": { "enum": ["BT1", "BT2", "BT3", "BT4", "BT5", "BT6"] }, "source": { "enum": ["teacher", "rule_based"] }, "confidence": { "type": "number", "minimum": 0, "maximum": 1 }, "reason": { "type": "string" }, "teacher_verified": { "type": "boolean" } } },
+        "difficulty": { "type": "object", "required": ["level", "suggested_level", "source", "teacher_verified"], "properties": { "level": { "enum": ["easy", "medium", "hard"] }, "suggested_level": { "enum": ["easy", "medium", "hard"] }, "source": { "enum": ["teacher", "rule_based"] }, "teacher_verified": { "type": "boolean" } } }
+      }
+    }
+  }
+}
