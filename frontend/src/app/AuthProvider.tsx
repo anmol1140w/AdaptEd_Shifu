@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import type { AuthSession, Classroom, CreateClassroomInput, JoinClassroomInput, Role } from '../types'
-import { clearSession, getSession, patchSession, setSession, subscribeSession } from '../services/session'
+import { clearSession, getSession, patchSession, setAccessToken, setSession, subscribeSession } from '../services/session'
 import {
   completeAuthCallback,
   completeGoogleCallback,
@@ -22,10 +22,10 @@ interface AuthContextValue {
   classrooms: Classroom[]
   hasClassroom: boolean
   google: ReturnType<typeof googleAuthStatus>
-  signIn: (input: { email: string; password: string }) => AuthResult<AuthSession>
-  signUp: (input: { name: string; email: string; password: string; confirm: string }) => AuthResult<AuthSession>
+  signIn: (input: { email: string; password: string }) => Promise<AuthResult<AuthSession>>
+  signUp: (input: { name: string; email: string; password: string; confirm: string; teacherInviteCode?: string }) => Promise<AuthResult<AuthSession>>
   teacherLogin: (input: { uniqueId: string; password: string }) => Promise<AuthResult<AuthSession>>
-  teacherRegister: (input: { name: string; uniqueId: string; password: string }) => Promise<AuthResult<AuthSession>>
+  teacherRegister: (input: { name: string; uniqueId: string; password: string; teacherInviteCode: string }) => Promise<AuthResult<AuthSession>>
   continueWithGoogle: () => AuthResult<AuthSession>
   finishCallback: () => Promise<AuthResult<AuthSession>>
   signOut: () => void
@@ -48,6 +48,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let active = true
     const hydrate = async () => {
+      if (getSession()?.isDemo) clearSession()
       if (!getSession()) {
         const user = await getCurrentUser()
         if (active && user) setSession({ user: { ...user, onboardingComplete: false }, provider: 'google', issuedAt: new Date().toISOString(), isDemo: false })
@@ -80,18 +81,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       classrooms,
       hasClassroom: classrooms.length > 0,
       google: googleAuthStatus(),
-      signIn: (input) => {
-        const result = signInWithPassword(input)
+      signIn: async (input) => {
+        const result = await signInWithPassword(input)
         if (result.ok) void refreshClassrooms()
         return result
       },
-      signUp: (input) => {
-        const result = signUpWithPassword(input)
+      signUp: async (input) => {
+        const result = await signUpWithPassword(input)
         if (result.ok) void refreshClassrooms()
         return result
       },
-      teacherLogin: async (input) => { try { const result = await teacherLoginRemote(input.uniqueId, input.password); const next = { user: { ...result.user, avatar: '', onboardingComplete: true }, provider: 'password' as const, issuedAt: new Date().toISOString(), isDemo: false }; setSession(next); return { ok: true, data: next } } catch (error) { return { ok: false, message: error instanceof Error ? error.message : 'Teacher login failed', field: 'form' as const } } },
-      teacherRegister: async (input) => { try { const result = await teacherRegisterRemote(input.name, input.uniqueId, input.password); const next = { user: { ...result.user, avatar: '', onboardingComplete: true }, provider: 'password' as const, issuedAt: new Date().toISOString(), isDemo: false }; setSession(next); return { ok: true, data: next } } catch (error) { return { ok: false, message: error instanceof Error ? error.message : 'Teacher registration failed', field: 'form' as const } } },
+      teacherLogin: async (input) => { try { const result = await teacherLoginRemote(input.uniqueId, input.password); setAccessToken(result.access_token); const next = { user: { ...result.user, avatar: '', onboardingComplete: true }, provider: 'password' as const, issuedAt: new Date().toISOString(), isDemo: false }; setSession(next); return { ok: true, data: next } } catch (error) { return { ok: false, message: error instanceof Error ? error.message : 'Teacher login failed', field: 'form' as const } } },
+      teacherRegister: async (input) => { try { const result = await teacherRegisterRemote(input.name, input.uniqueId, input.password, input.teacherInviteCode); setAccessToken(result.access_token); const next = { user: { ...result.user, avatar: '', onboardingComplete: true }, provider: 'password' as const, issuedAt: new Date().toISOString(), isDemo: false }; setSession(next); return { ok: true, data: next } } catch (error) { return { ok: false, message: error instanceof Error ? error.message : 'Teacher registration failed', field: 'form' as const } } },
       continueWithGoogle: () => { window.location.assign(`${import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/api/v1'}/auth/google/start`); return { ok: false, message: '', field: 'form' as const } },
       finishCallback: async () => {
         const result = await completeGoogleCallback()
@@ -99,6 +100,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return result
       },
       signOut: () => {
+        void fetch(`${import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/api/v1'}/auth/logout`, { method: 'POST', credentials: 'include' })
         clearSession()
         setClassrooms([])
       },

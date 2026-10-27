@@ -1,0 +1,1 @@
+"""AdaptEd application package."""

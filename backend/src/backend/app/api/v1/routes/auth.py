@@ -50,6 +50,7 @@ class TeacherRegisterRequest(BaseModel):
     name: str = Field(min_length=1, max_length=120)
     unique_id: str = Field(min_length=4, max_length=80, pattern=r"^[A-Za-z0-9._-]+$")
     password: str = Field(min_length=8, max_length=128)
+    teacher_invite_code: str = Field(min_length=8, max_length=128)
 
 
 class TeacherLoginRequest(BaseModel):
@@ -152,7 +153,13 @@ def logout(response: Response):
 @router.post("/register", status_code=status.HTTP_201_CREATED)
 def register(payload: RegisterRequest):
     connection = connect()
-    role = "teacher" if settings.teacher_invite_code and payload.teacher_invite_code == settings.teacher_invite_code else "student"
+    if payload.teacher_invite_code and (
+        not settings.teacher_invite_code
+        or not secrets.compare_digest(payload.teacher_invite_code, settings.teacher_invite_code)
+    ):
+        connection.close()
+        raise HTTPException(status_code=403, detail="Teacher invite code is invalid")
+    role = "teacher" if payload.teacher_invite_code else "student"
     user = {"id": str(uuid.uuid4()), "email": payload.email, "name": payload.name.strip(), "role": role}
     try:
         connection.execute(
@@ -172,6 +179,8 @@ def register(payload: RegisterRequest):
 
 @router.post("/teacher/register", status_code=status.HTTP_201_CREATED)
 def teacher_register(payload: TeacherRegisterRequest, response: Response):
+    if not settings.teacher_invite_code or not secrets.compare_digest(payload.teacher_invite_code, settings.teacher_invite_code):
+        raise HTTPException(status_code=403, detail="Teacher invite code is invalid")
     connection = connect()
     unique_id = payload.unique_id.strip().lower()
     user = {"id": str(uuid.uuid4()), "email": f"{unique_id}@teacher.local", "name": payload.name.strip(), "role": "teacher", "unique_id": unique_id}

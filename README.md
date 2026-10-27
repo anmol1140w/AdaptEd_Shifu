@@ -22,7 +22,7 @@ This workspace contains the round-one presentation plan for:
 
 - Project name: **AdaptEd**
 - Tagline: **From marks to mastery**
-- Pilot: **Class 9 Mathematics — Algebra and Linear Equations**
+- Pilot: **Class 11–12 Physics, Chemistry and Mathematics**
 - Main differentiator: **an explainable closed loop from evidence → concept mastery → next best action → re-assessment**
 - MVP users: **learner and teacher**
 
@@ -35,7 +35,7 @@ AdaptEd will expose learning gaps at two connected levels:
 
 The subject view is an aggregation of concept-level evidence; it must not hide the concepts that produced the summary. A teacher should be able to select a subject and then see the underlying concept mastery, confidence, misconceptions, evidence and recommended actions.
 
-The MVP demonstrates one subject—Class 9 Mathematics—but the data model and API should retain subject identifiers so additional subjects can be added without changing the learning loop.
+The current learning flow supports PCM for Classes 11 and 12. Subject and concept identifiers remain explicit through content, assessments, retrieval and analytics.
 
 ## Minimum round-one deliverables
 
@@ -56,17 +56,32 @@ The MVP demonstrates one subject—Class 9 Mathematics—but the data model and 
 - Do not claim that RAG guarantees factual correctness; describe it as a risk-reduction and grounding design.
 - Keep real student data, credentials and API keys out of this workspace.
 
-## Engineering scaffold
+## Application status and local run
 
-The repository now includes a prose-first scaffold for the future implementation:
+The repository contains a connected React and FastAPI application:
 
-- `backend/` — backend, learning-domain and AI integration boundaries.
-- `frontend/` — learner and teacher product surfaces.
-- `contracts/` — shared integration contracts between frontend and backend.
-- `content/` — concepts, questions, lessons and synthetic demo scenarios.
-- `docs/` — product, architecture, research and pitch documentation.
-- `infra/` — future local and deployment support.
-- `scripts/` — future repeatable project utilities.
-- `docs/team/` — team ownership, task division and integration responsibilities.
+- `backend/src/backend/` — FastAPI routes, PostgreSQL persistence, sign-in, adaptive assessments, AI support and teacher review.
+- `frontend/src/` — learner adaptive practice and cited tutor flows, JEE practice pages, and teacher question review and analytics.
+- `content/concepts/` and `content/items/` — PCM concepts and authored question drafts. New bank items begin unapproved and require teacher review.
+- `content/datasets/ncert/` — citation-preserving chunks and the Qdrant Cloud ingestion pipeline.
 
-Only the repository structure and documentation are being established at this stage. No application source code has been added yet.
+Run the API from `backend/` after configuring `backend/.env` from `.env.example` and providing a PostgreSQL database:
+
+```bash
+cd backend
+uv sync
+uv run backend
+```
+
+The API creates its schema and seeds the PCM concept/question catalog on first database access. Register a teacher with the configured invite code, create a classroom, then have student accounts join it. Teachers approve items before student assessments can use them.
+
+Run the web app from `frontend/`:
+
+```bash
+npm ci
+npm run dev
+```
+
+Set `VITE_API_BASE_URL` in `frontend/.env` if the API is not at `http://localhost:8000/api/v1`. Google sign-in requires `ADAPTED_GOOGLE_CLIENT_ID`, `ADAPTED_GOOGLE_CLIENT_SECRET`, and matching redirect settings. Ollama Cloud tutor and quiz generation require `OLLAMA_API_KEY` and a configured model. NCERT grounding also requires Qdrant Cloud credentials and the `ncert_pcm_active` alias to point at an ingested collection. AI routes return a clear service error when those integrations or mapped source chunks are unavailable; they do not silently switch to another model.
+
+The app code is wired end to end, but a successful live demonstration still depends on a reachable database, teacher-approved questions, and a populated Qdrant collection for grounded AI support.

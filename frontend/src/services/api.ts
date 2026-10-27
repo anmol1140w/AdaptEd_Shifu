@@ -1,4 +1,14 @@
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/api/v1'
+import { getAccessToken } from './session'
+
+function authHeaders(extra?: HeadersInit): HeadersInit {
+  const token = getAccessToken()
+  return { ...(extra ?? {}), ...(token ? { Authorization: `Bearer ${token}` } : {}) }
+}
+
+async function apiFetch(path: string, init: RequestInit = {}) {
+  return fetch(`${API_BASE}${path}`, { credentials: 'include', ...init, headers: authHeaders(init.headers) })
+}
 
 import type { Classroom, CreateClassroomInput } from '../types'
 
@@ -8,7 +18,7 @@ export type JeeProblem = { id: string; title: string; subject: string; chapter: 
 export type AuthUser = { id: string; email: string; name: string; role: 'student' | 'teacher'; unique_id?: string }
 
 export async function getCurrentUser(): Promise<AuthUser | null> {
-  const response = await fetch(`${API_BASE}/auth/me`, { credentials: 'include' })
+  const response = await apiFetch('/auth/me')
   if (!response.ok) return null
   const body = await response.json()
   return body.user
@@ -19,7 +29,7 @@ export function startGoogleLogin() {
 }
 
 export async function joinClassroom(code: string) {
-  const response = await fetch(`${API_BASE}/classrooms/join`, {
+  const response = await apiFetch('/classrooms/join', {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -31,7 +41,7 @@ export async function joinClassroom(code: string) {
 }
 
 export async function createClassroom(input: CreateClassroomInput) {
-  const response = await fetch(`${API_BASE}/classrooms`, {
+  const response = await apiFetch('/classrooms', {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -43,7 +53,7 @@ export async function createClassroom(input: CreateClassroomInput) {
 }
 
 export async function listClassrooms(): Promise<Classroom[]> {
-  const response = await fetch(`${API_BASE}/classrooms`, { credentials: 'include' })
+  const response = await apiFetch('/classrooms')
   const body = await response.json()
   if (!response.ok) throw new Error(body.detail ?? 'Could not load classrooms')
   return body.classrooms.map((classroom: Record<string, string>) => toFrontendClassroom(classroom))
@@ -67,7 +77,7 @@ function toFrontendClassroom(row: Record<string, string>, code = ''): Classroom 
 }
 
 export async function upgradeToTeacher(inviteCode: string) {
-  const response = await fetch(`${API_BASE}/auth/upgrade-teacher`, {
+  const response = await apiFetch('/auth/upgrade-teacher', {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -79,14 +89,14 @@ export async function upgradeToTeacher(inviteCode: string) {
 }
 
 export async function getClassroom(slug: string) {
-  const response = await fetch(`${API_BASE}/classrooms/${encodeURIComponent(slug)}`, { credentials: 'include' })
+  const response = await apiFetch(`/classrooms/${encodeURIComponent(slug)}`)
   const body = await response.json()
   if (!response.ok) throw new Error(body.detail ?? 'Could not load classroom')
   return body.classroom
 }
 
 export async function logout() {
-  await fetch(`${API_BASE}/auth/logout`, { method: 'POST', credentials: 'include' })
+  await apiFetch('/auth/logout', { method: 'POST' })
 }
 
 async function authRequest(path: string, payload: unknown) {
@@ -97,7 +107,7 @@ async function authRequest(path: string, payload: unknown) {
 }
 
 export const teacherLogin = (uniqueId: string, password: string) => authRequest('/auth/teacher/login', { unique_id: uniqueId, password })
-export const teacherRegister = (name: string, uniqueId: string, password: string) => authRequest('/auth/teacher/register', { name, unique_id: uniqueId, password })
+export const teacherRegister = (name: string, uniqueId: string, password: string, teacherInviteCode: string) => authRequest('/auth/teacher/register', { name, unique_id: uniqueId, password, teacher_invite_code: teacherInviteCode })
 
 export async function teacherClassrooms() {
   const response = await fetch(`${API_BASE}/teacher/classrooms`, { credentials: 'include' })
@@ -135,28 +145,28 @@ export async function studentQuizDetail(id: string) {
 }
 
 export async function listJeeTopics(subject?: string): Promise<JeeTopic[]> {
-  const response = await fetch(`${API_BASE}/content/topics${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`, { credentials: 'include' })
+  const response = await apiFetch(`/content/topics${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`)
   const body = await response.json()
   if (!response.ok) throw new Error(body.detail ?? 'Could not load topics')
   return body.topics
 }
 
 export async function listJeeProblems(topic?: string): Promise<JeeProblem[]> {
-  const response = await fetch(`${API_BASE}/content/problems${topic ? `?topic=${encodeURIComponent(topic)}` : ''}`, { credentials: 'include' })
+  const response = await apiFetch(`/content/problems${topic ? `?topic=${encodeURIComponent(topic)}` : ''}`)
   const body = await response.json()
   if (!response.ok) throw new Error(body.detail ?? 'Could not load problems')
   return body.problems
 }
 
 export async function getJeeProblem(id: string): Promise<JeeProblem> {
-  const response = await fetch(`${API_BASE}/content/problems/${encodeURIComponent(id)}`, { credentials: 'include' })
+  const response = await apiFetch(`/content/problems/${encodeURIComponent(id)}`)
   const body = await response.json()
   if (!response.ok) throw new Error(body.detail ?? 'Could not load problem')
   return body.problem
 }
 
 export async function submitJeeAttempt(id: string, payload: { answer: string; time_taken: number; hint_used: boolean }) {
-  const response = await fetch(`${API_BASE}/content/problems/${encodeURIComponent(id)}/attempt`, { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+  const response = await apiFetch(`/content/problems/${encodeURIComponent(id)}/attempt`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
   const body = await response.json()
   if (!response.ok) throw new Error(body.detail ?? 'Could not save attempt')
   return body.attempt
