@@ -74,7 +74,7 @@ class LearningEngine:
         }
         return min(
             candidates,
-            key=lambda item: (difficulty_order[item.difficulty], item.id),
+            key=lambda item: (abs(item.bloom_level - 3), difficulty_order[item.difficulty], item.id),
         )
 
     def select_next_item(
@@ -113,6 +113,7 @@ class LearningEngine:
         if recommendation.action_type is ActionType.TRANSFER_PRACTICE:
             candidates = tuple(item for item in candidates if item.difficulty is Difficulty.HARD)
             difficulty_order = {Difficulty.HARD: 0}
+            bloom_target = 5
             policy_reason = "selected the next unseen approved hard item for transfer practice"
         elif recommendation.action_type is ActionType.PREREQUISITE_SUPPORT:
             difficulty_order = {
@@ -120,6 +121,7 @@ class LearningEngine:
                 Difficulty.MEDIUM: 1,
                 Difficulty.HARD: 2,
             }
+            bloom_target = 2
             policy_reason = "selected the next unseen approved scaffolded prerequisite item"
         elif recommendation.action_type is ActionType.TARGETED_PRACTICE:
             difficulty_order = {
@@ -127,6 +129,7 @@ class LearningEngine:
                 Difficulty.MEDIUM: 1,
                 Difficulty.HARD: 2,
             }
+            bloom_target = 3
             policy_reason = "selected the next unseen approved scaffolded practice item"
         else:
             difficulty_order = {
@@ -134,6 +137,7 @@ class LearningEngine:
                 Difficulty.EASY: 1,
                 Difficulty.HARD: 2,
             }
+            bloom_target = 3
             policy_reason = "selected the next unseen approved baseline item"
 
         if not candidates:
@@ -148,7 +152,7 @@ class LearningEngine:
 
         selected = min(
             candidates,
-            key=lambda item: (difficulty_order[item.difficulty], item.id),
+            key=lambda item: (abs(item.bloom_level - bloom_target), difficulty_order[item.difficulty], item.id),
         )
         return NextItemSelection(
             target_concept_id=target_concept.id,
