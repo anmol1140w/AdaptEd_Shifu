@@ -20,7 +20,6 @@ function postAuthRoute(session: AuthSession) {
   const studentOnboardingComplete = session.user.studentOnboardingComplete
     ?? (session.user.role === 'student' && session.user.onboardingComplete)
   if (session.user.role === 'student' && !studentOnboardingComplete) return '/student-onboarding'
-  return '/classroom'
   if (session.user.role === 'teacher') return '/teacher'
   return session.user.onboardingComplete ? '/student/learn' : '/classroom'
 }
@@ -328,6 +327,30 @@ function LandingPage() {
 
 export function PhaseOneApp() {
   const { status, session } = useAuth()
-  return <Routes><Route path="/" element={<LandingPage />} /><Route path="/terms" element={<TermsPage />} /><Route path="/privacy" element={<PrivacyPage />} /><Route path="/sign-in" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignInPage />} /><Route path="/sign-up" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignUpPage />} /><Route path="/teacher-login" element={status === 'authenticated' && session?.user.role === 'teacher' ? <Navigate to="/teacher" replace /> : <TeacherLoginPage />} /><Route path="/teacher" element={<ProtectedTeacher><TeacherDashboardPage /></ProtectedTeacher>} /><Route path="/teacher/learning" element={<ProtectedTeacher><TeacherLearningDashboard /></ProtectedTeacher>} /><Route path="/auth/callback" element={<CallbackPage />} /><Route path="/classroom" element={<Protected><ClassroomHome /></Protected>} /><Route path="/classroom/create" element={<ProtectedTeacher><CreateClassroomPage /></ProtectedTeacher>} /><Route path="/classroom/join" element={<Protected><JoinClassroomPage /></Protected>} /><Route path="/classroom/created" element={<ProtectedTeacher><CreatedPage /></ProtectedTeacher>} /><Route path="/student/learn" element={<Protected><AdaptiveLearningPage /></Protected>} /><Route path="/student/problems" element={<Protected><TopicWiseProblemsPage /></Protected>} /><Route path="/student/topics/:subject/:slug" element={<Protected><TopicProblemsPage /></Protected>} /><Route path="/student/problems/:id" element={<Protected><JeeProblemPage /></Protected>} /><Route path="/student/quizzes" element={<Protected><TopicQuizzesPage /></Protected>} /><Route path="/student/quizzes/topic/:subject/:slug" element={<Protected><TopicQuizAttemptPage /></Protected>} /><Route path="/student/quizzes/:quizId" element={<Protected><TeacherQuizAttemptPage /></Protected>} /><Route path="*" element={<Navigate to="/" replace />} /></Routes>
+  return <Routes>
+    <Route path="/" element={<LandingPage />} />
+    <Route path="/terms" element={<TermsPage />} />
+    <Route path="/privacy" element={<PrivacyPage />} />
+    <Route path="/sign-in" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignInPage />} />
+    <Route path="/sign-up" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignUpPage />} />
+    <Route path="/student-onboarding" element={<Protected><StudentOnboardingPage /></Protected>} />
+    <Route path="/teacher-login" element={status === 'authenticated' && session?.user.role === 'teacher' ? <Navigate to="/teacher" replace /> : <TeacherLoginPage />} />
+    <Route path="/teacher" element={<ProtectedTeacher><TeacherDashboardPage /></ProtectedTeacher>} />
+    <Route path="/teacher/learning" element={<ProtectedTeacher><TeacherLearningDashboard /></ProtectedTeacher>} />
+    <Route path="/auth/callback" element={<CallbackPage />} />
+    <Route path="/classroom" element={<Protected><ClassroomHome /></Protected>} />
+    <Route path="/classroom/create" element={<ProtectedTeacher><CreateClassroomPage /></ProtectedTeacher>} />
+    <Route path="/classroom/join" element={<Protected><JoinClassroomPage /></Protected>} />
+    <Route path="/classroom/created" element={<ProtectedTeacher><CreatedPage /></ProtectedTeacher>} />
+    <Route path="/student/learn" element={<Protected><AdaptiveLearningPage /></Protected>} />
+    <Route path="/student/profile" element={<ProtectedStudentProfile><StudentProfilePage /></ProtectedStudentProfile>} />
+    <Route path="/student/problems" element={<Protected><TopicWiseProblemsPage /></Protected>} />
+    <Route path="/student/topics/:subject/:slug" element={<Protected><TopicProblemsPage /></Protected>} />
+    <Route path="/student/problems/:id" element={<Protected><JeeProblemPage /></Protected>} />
+    <Route path="/student/quizzes" element={<Protected><TopicQuizzesPage /></Protected>} />
+    <Route path="/student/quizzes/topic/:subject/:slug" element={<Protected><TopicQuizAttemptPage /></Protected>} />
+    <Route path="/student/quizzes/:quizId" element={<Protected><TeacherQuizAttemptPage /></Protected>} />
+    <Route path="*" element={<Navigate to="/" replace />} />
+  </Routes>
 }
 
