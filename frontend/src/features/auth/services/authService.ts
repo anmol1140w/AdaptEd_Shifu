@@ -21,21 +21,41 @@ const MIN_PASSWORD_LENGTH = 8
 const SESSION_HOURS = 12
 
 export interface GoogleAuthStatus {
-  configured: false
+  configured: boolean
   message: string
   requiredEnv: string[]
 }
 
-/** Reports whether a real Google OAuth provider is wired up. */
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/api/v1'
+
+/** Reports whether the frontend has a real backend OAuth flow wired up. */
 export function googleAuthStatus(): GoogleAuthStatus {
   return {
-    configured: false,
-    message:
-      'Google sign-in is not configured for this build yet. Add a Google OAuth client id and its authorized redirect URI to continue with email and password for now.',
-    requiredEnv: [
-      'VITE_GOOGLE_CLIENT_ID (Google OAuth web client id)',
-      'VITE_GOOGLE_REDIRECT_URI (must match /auth/callback on this origin)',
-    ],
+    configured: true,
+    message: '',
+    requiredEnv: [],
+  }
+}
+
+export function startGoogleOAuth(): void {
+  window.location.assign(`${API_BASE}/auth/google/start`)
+}
+
+export async function completeGoogleCallback(): Promise<AuthResult<AuthSession>> {
+  try {
+    const response = await fetch(`${API_BASE}/auth/me`, { credentials: 'include' })
+    if (!response.ok) return { ok: false, message: 'Google sign-in could not be completed. Please try again.', field: 'form' }
+    const body = await response.json() as { user: { id: string; name: string; email: string; role: 'student' | 'teacher' } }
+    const session: AuthSession = {
+      user: { ...body.user, onboardingComplete: false },
+      provider: 'google',
+      issuedAt: new Date().toISOString(),
+      isDemo: false,
+    }
+    setSession(session)
+    return { ok: true, data: session }
+  } catch {
+    return { ok: false, message: 'Could not reach the AdaptEd authentication server.', field: 'form' }
   }
 }
 

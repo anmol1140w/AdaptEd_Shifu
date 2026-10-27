@@ -13,9 +13,9 @@ class Settings(BaseSettings):
     database_password: str = ""
     google_client_id: str = ""
     google_client_secret: str = ""
-    google_redirect_uri: str = "http://127.0.0.1:8000/api/v1/auth/google/callback"
-    frontend_url: str = "http://127.0.0.1:5173"
-    cors_origins: str = "http://127.0.0.1:5173,http://localhost:5173"
+    google_redirect_uri: str = "http://localhost:8000/api/v1/auth/google/callback"
+    frontend_url: str = "http://localhost:5173"
+    cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
     database_url: str = "postgresql://adapted_user@127.0.0.1:5432/adapted"
     database_password: str = ""
 
