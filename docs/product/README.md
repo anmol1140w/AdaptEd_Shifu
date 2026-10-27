@@ -9,3 +9,5 @@ This area will contain the product contract for AdaptEd:
 - Demo assumptions and synthetic-data rules.
 
 Product decisions should be written here before they become implementation assumptions.
+
+The PS-22 problem statement is stored in `Problem_statement.md` in this directory.

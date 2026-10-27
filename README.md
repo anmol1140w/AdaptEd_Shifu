@@ -6,16 +6,16 @@ This workspace contains the round-one presentation plan for:
 
 ## Start here
 
-1. **[PS22_Hackathon_PPT_Blueprint.md](PS22_Hackathon_PPT_Blueprint.md)**  
+1. **[PS22_Hackathon_PPT_Blueprint.md](docs/pitch/PS22_Hackathon_PPT_Blueprint.md)**
    The complete 13-slide deck plan, exact slide copy, speaker guidance, design system, judge questions, MVP scope and selection checklist.
 
-2. **[PS22_Research_and_Citations.md](PS22_Research_and_Citations.md)**  
+2. **[PS22_Research_and_Citations.md](docs/research/PS22_Research_and_Citations.md)**
    Research thesis, existing-solution comparison, source notes, safe wording, citations, pilot metrics and claim-verification checklist.
 
-3. **[PS22_Diagrams_and_Product_Assets.md](PS22_Diagrams_and_Product_Assets.md)**  
+3. **[PS22_Diagrams_and_Product_Assets.md](docs/architecture/PS22_Diagrams_and_Product_Assets.md)**
    Mermaid diagrams, concept graph, technical architecture, database entities, adaptive pseudocode, RAG contract and mock UI copy.
 
-4. **[PS22_Pitch_Script_and_Rehearsal.md](PS22_Pitch_Script_and_Rehearsal.md)**  
+4. **[PS22_Pitch_Script_and_Rehearsal.md](docs/pitch/PS22_Pitch_Script_and_Rehearsal.md)**
    Five-minute and seven-minute scripts, 90-second demo runbook, team roles, scoring rubric and rehearsal plan.
 
 ## Recommended product direction
@@ -67,5 +67,6 @@ The repository now includes a prose-first scaffold for the future implementation
 - `docs/` — product, architecture, research and pitch documentation.
 - `infra/` — future local and deployment support.
 - `scripts/` — future repeatable project utilities.
+- `docs/team/` — team ownership, task division and integration responsibilities.
 
 Only the repository structure and documentation are being established at this stage. No application source code has been added yet.
