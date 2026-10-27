@@ -1,0 +1,19 @@
+{
+  "id": "lesson-algebra-04",
+  "source_id": "lesson-algebra-04",
+  "concept_id": "ALG-TWOSTEP-01",
+  "title": "Solving Two-Step Linear Equations",
+  "grade": 9,
+  "subject": "Mathematics",
+  "prerequisites": ["ALG-DIST-01", "ALG-ONESTEP-01"],
+  "text": "A two-step linear equation takes the general form ax + b = c, where a and b are known coefficients and x is the unknown variable. Solving two-step equations requires isolating the variable term by applying inverse operations in the reverse order of arithmetic operations. Step 1: Use addition or subtraction to eliminate the constant term b from the side containing the variable (e.g., subtract b from both sides). Step 2: Use multiplication or division to eliminate coefficient a (e.g., divide both sides by a). When equations contain parentheses, such as a(x + b) = c, expand the expression using the distributive property first, or divide both sides by a if divisible without remainder.",
+  "tags": [
+    "two-step equations",
+    "linear equations",
+    "inverse operations",
+    "isolating variable",
+    "coefficients",
+    "algebra",
+    "ALG-TWOSTEP-01"
+  ]
+}

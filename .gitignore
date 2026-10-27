@@ -20,3 +20,17 @@ dist/
 .env.*
 !.env.example
 
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment secrets
+.env
+!.env.example
