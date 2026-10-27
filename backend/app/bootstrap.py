@@ -37,9 +37,7 @@ from .infrastructure.ai.llm import (
     CuratedTutorFallback,
     DeterministicQuizGenerator,
     DeterministicTutorGenerator,
-    GrokGenerator,
     OllamaCloudGenerator,
-    PrimaryFallbackGenerator,
 )
 from .infrastructure.ai.retrieval import InMemoryLearningRetriever
 from .infrastructure.ai.validators import StructuredLearningOutputValidator
@@ -94,10 +92,9 @@ def build_in_memory_assessment_runtime(
     retriever: RetrievalPort | None = None,
     tutor_generator: TutorGenerationPort | None = None,
     quiz_generator: QuizGenerationPort | None = None,
-    use_grok: bool = False,
     use_ollama_cloud: bool = False,
 ) -> InMemoryAssessmentRuntime:
-    """Build a local runtime; optionally use Qdrant and Grok with Ollama fallback."""
+    """Build a local runtime; optionally use Qdrant and Ollama Cloud generation."""
 
     concept_list = tuple(concepts)
     subject_name_map = dict(subject_names)
@@ -126,15 +123,9 @@ def build_in_memory_assessment_runtime(
     ai_audit = InMemoryAIAudit()
     active_retriever = retriever or InMemoryLearningRetriever(sources)
     validator = StructuredLearningOutputValidator()
-    cloud_generator = None
-    if use_grok or use_ollama_cloud:
-        cloud_generator = PrimaryFallbackGenerator(
-            primary=GrokGenerator(),
-            fallback=OllamaCloudGenerator(),
-            validator=validator,
-        )
-    active_tutor_generator = tutor_generator or cloud_generator or DeterministicTutorGenerator()
-    active_quiz_generator = quiz_generator or cloud_generator or DeterministicQuizGenerator()
+    ollama_generator = OllamaCloudGenerator() if use_ollama_cloud else None
+    active_tutor_generator = tutor_generator or ollama_generator or DeterministicTutorGenerator()
+    active_quiz_generator = quiz_generator or ollama_generator or DeterministicQuizGenerator()
     learning_engine = LearningEngine(concept_list)
     start_assessment = StartAssessment(
         learners=learners,
