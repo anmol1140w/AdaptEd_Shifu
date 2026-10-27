@@ -12,8 +12,13 @@ from .api.v1.routes.question_banks import QuestionBankApi
 from .application.assessment_facade import AssessmentFacade
 from .application.learning_support_facade import LearningSupportFacade
 from .application.teacher_intervention_facade import TeacherInterventionFacade
+from .application.ports.ai import (
+    QuizGenerationPort,
+    RetrievalPort,
+    RetrievedSource,
+    TutorGenerationPort,
+)
 from .application.question_bank_facade import QuestionBankFacade
-from .application.ports.ai import RetrievedSource
 from .application.ports.assessment import AssessmentGraderPort
 from .application.use_cases.build_subject_summary import BuildSubjectSummary
 from .application.use_cases.build_intervention_queue import BuildInterventionQueue
@@ -69,6 +74,7 @@ class InMemoryAssessmentRuntime:
     intervention_api: TeacherInterventionApi
     intervention_facade: TeacherInterventionFacade
     ai_audit: InMemoryAIAudit
+    retriever: RetrievalPort
     question_bank_api: QuestionBankApi
     question_bank_facade: QuestionBankFacade
     question_bank_store: InMemoryQuestionBankStore
@@ -216,6 +222,7 @@ def build_in_memory_assessment_runtime(
         intervention_api=intervention_api,
         intervention_facade=intervention_facade,
         ai_audit=ai_audit,
+        retriever=active_retriever,
         question_bank_api=question_bank_api,
         question_bank_facade=question_bank_facade,
         question_bank_store=question_bank_store,
