@@ -158,6 +158,7 @@ CREATE TABLE IF NOT EXISTS learning_assessments (
     user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     subject TEXT NOT NULL,
     class_level INTEGER NOT NULL,
+    assessment_type TEXT NOT NULL DEFAULT 'adaptive' CHECK (assessment_type IN ('adaptive', 'mock')),
     item_ids JSONB NOT NULL,
     current_index INTEGER NOT NULL DEFAULT 0,
     target_count INTEGER NOT NULL DEFAULT 5,
@@ -166,6 +167,8 @@ CREATE TABLE IF NOT EXISTS learning_assessments (
     completed_at TIMESTAMPTZ
 );
 ALTER TABLE learning_assessments ADD COLUMN IF NOT EXISTS target_count INTEGER NOT NULL DEFAULT 5;
+ALTER TABLE learning_assessments ADD COLUMN IF NOT EXISTS assessment_type TEXT NOT NULL DEFAULT 'adaptive'
+    CHECK (assessment_type IN ('adaptive', 'mock'));
 CREATE TABLE IF NOT EXISTS learning_attempts (
     id TEXT PRIMARY KEY,
     assessment_id TEXT NOT NULL REFERENCES learning_assessments(id) ON DELETE CASCADE,
@@ -177,6 +180,29 @@ CREATE TABLE IF NOT EXISTS learning_attempts (
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_learning_attempts_user ON learning_attempts(user_id, item_id, created_at DESC);
+CREATE TABLE IF NOT EXISTS learning_external_evidence (
+    id TEXT PRIMARY KEY,
+    source_system TEXT NOT NULL,
+    source_event_id TEXT NOT NULL,
+    learner_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    quiz_id TEXT NOT NULL,
+    question_id TEXT NOT NULL,
+    subject TEXT NOT NULL CHECK (subject IN ('physics', 'chemistry', 'mathematics')),
+    class_level INTEGER NOT NULL CHECK (class_level IN (11, 12)),
+    concept_id TEXT NOT NULL REFERENCES learning_concepts(concept_id) ON DELETE CASCADE,
+    chapter TEXT NOT NULL,
+    question_text TEXT NOT NULL,
+    response TEXT NOT NULL DEFAULT '',
+    score DOUBLE PRECISION NOT NULL CHECK (score >= 0),
+    max_score DOUBLE PRECISION NOT NULL CHECK (max_score > 0 AND score <= max_score),
+    difficulty TEXT NOT NULL DEFAULT 'medium' CHECK (difficulty IN ('easy', 'medium', 'hard')),
+    time_taken INTEGER NOT NULL DEFAULT 0 CHECK (time_taken >= 0),
+    attempted_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    received_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (source_system, source_event_id, question_id)
+);
+CREATE INDEX IF NOT EXISTS idx_learning_external_evidence_learner
+    ON learning_external_evidence(learner_id, subject, class_level, concept_id, attempted_at DESC);
 CREATE TABLE IF NOT EXISTS generated_learning_content (
     id TEXT PRIMARY KEY,
     creator_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,

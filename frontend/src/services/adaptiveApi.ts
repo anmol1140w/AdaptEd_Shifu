@@ -25,16 +25,6 @@ export type AdaptiveQuestion = {
   item_id: string; concept_id: string; subject: string; class_level: number
   chapter: string; item_type: string; bloom_level: string; difficulty: string; question: string
 }
-export type TopicScore = {
-  topic: string
-  attempts: number
-  correct: number
-  accuracy: number
-  mastery_score: number
-  confidence: number
-  trend: string
-}
-export type TopicScores = Record<string, TopicScore>
 export type LearningPathStep = { concept_id: string; name: string; chapter: string; mastery_status: string; action: string; reason: string }
 export type LearnerSummary = { learner_id: string; name: string; attempts: number; accuracy: number; weak_concepts: string[]; intervention: string }
 export type AILearningRecommendation = { concept_id: string; concept_name: string; chapter: string; action: string; reason: string; source_ids: string[] }
@@ -54,6 +44,9 @@ export type LearningCitation = {
 export type GeneratedWeakQuiz = { id: string; status: string; question_count: number; citations: LearningCitation[] }
 export type TutorMemory = { id: string; mode: 'hint' | 'explanation' | 'check_question'; question: string; message: string; check_question: string; source_ids: string[]; sources: LearningCitation[]; created_at: string }
 export type LearningPreferences = { subject: string; class_level: number; updated_at: string | null }
+export type TopicScore = { topic: string; attempts: number; correct: number; accuracy: number; mastery_score: number; confidence: number; trend: 'insufficient_evidence' | 'improving' | 'stable' | 'declining' }
+export type TopicScores = Record<string, TopicScore>
+export type AssessmentSummary = { attempts: number; correct: number; accuracy: number; topic_scores: TopicScores }
 
 export function getConcepts(subject: string, classLevel: number) {
   return request<{ concepts: AdaptiveConcept[] }>(`/learning/concepts?subject=${subject}&class_level=${classLevel}`)
@@ -69,17 +62,20 @@ export function saveLearningPreferences(subject: string, classLevel: number) {
     method: 'PUT', body: JSON.stringify({ subject, class_level: classLevel }),
   })
 }
-export function startAdaptiveAssessment(subject: string, classLevel: number, conceptId?: string) {
-  return request<{ assessment_id: string; status: string; question_count: number; index: number; question: AdaptiveQuestion }>('/assessments/start', {
-    method: 'POST', body: JSON.stringify({ subject, class_level: classLevel, question_count: 5, ...(conceptId ? { concept_id: conceptId } : {}) }),
+export function startAdaptiveAssessment(subject: string, classLevel: number, conceptId?: string, assessmentType: 'adaptive' | 'mock' = 'adaptive') {
+  return request<{ assessment_id: string; status: string; assessment_type: 'adaptive' | 'mock'; question_count: number; index: number; question: AdaptiveQuestion }>('/assessments/start', {
+    method: 'POST', body: JSON.stringify({ subject, class_level: classLevel, question_count: assessmentType === 'mock' ? 10 : 5, assessment_type: assessmentType, ...(conceptId ? { concept_id: conceptId } : {}) }),
   })
 }
-export function submitAdaptiveAttempt(assessmentId: string, answer: string, timeTaken: number) {
-  return request<{ correct: boolean; answer_guide: string; explanation: string; grading: { correct: boolean; score: number; method: 'ollama' | 'exact' | 'similarity'; feedback: string }; completed: boolean; index: number; adaptation?: string; adaptation_reason?: string; question?: AdaptiveQuestion; summary?: { attempts: number; correct: number; accuracy: number; topic_scores: TopicScores } }>(`/assessments/${assessmentId}/attempt`, {
-    method: 'POST', body: JSON.stringify({ answer, time_taken: timeTaken }),
+export function resumeAdaptiveAssessment(assessmentId: string) {
+  return request<{ assessment_id: string; status: string; assessment_type: 'adaptive' | 'mock'; question_count: number; index: number; question?: AdaptiveQuestion }>(`/assessments/${encodeURIComponent(assessmentId)}`)
+}
+export function submitAdaptiveAttempt(assessmentId: string, itemId: string, answer: string, timeTaken: number) {
+  return request<{ correct: boolean; answer_guide: string; explanation: string; grading: { correct: boolean; score: number; method: 'ollama' | 'exact' | 'similarity'; feedback: string }; completed: boolean; index: number; adaptation?: string; adaptation_reason?: string; question?: AdaptiveQuestion; summary?: AssessmentSummary }>(`/assessments/${assessmentId}/attempt`, {
+    method: 'POST', body: JSON.stringify({ item_id: itemId, answer, time_taken: timeTaken }),
   })
 }
-export function askTutor(input: { subject: string; class_level: number; concept_id: string; question: string; mode: 'hint' | 'explanation' | 'check_question'; topic_scores?: TopicScores }) {
+export function askTutor(input: { subject: string; class_level: number; concept_id: string; question: string; mode: 'hint' | 'explanation' | 'check_question'; topic_scores?: Record<string, TopicScore> }) {
   return request<{ id: string; message: string; check_question: string; citations: LearningCitation[]; provider: string }>('/ai/tutor', {
     method: 'POST', body: JSON.stringify(input),
   })
