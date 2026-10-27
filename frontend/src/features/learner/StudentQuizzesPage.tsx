@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import { ArrowRight, CalendarClock, Search, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useAuth } from '../../app/AuthProvider'
+import { studentQuizzes } from '../../services/api'
 import type { JeeSubjectId } from '../../types'
 import { SUBJECTS } from './services/problemCatalog'
 import { recentlyUploadedQuizzes } from './services/teacherQuizCatalog'
@@ -34,7 +35,9 @@ export function StudentQuizzesPage() {
   const [subject, setSubject] = useState<QuizSubjectFilter>('all')
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState<QuizSort>('newest')
+  const [classroomQuizzes, setClassroomQuizzes] = useState<Array<Record<string, string | number>>>([])
   const navigate = useNavigate()
+  useEffect(() => { if (session) studentQuizzes().then(setClassroomQuizzes).catch(() => setClassroomQuizzes([])) }, [session])
 
   const quizzes = useMemo(() => {
     const query = search.trim().toLocaleLowerCase()
@@ -65,6 +68,8 @@ export function StudentQuizzesPage() {
       </div>
 
       {preview && <div className="preview-banner">Read-only preview · Sign in and join a classroom to save quiz attempts.</div>}
+
+      {classroomQuizzes.length > 0 && <section className="recent-quizzes-panel classroom-quiz-panel" aria-label="Classroom quizzes"><div className="recent-quizzes-toolbar"><h2 className="section-kicker">PUBLISHED BY YOUR TEACHERS</h2></div><div className="recent-quiz-list">{classroomQuizzes.map((quiz) => <article className="recent-quiz-card" key={String(quiz.id)}><div className="recent-quiz-main"><div className="recent-quiz-title-row"><h2>{String(quiz.title)}</h2><span className="recent-quiz-mock-badge">CLASSROOM</span></div><p className="recent-quiz-teacher">{String(quiz.classroom_name)}</p><div className="recent-quiz-tags"><span className="topic-tag">{String(quiz.question_count)} questions</span><span className={`difficulty-label difficulty-${String(quiz.difficulty).toLowerCase()}`}><i />{String(quiz.difficulty)}</span></div></div><div className="recent-quiz-action"><span>{String(quiz.time_limit_minutes)} min</span><Button className="attempt-quiz-button" onClick={() => navigate(`/student/quizzes/topic/${String(quiz.id)}`)}>Attempt Now <ArrowRight size={14} /></Button></div></article>)}</div></section>}
 
       <section className="recent-quizzes-panel" aria-label="Recently uploaded quizzes">
         <div className="recent-quizzes-toolbar">
