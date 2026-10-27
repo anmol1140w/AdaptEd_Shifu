@@ -20,17 +20,29 @@ This workspace contains the round-one presentation plan for:
 
 ## Recommended product direction
 
-- Working name: **Aarohan AI**
+- Project name: **AdaptEd**
 - Tagline: **From marks to mastery**
 - Pilot: **Class 9 Mathematics — Algebra and Linear Equations**
 - Main differentiator: **an explainable closed loop from evidence → concept mastery → next best action → re-assessment**
 - MVP users: **learner and teacher**
+
+## Subject-wise and concept-wise learning analysis
+
+AdaptEd will expose learning gaps at two connected levels:
+
+- **Subject-wise view:** summarizes a learner's overall progress and estimated mastery for a subject, such as Mathematics.
+- **Concept-wise view:** drills into the concepts and prerequisites that make up the subject, such as Variables, Distributive Property and Two-step Equations.
+
+The subject view is an aggregation of concept-level evidence; it must not hide the concepts that produced the summary. A teacher should be able to select a subject and then see the underlying concept mastery, confidence, misconceptions, evidence and recommended actions.
+
+The MVP demonstrates one subject—Class 9 Mathematics—but the data model and API should retain subject identifiers so additional subjects can be added without changing the learning loop.
 
 ## Minimum round-one deliverables
 
 - A 13-slide deck, or the compressed 8-slide version if the event has a limit.
 - One learner journey showing a real adaptive change.
 - One teacher dashboard showing a concept-level intervention queue.
+- A subject-level summary that drills down into concept-level mastery and gaps.
 - One process flow and one architecture diagram.
 - A source-backed context slide with no invented statistics.
 - A working or seeded demo plus a recorded fallback.
@@ -43,3 +55,17 @@ This workspace contains the round-one presentation plan for:
 - Do not present “we use an LLM” as the innovation.
 - Do not claim that RAG guarantees factual correctness; describe it as a risk-reduction and grounding design.
 - Keep real student data, credentials and API keys out of this workspace.
+
+## Engineering scaffold
+
+The repository now includes a prose-first scaffold for the future implementation:
+
+- `backend/` — backend, learning-domain and AI integration boundaries.
+- `frontend/` — learner and teacher product surfaces.
+- `contracts/` — shared integration contracts between frontend and backend.
+- `content/` — concepts, questions, lessons and synthetic demo scenarios.
+- `docs/` — product, architecture, research and pitch documentation.
+- `infra/` — future local and deployment support.
+- `scripts/` — future repeatable project utilities.
+
+Only the repository structure and documentation are being established at this stage. No application source code has been added yet.

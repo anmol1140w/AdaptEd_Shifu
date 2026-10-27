@@ -4,7 +4,7 @@ This file supports the round-one PPT. It is deliberately conservative: it separa
 
 **Prepared:** 15 October 2026  
 **Recommended pilot:** Class 9 Mathematics — Algebra and Linear Equations  
-**Product working name:** Aarohan AI
+**Product name:** AdaptEd
 
 ---
 
@@ -13,6 +13,8 @@ This file supports the round-one PPT. It is deliberately conservative: it separa
 The argument for PS-22 should not be “AI is popular, therefore education needs AI.” The stronger research thesis is:
 
 > Learners produce observable interaction evidence; a platform can use that evidence to estimate concept-level knowledge, choose an appropriate next action and support teachers with a prioritised intervention view. Generative AI is useful for explanations and item drafts, but educational reliability requires grounding, guardrails and human oversight.
+
+For PS-22, AdaptEd should report learning at two connected levels: a subject-wise summary for overall progress and a concept-wise drill-down that identifies the prerequisite, misconception and evidence behind that summary. The pilot is intentionally limited to Class 9 Mathematics, while the subject-aware model remains extensible to additional subjects.
 
 This gives the deck four layers of evidence:
 
@@ -78,7 +80,7 @@ This gives the deck four layers of evidence:
 
 **How to use it honestly:**
 
-> Educational AI research has explored knowledge tracing: modelling a learner’s evolving knowledge from interaction sequences. Aarohan uses a transparent, smaller hybrid mastery model for the MVP and treats advanced knowledge tracing as a later calibration path.
+> Educational AI research has explored knowledge tracing: modelling a learner’s evolving knowledge from interaction sequences. AdaptEd uses a transparent, smaller hybrid mastery model for the MVP and treats advanced knowledge tracing as a later calibration path.
 
 **Do not claim:** that your prototype reproduces the paper’s results, or that deep learning is necessary for the first version.
 
@@ -100,7 +102,7 @@ This gives the deck four layers of evidence:
 
 **Safe wording:**
 
-> AI tutoring products show the value of conversational, guided help inside a structured learning ecosystem. Aarohan focuses specifically on the diagnostic-to-intervention loop and exposes concept-level evidence to teachers.
+> AI tutoring products show the value of conversational, guided help inside a structured learning ecosystem. AdaptEd focuses specifically on the diagnostic-to-intervention loop and exposes subject summaries with concept-level evidence to teachers.
 
 **Do not claim:** that a benchmark product has no adaptive or analytics features. Product capabilities change; describe the gap as your focus, not an absolute criticism.
 
@@ -142,7 +144,7 @@ It is a concrete example of “AI inside a learning experience,” while your pr
 
 **Safe wording:**
 
-> An LMS provides the course and assessment workflow. Aarohan can sit as an intelligence layer that interprets interaction evidence and recommends the next learning action.
+> An LMS provides the course and assessment workflow. AdaptEd can sit as an intelligence layer that interprets interaction evidence and recommends the next learning action.
 
 **Place in deck:** Slide 4 existing solutions; Slide 11 architecture.
 
@@ -153,6 +155,7 @@ It is a concrete example of “AI inside a learning experience,” while your pr
 | Slide | Claim | Evidence / support | How to say it safely |
 |---:|---|---|---|
 | 2 | Marks alone hide concept-level gaps | Product problem framing; validate with a small pilot | “A score compresses multiple concepts into one number.” |
+| 5, 9 | Subject-wise summaries should lead to concept-wise diagnosis | Proposed product design; validate through teacher review | “The subject view summarizes progress, while the concept view shows the evidence and next action behind it.” |
 | 3 | Educational AI must be human-centred | UNESCO guidance and GEM Report | “AI is useful when aligned to learning goals and safeguards.” |
 | 3 | Learner knowledge can be modelled from interaction histories | Knowledge-tracing research | “Research has explored…” not “our model is proven.” |
 | 4 | Existing products solve parts of the journey | Product documentation and official product pages | “Our focus is the missing connection,” not “others cannot do this.” |
@@ -233,7 +236,7 @@ Use categories instead of a long competitor list. A panel will care more about t
 
 ### Your positioning
 
-> Aarohan is the connective intelligence layer: it links assessment evidence, concept mastery, grounded support, personalised practice and teacher intervention.
+> AdaptEd is the connective intelligence layer: it links assessment evidence, subject summaries, concept mastery, grounded support, personalised practice and teacher intervention.
 
 ---
 

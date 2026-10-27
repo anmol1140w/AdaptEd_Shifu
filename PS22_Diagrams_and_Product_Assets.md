@@ -101,14 +101,14 @@ journey
       Start 5-minute baseline: 4: Riya
       See concept map: 4: Riya
     section Understand
-      Learn why the next item was selected: 5: Riya, Aarohan
-      Ask for a hint: 5: Riya, Aarohan
+      Learn why the next item was selected: 5: Riya, AdaptEd
+      Ask for a hint: 5: Riya, AdaptEd
     section Practise
       Solve targeted item: 4: Riya
-      Receive feedback without answer dumping: 5: Riya, Aarohan
+      Receive feedback without answer dumping: 5: Riya, AdaptEd
     section Prove
       Complete transfer re-check: 4: Riya
-      See mastery progress: 5: Riya, Aarohan
+      See mastery progress: 5: Riya, AdaptEd
 ```
 
 ### Slide-ready user journey labels
@@ -257,6 +257,21 @@ audit_events
   id, actor_type, event_type, model_version, input_ref,
   output_ref, safety_flags, created_at
 ```
+
+### Subject-wise and concept-wise reporting
+
+The schema supports both levels required by PS-22:
+
+```text
+Subject summary
+  subject_id, learner_id, overall_mastery, confidence, trend
+
+Concept detail
+  subject_id, concept_id, score, confidence, evidence_count,
+  likely_misconception, next_action
+```
+
+The subject summary should be derived from the learner's concept states for that subject. It provides a high-level progress view, while the concept detail explains which prerequisite or misconception caused the summary and what the learner should do next. The teacher dashboard should support subject → concept drill-down, and the learner view should show the same hierarchy in a simpler form.
 
 ### Privacy guidance for the demo database
 

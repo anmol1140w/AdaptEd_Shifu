@@ -2,19 +2,19 @@
 
 ## Working product identity
 
-Use a memorable product name instead of presenting a generic “AI learning platform.” The working name in this blueprint is:
+Use the project name instead of presenting a generic “AI learning platform.” The project name is:
 
-> **Aarohan AI — From marks to mastery**
+> **AdaptEd — From marks to mastery**
 
-“Aarohan” means upward progress. Keep the name if the team likes it, or replace it with a name that fits your team. The positioning and slide content can remain the same.
+AdaptEd is the project name for the PS-22 platform. The positioning and slide content should consistently use this name.
 
 ### One-line pitch
 
-> Aarohan AI converts every learner response into a concept-level mastery map, then delivers the next best question, explanation and practice plan—while giving teachers an actionable intervention queue.
+> AdaptEd converts every learner response into a concept-level mastery map, then delivers the next best question, explanation and practice plan—while giving teachers an actionable intervention queue.
 
 ### 30-second pitch
 
-> Today, a score tells a student that they are behind, but not what to learn next. Aarohan AI starts with a short diagnostic, maps the learner’s mastery across concepts, adapts question difficulty in real time and explains mistakes using teacher-approved learning material. It creates a personal recovery path for the learner and highlights only the students and concepts that need teacher intervention. We will demonstrate the first version for Class 9 mathematics, focused on algebra and linear equations, so the solution is measurable, feasible and ready to scale.
+> Today, a score tells a student that they are behind, but not what to learn next. AdaptEd starts with a short diagnostic, maps the learner’s mastery across concepts, adapts question difficulty in real time and explains mistakes using teacher-approved learning material. It creates a personal recovery path for the learner and highlights only the students and concepts that need teacher intervention. We will demonstrate the first version for Class 9 mathematics, focused on algebra and linear equations, so the solution is measurable, feasible and ready to scale.
 
 ### Tagline options
 
@@ -92,7 +92,7 @@ Make the panel immediately understand that your solution is not another content 
 
 ### Put this on the slide
 
-**Aarohan AI**  
+**AdaptEd**
 **From marks to mastery**
 
 > An AI-powered adaptive learning and skill-gap identification platform
@@ -114,7 +114,7 @@ Avoid stock images of smiling students. A clean product-style visual communicate
 
 ### Speaker script
 
-> A score can tell us that a learner is struggling, but it does not tell the learner or the teacher what to do next. Aarohan AI turns every response into a concept-level learning signal and converts that signal into the next best question, explanation and intervention.
+> A score can tell us that a learner is struggling, but it does not tell the learner or the teacher what to do next. AdaptEd turns every response into a concept-level learning signal and converts that signal into the next best question, explanation and intervention.
 
 ### What makes this selection-worthy
 
@@ -264,7 +264,7 @@ Use four blocks around an empty centre:
                missing closed loop
 ```
 
-The empty centre is the opening for Aarohan AI.
+The empty centre is the opening for AdaptEd.
 
 ### Speaker script
 
@@ -272,7 +272,7 @@ The empty centre is the opening for Aarohan AI.
 
 ---
 
-## Slide 5 — Proposed solution: The Aarohan learning loop
+## Slide 5 — Proposed solution: The AdaptEd learning loop
 
 ### Purpose
 
@@ -290,7 +290,7 @@ Diagnose → Map the gap → Teach / explain → Practice → Re-check → Impro
 
 Short definition:
 
-> Aarohan AI builds a live concept-level mastery map from learner interactions and uses it to recommend the next best learning action.
+> AdaptEd builds a live concept-level mastery map from learner interactions and uses it to recommend the next best learning action.
 
 ### The five product modules
 
@@ -299,6 +299,22 @@ Short definition:
 3. **Personalised path** — orders micro-lessons, examples and practice by need.
 4. **Grounded AI learning assistant** — explains, hints, asks a check question and cites approved sources.
 5. **Teacher intervention dashboard** — prioritises students and concepts for human support.
+
+### Subject-wise to concept-wise visibility
+
+AdaptEd must present the same learning state at two levels:
+
+```text
+Subject summary: Mathematics
+  ↓
+Concept detail: Algebra
+  ├── Variables and expressions — secure
+  ├── Distributive property — developing
+  ├── Two-step equations — needs support
+  └── Word problems — not enough evidence
+```
+
+The subject-level summary should aggregate the underlying concept evidence and provide an entry point for drill-down. The concept-level view is where the platform identifies prerequisites, misconceptions, confidence and the next best action. The MVP uses one subject, but the subject identifier must remain part of the data model and API so the same structure can support additional subjects later.
 
 ### Speaker script
 
@@ -445,7 +461,7 @@ She scores 42% in algebra. She can solve one-step equations but repeatedly fails
    Riya takes 5 adaptive questions.
 
 2. Diagnosis
-   Aarohan identifies a likely gap in “distributive property”.
+   AdaptEd identifies a likely gap in “distributive property”.
 
 3. Explanation
    The assistant gives a visual explanation and asks a one-step check question.
@@ -496,6 +512,17 @@ Dashboard cards:
 - **Most common gap:** distributing signs — 11 learners.
 - **At-risk trend:** 5 learners have repeated the same misconception twice.
 - **Suggested action:** 10-minute mini-lesson + 3-question re-check.
+
+The dashboard should support a clear drill-down:
+
+```text
+Subject summary: Mathematics
+    → Concept detail: Distributive property
+    → Evidence: repeated negative-sign misconception
+    → Action: mini-lesson and re-check
+```
+
+The subject summary gives the teacher a high-level view of progress. The concept detail explains the reason behind that summary and provides the evidence for intervention.
 
 Intervention queue example:
 
@@ -718,7 +745,7 @@ Finish with measurable impact, not a generic “AI will transform education” s
 
 ### Final close
 
-> **Aarohan AI does not replace the teacher. It gives every learner a next step—and gives every teacher the evidence to make that step count.**
+> **AdaptEd does not replace the teacher. It gives every learner a next step—and gives every teacher the evidence to make that step count.**
 
 End with a QR code or short demo URL only if it works reliably. Add the team contact and a one-line ask:
 
@@ -747,7 +774,7 @@ Use this if the submission portal allows only a small number of slides.
 
 For a one-page executive summary, use the following copy:
 
-> **Aarohan AI is an explainable adaptive learning platform for Class 9 mathematics.** It diagnoses concept-level gaps from learner responses, selects the next best question, explains mistakes from teacher-approved content and gives teachers an intervention queue. Unlike a score-only assessment or a stand-alone chatbot, Aarohan connects evidence, mastery, action and re-assessment in one closed loop. The MVP uses React, FastAPI, PostgreSQL, a prerequisite-aware mastery engine and RAG-grounded LLM explanations. We will measure concept mastery gain, transfer accuracy, time-to-mastery, explanation quality and teacher intervention efficiency.
+> **AdaptEd is an explainable adaptive learning platform for Class 9 mathematics.** It diagnoses concept-level gaps from learner responses, selects the next best question, explains mistakes from teacher-approved content and gives teachers an intervention queue. Unlike a score-only assessment or a stand-alone chatbot, AdaptEd connects subject summaries, concept evidence, mastery, action and re-assessment in one closed loop. The MVP uses React, FastAPI, PostgreSQL, a prerequisite-aware mastery engine and RAG-grounded LLM explanations. We will measure concept mastery gain, transfer accuracy, time-to-mastery, explanation quality and teacher intervention efficiency.
 
 ---
 
@@ -895,7 +922,7 @@ Use a calm, trustworthy education aesthetic rather than a neon “AI startup” 
 
 ## “Why not just use ChatGPT?”
 
-> A general chatbot can explain a concept, but it does not reliably maintain a prerequisite-aware mastery model, choose the next assessment item, measure transfer or create a teacher intervention queue. Aarohan uses an LLM only for grounded communication inside a larger evidence and assessment loop.
+> A general chatbot can explain a concept, but it does not reliably maintain a prerequisite-aware mastery model, choose the next assessment item, measure transfer or create a teacher intervention queue. AdaptEd uses an LLM only for grounded communication inside a larger evidence and assessment loop.
 
 ## “How do you know a learner has a skill gap?”
 
@@ -931,4 +958,4 @@ Use a calm, trustworthy education aesthetic rather than a neon “AI startup” 
 
 If the panel remembers only one idea, make it this:
 
-> **Aarohan AI is not a chatbot added to a classroom. It is a closed-loop learning system that turns evidence into mastery insight, mastery insight into a personalised action and that action into measurable improvement.**
+> **AdaptEd is not a chatbot added to a classroom. It is a closed-loop learning system that turns evidence into mastery insight, mastery insight into a personalised action and that action into measurable improvement.**

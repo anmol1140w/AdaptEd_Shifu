@@ -20,7 +20,7 @@ The audience should never wonder why a feature appears. Every feature should ans
 - **Evidence:** Learning technology is most valuable when it is aligned to a clear educational goal and supported by responsible use.
 - **Gap:** Current tools often split content, assessment, tutoring and teacher analytics across separate experiences.
 - **Insight:** The useful unit of personalisation is not “more content”; it is the next best learning action for a specific concept.
-- **Product:** Aarohan builds a concept-level mastery map and closes the loop from evidence to action to re-check.
+- **Product:** AdaptEd builds a concept-level mastery map and closes the loop from evidence to action to re-check.
 - **Proof:** One simulated learner receives prerequisite support while another receives a harder transfer question.
 - **Feasibility:** Start with one grade, subject and concept graph; use deterministic rules where explainability matters.
 - **Impact:** Measure mastery gain, transfer, explanation quality and teacher intervention efficiency.
@@ -34,7 +34,7 @@ The script below is intentionally concise. Do not read every word if the team is
 
 ### 0:00–0:20 — Slide 1
 
-> A score can tell us that a learner is struggling, but it cannot tell the learner what to learn next or the teacher which concept to address. Aarohan AI is an adaptive learning and skill-gap platform built around one promise: **from marks to mastery**. We begin with a focused pilot for Class 9 mathematics, algebra and linear equations.
+> A score can tell us that a learner is struggling, but it cannot tell the learner what to learn next or the teacher which concept to address. AdaptEd is an adaptive learning and skill-gap platform built around one promise: **from marks to mastery**. We begin with a focused pilot for Class 9 mathematics, algebra and linear equations.
 
 ### 0:20–0:50 — Slide 2
 
@@ -50,7 +50,7 @@ The script below is intentionally concise. Do not read every word if the team is
 
 ### 1:50–2:25 — Slide 5
 
-> Aarohan closes that loop. It diagnoses, maps the gap, teaches or explains, gives targeted practice, re-checks the concept and then shows progress to the teacher. The shared mastery model is the bridge between the learner experience and the teacher dashboard. We are not replacing a teacher or an LMS; we are adding an evidence-to-action layer.
+> AdaptEd closes that loop. It diagnoses, maps the gap, teaches or explains, gives targeted practice, re-checks the concept and then shows progress to the teacher. The shared mastery model is the bridge between the learner experience and the teacher dashboard. We are not replacing a teacher or an LMS; we are adding an evidence-to-action layer.
 
 ### 2:25–3:10 — Slide 7 / mechanism
 
@@ -66,7 +66,7 @@ The script below is intentionally concise. Do not read every word if the team is
 
 ### 4:40–5:10 — Slides 12–13
 
-> We keep the MVP buildable: one subject, five to ten concepts, teacher-reviewed items, two user roles and one closed loop. We will measure concept mastery gain, transfer accuracy, time-to-mastery, explanation quality and teacher intervention efficiency. Aarohan AI does not replace the teacher. It gives every learner a next step and every teacher the evidence to make that step count.
+> We keep the MVP buildable: one subject, five to ten concepts, teacher-reviewed items, two user roles and one closed loop. We will measure concept mastery gain, transfer accuracy, time-to-mastery, explanation quality and teacher intervention efficiency. AdaptEd does not replace the teacher. It gives every learner a next step and every teacher the evidence to make that step count.
 
 ---
 
@@ -76,7 +76,7 @@ Use the extra time for the user journey, dashboard and impact detail. Do not add
 
 ### Optional 45 seconds on the user journey
 
-> Riya is a useful example because her score hides the cause of her difficulty. She knows variables and one-step equations, but she repeatedly loses a negative sign when expanding brackets. Aarohan shows that prerequisite, gives a visual explanation, asks her to attempt the next step and checks transfer with a new question. This makes the learner’s progress visible without labelling her as permanently weak.
+> Riya is a useful example because her score hides the cause of her difficulty. She knows variables and one-step equations, but she repeatedly loses a negative sign when expanding brackets. AdaptEd shows that prerequisite, gives a visual explanation, asks her to attempt the next step and checks transfer with a new question. This makes the learner’s progress visible without labelling her as permanently weak.
 
 ### Optional 30 seconds on teacher value
 
@@ -118,7 +118,7 @@ Concept cluster: Variables → Distributive property → Two-step equations
 2. Click **Start diagnostic**.
 3. Answer the first item correctly.
 4. Answer a distributive-property item incorrectly.
-5. Show the concept map and the “why this next?” panel.
+5. Show the Mathematics subject summary, drill down to the concept map and open the “why this next?” panel.
 6. Click **I need a hint**.
 7. Show the hint, source label and check question.
 8. Submit a corrected attempt.
@@ -180,7 +180,7 @@ Too many speaker handoffs can make a short pitch feel fragmented.
 
 ### Handoff lines
 
-- “Now that we have shown the gap, [Name] will show how Aarohan closes it.”
+- “Now that we have shown the gap, [Name] will show how AdaptEd closes it.”
 - “You have seen the learner path; [Name] will show how the same evidence helps the teacher.”
 - “The product idea is clear; [Name] will now prove that the MVP is technically feasible.”
 
@@ -261,6 +261,10 @@ Each team member should answer these in 20 seconds or less.
 ### What is your MVP?
 
 > Class 9 mathematics, algebra and linear equations, five to ten concepts, teacher-reviewed items, two roles and one end-to-end re-assessment loop.
+
+### How are subject-wise and concept-wise gaps shown?
+
+> AdaptEd gives a subject-level summary first—for example, overall Mathematics progress—then lets the learner or teacher drill down into concept-level mastery, prerequisites, misconceptions, confidence and evidence. The MVP uses one subject, but subject identifiers remain in the model so the same reporting structure can support additional subjects later.
 
 ### What happens if the LLM fails?
 
