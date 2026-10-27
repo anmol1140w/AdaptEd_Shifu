@@ -1,5 +1,3 @@
-# Synthetic demo seeds
+# Seeds
 
-This area is reserved for fictional learners, attempts and scripted demo scenarios.
-
-The initial scenarios are a foundation-gap learner and a learner ready for transfer practice. No real student records should be stored here.
+Subject/class seed files use the `subject_class_number.json` pattern and contain fictional learner profiles and attempt evidence that references the item bank. Scenario definitions live separately in `scenarios/` and point back to seed IDs. Never put real learner records in this directory.

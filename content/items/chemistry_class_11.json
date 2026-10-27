@@ -1,0 +1,1057 @@
+{
+  "schema_version": "1.0",
+  "subject": "Chemistry",
+  "class": 11,
+  "items": [
+    {
+      "item_id": "item-chem-11-acid-base-ph-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Equilibrium",
+      "concept_id": "chem-11-acid-base-ph",
+      "lesson_id": "lesson-chem-11-acid-base-ph",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the mathematical definition of pH in the introductory concentration model?",
+      "answer_guide": "pH = −log₁₀[H⁺].",
+      "explanation": "Direct recall of the pH formula.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-acid-base-ph-explanation-001",
+        "chem-11-acid-base-ph-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-acid-base-ph-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Equilibrium",
+      "concept_id": "chem-11-acid-base-ph",
+      "lesson_id": "lesson-chem-11-acid-base-ph",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "If the hydrogen-ion concentration [H⁺] of a solution increases from 1×10⁻⁴ mol/L to 1×10⁻³ mol/L, what is the change in pH?",
+      "answer_guide": "Initial pH = −log₁₀(1×10⁻⁴) = 4. Final pH = −log₁₀(1×10⁻³) = 3. The pH decreases by 1 unit.",
+      "explanation": "Applying the pH formula to calculate the change based on concentration.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-acid-base-ph-explanation-001",
+        "chem-11-acid-base-ph-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-acid-base-ph-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Equilibrium",
+      "concept_id": "chem-11-acid-base-ph",
+      "lesson_id": "lesson-chem-11-acid-base-ph",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Compare the behavior of a strong acid and a weak acid when dissolved in water in terms of ionization and equilibrium.",
+      "answer_guide": "Strong acids ionize extensively (almost completely) in water. Weak acids ionize only partially and establish a chemical equilibrium between the unionized acid and the ions.",
+      "explanation": "Analyzes the difference in ionization extent and the presence of equilibrium in weak acids.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-acid-base-ph-explanation-001",
+        "chem-11-acid-base-ph-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-alkene-addition-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Hydrocarbons",
+      "concept_id": "chem-11-alkene-addition",
+      "lesson_id": "lesson-chem-11-alkene-addition",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What happens to the carbon-carbon double bond during an electrophilic addition reaction in an alkene?",
+      "answer_guide": "The pi bond is converted into new sigma bonds as atoms or groups attach to the two carbons.",
+      "explanation": "Basic description of the addition process.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-alkene-addition-explanation-001",
+        "chem-11-alkene-addition-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-alkene-addition-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Hydrocarbons",
+      "concept_id": "chem-11-alkene-addition",
+      "lesson_id": "lesson-chem-11-alkene-addition",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Predict the product formed when ethene reacts with bromine (Br₂) based on the simple addition model.",
+      "answer_guide": "The product is 1,2-dibromoethane.",
+      "explanation": "Applying the addition reaction to a specific alkene (ethene) and reagent (bromine).",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-alkene-addition-explanation-001",
+        "chem-11-alkene-addition-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-alkene-addition-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Hydrocarbons",
+      "concept_id": "chem-11-alkene-addition",
+      "lesson_id": "lesson-chem-11-alkene-addition",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Why is the pi component of the carbon-carbon double bond the reactive site in alkene addition reactions?",
+      "answer_guide": "The pi bond is the part of the double bond that is converted into new sigma bonds during addition; it provides the electrons necessary to form new bonds with the adding atoms/groups.",
+      "explanation": "Analyzes the role of the pi bond in the reactivity of alkenes.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-alkene-addition-explanation-001",
+        "chem-11-alkene-addition-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-bond-types-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "concept_id": "chem-11-bond-types",
+      "lesson_id": "lesson-chem-11-bond-types",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What is the primary difference between an ionic bond and a covalent bond in terms of electron behavior?",
+      "answer_guide": "Ionic bonding involves the transfer of electrons (resulting in electrostatic attraction between ions), whereas covalent bonding involves the sharing of electron pairs.",
+      "explanation": "Basic distinction between the two bonding models.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-bond-types-explanation-001",
+        "chem11-bond-types-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-bond-types-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "concept_id": "chem-11-bond-types",
+      "lesson_id": "lesson-chem-11-bond-types",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Using the Lewis picture for NaCl, describe how the bond is formed and the resulting structure of the solid.",
+      "answer_guide": "Sodium transfers one electron to chlorine, producing Na⁺ and Cl⁻ ions. These ions are held together by electrostatic attraction, forming an ionic lattice rather than isolated molecules.",
+      "explanation": "Applying the ionic bond model to a specific example (NaCl) and identifying the lattice structure.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-bond-types-explanation-001",
+        "chem11-bond-types-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-bond-types-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "concept_id": "chem-11-bond-types",
+      "lesson_id": "lesson-chem-11-bond-types",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Why is it inaccurate to describe solid sodium chloride as a collection of individual NaCl molecules?",
+      "answer_guide": "Because ionic bonding is based on electrostatic attraction between oppositely charged ions in a continuous 3D network. In a lattice, each ion is attracted to multiple neighbors, not just one specific partner, so there are no discrete molecules.",
+      "explanation": "Analyzes the nature of the ionic lattice versus the molecular model.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-bond-types-explanation-001",
+        "chem11-bond-types-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-chemical-equilibrium-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Equilibrium",
+      "concept_id": "chem-11-chemical-equilibrium",
+      "lesson_id": "lesson-chem-11-chemical-equilibrium",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the condition regarding reaction rates when a closed system reaches dynamic equilibrium?",
+      "answer_guide": "At dynamic equilibrium, the forward and reverse reaction rates are equal.",
+      "explanation": "This is the defining characteristic of dynamic equilibrium.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-equilibrium-explanation-001",
+        "chem11-equilibrium-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-chemical-equilibrium-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Equilibrium",
+      "concept_id": "chem-11-chemical-equilibrium",
+      "lesson_id": "lesson-chem-11-chemical-equilibrium",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "For the reaction N₂(g) + 3H₂(g) ⇌ 2NH₃(g), what will be the immediate effect of adding more H₂ gas at a constant temperature?",
+      "answer_guide": "The system will shift the position of equilibrium toward the products (NH₃) to respond to the disturbance.",
+      "explanation": "Application of Le Chatelier's principle regarding concentration changes.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-equilibrium-explanation-001",
+        "chem11-equilibrium-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-chemical-equilibrium-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Equilibrium",
+      "concept_id": "chem-11-chemical-equilibrium",
+      "lesson_id": "lesson-chem-11-chemical-equilibrium",
+      "item_type": "short_answer",
+      "bloom_level": "evaluate",
+      "difficulty": "hard",
+      "question": "If the concentration of a reactant is increased in a system at equilibrium, does the equilibrium constant (Kc) change? Explain your reasoning.",
+      "answer_guide": "No, the equilibrium constant (Kc) does not change. Kc only changes with temperature; adding a reactant shifts the equilibrium position (concentrations), but the ratio defined by Kc remains constant at that temperature.",
+      "explanation": "Requires distinguishing between the shift in equilibrium position and the change in the equilibrium constant.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-equilibrium-explanation-001",
+        "chem11-equilibrium-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-enthalpy-hess-law-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Thermodynamics",
+      "concept_id": "chem-11-enthalpy-hess-law",
+      "lesson_id": "lesson-chem-11-enthalpy-hess-law",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What does it mean that enthalpy is a state function in the context of Hess's law?",
+      "answer_guide": "It means that the overall enthalpy change of a reaction is the same regardless of the path taken (the number of steps) to get from reactants to products.",
+      "explanation": "Fundamental conceptual link between state functions and Hess's law.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-enthalpy-hess-law-explanation-001",
+        "chem11-enthalpy-hess-law-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-enthalpy-hess-law-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Thermodynamics",
+      "concept_id": "chem-11-enthalpy-hess-law",
+      "lesson_id": "lesson-chem-11-enthalpy-hess-law",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Given that the reaction A → B has ΔH = +40 kJ and the reaction B → C has ΔH = −15 kJ, calculate the ΔH for the overall reaction A → C.",
+      "answer_guide": "ΔH(A→C) = ΔH(A→B) + ΔH(B→C) = (+40 kJ) + (−15 kJ) = +25 kJ.",
+      "explanation": "Direct application of Hess's law by summing step changes.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-enthalpy-hess-law-explanation-001",
+        "chem11-enthalpy-hess-law-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-enthalpy-hess-law-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Thermodynamics",
+      "concept_id": "chem-11-enthalpy-hess-law",
+      "lesson_id": "lesson-chem-11-enthalpy-hess-law",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If a reaction X → Y has an enthalpy change of ΔH = -100 kJ, what would be the ΔH for the reaction 2Y → 2X? Explain the changes made.",
+      "answer_guide": "ΔH = +200 kJ. Two changes occurred: 1. The reaction was reversed (X→Y becomes Y→X), which changes the sign from -100 to +100 kJ. 2. The reaction was scaled by a factor of 2, which scales the ΔH to 2 × (+100) = +200 kJ.",
+      "explanation": "Requires applying two different rules of Hess's law: sign reversal and scaling.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-enthalpy-hess-law-explanation-001",
+        "chem11-enthalpy-hess-law-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-hybridization-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "concept_id": "chem-11-hybridization",
+      "lesson_id": "lesson-chem-11-hybridization",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Describe the geometric arrangement associated with sp³ hybridization.",
+      "answer_guide": "sp³ arrangements are tetrahedral.",
+      "explanation": "Direct recall of the hybridization model.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-hybridization-explanation-001",
+        "chem-11-hybridization-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-hybridization-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "concept_id": "chem-11-hybridization",
+      "lesson_id": "lesson-chem-11-hybridization",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "In ethene, each carbon is sp² hybridized. How many sigma bonds and how many pi bonds are formed by each carbon atom?",
+      "answer_guide": "Each carbon forms three sigma bonds (using sp² orbitals) and one pi bond (using the remaining p orbital).",
+      "explanation": "Applying the sp² model to the specific case of ethene.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-hybridization-explanation-001",
+        "chem-11-hybridization-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-hybridization-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "concept_id": "chem-11-hybridization",
+      "lesson_id": "lesson-chem-11-hybridization",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Compare the nature of a sigma bond and a pi bond in terms of electron density and orbital overlap.",
+      "answer_guide": "A sigma bond has electron density located along the internuclear axis (head-on overlap), while a pi bond is formed by side-on overlap of orbitals, adding electron density above and below the axis.",
+      "explanation": "Requires analyzing the structural difference between the two types of covalent overlap.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-hybridization-explanation-001",
+        "chem-11-hybridization-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-hydrogen-bonding-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "concept_id": "chem-11-hydrogen-bonding",
+      "lesson_id": "lesson-chem-11-hydrogen-bonding",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Which three highly electronegative atoms are most important for the formation of hydrogen bonds in the standard school model?",
+      "answer_guide": "Nitrogen (N), Oxygen (O), and Fluorine (F).",
+      "explanation": "Direct recall of the elements involved in hydrogen bonding.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-hydrogen-bonding-explanation-001",
+        "chem-11-hydrogen-bonding-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-hydrogen-bonding-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "concept_id": "chem-11-hydrogen-bonding",
+      "lesson_id": "lesson-chem-11-hydrogen-bonding",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Explain why water (H₂O) has a higher boiling point than other small molecules of similar size that cannot form hydrogen bonds.",
+      "answer_guide": "Water molecules form intermolecular hydrogen bonds. These strong attractions require more energy to overcome, resulting in a higher boiling point.",
+      "explanation": "Applying the concept of hydrogen bonding to explain a physical property (boiling point).",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-hydrogen-bonding-explanation-001",
+        "chem-11-hydrogen-bonding-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-hydrogen-bonding-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "concept_id": "chem-11-hydrogen-bonding",
+      "lesson_id": "lesson-chem-11-hydrogen-bonding",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Analyze the requirements for a hydrogen bond to form between two molecules. What must be true about the hydrogen atom and the other atom involved?",
+      "answer_guide": "The hydrogen atom must be covalently attached to a highly electronegative atom (N, O, or F). The other atom involved must be an electronegative atom possessing a lone pair of electrons.",
+      "explanation": "Requires analyzing the two specific conditions (covalent bond to electronegative atom and presence of a lone pair) for the interaction to occur.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-hydrogen-bonding-explanation-001",
+        "chem-11-hydrogen-bonding-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-inductive-effect-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Organic Chemistry: Some Basic Principles",
+      "concept_id": "chem-11-inductive-effect",
+      "lesson_id": "lesson-chem-11-inductive-effect",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the inductive effect, and what causes it?",
+      "answer_guide": "The inductive effect is the displacement of electrons through sigma bonds caused by differences in electronegativity.",
+      "explanation": "Direct definition from the text.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-inductive-effect-explanation-001",
+        "chem-11-inductive-effect-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-inductive-effect-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Organic Chemistry: Some Basic Principles",
+      "concept_id": "chem-11-inductive-effect",
+      "lesson_id": "lesson-chem-11-inductive-effect",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "How does the influence of a chlorine substituent on a distant charge change as the number of carbon-carbon bonds between the chlorine and the charge increases?",
+      "answer_guide": "The influence of the chlorine substituent weakens with distance along the carbon chain.",
+      "explanation": "Applying the property that the inductive effect diminishes with distance.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-inductive-effect-explanation-001",
+        "chem-11-inductive-effect-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-inductive-effect-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Organic Chemistry: Some Basic Principles",
+      "concept_id": "chem-11-inductive-effect",
+      "lesson_id": "lesson-chem-11-inductive-effect",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Compare how electron-withdrawing groups and electron-donating groups affect the stability of ions.",
+      "answer_guide": "Electron-withdrawing groups can stabilize some anions (by pulling negative charge away), while electron-donating groups can stabilize some cations (by pushing electron density toward the positive charge).",
+      "explanation": "Analyzes the relationship between the direction of the inductive effect and ionic stability.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-inductive-effect-explanation-001",
+        "chem-11-inductive-effect-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-limiting-reagent-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Some Basic Concepts of Chemistry",
+      "concept_id": "chem-11-limiting-reagent",
+      "lesson_id": "lesson-chem-11-limiting-reagent",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What is a limiting reagent, and how does it affect the amount of product formed in a reaction?",
+      "answer_guide": "The limiting reagent is the reactant that is consumed first; it determines the maximum amount of product that can be formed.",
+      "explanation": "Basic definition of limiting reagent.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-limiting-reagent-explanation-001",
+        "chem-11-limiting-reagent-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-limiting-reagent-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Some Basic Concepts of Chemistry",
+      "concept_id": "chem-11-limiting-reagent",
+      "lesson_id": "lesson-chem-11-limiting-reagent",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "For the reaction 2H₂ + O₂ → 2H₂O, if you have 3 mol of H₂ and 1 mol of O₂, which is the limiting reagent? Show your calculation.",
+      "answer_guide": "1. H₂ can produce: 3 mol H₂ × (2 mol H₂O / 2 mol H₂) = 3 mol H₂O. 2. O₂ can produce: 1 mol O₂ × (2 mol H₂O / 1 mol O₂) = 2 mol H₂O. Since O₂ produces the smaller amount of product, O₂ is the limiting reagent.",
+      "explanation": "Applying the method of comparing potential product amounts to identify the limiting reagent.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-limiting-reagent-explanation-001",
+        "chem-11-limiting-reagent-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-limiting-reagent-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Some Basic Concepts of Chemistry",
+      "concept_id": "chem-11-limiting-reagent",
+      "lesson_id": "lesson-chem-11-limiting-reagent",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "In a reaction where two reactants are provided, explain why the reactant with the smallest number of moles is not necessarily the limiting reagent.",
+      "answer_guide": "The limiting reagent depends on the mole ratio from the balanced equation, not just the absolute amount. A reactant with more moles might be consumed faster if the stoichiometric coefficient is high, making it the limiting reagent compared to a reactant with fewer moles but a low coefficient.",
+      "explanation": "Analyzes the role of stoichiometry versus absolute quantity.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-limiting-reagent-explanation-001",
+        "chem-11-limiting-reagent-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-mole-concept-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Some Basic Concepts of Chemistry",
+      "concept_id": "chem-11-mole-concept",
+      "lesson_id": "lesson-chem-11-mole-concept",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Define a mole in terms of the number of specified entities it contains.",
+      "answer_guide": "A mole is an amount of substance containing approximately 6.022 × 10^23 specified entities (atoms, molecules, ions, etc.).",
+      "explanation": "This is the fundamental definition of the mole as provided in the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-mole-explanation-001",
+        "chem11-mole-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-mole-concept-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Some Basic Concepts of Chemistry",
+      "concept_id": "chem-11-mole-concept",
+      "lesson_id": "lesson-chem-11-mole-concept",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Calculate the number of moles present in 36 g of water (H₂O), given the molar mass of water is 18 g/mol.",
+      "answer_guide": "n = mass / molar mass = 36 g / 18 g/mol = 2 mol.",
+      "explanation": "Applying the formula n = mass/molar mass directly to the given values.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-mole-explanation-001",
+        "chem11-mole-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-mole-concept-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Some Basic Concepts of Chemistry",
+      "concept_id": "chem-11-mole-concept",
+      "lesson_id": "lesson-chem-11-mole-concept",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "A sample contains 3.011 × 10^23 molecules of water. Determine the mass of this sample and the total number of hydrogen atoms it contains. (Molar mass of H₂O = 18 g/mol; Avogadro's constant = 6.022 × 10^23).",
+      "answer_guide": "1. Moles (n) = (3.011 × 10^23) / (6.022 × 10^23) = 0.5 mol. 2. Mass = 0.5 mol × 18 g/mol = 9 g. 3. Hydrogen atoms = 0.5 mol × 2 atoms/molecule × 6.022 × 10^23 = 6.022 × 10^23 atoms.",
+      "explanation": "Requires converting particle count to moles, then moles to mass, and finally calculating the specific atom count based on molecular composition.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-mole-explanation-001",
+        "chem11-mole-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-oxidation-numbers-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Redox Reactions",
+      "concept_id": "chem-11-oxidation-numbers",
+      "lesson_id": "lesson-chem-11-oxidation-numbers",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "In a redox reaction, what is the difference between oxidation and reduction in terms of oxidation numbers?",
+      "answer_guide": "Oxidation corresponds to an increase in oxidation number, while reduction corresponds to a decrease in oxidation number.",
+      "explanation": "Basic definition of redox terms.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-oxidation-numbers-explanation-001",
+        "chem-11-oxidation-numbers-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-oxidation-numbers-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Redox Reactions",
+      "concept_id": "chem-11-oxidation-numbers",
+      "lesson_id": "lesson-chem-11-oxidation-numbers",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "In the reaction Zn + Cu²⁺ → Zn²⁺ + Cu, identify which species is oxidized and which is the oxidizing agent.",
+      "answer_guide": "Zn is oxidized (oxidation number changes from 0 to +2). Cu²⁺ is the oxidizing agent (it is reduced from +2 to 0).",
+      "explanation": "Applying oxidation number changes to identify the oxidized species and the oxidizing agent.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-oxidation-numbers-explanation-001",
+        "chem-11-oxidation-numbers-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-oxidation-numbers-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Redox Reactions",
+      "concept_id": "chem-11-oxidation-numbers",
+      "lesson_id": "lesson-chem-11-oxidation-numbers",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Explain why the oxidizing agent in a redox reaction must always be reduced.",
+      "answer_guide": "An oxidizing agent causes another species to be oxidized by taking electrons from it. By gaining those electrons, the oxidizing agent's own oxidation number decreases, which is the definition of reduction.",
+      "explanation": "Analyzes the logical necessity of the oxidizing agent being reduced.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-oxidation-numbers-explanation-001",
+        "chem-11-oxidation-numbers-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-periodic-trends-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Classification of Elements and Periodicity",
+      "concept_id": "chem-11-periodic-trends",
+      "lesson_id": "lesson-chem-11-periodic-trends",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "How does the atomic radius generally change as you move down a group in the periodic table, and why?",
+      "answer_guide": "Atomic radius generally increases down a group because additional electron shells are added.",
+      "explanation": "Direct application of the group trend described in the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-periodic-explanation-001",
+        "chem11-periodic-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-periodic-trends-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Classification of Elements and Periodicity",
+      "concept_id": "chem-11-periodic-trends",
+      "lesson_id": "lesson-chem-11-periodic-trends",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Between Sodium (Na) and Chlorine (Cl), both in Period 3, which element is expected to have a higher ionization enthalpy? Justify your answer.",
+      "answer_guide": "Chlorine (Cl) has a higher ionization enthalpy. Both have valence electrons in the third shell, but Cl has a greater nuclear charge with stronger effective attraction, making it harder to remove an electron.",
+      "explanation": "Applying the period trend of increasing ionization enthalpy due to increased effective nuclear charge.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-periodic-explanation-001",
+        "chem11-periodic-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-periodic-trends-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Classification of Elements and Periodicity",
+      "concept_id": "chem-11-periodic-trends",
+      "lesson_id": "lesson-chem-11-periodic-trends",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Compare the atomic radius of an element at the start of a period with one at the end of the same period. Explain the role of the principal shell and effective nuclear charge in this difference.",
+      "answer_guide": "The element at the end of the period has a smaller atomic radius. While electrons enter the same principal shell for both, the effective nuclear charge increases across the period, pulling the electrons closer to the nucleus.",
+      "explanation": "Requires analyzing the interplay between constant principal shell and increasing nuclear charge to explain the radius decrease.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-periodic-explanation-001",
+        "chem11-periodic-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-quantum-numbers-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Structure of Atom",
+      "concept_id": "chem-11-quantum-numbers",
+      "lesson_id": "lesson-chem-11-quantum-numbers",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Which quantum number specifies the shape of an orbital, and what is its symbol?",
+      "answer_guide": "The azimuthal quantum number, symbolized by 'l'.",
+      "explanation": "Basic identification of quantum number functions.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-quantum-numbers-explanation-001",
+        "chem-11-quantum-numbers-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-quantum-numbers-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Structure of Atom",
+      "concept_id": "chem-11-quantum-numbers",
+      "lesson_id": "lesson-chem-11-quantum-numbers",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "For a principal quantum number n = 3, list all the possible values for the azimuthal quantum number l and the subshells they correspond to.",
+      "answer_guide": "l can be 0, 1, or 2. These correspond to the 3s (l=0), 3p (l=1), and 3d (l=2) subshells.",
+      "explanation": "Applying the rule that l ranges from 0 to n-1.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-quantum-numbers-explanation-001",
+        "chem-11-quantum-numbers-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-quantum-numbers-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Structure of Atom",
+      "concept_id": "chem-11-quantum-numbers",
+      "lesson_id": "lesson-chem-11-quantum-numbers",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Explain why a quantum state with n = 2 and l = 2 is not allowed.",
+      "answer_guide": "The azimuthal quantum number l is constrained by the principal quantum number n; specifically, l must range from 0 to n-1. For n = 2, the maximum allowed value for l is 2-1 = 1. Therefore, l = 2 is impossible.",
+      "explanation": "Requires analyzing the constraints on quantum numbers to evaluate the validity of a state.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem-11-quantum-numbers-explanation-001",
+        "chem-11-quantum-numbers-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-vsepr-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "concept_id": "chem-11-vsepr",
+      "lesson_id": "lesson-chem-11-vsepr",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "According to VSEPR theory, why do lone pairs typically compress bond angles more than bonding pairs?",
+      "answer_guide": "Lone pairs generally repel more strongly than bonding pairs.",
+      "explanation": "Direct statement from the VSEPR explanation text.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-vsepr-explanation-001",
+        "chem11-vsepr-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-vsepr-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "concept_id": "chem-11-vsepr",
+      "lesson_id": "lesson-chem-11-vsepr",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Water (H₂O) has four electron domains around the oxygen atom (two bonding pairs and two lone pairs). Identify its electron-domain arrangement and its actual molecular shape.",
+      "answer_guide": "Electron-domain arrangement: tetrahedral; Molecular shape: bent.",
+      "explanation": "Applying VSEPR to determine the difference between domain geometry and molecular shape.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-vsepr-explanation-001",
+        "chem11-vsepr-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-11-vsepr-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "concept_id": "chem-11-vsepr",
+      "lesson_id": "lesson-chem-11-vsepr",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Explain why the molecular shape of a molecule is described differently than its electron-domain arrangement.",
+      "answer_guide": "Shape names describe only the positions of the atoms (atomic positions), whereas the electron-domain arrangement includes the positions of both bonding pairs and lone pairs.",
+      "explanation": "Requires analyzing the definition of 'shape' versus 'arrangement' in VSEPR.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-11"
+      ],
+      "supporting_chunk_ids": [
+        "chem11-vsepr-explanation-001",
+        "chem11-vsepr-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    }
+  ]
+}

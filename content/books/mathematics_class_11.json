@@ -1,0 +1,190 @@
+{
+  "schema_version": "1.0",
+  "book_id": "adapted-mathematics-11",
+  "title": "AdaptEd Mathematics Learning Book — Class 11",
+  "subject": "Mathematics",
+  "class": 11,
+  "edition": "1.0.0",
+  "language": "en",
+  "content_origin": "original_authored_material",
+  "authoring_note": "Original concise instructional content prepared for this learning platform; review by a qualified subject teacher before classroom use.",
+  "primary_reference_id": "adapted-original-mathematics-11",
+  "syllabus_reference_id": "cbse-2026-27-mathematics-041",
+  "chapters": [
+    {
+      "chapter_id": "math_class11-chapter-01",
+      "chapter_title": "Complex Numbers and Quadratic Equations",
+      "topic_id": "math-11-quadratic-equations",
+      "concept_id": "math-11-quadratic-equations",
+      "lesson_id": "lesson-math-11-quadratic-equations",
+      "chunk_ids": [
+        "math11-quadratic-explanation-001",
+        "math11-quadratic-example-001",
+        "math-11-quadratic-equations-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-02",
+      "chapter_title": "Sequences and Series",
+      "topic_id": "math-11-arithmetic-progression",
+      "concept_id": "math-11-arithmetic-progression",
+      "lesson_id": "lesson-math-11-arithmetic-progression",
+      "chunk_ids": [
+        "math11-ap-explanation-001",
+        "math11-ap-example-001",
+        "math-11-arithmetic-progression-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-03",
+      "chapter_title": "Trigonometric Functions",
+      "topic_id": "math-11-trigonometric-functions",
+      "concept_id": "math-11-trigonometric-functions",
+      "lesson_id": "lesson-math-11-trigonometric-functions",
+      "chunk_ids": [
+        "math11-trig-explanation-001",
+        "math11-trig-example-001",
+        "math-11-trigonometric-functions-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-04",
+      "chapter_title": "Binomial Theorem",
+      "topic_id": "math-11-binomial-general-term",
+      "concept_id": "math-11-binomial-general-term",
+      "lesson_id": "lesson-math-11-binomial-general-term",
+      "chunk_ids": [
+        "math11-binomial-general-term-explanation-001",
+        "math11-binomial-general-term-example-001",
+        "math11-binomial-general-term-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-05",
+      "chapter_title": "Straight Lines",
+      "topic_id": "math-11-straight-line-slope",
+      "concept_id": "math-11-straight-line-slope",
+      "lesson_id": "lesson-math-11-straight-line-slope",
+      "chunk_ids": [
+        "math11-straight-line-slope-explanation-001",
+        "math11-straight-line-slope-example-001",
+        "math11-straight-line-slope-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-06",
+      "chapter_title": "Probability",
+      "topic_id": "math-11-sample-space-probability",
+      "concept_id": "math-11-sample-space-probability",
+      "lesson_id": "lesson-math-11-sample-space-probability",
+      "chunk_ids": [
+        "math11-sample-space-probability-explanation-001",
+        "math11-sample-space-probability-example-001",
+        "math11-sample-space-probability-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-07",
+      "chapter_title": "Sets",
+      "topic_id": "math-11-set-operations",
+      "concept_id": "math-11-set-operations",
+      "lesson_id": "lesson-math-11-set-operations",
+      "chunk_ids": [
+        "math-11-set-operations-explanation-001",
+        "math-11-set-operations-example-001",
+        "math-11-set-operations-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-08",
+      "chapter_title": "Complex Numbers",
+      "topic_id": "math-11-complex-modulus",
+      "concept_id": "math-11-complex-modulus",
+      "lesson_id": "lesson-math-11-complex-modulus",
+      "chunk_ids": [
+        "math-11-complex-modulus-explanation-001",
+        "math-11-complex-modulus-example-001",
+        "math-11-complex-modulus-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-09",
+      "chapter_title": "Principle of Mathematical Induction",
+      "topic_id": "math-11-mathematical-induction",
+      "concept_id": "math-11-mathematical-induction",
+      "lesson_id": "lesson-math-11-mathematical-induction",
+      "chunk_ids": [
+        "math-11-mathematical-induction-explanation-001",
+        "math-11-mathematical-induction-example-001",
+        "math-11-mathematical-induction-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-10",
+      "chapter_title": "Permutations and Combinations",
+      "topic_id": "math-11-permutations-combinations",
+      "concept_id": "math-11-permutations-combinations",
+      "lesson_id": "lesson-math-11-permutations-combinations",
+      "chunk_ids": [
+        "math-11-permutations-combinations-explanation-001",
+        "math-11-permutations-combinations-example-001",
+        "math-11-permutations-combinations-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-11",
+      "chapter_title": "Conic Sections",
+      "topic_id": "math-11-circle-equation",
+      "concept_id": "math-11-circle-equation",
+      "lesson_id": "lesson-math-11-circle-equation",
+      "chunk_ids": [
+        "math-11-circle-equation-explanation-001",
+        "math-11-circle-equation-example-001",
+        "math-11-circle-equation-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-12",
+      "chapter_title": "Limits and Derivatives",
+      "topic_id": "math-11-derivative-limit",
+      "concept_id": "math-11-derivative-limit",
+      "lesson_id": "lesson-math-11-derivative-limit",
+      "chunk_ids": [
+        "math-11-derivative-limit-explanation-001",
+        "math-11-derivative-limit-example-001",
+        "math-11-derivative-limit-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-13",
+      "chapter_title": "Linear Inequalities",
+      "topic_id": "math-11-linear-inequalities",
+      "concept_id": "math-11-linear-inequalities",
+      "lesson_id": "lesson-math-11-linear-inequalities",
+      "chunk_ids": [
+        "math-11-linear-inequalities-explanation-001",
+        "math-11-linear-inequalities-worked_example-001",
+        "math-11-linear-inequalities-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "math_class11-chapter-14",
+      "chapter_title": "Probability",
+      "topic_id": "math-11-complement-events",
+      "concept_id": "math-11-complement-events",
+      "lesson_id": "lesson-math-11-complement-events",
+      "chunk_ids": [
+        "math-11-complement-events-explanation-001",
+        "math-11-complement-events-worked_example-001",
+        "math-11-complement-events-misconception-001"
+      ]
+    }
+  ],
+  "chapter_count": 14,
+  "lesson_content_file": "content/lessons/mathematics_class_11.json",
+  "concept_catalog_file": "content/concepts/mathematics_class_11.json",
+  "item_bank_file": "content/items/mathematics_class_11.json",
+  "supplemental_ncert_reference_ids": [
+    "ncert-kemh1"
+  ]
+}

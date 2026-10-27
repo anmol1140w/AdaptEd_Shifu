@@ -1,0 +1,1057 @@
+{
+  "schema_version": "1.0",
+  "subject": "Physics",
+  "class": 12,
+  "items": [
+    {
+      "item_id": "item-phy-12-ac-rms-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Alternating Current",
+      "concept_id": "phy-12-ac-rms",
+      "lesson_id": "lesson-phy-12-ac-rms",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What does the rms value of a sinusoidal alternating current represent?",
+      "answer_guide": "It is the equivalent steady (DC) current that would produce the same average heating in a resistor.",
+      "explanation": "Conceptual understanding of the root-mean-square value.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-ac-rms-explanation-001",
+        "phy-12-ac-rms-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-ac-rms-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Alternating Current",
+      "concept_id": "phy-12-ac-rms",
+      "lesson_id": "lesson-phy-12-ac-rms",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A sinusoidal AC voltage has a peak value V₀ = 311 V. Calculate the rms voltage Vrms.",
+      "answer_guide": "Vrms = V₀ / √2 = 311 / 1.414 ≈ 220 V.",
+      "explanation": "Application of the Vrms = V₀/√2 formula.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-ac-rms-explanation-001",
+        "phy-12-ac-rms-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-ac-rms-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Alternating Current",
+      "concept_id": "phy-12-ac-rms",
+      "lesson_id": "lesson-phy-12-ac-rms",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "For a pure resistor, if the peak current I₀ is doubled, how does the average power consumption change?",
+      "answer_guide": "Average power P = Vrms Irms. Since Vrms ∝ I₀ and Irms ∝ I₀, P ∝ I₀². Doubling I₀ increases power by a factor of 4.",
+      "explanation": "Analyzes the quadratic relationship between peak current and average power.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-ac-rms-explanation-001",
+        "phy-12-ac-rms-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-binding-energy-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Nuclei",
+      "concept_id": "phy-12-binding-energy",
+      "lesson_id": "lesson-phy-12-binding-energy",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Define mass defect in the context of a bound nucleus.",
+      "answer_guide": "Mass defect is the difference between the sum of the masses of separated nucleons and the actual mass of the bound nucleus.",
+      "explanation": "Basic definition of mass defect.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-binding-energy-explanation-001",
+        "phy-12-binding-energy-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-binding-energy-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Nuclei",
+      "concept_id": "phy-12-binding-energy",
+      "lesson_id": "lesson-phy-12-binding-energy",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A nucleus has a mass defect of 0.02 u. Calculate its binding energy in MeV. (Use 1 u = 931.5 MeV)",
+      "answer_guide": "E = Δm × 931.5 = 0.02 × 931.5 = 18.63 MeV.",
+      "explanation": "Direct calculation using the mass-energy equivalence for nuclei.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-binding-energy-explanation-001",
+        "phy-12-binding-energy-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-binding-energy-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Nuclei",
+      "concept_id": "phy-12-binding-energy",
+      "lesson_id": "lesson-phy-12-binding-energy",
+      "item_type": "short_answer",
+      "bloom_level": "evaluate",
+      "difficulty": "hard",
+      "question": "Compare the stability of two nuclei: Nucleus A has a binding energy of 100 MeV with 10 nucleons, and Nucleus B has 120 MeV with 15 nucleons. Which is more stable?",
+      "answer_guide": "Stability depends on binding energy per nucleon. A: 100/10 = 10 MeV/nucleon; B: 120/15 = 8 MeV/nucleon. Nucleus A is more stable.",
+      "explanation": "Evaluates stability using the binding energy per nucleon metric.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-binding-energy-explanation-001",
+        "phy-12-binding-energy-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-capacitor-combinations-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electrostatic Potential and Capacitance",
+      "concept_id": "phy-12-capacitor-combinations",
+      "lesson_id": "lesson-phy-12-capacitor-combinations",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "In a parallel combination of capacitors, what physical quantity remains the same for each capacitor?",
+      "answer_guide": "The potential difference (V).",
+      "explanation": "Basic property of parallel circuits.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-capacitor-combinations-explanation-001",
+        "phy12-capacitor-combinations-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-capacitor-combinations-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electrostatic Potential and Capacitance",
+      "concept_id": "phy-12-capacitor-combinations",
+      "lesson_id": "lesson-phy-12-capacitor-combinations",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Two capacitors of 4 μF and 6 μF are connected in series. Calculate the equivalent capacitance.",
+      "answer_guide": "1/Ceq = 1/4 + 1/6 = 5/12; Ceq = 12/5 = 2.4 μF",
+      "explanation": "Application of the reciprocal sum rule for series capacitors.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-capacitor-combinations-explanation-001",
+        "phy12-capacitor-combinations-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-capacitor-combinations-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electrostatic Potential and Capacitance",
+      "concept_id": "phy-12-capacitor-combinations",
+      "lesson_id": "lesson-phy-12-capacitor-combinations",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Compare the equivalent capacitance of two 10 μF capacitors when connected in parallel versus when connected in series. Which arrangement yields a higher capacitance?",
+      "answer_guide": "Parallel: 10+10=20 μF; Series: (10*10)/(10+10)=5 μF. Parallel yields higher capacitance.",
+      "explanation": "Comparing two different circuit configurations.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-capacitor-combinations-explanation-001",
+        "phy12-capacitor-combinations-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-coulombs-law-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electric Charges and Fields",
+      "concept_id": "phy-12-coulombs-law",
+      "lesson_id": "lesson-phy-12-coulombs-law",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "State Coulomb's law for the magnitude of the force between two point charges in a vacuum.",
+      "answer_guide": "F = k|q1q2|/r^2",
+      "explanation": "Direct definition from the lesson content.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-coulomb-explanation-001",
+        "phy12-coulomb-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-coulombs-law-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electric Charges and Fields",
+      "concept_id": "phy-12-coulombs-law",
+      "lesson_id": "lesson-phy-12-coulombs-law",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Calculate the magnitude of the electrostatic force between two point charges of 4 μC and 5 μC separated by 0.30 m in vacuum. Use k = 9 × 10^9 N m^2/C^2.",
+      "answer_guide": "F = (9 × 10^9)(4 × 10^-6)(5 × 10^-6)/(0.30)^2 = 2.0 N",
+      "explanation": "Direct application of the formula with given values.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-coulomb-explanation-001",
+        "phy12-coulomb-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-coulombs-law-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electric Charges and Fields",
+      "concept_id": "phy-12-coulombs-law",
+      "lesson_id": "lesson-phy-12-coulombs-law",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Two identical positive charges are placed at the ends of a line segment. If a third charge is placed at the midpoint, how does the superposition principle determine the net force on the third charge?",
+      "answer_guide": "The net force is zero because the two equal and opposite force vectors cancel each other out.",
+      "explanation": "Requires analyzing vector addition of forces from two sources.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-coulomb-explanation-001",
+        "phy12-coulomb-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-electric-dipole-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electric Charges and Fields",
+      "concept_id": "phy-12-electric-dipole",
+      "lesson_id": "lesson-phy-12-electric-dipole",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Define the electric dipole moment and state its direction.",
+      "answer_guide": "Magnitude p=qd; direction is from the negative charge to the positive charge.",
+      "explanation": "Basic definition of dipole moment.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-electric-dipole-explanation-001",
+        "phy-12-electric-dipole-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-electric-dipole-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electric Charges and Fields",
+      "concept_id": "phy-12-electric-dipole",
+      "lesson_id": "lesson-phy-12-electric-dipole",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Two charges of +3 μC and -3 μC are separated by a distance of 0.02 m. Calculate the magnitude of the dipole moment.",
+      "answer_guide": "p = qd = (3 × 10^-6 C)(0.02 m) = 6 × 10^-8 C m",
+      "explanation": "Direct application of p=qd.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-electric-dipole-explanation-001",
+        "phy-12-electric-dipole-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-electric-dipole-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electric Charges and Fields",
+      "concept_id": "phy-12-electric-dipole",
+      "lesson_id": "lesson-phy-12-electric-dipole",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "A dipole is placed in a uniform electric field. Describe the resulting effect on the dipole and the condition under which the torque would be zero.",
+      "answer_guide": "The dipole experiences a torque tending to align p with the field. Torque is zero when p is parallel to the field.",
+      "explanation": "Analyzing the interaction between a dipole and a uniform field.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-electric-dipole-explanation-001",
+        "phy-12-electric-dipole-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-electromagnetic-induction-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electromagnetic Induction",
+      "concept_id": "phy-12-electromagnetic-induction",
+      "lesson_id": "lesson-phy-12-electromagnetic-induction",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What does the negative sign in Faraday's law (ε = −dΦB/dt) represent?",
+      "answer_guide": "It represents Lenz's law, indicating that induced effects oppose the change in flux.",
+      "explanation": "Recall of the physical meaning of the sign.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-electromagnetic-induction-explanation-001",
+        "phy12-electromagnetic-induction-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-electromagnetic-induction-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electromagnetic Induction",
+      "concept_id": "phy-12-electromagnetic-induction",
+      "lesson_id": "lesson-phy-12-electromagnetic-induction",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A single-loop circuit experiences a change in magnetic flux of 0.05 Wb over a time interval of 0.2 s. Calculate the magnitude of the induced emf.",
+      "answer_guide": "|ε| = ΔΦ/Δt = 0.05 / 0.2 = 0.25 V",
+      "explanation": "Direct application of Faraday's law.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-electromagnetic-induction-explanation-001",
+        "phy12-electromagnetic-induction-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-electromagnetic-induction-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electromagnetic Induction",
+      "concept_id": "phy-12-electromagnetic-induction",
+      "lesson_id": "lesson-phy-12-electromagnetic-induction",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "A coil of 50 turns is placed in a magnetic field. If the flux through each turn changes from 0.1 Wb to 0.3 Wb in 0.5 s, calculate the average induced emf.",
+      "answer_guide": "|ε| = NΔΦ/Δt = 50 * (0.3 - 0.1) / 0.5 = 50 * 0.2 / 0.5 = 20 V",
+      "explanation": "Multi-step calculation involving turns and flux change.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-electromagnetic-induction-explanation-001",
+        "phy12-electromagnetic-induction-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-em-spectrum-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electromagnetic Waves",
+      "concept_id": "phy-12-em-spectrum",
+      "lesson_id": "lesson-phy-12-em-spectrum",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the relationship between the speed of light (c), frequency (f), and wavelength (λ) for an electromagnetic wave in vacuum?",
+      "answer_guide": "c = fλ.",
+      "explanation": "Recall of the fundamental wave equation.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-em-spectrum-explanation-001",
+        "phy-12-em-spectrum-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-em-spectrum-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electromagnetic Waves",
+      "concept_id": "phy-12-em-spectrum",
+      "lesson_id": "lesson-phy-12-em-spectrum",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "An electromagnetic wave has a frequency of 3 × 10¹¹ Hz. Calculate its wavelength in vacuum. (c = 3 × 10⁸ m/s)",
+      "answer_guide": "λ = c / f = (3×10⁸) / (3×10¹¹) = 10⁻³ m = 1 mm.",
+      "explanation": "Application of λ = c/f.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-em-spectrum-explanation-001",
+        "phy-12-em-spectrum-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-em-spectrum-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electromagnetic Waves",
+      "concept_id": "phy-12-em-spectrum",
+      "lesson_id": "lesson-phy-12-em-spectrum",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If two electromagnetic waves have frequencies f₁ and f₂ such that f₁ > f₂, compare their wavelengths and their ability to propagate through a vacuum.",
+      "answer_guide": "Since c = fλ, the wave with higher frequency (f₁) has a shorter wavelength (λ₁ < λ₂). Both propagate at speed c in vacuum.",
+      "explanation": "Analyzes the inverse relationship between frequency and wavelength at constant speed.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-em-spectrum-explanation-001",
+        "phy-12-em-spectrum-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-emf-internal-resistance-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Current Electricity",
+      "concept_id": "phy-12-emf-internal-resistance",
+      "lesson_id": "lesson-phy-12-emf-internal-resistance",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What is the difference between the emf (ε) and the terminal voltage (V) of a real cell?",
+      "answer_guide": "Emf is the energy supplied per unit charge, while terminal voltage is the potential difference available at the external terminals when current flows.",
+      "explanation": "Distinguishes between the two potential terms in a real cell.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-emf-internal-resistance-explanation-001",
+        "phy-12-emf-internal-resistance-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-emf-internal-resistance-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Current Electricity",
+      "concept_id": "phy-12-emf-internal-resistance",
+      "lesson_id": "lesson-phy-12-emf-internal-resistance",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A cell has an emf of 2.0 V and an internal resistance of 0.5 Ω. If it supplies a current of 0.4 A, what is its terminal voltage?",
+      "answer_guide": "V = ε - Ir = 2.0 - (0.4 × 0.5) = 2.0 - 0.2 = 1.8 V.",
+      "explanation": "Direct application of the terminal voltage formula V = ε - Ir.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-emf-internal-resistance-explanation-001",
+        "phy-12-emf-internal-resistance-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-emf-internal-resistance-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Current Electricity",
+      "concept_id": "phy-12-emf-internal-resistance",
+      "lesson_id": "lesson-phy-12-emf-internal-resistance",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If the internal resistance of a cell increases while the emf remains constant, how does the terminal voltage change as the external load resistance decreases?",
+      "answer_guide": "As external resistance decreases, current I increases. Since V = ε - Ir, a larger internal resistance r causes a steeper drop in terminal voltage.",
+      "explanation": "Evaluates the interaction between internal resistance, current, and terminal voltage.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-emf-internal-resistance-explanation-001",
+        "phy-12-emf-internal-resistance-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-gauss-law-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electric Charges and Fields",
+      "concept_id": "phy-12-gauss-law",
+      "lesson_id": "lesson-phy-12-gauss-law",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "State Gauss law for electric flux through a closed surface.",
+      "answer_guide": "The electric flux through a closed surface is equal to the total enclosed charge divided by the permittivity of free space (ε₀).",
+      "explanation": "Direct definition from the lesson content.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-gauss-law-explanation-001",
+        "phy-12-gauss-law-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-gauss-law-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electric Charges and Fields",
+      "concept_id": "phy-12-gauss-law",
+      "lesson_id": "lesson-phy-12-gauss-law",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Calculate the electric field magnitude at a distance r from a point charge q located at the center of a spherical Gaussian surface.",
+      "answer_guide": "By spherical symmetry, E is constant on the Gaussian surface. Gauss’s law gives E(4πr²) = |q|/ε₀, so the magnitude is E = |q|/(4πε₀r²).",
+      "explanation": "The spherical surface makes the field magnitude uniform, allowing E to be taken outside the flux integral.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-gauss-law-explanation-001",
+        "phy-12-gauss-law-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-gauss-law-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Electric Charges and Fields",
+      "concept_id": "phy-12-gauss-law",
+      "lesson_id": "lesson-phy-12-gauss-law",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Why is it necessary for a Gaussian surface to have symmetry (spherical, cylindrical, or planar) when calculating the electric field magnitude?",
+      "answer_guide": "Symmetry ensures the electric field magnitude is constant over the surface, allowing E to be taken outside the integral in the flux calculation.",
+      "explanation": "Analyzes the relationship between symmetry and the mathematical simplification of Gauss law.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-gauss-law-explanation-001",
+        "phy-12-gauss-law-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-magnetic-force-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Moving Charges and Magnetism",
+      "concept_id": "phy-12-magnetic-force",
+      "lesson_id": "lesson-phy-12-magnetic-force",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the formula for the magnitude of the magnetic force acting on a charge q moving with velocity v in a magnetic field B?",
+      "answer_guide": "F = |q|vB sinθ, where θ is the angle between velocity and the magnetic field.",
+      "explanation": "Recall of the standard magnetic force magnitude formula.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-magnetic-force-explanation-001",
+        "phy-12-magnetic-force-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-magnetic-force-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Moving Charges and Magnetism",
+      "concept_id": "phy-12-magnetic-force",
+      "lesson_id": "lesson-phy-12-magnetic-force",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A charge of 5 μC moves at 2000 m/s at an angle of 30° to a magnetic field of 0.2 T. Calculate the force magnitude.",
+      "answer_guide": "F = (5×10⁻⁶)(2000)(0.2)sin(30°) = (5×10⁻⁶)(2000)(0.2)(0.5) = 10⁻³ N.",
+      "explanation": "Application of F = qvB sinθ with given values.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-magnetic-force-explanation-001",
+        "phy-12-magnetic-force-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-magnetic-force-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Moving Charges and Magnetism",
+      "concept_id": "phy-12-magnetic-force",
+      "lesson_id": "lesson-phy-12-magnetic-force",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Explain why a static magnetic field cannot change the kinetic energy of a moving charged particle.",
+      "answer_guide": "The magnetic force F = q(v × B) is always perpendicular to the velocity v. Since force is perpendicular to displacement, no work is done.",
+      "explanation": "Analyzes the relationship between force direction, work, and energy.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-magnetic-force-explanation-001",
+        "phy-12-magnetic-force-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-ohms-law-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Current Electricity",
+      "concept_id": "phy-12-ohms-law",
+      "lesson_id": "lesson-phy-12-ohms-law",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What does resistance measure in an ohmic conductor, and what is its unit?",
+      "answer_guide": "Resistance measures opposition to current; its unit is the ohm (Ω).",
+      "explanation": "Basic conceptual understanding of resistance.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-ohm-explanation-001",
+        "phy12-ohm-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-ohms-law-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Current Electricity",
+      "concept_id": "phy-12-ohms-law",
+      "lesson_id": "lesson-phy-12-ohms-law",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A resistor is connected across a 24 V source, and a current of 3 A flows through it. Calculate the resistance of the conductor.",
+      "answer_guide": "R = V/I = 24/3 = 8 Ω",
+      "explanation": "Application of V=IR to find resistance.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-ohm-explanation-001",
+        "phy12-ohm-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-ohms-law-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Current Electricity",
+      "concept_id": "phy-12-ohms-law",
+      "lesson_id": "lesson-phy-12-ohms-law",
+      "item_type": "short_answer",
+      "bloom_level": "evaluate",
+      "difficulty": "hard",
+      "question": "If a device's V-I relationship is non-linear, can it be classified as an ohmic conductor? Justify your answer based on the provided model.",
+      "answer_guide": "No, because Ohm's law specifies that for an ohmic conductor, V must be proportional to I (linear relationship).",
+      "explanation": "Evaluating the limits of the ohmic model.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-ohm-explanation-001",
+        "phy12-ohm-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-photoelectric-effect-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Dual Nature of Radiation and Matter",
+      "concept_id": "phy-12-photoelectric-effect",
+      "lesson_id": "lesson-phy-12-photoelectric-effect",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "According to Einstein's relation, what is the formula for the maximum kinetic energy (K_max) of an emitted electron?",
+      "answer_guide": "K_max = hf - φ",
+      "explanation": "Recall of the fundamental equation.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-photoelectric-explanation-001",
+        "phy12-photoelectric-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-photoelectric-effect-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Dual Nature of Radiation and Matter",
+      "concept_id": "phy-12-photoelectric-effect",
+      "lesson_id": "lesson-phy-12-photoelectric-effect",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A material has a work function of 2.5 eV. If incident photons have an energy of 4.2 eV, what is the maximum kinetic energy of the emitted electrons?",
+      "answer_guide": "K_max = 4.2 eV - 2.5 eV = 1.7 eV",
+      "explanation": "Direct application of Einstein's relation.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-photoelectric-explanation-001",
+        "phy12-photoelectric-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-photoelectric-effect-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Dual Nature of Radiation and Matter",
+      "concept_id": "phy-12-photoelectric-effect",
+      "lesson_id": "lesson-phy-12-photoelectric-effect",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If the frequency of incident light is below the threshold frequency, what happens to the electron emission if the intensity of the light is significantly increased?",
+      "answer_guide": "No electrons are emitted regardless of intensity because the photon energy is less than the work function.",
+      "explanation": "Analyzing the relationship between frequency, intensity, and emission.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-photoelectric-explanation-001",
+        "phy12-photoelectric-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-thin-lenses-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Ray Optics",
+      "concept_id": "phy-12-thin-lenses",
+      "lesson_id": "lesson-phy-12-thin-lenses",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What is the lens equation used to relate focal length, object distance, and image distance for a thin lens?",
+      "answer_guide": "1/f = 1/v − 1/u",
+      "explanation": "Recall of the standard lens formula.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-thin-lenses-explanation-001",
+        "phy12-thin-lenses-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-thin-lenses-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Ray Optics",
+      "concept_id": "phy-12-thin-lenses",
+      "lesson_id": "lesson-phy-12-thin-lenses",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A converging lens has a focal length of +20 cm. If an object is placed at u = −60 cm, calculate the image distance v.",
+      "answer_guide": "Using 1/f = 1/v − 1/u: 1/v = 1/20 + 1/(−60) = 1/20 − 1/60 = 1/30, so v = +30 cm.",
+      "explanation": "With the Cartesian sign convention, the object distance is negative; applying the lens formula gives a real image 30 cm from the lens.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-thin-lenses-explanation-001",
+        "phy12-thin-lenses-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-thin-lenses-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Ray Optics",
+      "concept_id": "phy-12-thin-lenses",
+      "lesson_id": "lesson-phy-12-thin-lenses",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "An object is placed at u = −15 cm in front of a lens with f = +10 cm. Determine the magnification and state whether the image is enlarged or diminished.",
+      "answer_guide": "Using 1/f = 1/v − 1/u: 1/v = 1/10 + 1/(−15) = 1/30, so v = +30 cm. Magnification m = v/u = 30/(−15) = −2; the image is inverted and twice the object height.",
+      "explanation": "Keep the Cartesian signs for u and f consistent in the thin-lens equation; the negative magnification indicates inversion.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy12-thin-lenses-explanation-001",
+        "phy12-thin-lenses-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-young-double-slit-easy-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Wave Optics",
+      "concept_id": "phy-12-young-double-slit",
+      "lesson_id": "lesson-phy-12-young-double-slit",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "In Young's double-slit experiment, how does increasing the distance D between the slits and the screen affect the fringe width β?",
+      "answer_guide": "Increasing D increases the fringe width β, as β = λD/d.",
+      "explanation": "Understanding the proportional relationship between D and β.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-young-double-slit-explanation-001",
+        "phy-12-young-double-slit-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-young-double-slit-medium-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Wave Optics",
+      "concept_id": "phy-12-young-double-slit",
+      "lesson_id": "lesson-phy-12-young-double-slit",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Calculate the fringe width for λ = 500 nm, D = 1.5 m, and d = 0.2 mm.",
+      "answer_guide": "β = (500×10⁻⁹ × 1.5) / (0.2×10⁻³) = 7.5×10⁻⁷ / 2×10⁻⁴ = 3.75 mm.",
+      "explanation": "Application of the formula β = λD/d.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-young-double-slit-explanation-001",
+        "phy-12-young-double-slit-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-phy-12-young-double-slit-hard-demo-01",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Wave Optics",
+      "concept_id": "phy-12-young-double-slit",
+      "lesson_id": "lesson-phy-12-young-double-slit",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If the entire Young's double-slit apparatus is immersed in a medium with refractive index n, how does the fringe width change compared to vacuum?",
+      "answer_guide": "The wavelength λ decreases to λ/n in the medium. Since β = λD/d, the fringe width β decreases by a factor of n.",
+      "explanation": "Analyzes the effect of medium on wavelength and subsequently on fringe width.",
+      "source_reference_ids": [
+        "adapted-original-physics-12"
+      ],
+      "supporting_chunk_ids": [
+        "phy-12-young-double-slit-explanation-001",
+        "phy-12-young-double-slit-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-physics-042",
+      "generation_model": "gemma4:31b"
+    }
+  ]
+}

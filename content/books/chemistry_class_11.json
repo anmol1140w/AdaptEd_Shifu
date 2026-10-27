@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "book_id": "adapted-chemistry-11",
+  "title": "AdaptEd Chemistry Learning Book — Class 11",
+  "subject": "Chemistry",
+  "class": 11,
+  "edition": "1.0.0",
+  "language": "en",
+  "content_origin": "original_authored_material",
+  "authoring_note": "Original concise instructional content prepared for this learning platform; review by a qualified subject teacher before classroom use.",
+  "primary_reference_id": "adapted-original-chemistry-11",
+  "syllabus_reference_id": "cbse-2026-27-chemistry-043",
+  "chapters": [
+    {
+      "chapter_id": "chem_class11-chapter-01",
+      "chapter_title": "Some Basic Concepts of Chemistry",
+      "topic_id": "chem-11-mole-concept",
+      "concept_id": "chem-11-mole-concept",
+      "lesson_id": "lesson-chem-11-mole-concept",
+      "chunk_ids": [
+        "chem11-mole-explanation-001",
+        "chem11-mole-example-001",
+        "chem-11-mole-concept-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-02",
+      "chapter_title": "Classification of Elements and Periodicity",
+      "topic_id": "chem-11-periodic-trends",
+      "concept_id": "chem-11-periodic-trends",
+      "lesson_id": "lesson-chem-11-periodic-trends",
+      "chunk_ids": [
+        "chem11-periodic-explanation-001",
+        "chem11-periodic-example-001",
+        "chem-11-periodic-trends-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-03",
+      "chapter_title": "Equilibrium",
+      "topic_id": "chem-11-chemical-equilibrium",
+      "concept_id": "chem-11-chemical-equilibrium",
+      "lesson_id": "lesson-chem-11-chemical-equilibrium",
+      "chunk_ids": [
+        "chem11-equilibrium-explanation-001",
+        "chem11-equilibrium-example-001",
+        "chem-11-chemical-equilibrium-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-04",
+      "chapter_title": "Chemical Bonding and Molecular Structure",
+      "topic_id": "chem-11-bond-types",
+      "concept_id": "chem-11-bond-types",
+      "lesson_id": "lesson-chem-11-bond-types",
+      "chunk_ids": [
+        "chem11-bond-types-explanation-001",
+        "chem11-bond-types-example-001",
+        "chem11-bond-types-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-05",
+      "chapter_title": "Chemical Bonding and Molecular Structure",
+      "topic_id": "chem-11-vsepr",
+      "concept_id": "chem-11-vsepr",
+      "lesson_id": "lesson-chem-11-vsepr",
+      "chunk_ids": [
+        "chem11-vsepr-explanation-001",
+        "chem11-vsepr-example-001",
+        "chem11-vsepr-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-06",
+      "chapter_title": "Thermodynamics",
+      "topic_id": "chem-11-enthalpy-hess-law",
+      "concept_id": "chem-11-enthalpy-hess-law",
+      "lesson_id": "lesson-chem-11-enthalpy-hess-law",
+      "chunk_ids": [
+        "chem11-enthalpy-hess-law-explanation-001",
+        "chem11-enthalpy-hess-law-example-001",
+        "chem11-enthalpy-hess-law-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-07",
+      "chapter_title": "Structure of Atom",
+      "topic_id": "chem-11-quantum-numbers",
+      "concept_id": "chem-11-quantum-numbers",
+      "lesson_id": "lesson-chem-11-quantum-numbers",
+      "chunk_ids": [
+        "chem-11-quantum-numbers-explanation-001",
+        "chem-11-quantum-numbers-example-001",
+        "chem-11-quantum-numbers-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-08",
+      "chapter_title": "Chemical Bonding and Molecular Structure",
+      "topic_id": "chem-11-hybridization",
+      "concept_id": "chem-11-hybridization",
+      "lesson_id": "lesson-chem-11-hybridization",
+      "chunk_ids": [
+        "chem-11-hybridization-explanation-001",
+        "chem-11-hybridization-example-001",
+        "chem-11-hybridization-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-09",
+      "chapter_title": "Redox Reactions",
+      "topic_id": "chem-11-oxidation-numbers",
+      "concept_id": "chem-11-oxidation-numbers",
+      "lesson_id": "lesson-chem-11-oxidation-numbers",
+      "chunk_ids": [
+        "chem-11-oxidation-numbers-explanation-001",
+        "chem-11-oxidation-numbers-example-001",
+        "chem-11-oxidation-numbers-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-10",
+      "chapter_title": "Organic Chemistry: Some Basic Principles",
+      "topic_id": "chem-11-inductive-effect",
+      "concept_id": "chem-11-inductive-effect",
+      "lesson_id": "lesson-chem-11-inductive-effect",
+      "chunk_ids": [
+        "chem-11-inductive-effect-explanation-001",
+        "chem-11-inductive-effect-example-001",
+        "chem-11-inductive-effect-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-11",
+      "chapter_title": "Hydrocarbons",
+      "topic_id": "chem-11-alkene-addition",
+      "concept_id": "chem-11-alkene-addition",
+      "lesson_id": "lesson-chem-11-alkene-addition",
+      "chunk_ids": [
+        "chem-11-alkene-addition-explanation-001",
+        "chem-11-alkene-addition-example-001",
+        "chem-11-alkene-addition-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-12",
+      "chapter_title": "Chemical Bonding and Molecular Structure",
+      "topic_id": "chem-11-hydrogen-bonding",
+      "concept_id": "chem-11-hydrogen-bonding",
+      "lesson_id": "lesson-chem-11-hydrogen-bonding",
+      "chunk_ids": [
+        "chem-11-hydrogen-bonding-explanation-001",
+        "chem-11-hydrogen-bonding-worked_example-001",
+        "chem-11-hydrogen-bonding-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-13",
+      "chapter_title": "Some Basic Concepts of Chemistry",
+      "topic_id": "chem-11-limiting-reagent",
+      "concept_id": "chem-11-limiting-reagent",
+      "lesson_id": "lesson-chem-11-limiting-reagent",
+      "chunk_ids": [
+        "chem-11-limiting-reagent-explanation-001",
+        "chem-11-limiting-reagent-worked_example-001",
+        "chem-11-limiting-reagent-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "chem_class11-chapter-14",
+      "chapter_title": "Equilibrium",
+      "topic_id": "chem-11-acid-base-ph",
+      "concept_id": "chem-11-acid-base-ph",
+      "lesson_id": "lesson-chem-11-acid-base-ph",
+      "chunk_ids": [
+        "chem-11-acid-base-ph-explanation-001",
+        "chem-11-acid-base-ph-worked_example-001",
+        "chem-11-acid-base-ph-misconception-001"
+      ]
+    }
+  ],
+  "chapter_count": 14,
+  "lesson_content_file": "content/lessons/chemistry_class_11.json",
+  "concept_catalog_file": "content/concepts/chemistry_class_11.json",
+  "item_bank_file": "content/items/chemistry_class_11.json",
+  "supplemental_ncert_reference_ids": [
+    "ncert-kech1",
+    "ncert-kech2"
+  ]
+}

@@ -11,7 +11,12 @@ from .api.v1.routes.teacher_interventions import TeacherInterventionApi
 from .application.assessment_facade import AssessmentFacade
 from .application.learning_support_facade import LearningSupportFacade
 from .application.teacher_intervention_facade import TeacherInterventionFacade
-from .application.ports.ai import RetrievedSource
+from .application.ports.ai import (
+    QuizGenerationPort,
+    RetrievalPort,
+    RetrievedSource,
+    TutorGenerationPort,
+)
 from .application.ports.assessment import AssessmentGraderPort
 from .application.use_cases.build_subject_summary import BuildSubjectSummary
 from .application.use_cases.build_intervention_queue import BuildInterventionQueue
@@ -29,6 +34,7 @@ from .infrastructure.ai.llm import (
     CuratedTutorFallback,
     DeterministicQuizGenerator,
     DeterministicTutorGenerator,
+    OllamaCloudGenerator,
 )
 from .infrastructure.ai.retrieval import InMemoryLearningRetriever
 from .infrastructure.ai.validators import StructuredLearningOutputValidator
@@ -63,6 +69,7 @@ class InMemoryAssessmentRuntime:
     intervention_api: TeacherInterventionApi
     intervention_facade: TeacherInterventionFacade
     ai_audit: InMemoryAIAudit
+    retriever: RetrievalPort
 
 
 def build_in_memory_assessment_runtime(
@@ -74,8 +81,12 @@ def build_in_memory_assessment_runtime(
     session_id_prefix: str = "session",
     grader: AssessmentGraderPort | None = None,
     sources: Iterable[RetrievedSource] = (),
+    retriever: RetrievalPort | None = None,
+    tutor_generator: TutorGenerationPort | None = None,
+    quiz_generator: QuizGenerationPort | None = None,
+    use_ollama_cloud: bool = False,
 ) -> InMemoryAssessmentRuntime:
-    """Build a complete assessment runtime without a database or HTTP server."""
+    """Build a local runtime; optionally use Qdrant and Ollama Cloud AI adapters."""
 
     concept_list = tuple(concepts)
     subject_name_map = dict(subject_names)
@@ -102,7 +113,10 @@ def build_in_memory_assessment_runtime(
     mastery_states = InMemoryMasteryStates()
     recommendations = InMemoryRecommendations()
     ai_audit = InMemoryAIAudit()
-    retriever = InMemoryLearningRetriever(sources)
+    active_retriever = retriever or InMemoryLearningRetriever(sources)
+    ollama_generator = OllamaCloudGenerator() if use_ollama_cloud else None
+    active_tutor_generator = tutor_generator or ollama_generator or DeterministicTutorGenerator()
+    active_quiz_generator = quiz_generator or ollama_generator or DeterministicQuizGenerator()
     validator = StructuredLearningOutputValidator()
     learning_engine = LearningEngine(concept_list)
     start_assessment = StartAssessment(
@@ -131,8 +145,8 @@ def build_in_memory_assessment_runtime(
     )
     provide_tutor_support = ProvideTutorSupport(
         concepts=concept_catalog,
-        retriever=retriever,
-        generator=DeterministicTutorGenerator(),
+        retriever=active_retriever,
+        generator=active_tutor_generator,
         fallback_generator=CuratedTutorFallback(),
         validator=validator,
         audit=ai_audit,
@@ -141,8 +155,8 @@ def build_in_memory_assessment_runtime(
     )
     generate_weak_area_quiz = GenerateWeakAreaQuiz(
         concepts=concept_catalog,
-        retriever=retriever,
-        generator=DeterministicQuizGenerator(),
+        retriever=active_retriever,
+        generator=active_quiz_generator,
         fallback_generator=CuratedQuizFallback(),
         validator=validator,
         audit=ai_audit,
@@ -193,4 +207,5 @@ def build_in_memory_assessment_runtime(
         intervention_api=intervention_api,
         intervention_facade=intervention_facade,
         ai_audit=ai_audit,
+        retriever=active_retriever,
     )

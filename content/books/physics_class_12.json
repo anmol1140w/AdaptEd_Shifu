@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "book_id": "adapted-physics-12",
+  "title": "AdaptEd Physics Learning Book — Class 12",
+  "subject": "Physics",
+  "class": 12,
+  "edition": "1.0.0",
+  "language": "en",
+  "content_origin": "original_authored_material",
+  "authoring_note": "Original concise instructional content prepared for this learning platform; review by a qualified subject teacher before classroom use.",
+  "primary_reference_id": "adapted-original-physics-12",
+  "syllabus_reference_id": "cbse-2026-27-physics-042",
+  "chapters": [
+    {
+      "chapter_id": "phy_class12-chapter-01",
+      "chapter_title": "Electric Charges and Fields",
+      "topic_id": "phy-12-coulombs-law",
+      "concept_id": "phy-12-coulombs-law",
+      "lesson_id": "lesson-phy-12-coulombs-law",
+      "chunk_ids": [
+        "phy12-coulomb-explanation-001",
+        "phy12-coulomb-example-001",
+        "phy-12-coulombs-law-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-02",
+      "chapter_title": "Current Electricity",
+      "topic_id": "phy-12-ohms-law",
+      "concept_id": "phy-12-ohms-law",
+      "lesson_id": "lesson-phy-12-ohms-law",
+      "chunk_ids": [
+        "phy12-ohm-explanation-001",
+        "phy12-ohm-example-001",
+        "phy-12-ohms-law-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-03",
+      "chapter_title": "Dual Nature of Radiation and Matter",
+      "topic_id": "phy-12-photoelectric-effect",
+      "concept_id": "phy-12-photoelectric-effect",
+      "lesson_id": "lesson-phy-12-photoelectric-effect",
+      "chunk_ids": [
+        "phy12-photoelectric-explanation-001",
+        "phy12-photoelectric-example-001",
+        "phy-12-photoelectric-effect-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-04",
+      "chapter_title": "Electrostatic Potential and Capacitance",
+      "topic_id": "phy-12-capacitor-combinations",
+      "concept_id": "phy-12-capacitor-combinations",
+      "lesson_id": "lesson-phy-12-capacitor-combinations",
+      "chunk_ids": [
+        "phy12-capacitor-combinations-explanation-001",
+        "phy12-capacitor-combinations-example-001",
+        "phy12-capacitor-combinations-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-05",
+      "chapter_title": "Electromagnetic Induction",
+      "topic_id": "phy-12-electromagnetic-induction",
+      "concept_id": "phy-12-electromagnetic-induction",
+      "lesson_id": "lesson-phy-12-electromagnetic-induction",
+      "chunk_ids": [
+        "phy12-electromagnetic-induction-explanation-001",
+        "phy12-electromagnetic-induction-example-001",
+        "phy12-electromagnetic-induction-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-06",
+      "chapter_title": "Ray Optics",
+      "topic_id": "phy-12-thin-lenses",
+      "concept_id": "phy-12-thin-lenses",
+      "lesson_id": "lesson-phy-12-thin-lenses",
+      "chunk_ids": [
+        "phy12-thin-lenses-explanation-001",
+        "phy12-thin-lenses-example-001",
+        "phy12-thin-lenses-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-07",
+      "chapter_title": "Electric Charges and Fields",
+      "topic_id": "phy-12-electric-dipole",
+      "concept_id": "phy-12-electric-dipole",
+      "lesson_id": "lesson-phy-12-electric-dipole",
+      "chunk_ids": [
+        "phy-12-electric-dipole-explanation-001",
+        "phy-12-electric-dipole-example-001",
+        "phy-12-electric-dipole-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-08",
+      "chapter_title": "Electric Charges and Fields",
+      "topic_id": "phy-12-gauss-law",
+      "concept_id": "phy-12-gauss-law",
+      "lesson_id": "lesson-phy-12-gauss-law",
+      "chunk_ids": [
+        "phy-12-gauss-law-explanation-001",
+        "phy-12-gauss-law-example-001",
+        "phy-12-gauss-law-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-09",
+      "chapter_title": "Current Electricity",
+      "topic_id": "phy-12-emf-internal-resistance",
+      "concept_id": "phy-12-emf-internal-resistance",
+      "lesson_id": "lesson-phy-12-emf-internal-resistance",
+      "chunk_ids": [
+        "phy-12-emf-internal-resistance-explanation-001",
+        "phy-12-emf-internal-resistance-example-001",
+        "phy-12-emf-internal-resistance-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-10",
+      "chapter_title": "Moving Charges and Magnetism",
+      "topic_id": "phy-12-magnetic-force",
+      "concept_id": "phy-12-magnetic-force",
+      "lesson_id": "lesson-phy-12-magnetic-force",
+      "chunk_ids": [
+        "phy-12-magnetic-force-explanation-001",
+        "phy-12-magnetic-force-example-001",
+        "phy-12-magnetic-force-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-11",
+      "chapter_title": "Alternating Current",
+      "topic_id": "phy-12-ac-rms",
+      "concept_id": "phy-12-ac-rms",
+      "lesson_id": "lesson-phy-12-ac-rms",
+      "chunk_ids": [
+        "phy-12-ac-rms-explanation-001",
+        "phy-12-ac-rms-example-001",
+        "phy-12-ac-rms-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-12",
+      "chapter_title": "Nuclei",
+      "topic_id": "phy-12-binding-energy",
+      "concept_id": "phy-12-binding-energy",
+      "lesson_id": "lesson-phy-12-binding-energy",
+      "chunk_ids": [
+        "phy-12-binding-energy-explanation-001",
+        "phy-12-binding-energy-example-001",
+        "phy-12-binding-energy-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-13",
+      "chapter_title": "Wave Optics",
+      "topic_id": "phy-12-young-double-slit",
+      "concept_id": "phy-12-young-double-slit",
+      "lesson_id": "lesson-phy-12-young-double-slit",
+      "chunk_ids": [
+        "phy-12-young-double-slit-explanation-001",
+        "phy-12-young-double-slit-worked_example-001",
+        "phy-12-young-double-slit-misconception-001"
+      ]
+    },
+    {
+      "chapter_id": "phy_class12-chapter-14",
+      "chapter_title": "Electromagnetic Waves",
+      "topic_id": "phy-12-em-spectrum",
+      "concept_id": "phy-12-em-spectrum",
+      "lesson_id": "lesson-phy-12-em-spectrum",
+      "chunk_ids": [
+        "phy-12-em-spectrum-explanation-001",
+        "phy-12-em-spectrum-worked_example-001",
+        "phy-12-em-spectrum-misconception-001"
+      ]
+    }
+  ],
+  "chapter_count": 14,
+  "lesson_content_file": "content/lessons/physics_class_12.json",
+  "concept_catalog_file": "content/concepts/physics_class_12.json",
+  "item_bank_file": "content/items/physics_class_12.json",
+  "supplemental_ncert_reference_ids": [
+    "ncert-leph1",
+    "ncert-leph2"
+  ]
+}

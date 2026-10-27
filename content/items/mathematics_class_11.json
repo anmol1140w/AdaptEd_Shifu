@@ -1,0 +1,1057 @@
+{
+  "schema_version": "1.0",
+  "subject": "Mathematics",
+  "class": 11,
+  "items": [
+    {
+      "item_id": "item-math-11-arithmetic-progression-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Sequences and Series",
+      "concept_id": "math-11-arithmetic-progression",
+      "lesson_id": "lesson-math-11-arithmetic-progression",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the formula for the nth term (a_n) of an arithmetic progression?",
+      "answer_guide": "a_n = a + (n - 1)d",
+      "explanation": "Direct definition from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-ap-explanation-001",
+        "math11-ap-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-arithmetic-progression-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Sequences and Series",
+      "concept_id": "math-11-arithmetic-progression",
+      "lesson_id": "lesson-math-11-arithmetic-progression",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "In an AP where the first term is 5 and the common difference is 4, find the 12th term.",
+      "answer_guide": "a_12 = 5 + (12 - 1)4 = 5 + 44 = 49.",
+      "explanation": "Applying the nth term formula with given values.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-ap-explanation-001",
+        "math11-ap-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-arithmetic-progression-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Sequences and Series",
+      "concept_id": "math-11-arithmetic-progression",
+      "lesson_id": "lesson-math-11-arithmetic-progression",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "The 3rd term of an AP is 10 and the 7th term is 22. Find the sum of the first 10 terms.",
+      "answer_guide": "d = (22-10)/(7-3) = 3. a = 10 - 2(3) = 4. S_10 = 10/2[2(4) + 9(3)] = 5[8 + 27] = 175.",
+      "explanation": "Multi-step process: find d, then a, then the sum.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-ap-explanation-001",
+        "math11-ap-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-binomial-general-term-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Binomial Theorem",
+      "concept_id": "math-11-binomial-general-term",
+      "lesson_id": "lesson-math-11-binomial-general-term",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the general term T_(r+1) in the expansion of (a + b)^n?",
+      "answer_guide": "T_(r+1) = C(n,r)a^(n-r)b^r",
+      "explanation": "Direct formula from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-binomial-general-term-explanation-001",
+        "math11-binomial-general-term-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-binomial-general-term-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Binomial Theorem",
+      "concept_id": "math-11-binomial-general-term",
+      "lesson_id": "lesson-math-11-binomial-general-term",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Find the term where r = 1 in the expansion of (x + 3)^5.",
+      "answer_guide": "T_2 = C(5,1)x^(5-1)(3)^1 = 5 * x^4 * 3 = 15x^4.",
+      "explanation": "Applying the general term formula for a specific r.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-binomial-general-term-explanation-001",
+        "math11-binomial-general-term-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-binomial-general-term-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Binomial Theorem",
+      "concept_id": "math-11-binomial-general-term",
+      "lesson_id": "lesson-math-11-binomial-general-term",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "In the expansion of (2x + y)^6, which value of r corresponds to the term containing x^2?",
+      "answer_guide": "The exponent of a (2x) is n-r. 6 - r = 2 => r = 4.",
+      "explanation": "Analyzing the relationship between the exponent and r.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-binomial-general-term-explanation-001",
+        "math11-binomial-general-term-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-circle-equation-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Conic Sections",
+      "concept_id": "math-11-circle-equation",
+      "lesson_id": "lesson-math-11-circle-equation",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the standard equation of a circle with centre (h, k) and radius r?",
+      "answer_guide": "(x - h)² + (y - k)² = r².",
+      "explanation": "Direct definition from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-circle-equation-explanation-001",
+        "math-11-circle-equation-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-circle-equation-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Conic Sections",
+      "concept_id": "math-11-circle-equation",
+      "lesson_id": "lesson-math-11-circle-equation",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Find the centre and radius of the circle given by the equation (x + 3)² + (y - 5)² = 16.",
+      "answer_guide": "Centre (h, k) = (-3, 5); Radius r = √16 = 4.",
+      "explanation": "Applying the standard form to identify circle properties.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-circle-equation-explanation-001",
+        "math-11-circle-equation-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-circle-equation-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Conic Sections",
+      "concept_id": "math-11-circle-equation",
+      "lesson_id": "lesson-math-11-circle-equation",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Determine the centre and radius of the circle x² + y² - 4x + 6y - 3 = 0 by completing the square.",
+      "answer_guide": "(x²-4x+4) + (y²+6y+9) = 3 + 4 + 9 => (x-2)² + (y+3)² = 16. Centre (2, -3), Radius 4.",
+      "explanation": "Analyzing the general form and converting to standard form.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-circle-equation-explanation-001",
+        "math-11-circle-equation-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-complement-events-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Probability",
+      "concept_id": "math-11-complement-events",
+      "lesson_id": "lesson-math-11-complement-events",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the relationship between the probability of an event P(A) and its complement P(A')?",
+      "answer_guide": "P(A') = 1 - P(A).",
+      "explanation": "Direct definition from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-complement-events-explanation-001",
+        "math-11-complement-events-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-complement-events-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Probability",
+      "concept_id": "math-11-complement-events",
+      "lesson_id": "lesson-math-11-complement-events",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "If the probability that it rains tomorrow is 0.35, what is the probability that it does not rain?",
+      "answer_guide": "P(not rain) = 1 - 0.35 = 0.65.",
+      "explanation": "Applying the complement probability formula.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-complement-events-explanation-001",
+        "math-11-complement-events-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-complement-events-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Probability",
+      "concept_id": "math-11-complement-events",
+      "lesson_id": "lesson-math-11-complement-events",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Why is complement reasoning often used to calculate the probability of 'at least one' event occurring?",
+      "answer_guide": "Because 'at least one' is the complement of 'none'. Counting 'none' is often simpler than summing all cases of 1, 2, ..., n events.",
+      "explanation": "Evaluating the efficiency of complement reasoning.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-complement-events-explanation-001",
+        "math-11-complement-events-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-complex-modulus-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Complex Numbers",
+      "concept_id": "math-11-complex-modulus",
+      "lesson_id": "lesson-math-11-complex-modulus",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "For a complex number z = a + ib, what is the formula for its modulus |z|?",
+      "answer_guide": "|z| = √(a² + b²).",
+      "explanation": "Direct definition from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-complex-modulus-explanation-001",
+        "math-11-complex-modulus-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-complex-modulus-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Complex Numbers",
+      "concept_id": "math-11-complex-modulus",
+      "lesson_id": "lesson-math-11-complex-modulus",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Find the conjugate and the modulus of the complex number z = 5 - 12i.",
+      "answer_guide": "Conjugate z̄ = 5 + 12i. Modulus |z| = √(5² + (-12)²) = √(25 + 144) = √169 = 13.",
+      "explanation": "Applying conjugate and modulus formulas.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-complex-modulus-explanation-001",
+        "math-11-complex-modulus-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-complex-modulus-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Complex Numbers",
+      "concept_id": "math-11-complex-modulus",
+      "lesson_id": "lesson-math-11-complex-modulus",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If z = 1 + i, calculate the product z z̄ and verify it equals |z|².",
+      "answer_guide": "z̄ = 1 - i. z z̄ = (1+i)(1-i) = 1² - i² = 1 - (-1) = 2. |z|² = (√(1²+1²))² = (√2)² = 2. Both are 2.",
+      "explanation": "Analyzing the relationship between the product of conjugates and the modulus.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-complex-modulus-explanation-001",
+        "math-11-complex-modulus-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-derivative-limit-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Limits and Derivatives",
+      "concept_id": "math-11-derivative-limit",
+      "lesson_id": "lesson-math-11-derivative-limit",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the limit definition of the derivative f'(a) at a point a?",
+      "answer_guide": "f'(a) = lim(h→0) [f(a+h) - f(a)] / h.",
+      "explanation": "Direct definition from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-derivative-limit-explanation-001",
+        "math-11-derivative-limit-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-derivative-limit-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Limits and Derivatives",
+      "concept_id": "math-11-derivative-limit",
+      "lesson_id": "lesson-math-11-derivative-limit",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Using the limit definition, find the derivative of f(x) = 3x at x = a.",
+      "answer_guide": "f'(a) = lim(h→0) [3(a+h) - 3a]/h = lim(h→0) [3h]/h = 3.",
+      "explanation": "Applying the limit definition to a linear function.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-derivative-limit-explanation-001",
+        "math-11-derivative-limit-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-derivative-limit-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Limits and Derivatives",
+      "concept_id": "math-11-derivative-limit",
+      "lesson_id": "lesson-math-11-derivative-limit",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If f(x) represents the position of an object, what does the derivative f'(a) represent physically?",
+      "answer_guide": "It represents the instantaneous velocity at the point a.",
+      "explanation": "Transferring the geometric/mathematical concept to a physical context.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-derivative-limit-explanation-001",
+        "math-11-derivative-limit-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-linear-inequalities-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Linear Inequalities",
+      "concept_id": "math-11-linear-inequalities",
+      "lesson_id": "lesson-math-11-linear-inequalities",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "When graphing a linear inequality in two variables, when should a dashed boundary line be used?",
+      "answer_guide": "A dashed boundary is used for < or > signs.",
+      "explanation": "Direct rule from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-linear-inequalities-explanation-001",
+        "math-11-linear-inequalities-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-linear-inequalities-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Linear Inequalities",
+      "concept_id": "math-11-linear-inequalities",
+      "lesson_id": "lesson-math-11-linear-inequalities",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "To graph y ≤ 3x - 2, should the boundary line be solid or dashed, and should the origin (0,0) be in the shaded region?",
+      "answer_guide": "Solid line (due to ≤). Test (0,0): 0 ≤ 3(0)-2 => 0 ≤ -2 is False. Origin is not in the shaded region.",
+      "explanation": "Applying boundary rules and point-testing.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-linear-inequalities-explanation-001",
+        "math-11-linear-inequalities-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-linear-inequalities-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Linear Inequalities",
+      "concept_id": "math-11-linear-inequalities",
+      "lesson_id": "lesson-math-11-linear-inequalities",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Describe the region satisfying both y > x and y < -x.",
+      "answer_guide": "The region is the intersection of two half-planes: above the line y=x and below the line y=-x (the left wedge of the plane).",
+      "explanation": "Analyzing the overlap of two linear inequalities.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-linear-inequalities-explanation-001",
+        "math-11-linear-inequalities-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-mathematical-induction-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Principle of Mathematical Induction",
+      "concept_id": "math-11-mathematical-induction",
+      "lesson_id": "lesson-math-11-mathematical-induction",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What are the two essential steps required for a proof by mathematical induction?",
+      "answer_guide": "The base case and the inductive step.",
+      "explanation": "Direct definition from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-mathematical-induction-explanation-001",
+        "math-11-mathematical-induction-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-mathematical-induction-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Principle of Mathematical Induction",
+      "concept_id": "math-11-mathematical-induction",
+      "lesson_id": "lesson-math-11-mathematical-induction",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "In a proof by induction for a statement P(n) starting at n=1, what must be established in the inductive step?",
+      "answer_guide": "Assume P(n) is true for an arbitrary n, then prove P(n+1) is true.",
+      "explanation": "Applying the logic of the inductive step.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-mathematical-induction-explanation-001",
+        "math-11-mathematical-induction-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-mathematical-induction-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Principle of Mathematical Induction",
+      "concept_id": "math-11-mathematical-induction",
+      "lesson_id": "lesson-math-11-mathematical-induction",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Why is the base case necessary in a proof by induction?",
+      "answer_guide": "The inductive step only proves that if P(n) is true, then P(n+1) is true. The base case provides the initial truth to start the chain.",
+      "explanation": "Evaluating the logical necessity of the base case.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-mathematical-induction-explanation-001",
+        "math-11-mathematical-induction-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-permutations-combinations-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Permutations and Combinations",
+      "concept_id": "math-11-permutations-combinations",
+      "lesson_id": "lesson-math-11-permutations-combinations",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the difference between a permutation and a combination in terms of order?",
+      "answer_guide": "A permutation counts ordered selections; a combination counts selections where order does not matter.",
+      "explanation": "Direct definition from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-permutations-combinations-explanation-001",
+        "math-11-permutations-combinations-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-permutations-combinations-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Permutations and Combinations",
+      "concept_id": "math-11-permutations-combinations",
+      "lesson_id": "lesson-math-11-permutations-combinations",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "How many ways can a 2-person subcommittee be chosen from a group of 6 people?",
+      "answer_guide": "Order does not matter, so use 6C2 = 6! / [2!(6-2)!] = (6*5)/2 = 15.",
+      "explanation": "Applying the combination formula.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-permutations-combinations-explanation-001",
+        "math-11-permutations-combinations-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-permutations-combinations-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Permutations and Combinations",
+      "concept_id": "math-11-permutations-combinations",
+      "lesson_id": "lesson-math-11-permutations-combinations",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "A club has 5 members. How many ways can they elect a President and a Secretary?",
+      "answer_guide": "Order matters (different roles), so use 5P2 = 5! / (5-2)! = 5 * 4 = 20.",
+      "explanation": "Analyzing the problem to determine that order matters (permutation).",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-permutations-combinations-explanation-001",
+        "math-11-permutations-combinations-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-quadratic-equations-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Complex Numbers and Quadratic Equations",
+      "concept_id": "math-11-quadratic-equations",
+      "lesson_id": "lesson-math-11-quadratic-equations",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the formula for the discriminant D of a quadratic equation ax^2 + bx + c = 0?",
+      "answer_guide": "D = b^2 - 4ac",
+      "explanation": "Direct definition from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-quadratic-explanation-001",
+        "math11-quadratic-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-quadratic-equations-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Complex Numbers and Quadratic Equations",
+      "concept_id": "math-11-quadratic-equations",
+      "lesson_id": "lesson-math-11-quadratic-equations",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Determine the nature of the roots for the quadratic equation 2x^2 - 4x + 5 = 0.",
+      "answer_guide": "D = (-4)^2 - 4(2)(5) = 16 - 40 = -24. Since D < 0, the roots are a complex-conjugate pair.",
+      "explanation": "Applying the discriminant formula to determine root type.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-quadratic-explanation-001",
+        "math11-quadratic-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-quadratic-equations-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Complex Numbers and Quadratic Equations",
+      "concept_id": "math-11-quadratic-equations",
+      "lesson_id": "lesson-math-11-quadratic-equations",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If the quadratic equation x^2 + kx + 9 = 0 has equal real roots, find the possible values of k.",
+      "answer_guide": "For equal roots, D = 0. k^2 - 4(1)(9) = 0 => k^2 = 36 => k = ±6.",
+      "explanation": "Analyzing the condition D=0 to solve for a parameter.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-quadratic-explanation-001",
+        "math11-quadratic-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-sample-space-probability-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Probability",
+      "concept_id": "math-11-sample-space-probability",
+      "lesson_id": "lesson-math-11-sample-space-probability",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "For equally likely outcomes in a finite sample space, how is the probability P(A) of an event A calculated?",
+      "answer_guide": "P(A) = (number of outcomes in A) / (total outcomes in sample space).",
+      "explanation": "Direct definition from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-sample-space-probability-explanation-001",
+        "math11-sample-space-probability-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-sample-space-probability-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Probability",
+      "concept_id": "math-11-sample-space-probability",
+      "lesson_id": "lesson-math-11-sample-space-probability",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "A fair six-sided die is rolled. What is the probability of the event A = {roll a number greater than 4}?",
+      "answer_guide": "Outcomes in A = {5, 6} (2 outcomes). Total = 6. P(A) = 2/6 = 1/3.",
+      "explanation": "Applying the probability formula to a die roll.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-sample-space-probability-explanation-001",
+        "math11-sample-space-probability-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-sample-space-probability-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Probability",
+      "concept_id": "math-11-sample-space-probability",
+      "lesson_id": "lesson-math-11-sample-space-probability",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Two fair coins are tossed. What is the probability of getting exactly one head?",
+      "answer_guide": "Sample space = {HH, HT, TH, TT} (4 outcomes). Event A = {HT, TH} (2 outcomes). P(A) = 2/4 = 1/2.",
+      "explanation": "Defining the sample space and event to calculate probability.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-sample-space-probability-explanation-001",
+        "math11-sample-space-probability-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-set-operations-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Sets",
+      "concept_id": "math-11-set-operations",
+      "lesson_id": "lesson-math-11-set-operations",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Define the intersection A∩B of two sets A and B.",
+      "answer_guide": "The intersection A∩B contains elements common to both A and B.",
+      "explanation": "Direct definition from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-set-operations-explanation-001",
+        "math-11-set-operations-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-set-operations-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Sets",
+      "concept_id": "math-11-set-operations",
+      "lesson_id": "lesson-math-11-set-operations",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "If A = {a, b, c} and B = {b, c, d}, find A∪B and A∩B.",
+      "answer_guide": "A∪B = {a, b, c, d}; A∩B = {b, c}.",
+      "explanation": "Applying union and intersection operations.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-set-operations-explanation-001",
+        "math-11-set-operations-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-set-operations-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Sets",
+      "concept_id": "math-11-set-operations",
+      "lesson_id": "lesson-math-11-set-operations",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Given a universal set U = {1, 2, 3, 4, 5}, A = {1, 2}, and B = {2, 3}, find the complement of (A∪B).",
+      "answer_guide": "A∪B = {1, 2, 3}. Complement (A∪B)' = U - {1, 2, 3} = {4, 5}.",
+      "explanation": "Multi-step: find union, then find the complement relative to U.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math-11-set-operations-explanation-001",
+        "math-11-set-operations-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-straight-line-slope-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Straight Lines",
+      "concept_id": "math-11-straight-line-slope",
+      "lesson_id": "lesson-math-11-straight-line-slope",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the formula for the slope of a non-vertical line passing through (x₁,y₁) and (x₂,y₂)?",
+      "answer_guide": "Slope m = (y₂ - y₁) / (x₂ - x₁).",
+      "explanation": "Direct definition from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-straight-line-slope-explanation-001",
+        "math11-straight-line-slope-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-straight-line-slope-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Straight Lines",
+      "concept_id": "math-11-straight-line-slope",
+      "lesson_id": "lesson-math-11-straight-line-slope",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Find the equation of a line with slope 3 that passes through the point (1, 4).",
+      "answer_guide": "y - 4 = 3(x - 1) => y = 3x - 3 + 4 => y = 3x + 1.",
+      "explanation": "Applying the point-slope equation.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-straight-line-slope-explanation-001",
+        "math11-straight-line-slope-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-straight-line-slope-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Straight Lines",
+      "concept_id": "math-11-straight-line-slope",
+      "lesson_id": "lesson-math-11-straight-line-slope",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Find the equation of the line passing through (2, 5) and (4, 11).",
+      "answer_guide": "m = (11-5)/(4-2) = 6/2 = 3. Equation: y - 5 = 3(x - 2) => y = 3x - 1.",
+      "explanation": "Calculating slope first, then applying the point-slope equation.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-straight-line-slope-explanation-001",
+        "math11-straight-line-slope-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-trigonometric-functions-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Trigonometric Functions",
+      "concept_id": "math-11-trigonometric-functions",
+      "lesson_id": "lesson-math-11-trigonometric-functions",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "State the fundamental trigonometric identity relating sine and cosine for any real angle θ.",
+      "answer_guide": "sin^2 θ + cos^2 θ = 1",
+      "explanation": "Direct identity from the lesson text.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-trig-explanation-001",
+        "math11-trig-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-trigonometric-functions-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Trigonometric Functions",
+      "concept_id": "math-11-trigonometric-functions",
+      "lesson_id": "lesson-math-11-trigonometric-functions",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "If cos θ = 12/13 and θ is in the first quadrant, find sin θ.",
+      "answer_guide": "sin^2 θ = 1 - (12/13)^2 = 1 - 144/169 = 25/169. Since θ is in Q1, sin θ = 5/13.",
+      "explanation": "Applying the identity and quadrant sign.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-trig-explanation-001",
+        "math11-trig-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-11-trigonometric-functions-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Trigonometric Functions",
+      "concept_id": "math-11-trigonometric-functions",
+      "lesson_id": "lesson-math-11-trigonometric-functions",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Given sin θ = -1/2 and θ is in the third quadrant, determine the value of cos θ.",
+      "answer_guide": "cos^2 θ = 1 - (-1/2)^2 = 3/4. In the third quadrant, cosine is negative, so cos θ = -√3/2.",
+      "explanation": "Analyzing the identity and quadrant-specific sign.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-11"
+      ],
+      "supporting_chunk_ids": [
+        "math11-trig-explanation-001",
+        "math11-trig-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    }
+  ]
+}

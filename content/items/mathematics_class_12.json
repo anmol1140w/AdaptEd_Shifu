@@ -1,0 +1,1057 @@
+{
+  "schema_version": "1.0",
+  "subject": "Mathematics",
+  "class": 12,
+  "items": [
+    {
+      "item_id": "item-math-12-area-between-curves-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Application of Integrals",
+      "concept_id": "math-12-area-between-curves",
+      "lesson_id": "lesson-math-12-area-between-curves",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Given two curves y=f(x) and y=g(x) where f(x) ≥ g(x) on [a, b], what is the formula for the area between them?",
+      "answer_guide": "Area = ∫ from a to b of [f(x) - g(x)] dx.",
+      "explanation": "Area is the integral of the upper curve minus the lower curve.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-area-between-curves-explanation-001",
+        "math-12-area-between-curves-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-area-between-curves-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Application of Integrals",
+      "concept_id": "math-12-area-between-curves",
+      "lesson_id": "lesson-math-12-area-between-curves",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Calculate the area bounded by y = 2x and y = 0 from x = 0 to x = 3.",
+      "answer_guide": "Area = ∫₀³ (2x - 0) dx = [x²]₀³ = 3² - 0² = 9 square units.",
+      "explanation": "The area is the integral of the function 2x over the interval.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-area-between-curves-explanation-001",
+        "math-12-area-between-curves-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-area-between-curves-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Application of Integrals",
+      "concept_id": "math-12-area-between-curves",
+      "lesson_id": "lesson-math-12-area-between-curves",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If two curves f(x) and g(x) intersect at a point c within the interval [a, b], why must the integral be split at x = c?",
+      "answer_guide": "Because the relative positions of the curves change; the curve that was 'upper' becomes 'lower', and splitting ensures the integrand [upper - lower] remains positive.",
+      "explanation": "Splitting prevents negative area components from canceling positive ones.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-area-between-curves-explanation-001",
+        "math-12-area-between-curves-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-conditional-probability-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Probability",
+      "concept_id": "math-12-conditional-probability",
+      "lesson_id": "lesson-math-12-conditional-probability",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "State the formula for the conditional probability of event A given event B.",
+      "answer_guide": "P(A|B) = P(A ∩ B) / P(B), provided P(B) > 0.",
+      "explanation": "This defines the probability of A occurring given B has occurred.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-conditional-probability-explanation-001",
+        "math-12-conditional-probability-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-conditional-probability-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Probability",
+      "concept_id": "math-12-conditional-probability",
+      "lesson_id": "lesson-math-12-conditional-probability",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Given P(A) = 0.5, P(B) = 0.4, and P(A ∩ B) = 0.2, calculate P(A|B) and determine if A and B are independent.",
+      "answer_guide": "P(A|B) = 0.2 / 0.4 = 0.5. Since P(A|B) = P(A) = 0.5, the events are independent.",
+      "explanation": "Independence is confirmed when P(A|B) equals the marginal probability P(A).",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-conditional-probability-explanation-001",
+        "math-12-conditional-probability-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-conditional-probability-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Probability",
+      "concept_id": "math-12-conditional-probability",
+      "lesson_id": "lesson-math-12-conditional-probability",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Explain the relationship between the condition P(A ∩ B) = P(A)P(B) and the concept of independence.",
+      "answer_guide": "If P(A ∩ B) = P(A)P(B), then P(A|B) = P(A), meaning the occurrence of B does not change the probability of A, which is the definition of independence.",
+      "explanation": "The product rule for intersection is equivalent to the definition of independence.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-conditional-probability-explanation-001",
+        "math-12-conditional-probability-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-continuity-at-a-point-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Continuity and Differentiability",
+      "concept_id": "math-12-continuity-at-a-point",
+      "lesson_id": "lesson-math-12-continuity-at-a-point",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "State the three conditions that must be met for a function f to be continuous at x = a.",
+      "answer_guide": "1. f(a) is defined. 2. lim(x→a)f(x) exists. 3. lim(x→a)f(x) = f(a).",
+      "explanation": "These are the standard requirements for continuity at a point.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-continuity-at-a-point-explanation-001",
+        "math12-continuity-at-a-point-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-continuity-at-a-point-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Continuity and Differentiability",
+      "concept_id": "math-12-continuity-at-a-point",
+      "lesson_id": "lesson-math-12-continuity-at-a-point",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Let f(x) = (x^2 - 9)/(x - 3) for x ≠ 3 and f(3) = k. Find the value of k that makes f continuous at x = 3.",
+      "answer_guide": "k = 6",
+      "explanation": "lim(x→3) (x-3)(x+3)/(x-3) = lim(x→3) (x+3) = 6. Thus f(3) must be 6.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-continuity-at-a-point-explanation-001",
+        "math12-continuity-at-a-point-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-continuity-at-a-point-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Continuity and Differentiability",
+      "concept_id": "math-12-continuity-at-a-point",
+      "lesson_id": "lesson-math-12-continuity-at-a-point",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "A function f(x) has lim(x→a)f(x) = L, but f(a) is undefined. What type of discontinuity is this, and how can it be removed?",
+      "answer_guide": "Removable discontinuity; define f(a) = L.",
+      "explanation": "Since the limit exists but the point is missing, it is a hole (removable).",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-continuity-at-a-point-explanation-001",
+        "math12-continuity-at-a-point-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-definite-integrals-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Integrals",
+      "concept_id": "math-12-definite-integrals",
+      "lesson_id": "lesson-math-12-definite-integrals",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the value of the definite integral of an odd function f(x) over the symmetric interval [-a, a]?",
+      "answer_guide": "0",
+      "explanation": "For odd functions, the signed area from -a to 0 cancels the area from 0 to a.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-integral-explanation-001",
+        "math12-integral-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-definite-integrals-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Integrals",
+      "concept_id": "math-12-definite-integrals",
+      "lesson_id": "lesson-math-12-definite-integrals",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Evaluate ∫_{-1}^{1} (x^4 + 2) dx using symmetry properties.",
+      "answer_guide": "14/5 or 2.8",
+      "explanation": "f(x) is even. 2 ∫_{0}^{1} (x^4 + 2) dx = 2 [x^5/5 + 2x]_{0}^{1} = 2(1/5 + 2) = 22/5. Wait, 2(1/5 + 10/5) = 22/5. Correct: 2(0.2 + 2) = 4.4.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-integral-explanation-001",
+        "math12-integral-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-definite-integrals-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Integrals",
+      "concept_id": "math-12-definite-integrals",
+      "lesson_id": "lesson-math-12-definite-integrals",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Evaluate ∫_{-π}^{π} (sin(x) + cos(x)) dx by analyzing the parity of each term.",
+      "answer_guide": "0",
+      "explanation": "sin(x) is odd, so its integral is 0. cos(x) is even, but ∫_{-π}^{π} cos(x) dx = [sin(x)]_{-π}^{π} = 0 - 0 = 0.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-integral-explanation-001",
+        "math12-integral-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-derivatives-applications-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Applications of Derivatives",
+      "concept_id": "math-12-derivatives-applications",
+      "lesson_id": "lesson-math-12-derivatives-applications",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "If a differentiable function f(x) satisfies f'(x) < 0 for all x in an interval (a, b), what can be concluded about the behavior of f on that interval?",
+      "answer_guide": "The function f is decreasing on (a, b).",
+      "explanation": "A negative first derivative indicates a decreasing function.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-monotonicity-explanation-001",
+        "math12-monotonicity-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-derivatives-applications-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Applications of Derivatives",
+      "concept_id": "math-12-derivatives-applications",
+      "lesson_id": "lesson-math-12-derivatives-applications",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Find the interval where the function f(x) = x^2 + 6x is increasing.",
+      "answer_guide": "(-3, ∞)",
+      "explanation": "f'(x) = 2x + 6. Setting 2x + 6 > 0 gives x > -3.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-monotonicity-explanation-001",
+        "math12-monotonicity-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-derivatives-applications-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Applications of Derivatives",
+      "concept_id": "math-12-derivatives-applications",
+      "lesson_id": "lesson-math-12-derivatives-applications",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "For f(x) = x^3 - 3x, identify the critical points and determine the intervals where the function is increasing and decreasing.",
+      "answer_guide": "Critical points: x = ±1. Increasing: (-∞, -1) ∪ (1, ∞). Decreasing: (-1, 1).",
+      "explanation": "f'(x) = 3x^2 - 3. Roots are ±1. Sign chart: positive outside [-1, 1], negative inside.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-monotonicity-explanation-001",
+        "math12-monotonicity-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-determinants-invertibility-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Determinants",
+      "concept_id": "math-12-determinants-invertibility",
+      "lesson_id": "lesson-math-12-determinants-invertibility",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Under what condition is a square matrix considered invertible in terms of its determinant?",
+      "answer_guide": "A square matrix is invertible if and only if its determinant is nonzero.",
+      "explanation": "The determinant must be non-zero for an inverse to exist.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-determinants-invertibility-explanation-001",
+        "math-12-determinants-invertibility-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-determinants-invertibility-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Determinants",
+      "concept_id": "math-12-determinants-invertibility",
+      "lesson_id": "lesson-math-12-determinants-invertibility",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Determine if the matrix [[4, 2], [6, 3]] is invertible. Show your calculation.",
+      "answer_guide": "Determinant = (4*3) - (2*6) = 12 - 12 = 0. Since the determinant is zero, the matrix is not invertible.",
+      "explanation": "A zero determinant indicates the matrix has no inverse.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-determinants-invertibility-explanation-001",
+        "math-12-determinants-invertibility-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-determinants-invertibility-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Determinants",
+      "concept_id": "math-12-determinants-invertibility",
+      "lesson_id": "lesson-math-12-determinants-invertibility",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If a 2x2 matrix has a determinant of 0, what can be inferred about its rows or columns?",
+      "answer_guide": "A zero determinant signals that the rows or columns of the matrix are linearly dependent.",
+      "explanation": "Linear dependence in rows/columns results in a zero determinant.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-determinants-invertibility-explanation-001",
+        "math-12-determinants-invertibility-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-direction-cosines-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Three-Dimensional Geometry",
+      "concept_id": "math-12-direction-cosines",
+      "lesson_id": "lesson-math-12-direction-cosines",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What is the mathematical relationship between the direction cosines l, m, and n of a line?",
+      "answer_guide": "The sum of the squares of the direction cosines is equal to 1: l² + m² + n² = 1.",
+      "explanation": "This is the fundamental identity for normalized direction cosines.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-direction-cosines-explanation-001",
+        "math-12-direction-cosines-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-direction-cosines-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Three-Dimensional Geometry",
+      "concept_id": "math-12-direction-cosines",
+      "lesson_id": "lesson-math-12-direction-cosines",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Find the direction cosines of a line with direction ratios (1, 2, 2).",
+      "answer_guide": "Magnitude = √(1² + 2² + 2²) = √9 = 3. Direction cosines = (1/3, 2/3, 2/3).",
+      "explanation": "Direction cosines are obtained by normalizing the direction ratios.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-direction-cosines-explanation-001",
+        "math-12-direction-cosines-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-direction-cosines-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Three-Dimensional Geometry",
+      "concept_id": "math-12-direction-cosines",
+      "lesson_id": "lesson-math-12-direction-cosines",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If a line has direction ratios (a, b, c), explain the process of transforming these into direction cosines.",
+      "answer_guide": "First, calculate the magnitude √(a² + b² + c²). Then, divide each ratio by this magnitude to obtain l = a/mag, m = b/mag, and n = c/mag.",
+      "explanation": "Normalization ensures the resulting vector has a unit length of 1.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-direction-cosines-explanation-001",
+        "math-12-direction-cosines-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-integration-substitution-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Integrals",
+      "concept_id": "math-12-integration-substitution",
+      "lesson_id": "lesson-math-12-integration-substitution",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What is the primary purpose of using the substitution method in integration?",
+      "answer_guide": "Substitution simplifies an integral by setting an inner expression to a new variable, effectively reversing the chain rule.",
+      "explanation": "It transforms a complex integral into a simpler form.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-integration-substitution-explanation-001",
+        "math-12-integration-substitution-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-integration-substitution-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Integrals",
+      "concept_id": "math-12-integration-substitution",
+      "lesson_id": "lesson-math-12-integration-substitution",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Evaluate the integral ∫ 3x² exp(x³) dx using substitution.",
+      "answer_guide": "Let u = x³, then du = 3x² dx. The integral becomes ∫ exp(u) du = exp(u) + C = exp(x³) + C.",
+      "explanation": "Substitution replaces the inner function x³ and its derivative.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-integration-substitution-explanation-001",
+        "math-12-integration-substitution-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-integration-substitution-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Integrals",
+      "concept_id": "math-12-integration-substitution",
+      "lesson_id": "lesson-math-12-integration-substitution",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "When evaluating a definite integral using substitution, what are the two valid ways to handle the limits of integration?",
+      "answer_guide": "One can either change the original limits to corresponding u-values or substitute the original variable back into the result before applying the original limits.",
+      "explanation": "Both methods ensure the limits match the variable of integration.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-integration-substitution-explanation-001",
+        "math-12-integration-substitution-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-inverse-sine-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Inverse Trigonometric Functions",
+      "concept_id": "math-12-inverse-sine",
+      "lesson_id": "lesson-math-12-inverse-sine",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the principal-value range of the function f(x) = sin⁻¹(x)?",
+      "answer_guide": "[-π/2, π/2]",
+      "explanation": "The range is restricted to ensure the inverse is a function.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-inverse-sine-explanation-001",
+        "math-12-inverse-sine-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-inverse-sine-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Inverse Trigonometric Functions",
+      "concept_id": "math-12-inverse-sine",
+      "lesson_id": "lesson-math-12-inverse-sine",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Find the principal value of sin⁻¹(-√3/2).",
+      "answer_guide": "-π/3",
+      "explanation": "sin(-π/3) = -√3/2 and -π/3 falls within the range [-π/2, π/2].",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-inverse-sine-explanation-001",
+        "math-12-inverse-sine-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-inverse-sine-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Inverse Trigonometric Functions",
+      "concept_id": "math-12-inverse-sine",
+      "lesson_id": "lesson-math-12-inverse-sine",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Explain why sin⁻¹(2) is undefined in the context of the function's domain.",
+      "answer_guide": "The domain of sin⁻¹(x) is [-1, 1], and 2 is outside this interval.",
+      "explanation": "The sine of any real angle cannot exceed 1 or be less than -1.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-inverse-sine-explanation-001",
+        "math-12-inverse-sine-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-linear-programming-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Linear Programming",
+      "concept_id": "math-12-linear-programming",
+      "lesson_id": "lesson-math-12-linear-programming",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What is the 'feasible region' in a linear programming problem?",
+      "answer_guide": "The feasible region is the intersection of all the half-planes defined by the linear constraints.",
+      "explanation": "It represents all points that satisfy every constraint.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-linear-programming-explanation-001",
+        "math-12-linear-programming-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-linear-programming-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Linear Programming",
+      "concept_id": "math-12-linear-programming",
+      "lesson_id": "lesson-math-12-linear-programming",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Maximize Z = 2x + 5y subject to x ≥ 0, y ≥ 0, and x + y ≤ 2. Identify the corner points and the maximum value.",
+      "answer_guide": "Corner points: (0,0), (2,0), (0,2). Z values: Z(0,0)=0, Z(2,0)=4, Z(0,2)=10. Maximum is 10 at (0,2).",
+      "explanation": "The optimum occurs at one of the vertices of the bounded region.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-linear-programming-explanation-001",
+        "math-12-linear-programming-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-linear-programming-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Linear Programming",
+      "concept_id": "math-12-linear-programming",
+      "lesson_id": "lesson-math-12-linear-programming",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "For a bounded polygonal feasible region, why is it sufficient to evaluate the objective function only at the corner points?",
+      "answer_guide": "Because the objective function is linear, its maximum and minimum values must occur at the boundaries, specifically at the vertices (corner points) of the convex polygon.",
+      "explanation": "Linearity ensures extrema are located at the region's extremities.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-linear-programming-explanation-001",
+        "math-12-linear-programming-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-matrices-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Matrices",
+      "concept_id": "math-12-matrices",
+      "lesson_id": "lesson-math-12-matrices",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "If matrix A has order 3 × 2 and matrix B has order 2 × 5, what is the order of the product matrix AB?",
+      "answer_guide": "3 × 5",
+      "explanation": "The product of an m × n and n × p matrix is an m × p matrix.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-matrix-explanation-001",
+        "math12-matrix-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-matrices-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Matrices",
+      "concept_id": "math-12-matrices",
+      "lesson_id": "lesson-math-12-matrices",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Given A = [[1, 0], [2, 1]] and B = [[3, 1], [0, 2]], calculate the product AB.",
+      "answer_guide": "[[3, 1], [6, 3]]",
+      "explanation": "Row-by-column dot products: (1*3+0*0, 1*1+0*2) and (2*3+1*0, 2*1+1*2).",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-matrix-explanation-001",
+        "math12-matrix-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-matrices-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Matrices",
+      "concept_id": "math-12-matrices",
+      "lesson_id": "lesson-math-12-matrices",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If A is a 2 × 3 matrix and B is a 3 × 2 matrix, is it possible for AB to be defined while BA is undefined? Explain.",
+      "answer_guide": "No, both are defined.",
+      "explanation": "AB is (2x3)(3x2) = 2x2. BA is (3x2)(2x3) = 3x3. Both satisfy the inner-dimension match rule.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-matrix-explanation-001",
+        "math12-matrix-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-order-degree-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Differential Equations",
+      "concept_id": "math-12-order-degree",
+      "lesson_id": "lesson-math-12-order-degree",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Define the 'order' of a differential equation.",
+      "answer_guide": "The order of a differential equation is the highest derivative present in the equation.",
+      "explanation": "Order is determined by the highest derivative level.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-order-degree-explanation-001",
+        "math-12-order-degree-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-order-degree-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Differential Equations",
+      "concept_id": "math-12-order-degree",
+      "lesson_id": "lesson-math-12-order-degree",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Find the order and degree of the differential equation (d³y/dx³)² + (dy/dx)⁵ = 0.",
+      "answer_guide": "Order = 3 (highest derivative is the third derivative). Degree = 2 (power of the highest-order derivative).",
+      "explanation": "Order is the derivative level; degree is the power of that derivative.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-order-degree-explanation-001",
+        "math-12-order-degree-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-order-degree-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Differential Equations",
+      "concept_id": "math-12-order-degree",
+      "lesson_id": "lesson-math-12-order-degree",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Can a differential equation have an order of 2 but a degree of 1? Provide a general example.",
+      "answer_guide": "Yes. An example is d²y/dx² + dy/dx = 0. Here, the highest derivative is the second (order 2) and its power is 1 (degree 1).",
+      "explanation": "Order and degree are independent classifications of the equation.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math-12-order-degree-explanation-001",
+        "math-12-order-degree-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-separation-of-variables-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Differential Equations",
+      "concept_id": "math-12-separation-of-variables",
+      "lesson_id": "lesson-math-12-separation-of-variables",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What is the primary goal when rearranging a differential equation to use the method of separation of variables?",
+      "answer_guide": "To place all terms involving y with dy and all terms involving x with dx on opposite sides of the equation.",
+      "explanation": "This allows independent integration of both sides.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-separation-of-variables-explanation-001",
+        "math12-separation-of-variables-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-separation-of-variables-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Differential Equations",
+      "concept_id": "math-12-separation-of-variables",
+      "lesson_id": "lesson-math-12-separation-of-variables",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Solve the differential equation dy/dx = 3x^2 with the initial condition y(0) = 5.",
+      "answer_guide": "y = x^3 + 5",
+      "explanation": "∫ dy = ∫ 3x^2 dx → y = x^3 + C. Using y(0)=5, 5 = 0 + C, so C=5.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-separation-of-variables-explanation-001",
+        "math12-separation-of-variables-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-separation-of-variables-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Differential Equations",
+      "concept_id": "math-12-separation-of-variables",
+      "lesson_id": "lesson-math-12-separation-of-variables",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Solve dy/dx = y/x and determine the general solution.",
+      "answer_guide": "y = Cx",
+      "explanation": "∫ (1/y) dy = ∫ (1/x) dx → ln|y| = ln|x| + C' → |y| = e^{C'}|x| → y = Cx.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-separation-of-variables-explanation-001",
+        "math12-separation-of-variables-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-vector-dot-product-easy-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Vectors",
+      "concept_id": "math-12-vector-dot-product",
+      "lesson_id": "lesson-math-12-vector-dot-product",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "If the dot product of two non-zero vectors a and b is zero, what is the geometric relationship between them?",
+      "answer_guide": "They are perpendicular (orthogonal).",
+      "explanation": "a·b = |a||b|cosθ; if a·b=0 and |a|,|b|≠0, then cosθ=0, so θ=90°.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-vector-dot-product-explanation-001",
+        "math12-vector-dot-product-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-vector-dot-product-medium-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Vectors",
+      "concept_id": "math-12-vector-dot-product",
+      "lesson_id": "lesson-math-12-vector-dot-product",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Calculate the dot product of vectors a = (3, -1, 2) and b = (1, 4, 0).",
+      "answer_guide": "-1",
+      "explanation": "(3*1) + (-1*4) + (2*0) = 3 - 4 + 0 = -1.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-vector-dot-product-explanation-001",
+        "math12-vector-dot-product-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-math-12-vector-dot-product-hard-demo-01",
+      "subject": "Mathematics",
+      "class": 12,
+      "chapter": "Vectors",
+      "concept_id": "math-12-vector-dot-product",
+      "lesson_id": "lesson-math-12-vector-dot-product",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Given |a| = 5, |b| = 4, and a·b = 10, find the cosine of the angle θ between the two vectors.",
+      "answer_guide": "cosθ = 1/2",
+      "explanation": "a·b = |a||b|cosθ → 10 = (5)(4)cosθ → 10 = 20cosθ → cosθ = 1/2.",
+      "source_reference_ids": [
+        "adapted-original-mathematics-12"
+      ],
+      "supporting_chunk_ids": [
+        "math12-vector-dot-product-explanation-001",
+        "math12-vector-dot-product-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-mathematics-041",
+      "generation_model": "gemma4:31b"
+    }
+  ]
+}
