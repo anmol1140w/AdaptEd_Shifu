@@ -79,3 +79,16 @@
   .solved-breakdown-row:hover, .profile-back-link:hover, .profile-error button:hover, .profile-heat-cell:hover,
   .profile-error button:active, .profile-heat-cell:active { transform: none; }
 }
+
+/* Submission density is mapped to these progressively stronger greens by levelFor(). */
+.profile-heat-cell.activity-level-0 { background: #f0efe8; }
+.profile-heat-cell.activity-level-1 { background: #c9f5d3; }
+.profile-heat-cell.activity-level-2 { background: #8ee5a4; }
+.profile-heat-cell.activity-level-3 { background: #43bd70; }
+.profile-heat-cell.activity-level-4 { background: #168447; }
+.profile-heat-cell.activity-level-5 { background: #147c42; }
+.profile-heat-cell.activity-level-6 { background: #126f3b; }
+.profile-heat-cell.activity-level-7 { background: #106234; }
+.profile-heat-cell.activity-level-8 { background: #0d552d; }
+.profile-heat-cell.activity-level-9 { background: #0a4725; }
+.profile-heat-cell.activity-level-10 { background: #073b1e; }

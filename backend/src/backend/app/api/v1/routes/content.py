@@ -57,12 +57,15 @@ def list_problems(topic: str | None = Query(default=None), subject: str | None =
                        p.estimated_minutes, p.exam_relevance,
                        COALESCE(bool_or(a.correct), FALSE) AS solved,
                        COALESCE(bool_or(a.id IS NOT NULL), FALSE) AS attempted,
+                       COALESCE((SELECT jsonb_agg(jsonb_build_object('correct', pa.correct, 'created_at', pa.created_at)
+                         ORDER BY pa.created_at DESC)
+                         FROM problem_attempts pa WHERE pa.problem_id = p.id AND pa.user_id = %s), '[]') AS attempts,
                        COALESCE(array_agg(DISTINCT t.name) FILTER (WHERE t.name IS NOT NULL), '{{}}') AS topics
                 FROM jee_problems p LEFT JOIN problem_topics pt ON pt.problem_id = p.id
                 LEFT JOIN jee_topics t ON t.id = pt.topic_id
                 LEFT JOIN problem_attempts a ON a.problem_id = p.id AND a.user_id = %s
                 {where}
-                GROUP BY p.id ORDER BY p.subject, p.chapter, p.id""", [user["id"], *values]
+            GROUP BY p.id ORDER BY p.subject, p.chapter, p.id""", [user["id"], user["id"], *values]
         ).fetchall()
         return {"problems": rows}
     finally:
