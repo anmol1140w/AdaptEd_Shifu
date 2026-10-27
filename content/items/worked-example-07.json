@@ -1,0 +1,18 @@
+{
+  "id": "worked-example-07",
+  "source_id": "worked-example-07",
+  "concept_id": "ALG-DIST-01",
+  "title": "Worked Example: Distributing a Negative Multiplier Across Parentheses",
+  "grade": 9,
+  "subject": "Mathematics",
+  "prerequisites": ["ALG-DIST-01"],
+  "text": "Problem: Expand and simplify the expression -2(x + 3).\nStep 1 (Identify terms): The multiplier outside the parentheses is -2. The terms inside the parentheses are x and +3.\nStep 2 (Distribute to first term): Multiply -2 by x: (-2) * x = -2x.\nStep 3 (Distribute to second term): Multiply -2 by +3: (-2) * (+3) = -6.\nStep 4 (Combine results): Combine the distributed products: -2x + (-6) = -2x - 6.\nKey Takeaway: The negative sign belongs to the multiplier and must be distributed to BOTH terms inside the parentheses. Writing -2x + 3 is a misconception where the constant was not multiplied.",
+  "tags": [
+    "worked example",
+    "distributive property",
+    "negative multiplier",
+    "common misconception",
+    "algebra",
+    "ALG-DIST-01"
+  ]
+}
