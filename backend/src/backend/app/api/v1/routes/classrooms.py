@@ -50,17 +50,17 @@ def classroom_view(row, *, join_code: str | None = None) -> dict:
 
 
 @router.post("", status_code=status.HTTP_201_CREATED)
-def create_classroom(payload: CreateClassroomRequest, teacher=Depends(teacher_only)):
+def create_classroom(payload: CreateClassroomRequest, user=Depends(current_user)):
     connection = connect()
     classroom_id, slug, join_code = unique_values(connection)
     try:
         connection.execute(
             "INSERT INTO classrooms (id, public_slug, name, description, owner_id, join_code_hash) VALUES (%s, %s, %s, %s, %s, %s)",
-            (classroom_id, slug, payload.name.strip(), payload.description, teacher["id"], hash_secret(join_code, settings.secret_key)),
+            (classroom_id, slug, payload.name.strip(), payload.description, user["id"], hash_secret(join_code, settings.secret_key)),
         )
         connection.execute(
             "INSERT INTO classroom_memberships (classroom_id, user_id, role) VALUES (%s, %s, 'owner')",
-            (classroom_id, teacher["id"]),
+            (classroom_id, user["id"]),
         )
         connection.commit()
         row = connection.execute("SELECT * FROM classrooms WHERE id = %s", (classroom_id,)).fetchone()

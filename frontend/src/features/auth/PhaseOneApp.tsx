@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { ArrowDownRight, ArrowLeft, ArrowRight, Atom, BookOpen, Check, ChevronRight, GraduationCap, LogOut, Mail, Orbit, Plus, School, Sparkles, Users } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -6,14 +6,17 @@ import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useAuth } from '../../app/AuthProvider'
 import { PrivacyPage, TermsPage } from '../../app/LegalPages'
-import { ProblemsPage, StudentProblemDetailPage } from '../learner/ProblemsPage'
+import { StudentProblemDetailPage } from '../learner/ProblemsPage'
 import { QuizAttemptPage } from '../learner/QuizAttemptPage'
 import { StudentQuizzesPage } from '../learner/StudentQuizzesPage'
+import { JeeProblemPage, TopicProblemsPage } from '../learner/JeeContentPages'
+import { TopicWiseProblemsPage } from '../learner/TopicWiseProblemsPage'
+import { TopicQuizAttemptPage, TopicQuizzesPage } from '../learner/TopicQuizzesPage'
 import { ACADEMIC_YEARS, CLASS_LEVELS, EXAM_TARGETS, JEE_SUBJECTS, subjectLabel } from '../onboarding/services/classroomService'
 import type { AuthSession, ClassLevel, Classroom, CreateClassroomInput, ExamTarget, JeeSubjectId } from '../../types'
 
 function postAuthRoute(session: AuthSession) {
-  return session.user.role === 'student' && session.user.onboardingComplete ? '/student/problems' : '/classroom'
+  return '/classroom'
 }
 
 function Brand({ compact = false }: { compact?: boolean }) {
@@ -109,15 +112,15 @@ function CreateClassroomPage() {
   const [busy, setBusy] = useState(false)
   const change = <K extends keyof CreateClassroomInput>(key: K, value: CreateClassroomInput[K]) => { setForm((current) => ({ ...current, [key]: value })); setError('') }
   const toggleSubject = (subject: JeeSubjectId) => change('subjects', form.subjects.includes(subject) ? form.subjects.filter((item) => item !== subject) : [...form.subjects, subject])
-  const submit = (event: FormEvent) => {
+  const submit = async (event: FormEvent) => {
     event.preventDefault(); setBusy(true)
-    const result = createClassroom(form)
+    const result = await createClassroom(form)
     setBusy(false)
     if (!result.ok) { setError(result.message); return }
     completeOnboarding()
     navigate('/classroom/created', { replace: true, state: { classroom: result.data } })
   }
-  return <FormShell title="Create your classroom." description="Set the focus for your batch. You can change the details as your preparation evolves." onBack={() => navigate('/classroom')}><form className="phase-form create-form" onSubmit={submit} noValidate><Field id="classroom-name" label="Classroom name" placeholder="e.g. JEE 2027 · Evening Batch" value={form.name} maxLength={60} onChange={(event) => change('name', event.target.value)} /><Field id="teacher-name" label="Your name" placeholder="Teacher or batch lead" value={form.teacherName} onChange={(event) => change('teacherName', event.target.value)} /><div className="form-grid"><label className="phase-field" htmlFor="class-level"><span className="field-label">Class level</span><select id="class-level" className="phase-select" value={form.classLevel} onChange={(event) => change('classLevel', event.target.value as ClassLevel)}>{CLASS_LEVELS.map((level) => <option key={level}>{level}</option>)}</select></label><label className="phase-field" htmlFor="academic-year"><span className="field-label">Academic year</span><select id="academic-year" className="phase-select" value={form.academicYear} onChange={(event) => change('academicYear', event.target.value)}>{ACADEMIC_YEARS.map((year) => <option key={year}>{year}</option>)}</select></label></div><label className="phase-field" htmlFor="exam-target"><span className="field-label">Exam target</span><select id="exam-target" className="phase-select" value={form.examTarget} onChange={(event) => change('examTarget', event.target.value as ExamTarget)}>{EXAM_TARGETS.map((exam) => <option key={exam}>{exam}</option>)}</select></label><fieldset className="subject-fieldset"><legend>Subjects <small>Choose at least one</small></legend><div className="subject-options">{JEE_SUBJECTS.map((subject) => <label className={`subject-option ${form.subjects.includes(subject) ? 'subject-selected' : ''}`} key={subject}><input type="checkbox" checked={form.subjects.includes(subject)} onChange={() => toggleSubject(subject)} /><span className="subject-check"><Check size={13} /></span><span>{subjectLabel(subject)}</span></label>)}</div></fieldset>{error && <Notice>{error}</Notice>}<Button type="submit" className="submit-button" disabled={busy}>{busy ? 'Creating…' : 'Create classroom'} <ArrowRight size={17} /></Button></form><p className="demo-disclaimer">Classroom data is stored in this browser until a backend is connected.</p></FormShell>
+  return <FormShell title="Create your classroom." description="Set the focus for your batch. You can change the details as your preparation evolves." onBack={() => navigate('/classroom')}><form className="phase-form create-form" onSubmit={submit} noValidate><Field id="classroom-name" label="Classroom name" placeholder="e.g. JEE 2027 · Evening Batch" value={form.name} maxLength={60} onChange={(event) => change('name', event.target.value)} /><Field id="teacher-name" label="Your name" placeholder="Teacher or batch lead" value={form.teacherName} onChange={(event) => change('teacherName', event.target.value)} /><div className="form-grid"><label className="phase-field" htmlFor="class-level"><span className="field-label">Class level</span><select id="class-level" className="phase-select" value={form.classLevel} onChange={(event) => change('classLevel', event.target.value as ClassLevel)}>{CLASS_LEVELS.map((level) => <option key={level}>{level}</option>)}</select></label><label className="phase-field" htmlFor="academic-year"><span className="field-label">Academic year</span><select id="academic-year" className="phase-select" value={form.academicYear} onChange={(event) => change('academicYear', event.target.value)}>{ACADEMIC_YEARS.map((year) => <option key={year}>{year}</option>)}</select></label></div><label className="phase-field" htmlFor="exam-target"><span className="field-label">Exam target</span><select id="exam-target" className="phase-select" value={form.examTarget} onChange={(event) => change('examTarget', event.target.value as ExamTarget)}>{EXAM_TARGETS.map((exam) => <option key={exam}>{exam}</option>)}</select></label><fieldset className="subject-fieldset"><legend>Subjects <small>Choose at least one</small></legend><div className="subject-options">{JEE_SUBJECTS.map((subject) => <label className={`subject-option ${form.subjects.includes(subject) ? 'subject-selected' : ''}`} key={subject}><input type="checkbox" checked={form.subjects.includes(subject)} onChange={() => toggleSubject(subject)} /><span className="subject-check"><Check size={13} /></span><span>{subjectLabel(subject)}</span></label>)}</div></fieldset>{error && <Notice>{error}</Notice>}<Button type="submit" className="submit-button" disabled={busy}>{busy ? 'Creating…' : 'Create classroom'} <ArrowRight size={17} /></Button></form><p className="demo-disclaimer">Classroom data is now stored in PostgreSQL.</p></FormShell>
 }
 
 function CreatedPage() {
@@ -134,15 +137,27 @@ function JoinClassroomPage() {
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
   const [joined, setJoined] = useState<Classroom | null>(null)
-  const submit = (event: FormEvent) => { event.preventDefault(); const result = joinClassroom({ code }); if (!result.ok) { setError(result.message); setJoined(null); return }; completeOnboarding('student'); setError(''); setJoined(result.data); navigate('/student/problems', { replace: true }) }
-  return <FormShell title="Join a classroom." description="Ask your teacher or batch lead for the invite code." onBack={() => navigate('/classroom')}><form className="phase-form join-form" onSubmit={submit} noValidate><label className="phase-field" htmlFor="join-code"><span className="field-label">Classroom code</span><div className="code-input-wrap"><Mail size={17} /><Input id="join-code" className="phase-input code-input" placeholder="Enter code" value={code} autoCapitalize="characters" maxLength={8} onChange={(event) => { setCode(event.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '')); setError(''); setJoined(null) }} /></div><span className="field-hint">Codes have 4–8 letters or numbers.</span></label>{error && <Notice>{error}</Notice>}{joined && <Notice tone="success">You joined <b>{joined.name}</b>. Your classroom is saved in this browser.</Notice>}<Button type="submit" className="submit-button">Join classroom <ArrowRight size={17} /></Button></form><div className="join-help"><BookOpen size={17} /><p>Don't have a code yet? Ask your teacher to create a classroom and share its invite code.</p></div></FormShell>
+  useEffect(() => {
+    if (!joined) return
+    const timer = window.setTimeout(() => navigate('/student/problems', { replace: true }), 0)
+    return () => window.clearTimeout(timer)
+  }, [joined, navigate])
+  const submit = async (event: FormEvent) => { event.preventDefault(); const result = await joinClassroom({ code }); if (!result.ok) { setError(result.message); setJoined(null); return }; completeOnboarding('student'); setError(''); setJoined(result.data) }
+  return <FormShell title="Join a classroom." description="Ask your teacher or batch lead for the invite code." onBack={() => navigate('/classroom')}><form className="phase-form join-form" onSubmit={submit} noValidate><label className="phase-field" htmlFor="join-code"><span className="field-label">Classroom code</span><div className="code-input-wrap"><Mail size={17} /><Input id="join-code" className="phase-input code-input" placeholder="Enter code" value={code} maxLength={10} onChange={(event) => { setCode(event.target.value.replace(/[^A-Za-z0-9]/g, '')); setError(''); setJoined(null) }} /></div><span className="field-hint">Codes have 10 letters or numbers. Enter it exactly as shown.</span></label>{error && <Notice>{error}</Notice>}{joined && <Notice tone="success">You joined <b>{joined.name}</b>. Your classroom is saved in this browser.</Notice>}<Button type="submit" className="submit-button">Join classroom <ArrowRight size={17} /></Button></form><div className="join-help"><BookOpen size={17} /><p>Don't have a code yet? Ask your teacher to create a classroom and share its invite code.</p></div></FormShell>
 }
 
 function CallbackPage() {
   const { finishCallback } = useAuth()
   const navigate = useNavigate()
   const [message, setMessage] = useState('')
-  useEffect(() => { const result = finishCallback(); if (result.ok) navigate(postAuthRoute(result.data), { replace: true }); else setMessage(result.message) }, [finishCallback, navigate])
+  const started = useRef(false)
+  useEffect(() => {
+    if (started.current) return
+    started.current = true
+    let active = true
+    finishCallback().then((result) => { if (!active) return; if (result.ok) navigate(postAuthRoute(result.data), { replace: true }); else setMessage(result.message) })
+    return () => { active = false }
+  }, [finishCallback, navigate])
   return message ? <Frame><div className="created-wrap"><span className="section-kicker">SIGN-IN LINK</span><h1>We couldn't complete sign in.</h1><Notice>{message}</Notice><Link className="inline-link" to="/sign-in">Back to sign in <ChevronRight size={15} /></Link></div></Frame> : <div className="phase-loading">Completing sign in…</div>
 }
 
@@ -164,5 +179,5 @@ function LandingPage() {
 
 export function PhaseOneApp() {
   const { status, session } = useAuth()
-  return <Routes><Route path="/" element={<LandingPage />} /><Route path="/terms" element={<TermsPage />} /><Route path="/privacy" element={<PrivacyPage />} /><Route path="/sign-in" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignInPage />} /><Route path="/sign-up" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignUpPage />} /><Route path="/auth/callback" element={<CallbackPage />} /><Route path="/classroom" element={<Protected><ClassroomHome /></Protected>} /><Route path="/classroom/create" element={<Protected><CreateClassroomPage /></Protected>} /><Route path="/classroom/join" element={<Protected><JoinClassroomPage /></Protected>} /><Route path="/classroom/created" element={<Protected><CreatedPage /></Protected>} /><Route path="/student/problems" element={<ProblemsPage />} /><Route path="/student/problems/:id" element={<StudentProblemDetailPage />} /><Route path="/student/quizzes" element={<StudentQuizzesPage />} /><Route path="/student/quizzes/:quizId" element={<QuizAttemptPage />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes>
+  return <Routes><Route path="/" element={<LandingPage />} /><Route path="/terms" element={<TermsPage />} /><Route path="/privacy" element={<PrivacyPage />} /><Route path="/sign-in" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignInPage />} /><Route path="/sign-up" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignUpPage />} /><Route path="/auth/callback" element={<CallbackPage />} /><Route path="/classroom" element={<Protected><ClassroomHome /></Protected>} /><Route path="/classroom/create" element={<Protected><CreateClassroomPage /></Protected>} /><Route path="/classroom/join" element={<Protected><JoinClassroomPage /></Protected>} /><Route path="/classroom/created" element={<Protected><CreatedPage /></Protected>} /><Route path="/student/problems" element={<TopicWiseProblemsPage />} /><Route path="/student/topics/:subject/:slug" element={<TopicProblemsPage />} /><Route path="/student/problems/:id" element={<JeeProblemPage />} /><Route path="/student/quizzes" element={<TopicQuizzesPage />} /><Route path="/student/quizzes/topic/:subject/:slug" element={<TopicQuizAttemptPage />} /><Route path="/student/quizzes/:quizId" element={<QuizAttemptPage />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes>
 }

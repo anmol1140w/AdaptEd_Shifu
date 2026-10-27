@@ -64,3 +64,22 @@ def decode_access_token(token: str, secret_key: str) -> dict[str, Any]:
         return claims
     except (ValueError, KeyError, TypeError, json.JSONDecodeError):
         raise ValueError("invalid access token") from None
+
+
+def create_oauth_state(secret_key: str, ttl_seconds: int = 600) -> str:
+    payload = f"{secrets.token_urlsafe(32)}.{int(time.time()) + ttl_seconds}"
+    signature = hmac.new(secret_key.encode(), payload.encode(), hashlib.sha256).hexdigest()
+    return f"{_b64(payload.encode())}.{signature}"
+
+
+def verify_oauth_state(state: str, secret_key: str) -> bool:
+    try:
+        encoded_payload, signature = state.split(".")
+        payload = _unb64(encoded_payload).decode()
+        expected = hmac.new(secret_key.encode(), payload.encode(), hashlib.sha256).hexdigest()
+        if not hmac.compare_digest(signature, expected):
+            return False
+        _, expires_at = payload.rsplit(".", 1)
+        return int(expires_at) >= int(time.time())
+    except (ValueError, TypeError):
+        return False
