@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "seed_id": "seed-math_class11-learner-evidence",
+  "subject": "Mathematics",
+  "class": 11,
+  "synthetic": true,
+  "learners": [
+    {
+      "learner_id": "learner-math_class11-1",
+      "display_name": "Mathematics Learner 1",
+      "subject": "Mathematics",
+      "class": 11,
+      "evidence_note": "Fictional learner record for local development; not a real student."
+    }
+  ],
+  "attempts": [
+    {
+      "attempt_id": "seed-math_class11-attempt-01",
+      "learner_id": "learner-math_class11-1",
+      "item_id": "item-math-11-quadratic-equations-recall-01",
+      "concept_id": "math-11-quadratic-equations",
+      "is_correct": true,
+      "difficulty": "medium",
+      "hint_count": 0,
+      "confidence_signal": 0.65,
+      "response_ms": 45000
+    },
+    {
+      "attempt_id": "seed-math_class11-attempt-02",
+      "learner_id": "learner-math_class11-1",
+      "item_id": "item-math-11-arithmetic-progression-recall-01",
+      "concept_id": "math-11-arithmetic-progression",
+      "is_correct": false,
+      "difficulty": "medium",
+      "hint_count": 1,
+      "confidence_signal": 0.4,
+      "response_ms": 50000
+    },
+    {
+      "attempt_id": "seed-math_class11-attempt-03",
+      "learner_id": "learner-math_class11-1",
+      "item_id": "item-math-11-trigonometric-functions-recall-01",
+      "concept_id": "math-11-trigonometric-functions",
+      "is_correct": true,
+      "difficulty": "medium",
+      "hint_count": 0,
+      "confidence_signal": 0.65,
+      "response_ms": 55000
+    },
+    {
+      "attempt_id": "seed-math_class11-attempt-04",
+      "learner_id": "learner-math_class11-1",
+      "item_id": "item-math-11-binomial-general-term-recall-01",
+      "concept_id": "math-11-binomial-general-term",
+      "is_correct": false,
+      "difficulty": "medium",
+      "hint_count": 0,
+      "confidence_signal": 0.4,
+      "response_ms": 60000
+    }
+  ]
+}

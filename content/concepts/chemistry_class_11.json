@@ -1,0 +1,193 @@
+{
+  "schema_version": "1.0",
+  "subject": "Chemistry",
+  "class": 11,
+  "concepts": [
+    {
+      "concept_id": "chem-11-mole-concept",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Some Basic Concepts of Chemistry",
+      "name": "Mole concept and amount of substance",
+      "description": "A mole is an amount of substance containing Avogadro's number of specified entities, approximately 6.022 × 10^23. The entities may be atoms, molecules, ions, or other stated particles. The amount in moles is n = mass/molar mass; particle count is then n times Avogadro's constant.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-11-mole-concept-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-periodic-trends",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Classification of Elements and Periodicity",
+      "name": "Atomic radius and ionization enthalpy trends",
+      "description": "Across a period, effective nuclear charge generally increases while electrons enter the same principal shell, so atomic radius generally decreases. Down a group, additional electron shells generally make atoms larger. Ionization enthalpy generally increases across a period and decreases down a group, with exceptions caused by subshell structure and electron pairing.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-11-periodic-trends-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-chemical-equilibrium",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Equilibrium",
+      "name": "Dynamic equilibrium and Le Chatelier's principle",
+      "description": "At dynamic equilibrium in a closed system, forward and reverse reaction rates are equal, so concentrations remain constant over time. The concentrations need not be equal. A disturbance such as a concentration or temperature change can shift the position of equilibrium; the equilibrium constant changes with temperature, not simply because more reactant was added.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-11-chemical-equilibrium-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-bond-types",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "name": "Ionic and covalent bonding",
+      "description": "Ionic bonding is associated with electrostatic attraction between oppositely charged ions, often after electron transfer. Covalent bonding involves shared electron pairs. Real bonding can have mixed character, and the useful model depends on the substance and question.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem11-bond-types-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-vsepr",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "name": "VSEPR shapes and bond angles",
+      "description": "VSEPR predicts approximate molecular shape by arranging electron domains around a central atom to reduce repulsion. Lone pairs generally repel more strongly than bonding pairs, so they can compress bond angles. Shape names describe atomic positions, not lone-pair positions.",
+      "prerequisite_ids": [
+        "chem-11-bond-types"
+      ],
+      "misconception_chunk_ids": [
+        "chem11-vsepr-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-enthalpy-hess-law",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Thermodynamics",
+      "name": "Enthalpy changes and Hess’s law",
+      "description": "Enthalpy change at constant pressure is the heat transferred when only pressure-volume work is considered. Hess’s law follows from enthalpy being a state function: if a reaction is assembled from steps, the overall enthalpy change is the sum of step changes. Reversing a reaction changes the sign; scaling it scales ΔH.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem11-enthalpy-hess-law-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-quantum-numbers",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Structure of Atom",
+      "name": "Quantum numbers and orbitals",
+      "description": "Quantum numbers specify an electron state: principal n relates to shell/energy, azimuthal l to subshell shape, magnetic ml to orbital orientation, and spin ms to spin state. Allowed values are constrained; for a given n, l ranges from 0 to n−1.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-11-quantum-numbers-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-hybridization",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "name": "Hybridization and sigma/pi bonds",
+      "description": "Hybridization is a bonding model that combines atomic orbitals to describe directional bonding. In the introductory model, sp³ arrangements are tetrahedral, sp² arrangements are trigonal planar, and sp arrangements are linear. A sigma bond has electron density along the internuclear axis; pi bonding adds side-on overlap.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-11-hybridization-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-oxidation-numbers",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Redox Reactions",
+      "name": "Oxidation numbers and redox identification",
+      "description": "Oxidation number is a bookkeeping assignment used to track electron transfer. Oxidation corresponds to an increase in oxidation number; reduction corresponds to a decrease. In a redox reaction, oxidation and reduction occur together, and the oxidizing agent is itself reduced.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-11-oxidation-numbers-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-inductive-effect",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Organic Chemistry: Some Basic Principles",
+      "name": "Inductive effect and bond polarity",
+      "description": "The inductive effect is electron displacement through sigma bonds caused by electronegativity differences. It weakens with distance along the carbon chain. Electron-withdrawing groups can stabilize some anions, while electron-donating groups can stabilize some cations; the outcome depends on the species and context.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-11-inductive-effect-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-alkene-addition",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Hydrocarbons",
+      "name": "Alkenes and electrophilic addition",
+      "description": "Alkenes contain a carbon-carbon double bond with a reactive pi component. Many introductory alkene reactions are additions across that double bond: the pi bond is converted into new sigma bonds as atoms/groups attach to the two carbons. Product orientation can depend on reaction conditions and substrate.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-11-alkene-addition-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-hydrogen-bonding",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "name": "Hydrogen bonding and its effects",
+      "description": "Hydrogen bonding is an attractive interaction involving hydrogen covalently attached to a highly electronegative atom and a lone pair on another electronegative atom. In the standard school model, it is especially important for N, O, and F. Hydrogen bonding affects boiling points, solubility, and structures such as water and biological molecules.",
+      "prerequisite_ids": [
+        "chem-11-bond-types"
+      ],
+      "misconception_chunk_ids": [
+        "chem-11-hydrogen-bonding-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-limiting-reagent",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Some Basic Concepts of Chemistry",
+      "name": "Limiting reagent and stoichiometry",
+      "description": "A balanced chemical equation gives mole ratios. The limiting reagent is consumed first and determines the maximum amount of product. Convert each reactant amount to the amount of product it could form; the smaller product amount identifies the limiting reagent.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-11-limiting-reagent-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    },
+    {
+      "concept_id": "chem-11-acid-base-ph",
+      "subject": "Chemistry",
+      "class": 11,
+      "chapter": "Equilibrium",
+      "name": "Acids, bases, and pH",
+      "description": "pH is defined as −log₁₀[H⁺] for the introductory concentration model. A change of one pH unit corresponds to a tenfold change in hydrogen-ion concentration. Strong acids ionize extensively in water; weak acids establish an equilibrium and ionize only partially.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "chem-11-acid-base-ph-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-chemistry-043"
+    }
+  ]
+}

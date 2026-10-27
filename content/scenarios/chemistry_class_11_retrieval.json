@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "scenario-chem_class11-retrieval-and-practice",
+  "title": "Chemistry Class 11: explain, retrieve, and check understanding",
+  "subject": "Chemistry",
+  "class": 11,
+  "seed_id": "seed-chem_class11-learner-evidence",
+  "learner_id": "learner-chem_class11-1",
+  "focus_concept_id": "chem-11-periodic-trends",
+  "learner_prompt": "I am unsure about atomic radius and ionization enthalpy trends. Can you explain the main idea and help me try a question?",
+  "retrieval_expectations": {
+    "required_subject": "Chemistry",
+    "required_class": 11,
+    "concept_id": "chem-11-periodic-trends",
+    "expected_chunk_ids": [
+      "chem11-periodic-explanation-001",
+      "chem11-periodic-example-001"
+    ],
+    "required_reference_id": "adapted-original-chemistry-11"
+  },
+  "expected_flow": [
+    "retrieve the linked explanation or worked example",
+    "answer using retrieved material and cite its source reference",
+    "offer a suitable linked practice item",
+    "record learner response as evidence for this concept"
+  ],
+  "synthetic": true
+}

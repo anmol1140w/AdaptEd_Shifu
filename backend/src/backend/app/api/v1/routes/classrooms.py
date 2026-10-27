@@ -50,17 +50,17 @@ def classroom_view(row, *, join_code: str | None = None) -> dict:
 
 
 @router.post("", status_code=status.HTTP_201_CREATED)
-def create_classroom(payload: CreateClassroomRequest, teacher=Depends(teacher_only)):
+def create_classroom(payload: CreateClassroomRequest, user=Depends(teacher_only)):
     connection = connect()
     classroom_id, slug, join_code = unique_values(connection)
     try:
         connection.execute(
             "INSERT INTO classrooms (id, public_slug, name, description, owner_id, join_code_hash) VALUES (%s, %s, %s, %s, %s, %s)",
-            (classroom_id, slug, payload.name.strip(), payload.description, teacher["id"], hash_secret(join_code, settings.secret_key)),
+            (classroom_id, slug, payload.name.strip(), payload.description, user["id"], hash_secret(join_code, settings.secret_key)),
         )
         connection.execute(
             "INSERT INTO classroom_memberships (classroom_id, user_id, role) VALUES (%s, %s, 'owner')",
-            (classroom_id, teacher["id"]),
+            (classroom_id, user["id"]),
         )
         connection.commit()
         row = connection.execute("SELECT * FROM classrooms WHERE id = %s", (classroom_id,)).fetchone()
@@ -122,6 +122,24 @@ def get_member_classroom(slug: str, user_id: str):
 @router.get("/{slug}")
 def get_classroom(slug: str, user=Depends(current_user)):
     return {"classroom": classroom_view(get_member_classroom(slug, user["id"]))}
+
+
+@router.get("/{slug}/students")
+def list_students(slug: str, teacher=Depends(teacher_only)):
+    connection = connect()
+    rows = connection.execute(
+        """SELECT u.id, u.name, u.email, m.joined_at,
+           COUNT(DISTINCT a.id)::int AS attempts,
+           COUNT(DISTINCT a.problem_id) FILTER (WHERE a.correct)::int AS solved
+           FROM classrooms c JOIN classroom_memberships m ON m.classroom_id = c.id
+           JOIN users u ON u.id = m.user_id
+           LEFT JOIN problem_attempts a ON a.user_id = u.id
+           WHERE c.public_slug = %s AND c.owner_id = %s AND m.role = 'student'
+           GROUP BY u.id, m.joined_at ORDER BY u.name""",
+        (slug, teacher["id"]),
+    ).fetchall()
+    connection.close()
+    return {"students": rows}
 
 
 @router.post("/{slug}/rotate-code")

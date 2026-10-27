@@ -28,3 +28,8 @@ adapter can expose.
 The adapter does not implement authentication, persistence or HTTP server
 startup. It enforces the learner identity/role boundary and delegates the
 assessment flow to `AssessmentFacade`.
+
+`question_banks.py` provides teacher-only preview and import adapters at
+`/api/v1/teacher/question-banks/preview` and
+`/api/v1/teacher/question-banks`. These receive normalized row objects; the
+frontend decodes uploaded files, while the backend validates and classifies.

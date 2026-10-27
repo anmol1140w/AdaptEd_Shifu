@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "references": [
+    {
+      "reference_id": "ncert-textbook-catalog",
+      "publisher": "National Council of Educational Research and Training (NCERT)",
+      "title": "Textbooks PDF (I-XII)",
+      "url": "https://ncert.nic.in/textbook.php",
+      "accessed_date": "2026-10-27",
+      "language": "English",
+      "notes": "Official catalog used to retrieve the complete-book archives. Individual book and chapter URLs are recorded in content/books/ncert/catalog.json."
+    }
+  ],
+  "attribution_policy": "Cite the NCERT title, class, subject, part, chapter, and PDF page span for every retrieved passage. Keep the source PDF and its NCERT attribution associated with each chunk. Confirm current NCERT reuse terms before distributing extracted textbook text."
+}

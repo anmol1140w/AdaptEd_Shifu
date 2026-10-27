@@ -8,10 +8,17 @@ from dataclasses import dataclass
 from .api.v1.routes.assessment import AssessmentApi
 from .api.v1.routes.learning_support import LearningSupportApi
 from .api.v1.routes.teacher_interventions import TeacherInterventionApi
+from .api.v1.routes.question_banks import QuestionBankApi
 from .application.assessment_facade import AssessmentFacade
 from .application.learning_support_facade import LearningSupportFacade
 from .application.teacher_intervention_facade import TeacherInterventionFacade
-from .application.ports.ai import RetrievedSource
+from .application.ports.ai import (
+    QuizGenerationPort,
+    RetrievalPort,
+    RetrievedSource,
+    TutorGenerationPort,
+)
+from .application.question_bank_facade import QuestionBankFacade
 from .application.ports.assessment import AssessmentGraderPort
 from .application.use_cases.build_subject_summary import BuildSubjectSummary
 from .application.use_cases.build_intervention_queue import BuildInterventionQueue
@@ -20,6 +27,7 @@ from .application.use_cases.prepare_attempt import PrepareAttempt
 from .application.use_cases.provide_tutor_support import ProvideTutorSupport
 from .application.use_cases.start_assessment import StartAssessment
 from .application.use_cases.submit_attempt import SubmitAttempt
+from .application.use_cases.manage_question_bank import ManageQuestionBank
 from .domain.entities.learning import AssessmentItem, Concept
 from .domain.services.learning_engine import LearningEngine
 from .infrastructure.assessment.grading import DeterministicAssessmentGrader
@@ -29,6 +37,7 @@ from .infrastructure.ai.llm import (
     CuratedTutorFallback,
     DeterministicQuizGenerator,
     DeterministicTutorGenerator,
+    OllamaCloudGenerator,
 )
 from .infrastructure.ai.retrieval import InMemoryLearningRetriever
 from .infrastructure.ai.validators import StructuredLearningOutputValidator
@@ -41,6 +50,8 @@ from .infrastructure.in_memory import (
     InMemoryMasteryStates,
     InMemoryRecommendations,
     InMemorySessionIds,
+    InMemoryQuestionBankIds,
+    InMemoryQuestionBankStore,
 )
 
 
@@ -63,6 +74,10 @@ class InMemoryAssessmentRuntime:
     intervention_api: TeacherInterventionApi
     intervention_facade: TeacherInterventionFacade
     ai_audit: InMemoryAIAudit
+    retriever: RetrievalPort
+    question_bank_api: QuestionBankApi
+    question_bank_facade: QuestionBankFacade
+    question_bank_store: InMemoryQuestionBankStore
 
 
 def build_in_memory_assessment_runtime(
@@ -74,8 +89,12 @@ def build_in_memory_assessment_runtime(
     session_id_prefix: str = "session",
     grader: AssessmentGraderPort | None = None,
     sources: Iterable[RetrievedSource] = (),
+    retriever: RetrievalPort | None = None,
+    tutor_generator: TutorGenerationPort | None = None,
+    quiz_generator: QuizGenerationPort | None = None,
+    use_ollama_cloud: bool = False,
 ) -> InMemoryAssessmentRuntime:
-    """Build a complete assessment runtime without a database or HTTP server."""
+    """Build a local runtime; optionally use Qdrant and Ollama Cloud generation."""
 
     concept_list = tuple(concepts)
     subject_name_map = dict(subject_names)
@@ -102,8 +121,11 @@ def build_in_memory_assessment_runtime(
     mastery_states = InMemoryMasteryStates()
     recommendations = InMemoryRecommendations()
     ai_audit = InMemoryAIAudit()
-    retriever = InMemoryLearningRetriever(sources)
+    active_retriever = retriever or InMemoryLearningRetriever(sources)
     validator = StructuredLearningOutputValidator()
+    ollama_generator = OllamaCloudGenerator() if use_ollama_cloud else None
+    active_tutor_generator = tutor_generator or ollama_generator or DeterministicTutorGenerator()
+    active_quiz_generator = quiz_generator or ollama_generator or DeterministicQuizGenerator()
     learning_engine = LearningEngine(concept_list)
     start_assessment = StartAssessment(
         learners=learners,
@@ -131,8 +153,8 @@ def build_in_memory_assessment_runtime(
     )
     provide_tutor_support = ProvideTutorSupport(
         concepts=concept_catalog,
-        retriever=retriever,
-        generator=DeterministicTutorGenerator(),
+        retriever=active_retriever,
+        generator=active_tutor_generator,
         fallback_generator=CuratedTutorFallback(),
         validator=validator,
         audit=ai_audit,
@@ -141,8 +163,8 @@ def build_in_memory_assessment_runtime(
     )
     generate_weak_area_quiz = GenerateWeakAreaQuiz(
         concepts=concept_catalog,
-        retriever=retriever,
-        generator=DeterministicQuizGenerator(),
+        retriever=active_retriever,
+        generator=active_quiz_generator,
         fallback_generator=CuratedQuizFallback(),
         validator=validator,
         audit=ai_audit,
@@ -177,6 +199,13 @@ def build_in_memory_assessment_runtime(
         subject_names=subject_name_map,
     )
     intervention_api = TeacherInterventionApi(facade=intervention_facade)
+    question_bank_store = InMemoryQuestionBankStore()
+    question_bank_manager = ManageQuestionBank(
+        store=question_bank_store,
+        ids=InMemoryQuestionBankIds(),
+    )
+    question_bank_facade = QuestionBankFacade(manager=question_bank_manager)
+    question_bank_api = QuestionBankApi(facade=question_bank_facade)
     return InMemoryAssessmentRuntime(
         api=api,
         facade=facade,
@@ -193,4 +222,8 @@ def build_in_memory_assessment_runtime(
         intervention_api=intervention_api,
         intervention_facade=intervention_facade,
         ai_audit=ai_audit,
+        retriever=active_retriever,
+        question_bank_api=question_bank_api,
+        question_bank_facade=question_bank_facade,
+        question_bank_store=question_bank_store,
     )

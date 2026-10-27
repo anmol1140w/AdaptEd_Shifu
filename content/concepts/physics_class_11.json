@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "subject": "Physics",
+  "class": 11,
+  "concepts": [
+    {
+      "concept_id": "phy-11-newtons-second-law",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Laws of Motion",
+      "name": "Newton's second law and momentum",
+      "description": "Newton's second law relates the net force on an object to the rate of change of its momentum. For constant mass, the familiar form is F_net = m a. Acceleration points in the direction of the net force; forces from different interactions must be added as vectors before applying the law.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-11-newtons-second-law-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-projectile-motion",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Motion in a Plane",
+      "name": "Projectile motion",
+      "description": "Ideal projectile motion separates into horizontal and vertical components. Neglecting air resistance, horizontal acceleration is zero and vertical acceleration is -g when upward is positive. The two components share the same time; this lets us combine horizontal uniform motion with vertical accelerated motion.",
+      "prerequisite_ids": [
+        "phy-11-newtons-second-law"
+      ],
+      "misconception_chunk_ids": [
+        "phy-11-projectile-motion-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-work-energy-theorem",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Work, Energy and Power",
+      "name": "Work-energy theorem",
+      "description": "The net work done on an object equals its change in kinetic energy: W_net = ΔK. Positive net work increases kinetic energy; negative net work decreases it. Work depends on the component of force along displacement, so a force perpendicular to displacement does no work in this model.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-11-work-energy-theorem-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-friction",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Laws of Motion",
+      "name": "Static and kinetic friction",
+      "description": "Friction acts parallel to a contact surface and opposes relative motion or its tendency. Static friction adjusts up to a maximum value; kinetic friction acts when surfaces slide. The simple dry-friction model uses f_s ≤ μ_s N and f_k = μ_k N.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy11-friction-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-gravitation",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Gravitation",
+      "name": "Universal gravitation and gravitational field",
+      "description": "Any two masses attract with force F = Gm₁m₂/r² along the line joining their centres. The gravitational field strength is force per unit test mass. For a spherical body outside it, the field behaves as if the mass were concentrated at its centre.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy11-gravitation-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-simple-harmonic-motion",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Oscillations",
+      "name": "Simple harmonic motion",
+      "description": "Simple harmonic motion occurs when acceleration is proportional to displacement from equilibrium and points in the opposite direction: a = −ω²x. Position, velocity, and acceleration vary periodically. The period is the time for one complete cycle.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy11-simple-harmonic-motion-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-measurement-uncertainty",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Units and Measurements",
+      "name": "Significant figures and uncertainty",
+      "description": "A measured value is reported with precision appropriate to its instrument. Significant figures communicate that precision, while uncertainty estimates the range of plausible values. For independent measured quantities, uncertainty propagation follows the mathematical operation used to calculate the result.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-11-measurement-uncertainty-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-velocity",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Motion in a Straight Line",
+      "name": "Average and instantaneous velocity",
+      "description": "Average velocity is displacement divided by elapsed time; it is a vector and can differ from average speed. Instantaneous velocity is the limiting rate of change of position with time and is the slope of a position-time graph at that instant.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-11-velocity-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-vector-components",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Motion in a Plane",
+      "name": "Resolution of vectors into components",
+      "description": "A vector can be represented by perpendicular components. If a vector of magnitude A makes angle θ with the positive x-axis, its components are Ax=A cosθ and Ay=A sinθ. Signs depend on the chosen axes and the vector direction.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-11-vector-components-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-impulse-momentum",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Laws of Motion",
+      "name": "Impulse and momentum change",
+      "description": "Momentum is p=mv. Impulse is the time integral of force and equals momentum change; for a constant force J=FΔt. A force acting for a longer time can produce the same momentum change with a smaller average magnitude.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-11-impulse-momentum-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-torque-equilibrium",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "System of Particles and Rotational Motion",
+      "name": "Torque and rotational equilibrium",
+      "description": "Torque about a chosen point is the turning effect of a force, with magnitude τ=rF sinθ. A rigid body in static equilibrium has zero net force and zero net torque. The torque depends on the perpendicular lever arm, not just the distance to the point of application.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-11-torque-equilibrium-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-thermal-expansion",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Thermal Properties of Matter",
+      "name": "Thermal expansion",
+      "description": "Most materials expand when heated because their average particle separation increases. For small temperature changes, linear expansion is ΔL=αL₀ΔT. Different materials expand by different amounts, which matters in joints, rails, and measuring instruments.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-11-thermal-expansion-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-standing-waves",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "Waves",
+      "name": "Superposition and standing waves",
+      "description": "When two waves overlap, the resultant displacement is the algebraic sum of their individual displacements. Two similar waves travelling in opposite directions can form a standing wave with nodes of permanent zero displacement and antinodes of maximum oscillation.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-11-standing-waves-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-11-moment-of-inertia",
+      "subject": "Physics",
+      "class": 11,
+      "chapter": "System of Particles and Rotational Motion",
+      "name": "Moment of inertia and rotational dynamics",
+      "description": "Moment of inertia measures resistance to angular acceleration about a chosen axis. For point masses I=Σmr², and rotational dynamics follows τ=Iα for a rigid body about a fixed axis in the introductory model. The axis matters because changing it changes the distances r.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [
+        "phy-11-moment-of-inertia-misconception-001"
+      ],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    }
+  ]
+}

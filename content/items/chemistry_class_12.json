@@ -1,0 +1,1057 @@
+{
+  "schema_version": "1.0",
+  "subject": "Chemistry",
+  "class": 12,
+  "items": [
+    {
+      "item_id": "item-chem-12-alcohol-phenol-ether-groups-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Alcohols, Phenols and Ethers",
+      "concept_id": "chem-12-alcohol-phenol-ether-groups",
+      "lesson_id": "lesson-chem-12-alcohol-phenol-ether-groups",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "Distinguish between the structural attachment of the –OH group in alcohols versus phenols.",
+      "answer_guide": "In alcohols, the –OH group is bonded to a saturated carbon; in phenols, the –OH group is directly attached to an aromatic ring.",
+      "explanation": "Structural distinction between alcohols and phenols.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-alcohol-phenol-ether-groups-explanation-001",
+        "chem-12-alcohol-phenol-ether-groups-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-alcohol-phenol-ether-groups-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Alcohols, Phenols and Ethers",
+      "concept_id": "chem-12-alcohol-phenol-ether-groups",
+      "lesson_id": "lesson-chem-12-alcohol-phenol-ether-groups",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Identify the functional group present in dimethyl ether (CH₃–O–CH₃) and describe its general structure.",
+      "answer_guide": "The functional group is an ether. Its general structure consists of an oxygen atom situated between two carbon groups.",
+      "explanation": "Application of functional group identification to a specific molecule.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-alcohol-phenol-ether-groups-explanation-001",
+        "chem-12-alcohol-phenol-ether-groups-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-alcohol-phenol-ether-groups-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Alcohols, Phenols and Ethers",
+      "concept_id": "chem-12-alcohol-phenol-ether-groups",
+      "lesson_id": "lesson-chem-12-alcohol-phenol-ether-groups",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "How do the structural differences between alcohols, phenols, and ethers influence their physical and chemical properties?",
+      "answer_guide": "The differences in how the oxygen is bonded (to saturated carbon, aromatic ring, or between two carbons) affect the molecule's ability to form hydrogen bonds, its acidity, its boiling point, and its characteristic chemical reactions.",
+      "explanation": "Analysis of the relationship between structure and properties for these three groups.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-alcohol-phenol-ether-groups-explanation-001",
+        "chem-12-alcohol-phenol-ether-groups-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-amine-basicity-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Amines",
+      "concept_id": "chem-12-amine-basicity",
+      "lesson_id": "lesson-chem-12-amine-basicity",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "Why are amines capable of acting as bases?",
+      "answer_guide": "Amines have a nitrogen atom with a lone pair of electrons, which allows them to accept a proton (H⁺).",
+      "explanation": "Understanding the structural basis of amine basicity.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-amine-basicity-explanation-001",
+        "chem12-amine-basicity-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-amine-basicity-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Amines",
+      "concept_id": "chem-12-amine-basicity",
+      "lesson_id": "lesson-chem-12-amine-basicity",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "When methylamine reacts as a base, what is the resulting species formed after it accepts a proton?",
+      "answer_guide": "Methylamine (CH₃NH₂) accepts a proton to form the methylammonium ion (CH₃NH₃⁺).",
+      "explanation": "Application of the protonation process for a specific amine.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-amine-basicity-explanation-001",
+        "chem12-amine-basicity-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-amine-basicity-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Amines",
+      "concept_id": "chem-12-amine-basicity",
+      "lesson_id": "lesson-chem-12-amine-basicity",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "When comparing the basicity of amines in aqueous solution, why is it insufficient to only consider the electron-donating effect of alkyl groups on the nitrogen lone pair?",
+      "answer_guide": "In aqueous solution, basicity is influenced by both the availability of the lone pair (electron donation) and the stabilization of the resulting ammonium ion through solvation. Both factors must be considered to determine relative basicity.",
+      "explanation": "Analysis of the competing factors (electronic vs. solvation) affecting basicity in water.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-amine-basicity-explanation-001",
+        "chem12-amine-basicity-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-carbonyl-group-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+      "concept_id": "chem-12-carbonyl-group",
+      "lesson_id": "lesson-chem-12-carbonyl-group",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the structural difference between the carbonyl carbon in an aldehyde and that in a ketone?",
+      "answer_guide": "In an aldehyde, the carbonyl carbon is bonded to at least one hydrogen; in a ketone, the carbonyl carbon is bonded to two carbon groups.",
+      "explanation": "Recall of the structural definitions of aldehydes and ketones.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-carbonyl-group-explanation-001",
+        "chem-12-carbonyl-group-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-carbonyl-group-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+      "concept_id": "chem-12-carbonyl-group",
+      "lesson_id": "lesson-chem-12-carbonyl-group",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Using the examples of ethanal (CH₃CHO) and propanone (CH₃COCH₃), identify which is an aldehyde and which is a ketone.",
+      "answer_guide": "Ethanal is an aldehyde (carbonyl carbon bonded to H); propanone is a ketone (carbonyl carbon bonded to two carbons).",
+      "explanation": "Application of structural rules to identify specific carbonyl compounds.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-carbonyl-group-explanation-001",
+        "chem-12-carbonyl-group-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-carbonyl-group-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+      "concept_id": "chem-12-carbonyl-group",
+      "lesson_id": "lesson-chem-12-carbonyl-group",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Explain why the polarity of the C=O group makes aldehydes and ketones susceptible to nucleophilic addition reactions.",
+      "answer_guide": "The carbonyl group is polar because oxygen attracts electron density away from the carbon. This creates an electron-deficient (electrophilic) carbon atom, which is then susceptible to attack by a nucleophile.",
+      "explanation": "Analysis of the relationship between polarity and reactivity.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-carbonyl-group-explanation-001",
+        "chem-12-carbonyl-group-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-carboxylic-acid-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+      "concept_id": "chem-12-carboxylic-acid",
+      "lesson_id": "lesson-chem-12-carboxylic-acid",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the functional group of carboxylic acids, and what ion is formed when they donate a proton?",
+      "answer_guide": "The functional group is –COOH. When they donate a proton, they form a carboxylate ion.",
+      "explanation": "Basic identification of the carboxylic acid group and its conjugate base.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-carboxylic-acid-explanation-001",
+        "chem-12-carboxylic-acid-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-carboxylic-acid-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+      "concept_id": "chem-12-carboxylic-acid",
+      "lesson_id": "lesson-chem-12-carboxylic-acid",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Describe the stabilization of the conjugate base of ethanoic acid (CH₃COOH) after it loses a proton.",
+      "answer_guide": "The resulting carboxylate ion (CH₃COO⁻) is stabilized by resonance delocalization, where the negative charge is shared between the two C–O bonds.",
+      "explanation": "Application of resonance stabilization to a specific carboxylic acid.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-carboxylic-acid-explanation-001",
+        "chem-12-carboxylic-acid-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-carboxylic-acid-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+      "concept_id": "chem-12-carboxylic-acid",
+      "lesson_id": "lesson-chem-12-carboxylic-acid",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "How would the addition of an electron-withdrawing substituent near the –COOH group affect the acidity of a carboxylic acid? Explain why.",
+      "answer_guide": "An electron-withdrawing substituent increases the acidity. It does this by stabilizing the negative charge of the resulting carboxylate ion, making it easier for the acid to donate its proton.",
+      "explanation": "Analysis of the effect of substituents on acid strength via charge stabilization.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-carboxylic-acid-explanation-001",
+        "chem-12-carboxylic-acid-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-chemical-kinetics-rate-law-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Chemical Kinetics",
+      "concept_id": "chem-12-chemical-kinetics-rate-law",
+      "lesson_id": "lesson-chem-12-chemical-kinetics-rate-law",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "How is the overall order of a reaction determined from its rate law expression, such as rate = k[A]^m[B]^n?",
+      "answer_guide": "The overall order is the sum of the exponents of the concentration terms in the rate law (m + n).",
+      "explanation": "Definition of overall reaction order.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-rate-law-explanation-001",
+        "chem12-rate-law-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-chemical-kinetics-rate-law-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Chemical Kinetics",
+      "concept_id": "chem-12-chemical-kinetics-rate-law",
+      "lesson_id": "lesson-chem-12-chemical-kinetics-rate-law",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "For a reaction with the rate law rate = k[A]^2[B], by what factor will the reaction rate increase if the concentration of A is tripled while the concentration of B remains constant?",
+      "answer_guide": "The rate is proportional to [A]^2. If [A] is tripled, the rate increases by 3^2 = 9 times.",
+      "explanation": "Application of the rate law to determine the effect of concentration changes.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-rate-law-explanation-001",
+        "chem12-rate-law-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-chemical-kinetics-rate-law-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Chemical Kinetics",
+      "concept_id": "chem-12-chemical-kinetics-rate-law",
+      "lesson_id": "lesson-chem-12-chemical-kinetics-rate-law",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Explain why the exponents in a rate law cannot generally be determined by looking at the coefficients of a balanced chemical equation.",
+      "answer_guide": "The balanced equation represents the overall stoichiometry, but the rate law depends on the reaction mechanism (the sequence of elementary steps). The exponents only match coefficients if the reaction is an elementary step.",
+      "explanation": "Analysis of the difference between stoichiometry and kinetics/mechanism.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-rate-law-explanation-001",
+        "chem12-rate-law-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-coordination-basics-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Coordination Compounds",
+      "concept_id": "chem-12-coordination-basics",
+      "lesson_id": "lesson-chem-12-coordination-basics",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the definition of the coordination number of a central metal atom in a coordination entity?",
+      "answer_guide": "The coordination number is the total number of donor atoms directly attached to the central metal atom or ion.",
+      "explanation": "Basic definition of coordination number.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-coordination-basics-explanation-001",
+        "chem12-coordination-basics-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-coordination-basics-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Coordination Compounds",
+      "concept_id": "chem-12-coordination-basics",
+      "lesson_id": "lesson-chem-12-coordination-basics",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Determine the coordination number and the overall charge of the complex ion [Co(NH₃)₆]³⁺.",
+      "answer_guide": "Coordination number = 6 (six ammonia ligands, each donating one nitrogen). Overall charge = +3.",
+      "explanation": "Application of coordination number and charge concepts to a specific example.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-coordination-basics-explanation-001",
+        "chem12-coordination-basics-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-coordination-basics-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Coordination Compounds",
+      "concept_id": "chem-12-coordination-basics",
+      "lesson_id": "lesson-chem-12-coordination-basics",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Why might the coordination number of a complex be higher than the number of ligands present in its formula?",
+      "answer_guide": "This occurs when multidentate ligands are present. A single multidentate ligand can attach to the central metal at several different donor sites, increasing the coordination number beyond the count of ligand molecules.",
+      "explanation": "Analysis of the effect of multidentate ligands on coordination number.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-coordination-basics-explanation-001",
+        "chem12-coordination-basics-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-coordination-isomerism-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Coordination Compounds",
+      "concept_id": "chem-12-coordination-isomerism",
+      "lesson_id": "lesson-chem-12-coordination-isomerism",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "What is geometrical isomerism in the context of coordination compounds?",
+      "answer_guide": "Geometrical isomerism occurs when coordination compounds have the same overall composition but different spatial arrangements of ligands (such as cis and trans arrangements).",
+      "explanation": "Understanding the concept of geometrical isomerism.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-coordination-isomerism-explanation-001",
+        "chem-12-coordination-isomerism-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-coordination-isomerism-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Coordination Compounds",
+      "concept_id": "chem-12-coordination-isomerism",
+      "lesson_id": "lesson-chem-12-coordination-isomerism",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "For the square-planar complex [Pt(NH₃)₂Cl₂], describe the difference between the cis and trans isomers.",
+      "answer_guide": "In the cis isomer, the two chloride ligands are adjacent to each other. In the trans isomer, the two chloride ligands are opposite to each other.",
+      "explanation": "Application of cis/trans definitions to a specific square-planar complex.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-coordination-isomerism-explanation-001",
+        "chem-12-coordination-isomerism-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-coordination-isomerism-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Coordination Compounds",
+      "concept_id": "chem-12-coordination-isomerism",
+      "lesson_id": "lesson-chem-12-coordination-isomerism",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "What factors determine whether a coordination compound can exhibit geometrical isomerism?",
+      "answer_guide": "Isomerism depends on the coordination geometry (e.g., square-planar or octahedral) and the positions of the ligands. Not all geometries or ligand combinations allow for distinct spatial arrangements like cis/trans.",
+      "explanation": "Analysis of the requirements for geometrical isomerism.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-coordination-isomerism-explanation-001",
+        "chem-12-coordination-isomerism-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-diazonium-salts-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Amines",
+      "concept_id": "chem-12-diazonium-salts",
+      "lesson_id": "lesson-chem-12-diazonium-salts",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "From which type of starting material are aromatic diazonium salts prepared, and under what temperature conditions?",
+      "answer_guide": "They are prepared from primary aromatic amines under cold conditions.",
+      "explanation": "Recall of the synthesis conditions for diazonium salts.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-diazonium-salts-explanation-001",
+        "chem-12-diazonium-salts-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-diazonium-salts-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Amines",
+      "concept_id": "chem-12-diazonium-salts",
+      "lesson_id": "lesson-chem-12-diazonium-salts",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "How can benzenediazonium chloride be converted into chlorobenzene?",
+      "answer_guide": "Benzenediazonium chloride can be converted to chlorobenzene using a copper(I) chloride reaction (a Sandmeyer-type transformation).",
+      "explanation": "Application of diazonium salt reactivity to synthesize a specific aromatic compound.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-diazonium-salts-explanation-001",
+        "chem-12-diazonium-salts-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-diazonium-salts-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Amines",
+      "concept_id": "chem-12-diazonium-salts",
+      "lesson_id": "lesson-chem-12-diazonium-salts",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Why are aromatic diazonium salts considered valuable synthetic intermediates in organic chemistry?",
+      "answer_guide": "They are valuable because the diazonium group can be replaced by several different functional groups under suitable reaction conditions, providing a versatile route to various substituted aromatic compounds.",
+      "explanation": "Analysis of the synthetic utility of diazonium salts.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-diazonium-salts-explanation-001",
+        "chem-12-diazonium-salts-worked_example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-electrochemical-cells-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Electrochemistry",
+      "concept_id": "chem-12-electrochemical-cells",
+      "lesson_id": "lesson-chem-12-electrochemical-cells",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "In a galvanic cell, at which electrode does oxidation occur, and in which direction do electrons flow externally?",
+      "answer_guide": "Oxidation occurs at the anode. Electrons flow externally from the anode to the cathode.",
+      "explanation": "Basic identification of electrode functions and electron flow in galvanic cells.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-galvanic-explanation-001",
+        "chem12-galvanic-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-electrochemical-cells-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Electrochemistry",
+      "concept_id": "chem-12-electrochemical-cells",
+      "lesson_id": "lesson-chem-12-electrochemical-cells",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Calculate the standard cell potential (E°cell) for a cell where the cathode has a standard reduction potential of +0.34 V and the anode has a standard reduction potential of -0.76 V.",
+      "answer_guide": "E°cell = E°cathode - E°anode = 0.34 V - (-0.76 V) = +1.10 V.",
+      "explanation": "Application of the standard cell potential formula using tabulated reduction potentials.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-galvanic-explanation-001",
+        "chem12-galvanic-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-electrochemical-cells-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Electrochemistry",
+      "concept_id": "chem-12-electrochemical-cells",
+      "lesson_id": "lesson-chem-12-electrochemical-cells",
+      "item_type": "short_answer",
+      "bloom_level": "evaluate",
+      "difficulty": "hard",
+      "question": "A student calculates a standard cell potential (E°cell) of -0.45 V for a proposed cell reaction. Based on this value, is the reaction spontaneous as written under standard conditions? Justify your answer.",
+      "answer_guide": "No, the reaction is not spontaneous. A positive E°cell value is required for a reaction to be spontaneous under standard conditions; a negative value indicates the reaction is non-spontaneous as written.",
+      "explanation": "Evaluation of spontaneity based on the sign of the cell potential.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-galvanic-explanation-001",
+        "chem12-galvanic-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-nernst-equation-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Electrochemistry",
+      "concept_id": "chem-12-nernst-equation",
+      "lesson_id": "lesson-chem-12-nernst-equation",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "In the Nernst equation, what does the term 'Q' represent, and which species are omitted when constructing it?",
+      "answer_guide": "Q is the reaction quotient, built from the activities (approximated by concentrations) of products over reactants. Pure solids and pure liquids are omitted.",
+      "explanation": "Understanding the components of the reaction quotient in electrochemistry.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-nernst-equation-explanation-001",
+        "chem12-nernst-equation-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-nernst-equation-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Electrochemistry",
+      "concept_id": "chem-12-nernst-equation",
+      "lesson_id": "lesson-chem-12-nernst-equation",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Using the Nernst equation at 298 K, calculate the cell potential (E) for a cell with E° = 0.70 V, n = 2, and Q = 10^2.",
+      "answer_guide": "E = E° - (0.0591/n)log₁₀Q = 0.70 - (0.0591/2)log₁₀(10^2) = 0.70 - (0.02955 × 2) = 0.70 - 0.0591 = 0.6409 V.",
+      "explanation": "Direct application of the Nernst equation at 298 K.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-nernst-equation-explanation-001",
+        "chem12-nernst-equation-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-nernst-equation-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Electrochemistry",
+      "concept_id": "chem-12-nernst-equation",
+      "lesson_id": "lesson-chem-12-nernst-equation",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "For a cell reaction where n = 1, how does increasing the concentration of the products relative to the reactants affect the cell potential (E) compared to the standard potential (E°)? Explain using the Nernst equation.",
+      "answer_guide": "Increasing product concentration increases Q. Since the Nernst equation is E = E° - (0.0591/n)log₁₀Q, a larger Q increases the value of the subtracted term, thereby decreasing the cell potential (E < E°).",
+      "explanation": "Analysis of the relationship between the reaction quotient and cell potential.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-nernst-equation-explanation-001",
+        "chem12-nernst-equation-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-nucleophilic-substitution-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Haloalkanes and Haloarenes",
+      "concept_id": "chem-12-nucleophilic-substitution",
+      "lesson_id": "lesson-chem-12-nucleophilic-substitution",
+      "item_type": "short_answer",
+      "bloom_level": "understand",
+      "difficulty": "easy",
+      "question": "In a nucleophilic substitution reaction, what is the role of the nucleophile?",
+      "answer_guide": "The nucleophile donates an electron pair to the substrate to replace a leaving group.",
+      "explanation": "Understanding the fundamental role of a nucleophile.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-nucleophilic-substitution-explanation-001",
+        "chem-12-nucleophilic-substitution-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-nucleophilic-substitution-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Haloalkanes and Haloarenes",
+      "concept_id": "chem-12-nucleophilic-substitution",
+      "lesson_id": "lesson-chem-12-nucleophilic-substitution",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Write the chemical equation for the reaction where hydroxide (OH⁻) replaces bromide in bromoethane to form ethanol.",
+      "answer_guide": "C₂H₅Br + OH⁻ → C₂H₅OH + Br⁻",
+      "explanation": "Application of nucleophilic substitution to a specific chemical reaction.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-nucleophilic-substitution-explanation-001",
+        "chem-12-nucleophilic-substitution-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-nucleophilic-substitution-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Haloalkanes and Haloarenes",
+      "concept_id": "chem-12-nucleophilic-substitution",
+      "lesson_id": "lesson-chem-12-nucleophilic-substitution",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Compare the suitability of a highly hindered substrate versus a less hindered substrate for the SN2 pathway. Which is favoured and why?",
+      "answer_guide": "The SN2 pathway is favoured by less hindered substrates. Because the SN2 mechanism is concerted (occurring in one step), steric hindrance at the reaction site would obstruct the nucleophile's approach, slowing the reaction.",
+      "explanation": "Analysis of the relationship between substrate structure (sterics) and the SN2 mechanism.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-nucleophilic-substitution-explanation-001",
+        "chem-12-nucleophilic-substitution-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-proteins-peptide-bond-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Biomolecules",
+      "concept_id": "chem-12-proteins-peptide-bond",
+      "lesson_id": "lesson-chem-12-proteins-peptide-bond",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the primary structure of a protein?",
+      "answer_guide": "The primary structure is the specific sequence of amino-acid residues joined by peptide bonds.",
+      "explanation": "Definition of primary protein structure.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-proteins-peptide-bond-explanation-001",
+        "chem-12-proteins-peptide-bond-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-proteins-peptide-bond-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Biomolecules",
+      "concept_id": "chem-12-proteins-peptide-bond",
+      "lesson_id": "lesson-chem-12-proteins-peptide-bond",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Describe the process by which two amino acids form a dipeptide.",
+      "answer_guide": "A dipeptide is formed when the carboxyl group of one amino acid links to the amino group of another, creating a peptide bond and releasing a molecule of water (condensation).",
+      "explanation": "Application of the peptide bond formation process.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-proteins-peptide-bond-explanation-001",
+        "chem-12-proteins-peptide-bond-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-proteins-peptide-bond-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Biomolecules",
+      "concept_id": "chem-12-proteins-peptide-bond",
+      "lesson_id": "lesson-chem-12-proteins-peptide-bond",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "How can changes in temperature or pH lead to a loss of protein function? Explain the mechanism.",
+      "answer_guide": "Protein function depends on its higher-level folding (structure). Changes in temperature or pH can disrupt the interactions that maintain this folding, altering the protein's shape and thus its ability to function.",
+      "explanation": "Analysis of the link between environmental factors, protein structure, and function.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-proteins-peptide-bond-explanation-001",
+        "chem-12-proteins-peptide-bond-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-solutions-colligative-properties-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Solutions",
+      "concept_id": "chem-12-solutions-colligative-properties",
+      "lesson_id": "lesson-chem-12-solutions-colligative-properties",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "What is the defining characteristic of colligative properties in an ideal dilute solution?",
+      "answer_guide": "Colligative properties depend only on the number of dissolved solute particles relative to solvent particles, not on the chemical identity of the solute.",
+      "explanation": "The core definition emphasizes quantity of particles over the nature of the solute.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-colligative-explanation-001",
+        "chem12-colligative-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-solutions-colligative-properties-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Solutions",
+      "concept_id": "chem-12-solutions-colligative-properties",
+      "lesson_id": "lesson-chem-12-solutions-colligative-properties",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Calculate the freezing point depression (ΔTf) for a non-electrolyte solution with a molality of 0.50 mol/kg, given that the Kf for water is 1.86 K kg/mol.",
+      "answer_guide": "ΔTf = Kf × m = 1.86 K kg/mol × 0.50 mol/kg = 0.93 K.",
+      "explanation": "Direct application of the formula ΔTf = Kf m for non-electrolytes.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-colligative-explanation-001",
+        "chem12-colligative-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-solutions-colligative-properties-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "Solutions",
+      "concept_id": "chem-12-solutions-colligative-properties",
+      "lesson_id": "lesson-chem-12-solutions-colligative-properties",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "Two solutions are prepared: one with 0.20 mol/kg of a non-electrolyte and one with 0.20 mol/kg of a solute that completely dissociates into two ions. How will the freezing point depression of the second solution compare to the first, and why?",
+      "answer_guide": "The second solution will have a freezing point depression approximately twice as large as the first. This is because colligative properties depend on the number of particles; dissociation increases the effective particle count from 0.20 mol/kg to 0.40 mol/kg.",
+      "explanation": "Requires analyzing the effect of dissociation on the effective particle count in colligative properties.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem12-colligative-explanation-001",
+        "chem12-colligative-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-transition-metal-properties-easy-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "d- and f-Block Elements",
+      "concept_id": "chem-12-transition-metal-properties",
+      "lesson_id": "lesson-chem-12-transition-metal-properties",
+      "item_type": "short_answer",
+      "bloom_level": "remember",
+      "difficulty": "easy",
+      "question": "Why do transition elements typically exhibit variable oxidation states?",
+      "answer_guide": "They exhibit variable oxidation states because the ns and (n−1)d electrons have similar energies, allowing different numbers of electrons to be involved in bonding.",
+      "explanation": "Recall of the electronic reason for variable oxidation states.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-transition-metal-properties-explanation-001",
+        "chem-12-transition-metal-properties-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-transition-metal-properties-medium-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "d- and f-Block Elements",
+      "concept_id": "chem-12-transition-metal-properties",
+      "lesson_id": "lesson-chem-12-transition-metal-properties",
+      "item_type": "short_answer",
+      "bloom_level": "apply",
+      "difficulty": "medium",
+      "question": "Based on their d-electron configurations, explain why Zn²⁺ is typically colourless while Cu²⁺ forms coloured solutions.",
+      "answer_guide": "Zn²⁺ has a d¹⁰ configuration (completely filled), while Cu²⁺ has a partially filled d subshell. Colour in transition metals often arises from electronic transitions within a partially filled d subshell; d⁰ and d¹⁰ ions lack these transitions and are often colourless.",
+      "explanation": "Application of d-electron configuration to the property of colour.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-transition-metal-properties-explanation-001",
+        "chem-12-transition-metal-properties-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    },
+    {
+      "item_id": "item-chem-12-transition-metal-properties-hard-demo-01",
+      "subject": "Chemistry",
+      "class": 12,
+      "chapter": "d- and f-Block Elements",
+      "concept_id": "chem-12-transition-metal-properties",
+      "lesson_id": "lesson-chem-12-transition-metal-properties",
+      "item_type": "short_answer",
+      "bloom_level": "analyze",
+      "difficulty": "hard",
+      "question": "If a transition metal ion is found to be colourless, does this definitively prove it has a d⁰ or d¹⁰ configuration? Justify your answer based on the provided text.",
+      "answer_guide": "No, it does not definitively prove it. While d⁰ and d¹⁰ ions are often colourless in simple cases, the text notes that 'other effects can matter,' implying that other factors can influence whether an ion is coloured or colourless.",
+      "explanation": "Analysis of the limitations of the d-electron rule for colour.",
+      "source_reference_ids": [
+        "adapted-original-chemistry-12"
+      ],
+      "supporting_chunk_ids": [
+        "chem-12-transition-metal-properties-explanation-001",
+        "chem-12-transition-metal-properties-example-001"
+      ],
+      "citation_status": "teacher_review_required",
+      "teacher_approved": false,
+      "syllabus_alignment_reference_id": "cbse-2026-27-chemistry-043",
+      "generation_model": "gemma4:31b"
+    }
+  ]
+}
