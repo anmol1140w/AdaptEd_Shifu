@@ -82,7 +82,7 @@ def build_demo_runtime() -> InMemoryAssessmentRuntime:
         ),
         subject_names={SUBJECT_ID: SUBJECT_NAME},
         session_id_prefix="demo-session",
-        use_grok=True,
+        use_ollama_cloud=True,
         sources=(
             RetrievedSource(
                 source_id="demo-lesson-equations-01",
