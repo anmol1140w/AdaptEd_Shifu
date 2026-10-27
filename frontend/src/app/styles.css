@@ -17,6 +17,9 @@ button { cursor: pointer; }
 .phase-nav-note { display: inline-flex; align-items: center; gap: 8px; font-family: "DM Mono", ui-monospace, monospace; font-size: 10px; font-weight: 800; letter-spacing: .09em; border: 2px solid var(--ink); padding: 8px 10px; background: var(--mint); box-shadow: 3px 3px 0 var(--ink); }
 .live-dot { width: 9px; height: 9px; border: 1.5px solid var(--ink); background: #77d293; border-radius: 50%; display: inline-block; flex: 0 0 auto; }
 .phase-nav-right { margin-left: auto; font-size: 12px; font-weight: 650; }
+.phase-profile-link { display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 4px 9px 4px 5px; border: 1.5px solid var(--ink); background: #fff; box-shadow: 2px 2px 0 var(--ink); font-size: 10px; font-weight: 850; }
+.phase-profile-link:hover, .phase-profile-link:focus-visible { background: var(--yellow); outline: 0; transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
+.phase-profile-avatar { width: 27px; height: 27px; display: grid; place-items: center; border: 1.5px solid var(--ink); border-radius: 50%; background: var(--mint); font: 800 8px "DM Mono", ui-monospace, monospace; }
 .phase-main { width: min(1440px, 100%); flex: 1; margin: 0 auto; display: grid; grid-template-columns: 1fr; padding: 40px 5.3vw 48px; }
 .phase-main-split { grid-template-columns: minmax(390px, .95fr) minmax(410px, 1.05fr); gap: clamp(38px, 8vw, 120px); align-items: center; }
 .phase-form-area { min-width: 0; display: flex; align-items: center; justify-content: center; }

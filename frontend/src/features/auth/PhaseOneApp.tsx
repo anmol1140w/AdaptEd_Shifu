@@ -13,6 +13,7 @@ import { JeeProblemPage, TopicProblemsPage } from '../learner/JeeContentPages'
 import { TopicWiseProblemsPage } from '../learner/TopicWiseProblemsPage'
 import { TeacherQuizAttemptPage, TopicQuizAttemptPage, TopicQuizzesPage } from '../learner/TopicQuizzesPage'
 import { TeacherDashboardPage, TeacherLoginPage } from '../teacher/TeacherPages'
+import { StudentProfilePage } from '../profile/StudentProfilePage'
 import { ACADEMIC_YEARS, CLASS_LEVELS, EXAM_TARGETS, JEE_SUBJECTS, subjectLabel } from '../onboarding/services/classroomService'
 import type { AuthSession, ClassLevel, Classroom, CreateClassroomInput, ExamTarget, JeeSubjectId, StudentClassLevel, StudentImprovementSubject, StudentJeeGoal, StudentLearningStyle, StudentOnboardingProfile, StudentStrengthSubject } from '../../types'
 
@@ -32,7 +33,9 @@ function Notice({ children, tone = 'error' }: { children: ReactNode; tone?: 'err
 }
 
 function Frame({ children, side }: { children: ReactNode; side?: ReactNode }) {
-  return <main className="phase-shell"><header className="phase-nav"><Brand /><span className="phase-nav-note"><span className="live-dot" /> LEARN WITH INTENT</span><span className="phase-nav-right">A clearer way to keep moving forward</span></header><div className={`phase-main ${side ? 'phase-main-split' : ''}`}><section className="phase-form-area">{children}</section>{side && <aside className="phase-art-area">{side}</aside>}</div><footer className="phase-footer"><span>AdaptEd © 2026</span><nav className="phase-footer-links" aria-label="Policies and project links"><Link to="/terms">Terms &amp; Conditions</Link><Link to="/privacy">Privacy Policy</Link><a href="https://github.com/sharadvyas123/AdaptEd_Shifu" target="_blank" rel="noreferrer"><span className="github-mark" aria-hidden="true">GH</span> GitHub</a></nav><span>Built for focused learning <Sparkles size={13} /></span></footer></main>
+  const { session } = useAuth()
+  const initials = session?.user.name.split(/\s+/).map((part) => part[0]).join('').slice(0, 2).toUpperCase()
+  return <main className="phase-shell"><header className="phase-nav"><Brand /><span className="phase-nav-note"><span className="live-dot" /> LEARN WITH INTENT</span><span className="phase-nav-right">A clearer way to keep moving forward</span>{session?.user.role === 'student' && <Link className="phase-profile-link" to="/student/profile" aria-label="Open your student profile"><span className="phase-profile-avatar">{initials}</span><span>Profile</span><ArrowRight size={14} /></Link>}</header><div className={`phase-main ${side ? 'phase-main-split' : ''}`}><section className="phase-form-area">{children}</section>{side && <aside className="phase-art-area">{side}</aside>}</div><footer className="phase-footer"><span>AdaptEd © 2026</span><nav className="phase-footer-links" aria-label="Policies and project links"><Link to="/terms">Terms &amp; Conditions</Link><Link to="/privacy">Privacy Policy</Link><a href="https://github.com/sharadvyas123/AdaptEd_Shifu" target="_blank" rel="noreferrer"><span className="github-mark" aria-hidden="true">GH</span> GitHub</a></nav><span>Built for focused learning <Sparkles size={13} /></span></footer></main>
 }
 
 function BrandPanel({ eyebrow, title, copy, visual = 'orbit' }: { eyebrow: string; title: ReactNode; copy: string; visual?: 'orbit' | 'classroom' }) {
@@ -223,6 +226,16 @@ function ProtectedStudent({ children }: { children: ReactNode }) {
   return children
 }
 
+function ProtectedStudentProfile({ children }: { children: ReactNode }) {
+  const { status, session } = useAuth()
+  if (status === 'loading') return <div className="phase-loading">Loading your workspace…</div>
+  if (status !== 'authenticated' || !session) return <Navigate to="/sign-in" replace />
+  if (session.user.role !== 'student') return <Navigate to="/classroom" replace />
+  const studentOnboardingComplete = session.user.studentOnboardingComplete ?? session.user.onboardingComplete
+  if (!studentOnboardingComplete) return <Navigate to="/student-onboarding" replace />
+  return children
+}
+
 function ClassroomHome() {
   const { session, classrooms, signOut } = useAuth()
   const navigate = useNavigate()
@@ -314,6 +327,6 @@ function LandingPage() {
 
 export function PhaseOneApp() {
   const { status, session } = useAuth()
-  return <Routes><Route path="/" element={<LandingPage />} /><Route path="/terms" element={<TermsPage />} /><Route path="/privacy" element={<PrivacyPage />} /><Route path="/sign-in" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignInPage />} /><Route path="/sign-up" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignUpPage />} /><Route path="/teacher-login" element={status === 'authenticated' && session?.user.role === 'teacher' ? <Navigate to="/teacher" replace /> : <TeacherLoginPage />} /><Route path="/teacher" element={<ProtectedTeacher><TeacherDashboardPage /></ProtectedTeacher>} /><Route path="/auth/callback" element={<CallbackPage />} /><Route path="/student-onboarding" element={<Protected><StudentOnboardingPage /></Protected>} /><Route path="/classroom" element={<Protected><ClassroomHome /></Protected>} /><Route path="/classroom/create" element={<ProtectedTeacher><CreateClassroomPage /></ProtectedTeacher>} /><Route path="/classroom/join" element={<Protected><JoinClassroomPage /></Protected>} /><Route path="/classroom/created" element={<ProtectedTeacher><CreatedPage /></ProtectedTeacher>} /><Route path="/student/problems" element={<ProtectedStudent><TopicWiseProblemsPage /></ProtectedStudent>} /><Route path="/student/topics/:subject/:slug" element={<ProtectedStudent><TopicProblemsPage /></ProtectedStudent>} /><Route path="/student/problems/:id" element={<ProtectedStudent><JeeProblemPage /></ProtectedStudent>} /><Route path="/student/quizzes" element={<ProtectedStudent><TopicQuizzesPage /></ProtectedStudent>} /><Route path="/student/quizzes/topic/:subject/:slug" element={<ProtectedStudent><TopicQuizAttemptPage /></ProtectedStudent>} /><Route path="/student/quizzes/:quizId" element={<ProtectedStudent><TeacherQuizAttemptPage /></ProtectedStudent>} /><Route path="*" element={<Navigate to="/" replace />} /></Routes>
+  return <Routes><Route path="/" element={<LandingPage />} /><Route path="/terms" element={<TermsPage />} /><Route path="/privacy" element={<PrivacyPage />} /><Route path="/sign-in" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignInPage />} /><Route path="/sign-up" element={status === 'authenticated' && session ? <Navigate to={postAuthRoute(session)} replace /> : <SignUpPage />} /><Route path="/teacher-login" element={status === 'authenticated' && session?.user.role === 'teacher' ? <Navigate to="/teacher" replace /> : <TeacherLoginPage />} /><Route path="/teacher" element={<ProtectedTeacher><TeacherDashboardPage /></ProtectedTeacher>} /><Route path="/auth/callback" element={<CallbackPage />} /><Route path="/student-onboarding" element={<Protected><StudentOnboardingPage /></Protected>} /><Route path="/classroom" element={<Protected><ClassroomHome /></Protected>} /><Route path="/classroom/create" element={<ProtectedTeacher><CreateClassroomPage /></ProtectedTeacher>} /><Route path="/classroom/join" element={<Protected><JoinClassroomPage /></Protected>} /><Route path="/classroom/created" element={<ProtectedTeacher><CreatedPage /></ProtectedTeacher>} /><Route path="/student/profile" element={<ProtectedStudentProfile><StudentProfilePage /></ProtectedStudentProfile>} /><Route path="/student/problems" element={<ProtectedStudent><TopicWiseProblemsPage /></ProtectedStudent>} /><Route path="/student/topics/:subject/:slug" element={<ProtectedStudent><TopicProblemsPage /></ProtectedStudent>} /><Route path="/student/problems/:id" element={<ProtectedStudent><JeeProblemPage /></ProtectedStudent>} /><Route path="/student/quizzes" element={<ProtectedStudent><TopicQuizzesPage /></ProtectedStudent>} /><Route path="/student/quizzes/topic/:subject/:slug" element={<ProtectedStudent><TopicQuizAttemptPage /></ProtectedStudent>} /><Route path="/student/quizzes/:quizId" element={<ProtectedStudent><TeacherQuizAttemptPage /></ProtectedStudent>} /><Route path="*" element={<Navigate to="/" replace />} /></Routes>
 }
 
