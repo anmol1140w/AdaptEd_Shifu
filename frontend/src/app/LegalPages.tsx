@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { ArrowLeft, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-const lastUpdated = 'October 27, 2026'
+const lastUpdated = 'October 28, 2026'
 const githubUrl = 'https://github.com/sharadvyas123/AdaptEd_Shifu'
 
 function LegalShell({ title, eyebrow, summary, children }: { title: string; eyebrow: string; summary: string; children: ReactNode }) {
@@ -10,18 +10,18 @@ function LegalShell({ title, eyebrow, summary, children }: { title: string; eyeb
 }
 
 export function PrivacyPage() {
-  return <LegalShell eyebrow="PRIVACY POLICY" title="Your learning data stays yours." summary="This page describes how information is handled in the current AdaptEd frontend preview.">
-    <section><span className="legal-number">01</span><div><h2>What this version stores</h2><p>The current frontend stores a local demo session and classroom records in your browser's local storage. These records can include your name and email, classroom name and invite code, class level, academic year, exam target, selected subjects, and classroom membership details. Passwords are not stored by the local demo sign-in flow.</p></div></section>
-    <section><span className="legal-number">02</span><div><h2>Where information is kept</h2><p>In this preview, session and classroom records are kept on the device and browser where you use AdaptEd. The authentication and classroom services currently use local browser storage; they do not call an application backend. Clearing this browser's site data removes those local records.</p></div></section>
-    <section><span className="legal-number">03</span><div><h2>Google sign-in and connected services</h2><p>Google OAuth is not configured in this build. Selecting Google sign-in reports that configuration is missing and does not send you through a Google authentication flow. No connected analytics or third-party learning service is configured by this frontend.</p></div></section>
-    <section><span className="legal-number">04</span><div><h2>Demo information</h2><p>Some classroom and learner examples are synthetic demo data. Do not enter real student records, passwords, or sensitive personal information into this preview. Local demo data should not be treated as a secure account or school record.</p></div></section>
-    <section><span className="legal-number">05</span><div><h2>Changes to this policy</h2><p>When AdaptEd adds a backend, authentication provider, analytics, or other service that handles personal information, this policy should be updated to explain what is collected, why it is used, where it is stored, and how users can contact the team.</p></div></section>
+  return <LegalShell eyebrow="PRIVACY POLICY" title="Your learning data stays yours." summary="This page describes the account, learning, and AI data handled by the current AdaptEd application.">
+    <section><span className="legal-number">01</span><div><h2>What the application stores</h2><p>Account details, classroom membership, saved class and subject preferences, assessment attempts, progress signals, teacher question reviews, generated quiz drafts, and account-scoped tutor conversations are stored in the configured PostgreSQL database. Passwords are stored as salted password hashes. Sign-in tokens are carried in HttpOnly browser cookies; the current default session lasts 30 days.</p></div></section>
+    <section><span className="legal-number">02</span><div><h2>Where information is kept</h2><p>Account and learning records remain in the PostgreSQL database configured by the AdaptEd operator; deleting browser storage or signing out does not delete those records. Qdrant Cloud is used to retrieve indexed textbook passages. Tutor questions and retrieved passages are sent to Ollama Cloud to generate answers. Tutor answers and their citations are saved with the signed-in account.</p></div></section>
+    <section><span className="legal-number">03</span><div><h2>Sign-in and connected services</h2><p>Password sign-in and Google OAuth authenticate accounts through the AdaptEd backend. The backend uses Google OAuth, Qdrant Cloud, and Ollama Cloud when those integrations are configured. Their handling of requests is also subject to their respective provider policies.</p></div></section>
+    <section><span className="legal-number">04</span><div><h2>Demo information and responsible use</h2><p>Some older Problems and chapter-quiz screens still use local demo content and browser-only attempt storage; these records are not part of the persistent adaptive assessment history. Do not enter confidential or sensitive student information into this project preview.</p></div></section>
+    <section><span className="legal-number">05</span><div><h2>Account and data control</h2><p>Signing out clears the current browser session but keeps the account and learning history in the database so they are available at your next sign-in. Contact the AdaptEd team through the project repository for help with account or stored-data requests.</p></div></section>
   </LegalShell>
 }
 
 export function TermsPage() {
-  return <LegalShell eyebrow="TERMS & CONDITIONS" title="A clear start for your learning." summary="These terms apply to the current AdaptEd frontend preview and its local demo features.">
-    <section><span className="legal-number">01</span><div><h2>Preview service</h2><p>AdaptEd is an evolving educational product preview. Sign-in and classroom creation or joining currently operate with local demo data in your browser. They do not create a verified online account or shared classroom on a server.</p></div></section>
+  return <LegalShell eyebrow="TERMS & CONDITIONS" title="A clear start for your learning." summary="These terms apply to the current AdaptEd learning application and its preview features.">
+    <section><span className="legal-number">01</span><div><h2>Application service</h2><p>AdaptEd is an evolving educational product. Account sign-in and classroom membership use the application backend and configured PostgreSQL database. Some older problem and chapter-quiz screens remain local demonstrations; their labels identify sample content.</p></div></section>
     <section><span className="legal-number">02</span><div><h2>Educational information</h2><p>Learning paths, practice content, progress indicators, and recommendations are intended to support study. They are not official exam guidance and should not replace a teacher's judgment or a learner's own review.</p></div></section>
     <section><span className="legal-number">03</span><div><h2>Use of the preview</h2><p>Use the preview lawfully and do not attempt to disrupt or gain unauthorized access to it. Do not submit confidential, sensitive, or real student information. You are responsible for any information you enter into your local browser session.</p></div></section>
     <section><span className="legal-number">04</span><div><h2>Demo content and availability</h2><p>Examples may be synthetic and features may change as the team develops the product. The preview is provided for evaluation and may be unavailable or altered without notice.</p></div></section>

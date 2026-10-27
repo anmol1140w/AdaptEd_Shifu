@@ -1,12 +1,8 @@
 import type { AuthSession } from '../types'
 
 /**
- * Session store for Phase 1.
- *
- * No authentication provider is configured in this repository yet, so the session
- * lives in the browser and is clearly flagged with `isDemo: true`. When a real
- * provider is added, only this module and `authService` need to change — every
- * consumer reads through the same subscribe/get/set/clear API.
+ * In-memory identity cache. Demo identities are stored locally; real identities
+ * are rehydrated from the backend's HttpOnly session cookie on app startup.
  */
 const SESSION_KEY = 'adapted-local-session-v1'
 
@@ -31,6 +27,7 @@ function readPersisted(): AuthSession | null {
 function hydrate() {
   if (hydrated) return
   hydrated = true
+  try { window.localStorage.removeItem('adapted-api-access-token-v1') } catch { /* use the HttpOnly cookie only */ }
   memorySession = readPersisted()
 }
 

@@ -50,6 +50,12 @@ class TeacherRegisterRequest(BaseModel):
     name: str = Field(min_length=1, max_length=120)
     unique_id: str = Field(min_length=4, max_length=80, pattern=r"^[A-Za-z0-9._-]+$")
     password: str = Field(min_length=8, max_length=128)
+    teacher_invite_code: str = Field(min_length=8, max_length=128)
+
+    @field_validator("teacher_invite_code")
+    @classmethod
+    def strip_invite_code(cls, value: str) -> str:
+        return value.strip()
 
 
 class TeacherLoginRequest(BaseModel):
@@ -61,8 +67,18 @@ class TeacherUpgradeRequest(BaseModel):
     invite_code: str = Field(min_length=8, max_length=128)
 
 
-def user_response(user: dict, token: str) -> dict:
-    return {"access_token": token, "token_type": "bearer", "user": user}
+def user_response(user: dict, token: str, response: Response) -> dict:
+    response.set_cookie("access_token", token, max_age=settings.access_token_ttl_seconds,
+                        httponly=True, secure=settings.frontend_url.startswith("https://"), samesite="lax", path="/")
+    if user["role"] == "teacher":
+        onboarding_complete = True
+    else:
+        connection = connect()
+        onboarding_complete = connection.execute(
+            "SELECT EXISTS(SELECT 1 FROM classroom_memberships WHERE user_id=%s)", (user["id"],)
+        ).fetchone()["exists"]
+        connection.close()
+    return {"access_token": token, "token_type": "bearer", "user": {**user, "onboarding_complete": onboarding_complete}}
 
 
 def teacher_user(row: dict) -> dict:
@@ -71,7 +87,8 @@ def teacher_user(row: dict) -> dict:
 
 @router.get("/google/start")
 def google_start(response: Response):
-    if not settings.google_client_id or not settings.google_client_secret:
+    credentials = (settings.google_client_id, settings.google_client_secret)
+    if any(not value or value.strip().lower().startswith("replace-with") for value in credentials):
         raise HTTPException(status_code=503, detail="Google OAuth is not configured")
     state = create_oauth_state(settings.secret_key)
     response = RedirectResponse(
@@ -86,7 +103,8 @@ def google_start(response: Response):
             "prompt": "select_account",
         })
     )
-    response.set_cookie("google_oauth_state", state, max_age=600, httponly=True, secure=False, samesite="lax")
+    response.set_cookie("google_oauth_state", state, max_age=600, httponly=True,
+                        secure=settings.frontend_url.startswith("https://"), samesite="lax", path="/")
     return response
 
 
@@ -138,8 +156,13 @@ async def google_callback(request: Request, code: str | None = None, state: str 
     connection.commit()
     connection.close()
     token = create_access_token(user["id"], user["role"], settings.secret_key, settings.access_token_ttl_seconds)
-    redirect = RedirectResponse(f"{settings.frontend_url}/classroom")
-    redirect.set_cookie("access_token", token, max_age=settings.access_token_ttl_seconds, httponly=True, secure=False, samesite="lax")
+    membership_connection = connect()
+    has_classroom = membership_connection.execute("SELECT EXISTS(SELECT 1 FROM classroom_memberships WHERE user_id=%s)", (user["id"],)).fetchone()["exists"]
+    membership_connection.close()
+    destination = "/teacher" if user["role"] == "teacher" else "/student/learn" if has_classroom else "/classroom"
+    redirect = RedirectResponse(f"{settings.frontend_url}{destination}")
+    redirect.set_cookie("access_token", token, max_age=settings.access_token_ttl_seconds, httponly=True,
+                        secure=settings.frontend_url.startswith("https://"), samesite="lax", path="/")
     redirect.delete_cookie("google_oauth_state")
     return redirect
 
@@ -150,9 +173,15 @@ def logout(response: Response):
 
 
 @router.post("/register", status_code=status.HTTP_201_CREATED)
-def register(payload: RegisterRequest):
+def register(payload: RegisterRequest, response: Response):
     connection = connect()
-    role = "teacher" if settings.teacher_invite_code and payload.teacher_invite_code == settings.teacher_invite_code else "student"
+    if payload.teacher_invite_code and (
+        not settings.teacher_invite_code
+        or not secrets.compare_digest(payload.teacher_invite_code, settings.teacher_invite_code)
+    ):
+        connection.close()
+        raise HTTPException(status_code=403, detail="Teacher invite code is invalid")
+    role = "teacher" if payload.teacher_invite_code else "student"
     user = {"id": str(uuid.uuid4()), "email": payload.email, "name": payload.name.strip(), "role": role}
     try:
         connection.execute(
@@ -167,11 +196,15 @@ def register(payload: RegisterRequest):
     finally:
         connection.close()
     token = create_access_token(user["id"], user["role"], settings.secret_key, settings.access_token_ttl_seconds)
-    return user_response(user, token)
+    return user_response(user, token, response)
 
 
 @router.post("/teacher/register", status_code=status.HTTP_201_CREATED)
 def teacher_register(payload: TeacherRegisterRequest, response: Response):
+    if not settings.teacher_invite_code:
+        raise HTTPException(status_code=503, detail="Teacher invite code is not configured")
+    if not secrets.compare_digest(payload.teacher_invite_code, settings.teacher_invite_code):
+        raise HTTPException(status_code=403, detail="Teacher invite code is invalid")
     connection = connect()
     unique_id = payload.unique_id.strip().lower()
     user = {"id": str(uuid.uuid4()), "email": f"{unique_id}@teacher.local", "name": payload.name.strip(), "role": "teacher", "unique_id": unique_id}
@@ -188,8 +221,7 @@ def teacher_register(payload: TeacherRegisterRequest, response: Response):
     finally:
         connection.close()
     token = create_access_token(user["id"], "teacher", settings.secret_key, settings.access_token_ttl_seconds)
-    response.set_cookie("access_token", token, max_age=settings.access_token_ttl_seconds, httponly=True, secure=False, samesite="lax")
-    return user_response(user, token)
+    return user_response(user, token, response)
 
 
 @router.post("/teacher/login")
@@ -201,12 +233,11 @@ def teacher_login(payload: TeacherLoginRequest, response: Response):
         raise HTTPException(status_code=401, detail="Incorrect teacher ID or password")
     user = teacher_user(row)
     token = create_access_token(user["id"], "teacher", settings.secret_key, settings.access_token_ttl_seconds)
-    response.set_cookie("access_token", token, max_age=settings.access_token_ttl_seconds, httponly=True, secure=False, samesite="lax")
-    return user_response(user, token)
+    return user_response(user, token, response)
 
 
 @router.post("/login")
-def login(payload: LoginRequest):
+def login(payload: LoginRequest, response: Response):
     connection = connect()
     row = connection.execute("SELECT * FROM users WHERE email = %s", (payload.email,)).fetchone()
     connection.close()
@@ -214,12 +245,19 @@ def login(payload: LoginRequest):
         raise HTTPException(status_code=401, detail="Incorrect email or password")
     user = {"id": row["id"], "email": row["email"], "name": row["name"], "role": row["role"]}
     token = create_access_token(user["id"], user["role"], settings.secret_key, settings.access_token_ttl_seconds)
-    return user_response(user, token)
+    return user_response(user, token, response)
 
 
 @router.get("/me")
 def me(user=Depends(current_user)):
-    return {"user": user}
+    if user["role"] == "teacher":
+        return {"user": {**user, "onboarding_complete": True}}
+    connection = connect()
+    try:
+        joined = connection.execute("SELECT EXISTS(SELECT 1 FROM classroom_memberships WHERE user_id=%s)", (user["id"],)).fetchone()["exists"]
+        return {"user": {**user, "onboarding_complete": joined}}
+    finally:
+        connection.close()
 
 
 @router.post("/upgrade-teacher")
