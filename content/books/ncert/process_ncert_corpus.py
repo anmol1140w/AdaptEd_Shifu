@@ -239,6 +239,7 @@ def assemble_chunks(parts, records, book_code, grade, subject, part_num, chapter
                 "book_part": str(part_num) if part_num is not None else "single",
                 "chapter_code": chapter_code, "chapter_title": title,
                 "chunking_strategy": strategy, "page_start": pstart, "page_end": pend,
+                "extraction_strategy": "pdftotext_layout_nfkc_font_repair_v1",
                 "source_pdf_path": source_pdf,
                 "text_normalization": "NFKC; NCERT shifted-font ASCII repair; common reaction and cell-notation repair",
                 "page_content_is_text_only": True,

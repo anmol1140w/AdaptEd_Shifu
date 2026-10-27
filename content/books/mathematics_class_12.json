@@ -178,9 +178,18 @@
         "math-12-conditional-probability-worked_example-001",
         "math-12-conditional-probability-misconception-001"
       ]
+    },
+    {
+      "chapter_id": "adapted-mathematics-12-ncert-lemh101",
+      "chapter_title": "Relations and Functions",
+      "topic_id": "math-12-relations-functions",
+      "concept_id": "math-12-relations-functions",
+      "lesson_id": "lesson-math-12-relations-functions",
+      "chunk_ids": [],
+      "ncert_chapter_code": "lemh101"
     }
   ],
-  "chapter_count": 14,
+  "chapter_count": 15,
   "lesson_content_file": "content/lessons/mathematics_class_12.json",
   "concept_catalog_file": "content/concepts/mathematics_class_12.json",
   "item_bank_file": "content/items/mathematics_class_12.json",

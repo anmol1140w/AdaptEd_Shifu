@@ -186,6 +186,39 @@
         "phy-12-em-spectrum-misconception-001"
       ],
       "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-magnetism-matter",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Magnetism and Matter",
+      "name": "Magnetic dipoles and materials",
+      "description": "A bar magnet and a current-carrying solenoid produce magnetic dipole fields with continuous field lines. Magnetic materials respond differently to an applied field; field and magnetisation quantities must be distinguished, and textbook diagrams should be checked in the cited PDF when geometry matters.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-atoms",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Atoms",
+      "name": "Rutherford model and Bohr energy levels",
+      "description": "Rutherford’s alpha-particle scattering supports a small, positively charged nucleus. Bohr’s model for hydrogen-like atoms uses quantised energy levels to explain discrete spectral lines; it is not a general model for multi-electron atoms.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
+    },
+    {
+      "concept_id": "phy-12-semiconductors",
+      "subject": "Physics",
+      "class": 12,
+      "chapter": "Semiconductor Electronics",
+      "name": "Semiconductors and p–n junction devices",
+      "description": "Semiconductors have conductivity between that of conductors and insulators. Their behaviour depends on charge carriers and doping; a p–n junction diode conducts differently under forward and reverse bias. Circuit and device symbols should be read with the referenced source page.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [],
+      "syllabus_reference_id": "cbse-2026-27-physics-042"
     }
   ]
 }

@@ -5,9 +5,10 @@ The use cases own retrieval, fallback, validation, answer redaction, and audit
 decisions. This directory contains the replaceable adapters:
 
 - `retrieval/in_memory.py` supplies deterministic local sources.
-- `retrieval/qdrant_ncert.py` searches the active `ncert_pcm_active` Qdrant
-  collection and reads `QDRANT_URL` plus `QDRANT_READ_ONLY_API_KEY` from
-  process environment or `backend/.env`.
+- `retrieval/qdrant_ncert.py` searches the dedicated official corpus through
+  `ncert_pcm_official_active` and applies corpus and source-kind filters.
+  It reads `QDRANT_URL` plus `QDRANT_READ_ONLY_API_KEY` from process
+  environment or `backend/.env`.
 - `llm/ollama_cloud.py` generates tutor support and weak-area quizzes through
   Ollama Cloud. `OLLAMA_API_KEY` and `OLLAMA_MODEL` configure it. Its JSON is
   parsed and validated locally before it reaches the application validator.

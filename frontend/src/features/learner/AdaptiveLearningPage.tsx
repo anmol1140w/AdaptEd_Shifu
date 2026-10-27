@@ -22,7 +22,8 @@ const tutorModes = [
 ] as const
 
 function SourceEvidence({ source }: { source: LearningCitation }) {
-  return <details className="rag-source"><summary><span>{source.citation}</span><small>Match {Math.round(source.score * 100)}%</small></summary><p>{source.text}</p><code>{source.source_id}</code></details>
+  const sourceLabel = source.source_kind === 'official_ncert' ? 'Official NCERT' : source.source_kind === 'legacy_unclassified' ? 'Unclassified source' : 'Saved source'
+  return <details className="rag-source"><summary><span>{source.citation}</span><small>{sourceLabel} · similarity {Math.round(source.score * 100)}%</small></summary><p>{source.text}</p><code>{source.source_id}</code></details>
 }
 
 export function AdaptiveLearningPage() {

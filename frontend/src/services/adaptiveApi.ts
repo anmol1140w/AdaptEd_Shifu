@@ -28,7 +28,19 @@ export type AdaptiveQuestion = {
 export type LearningPathStep = { concept_id: string; name: string; chapter: string; mastery_status: string; action: string; reason: string }
 export type LearnerSummary = { learner_id: string; name: string; attempts: number; accuracy: number; weak_concepts: string[]; intervention: string }
 export type AILearningRecommendation = { concept_id: string; concept_name: string; chapter: string; action: string; reason: string; source_ids: string[] }
-export type LearningCitation = { source_id: string; citation: string; text: string; score: number }
+export type LearningCitation = {
+  source_id: string
+  citation: string
+  text: string
+  score: number
+  source_kind?: string
+  source_book_id?: string
+  corpus_id?: string
+  chapter_code?: string
+  page_start?: number | null
+  page_end?: number | null
+  concept_ids?: string[]
+}
 export type GeneratedWeakQuiz = { id: string; status: string; question_count: number; citations: LearningCitation[] }
 export type TutorMemory = { id: string; mode: 'hint' | 'explanation' | 'check_question'; question: string; message: string; check_question: string; source_ids: string[]; sources: LearningCitation[]; created_at: string }
 export type LearningPreferences = { subject: string; class_level: number; updated_at: string | null }

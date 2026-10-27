@@ -186,6 +186,39 @@
         "math-11-complement-events-misconception-001"
       ],
       "syllabus_reference_id": "cbse-2026-27-mathematics-041"
+    },
+    {
+      "concept_id": "math-11-relations-functions",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Relations and Functions",
+      "name": "Relations and functions",
+      "description": "A relation from one set to another is a subset of their Cartesian product. A function assigns each domain element exactly one value in the codomain. Identify domain, codomain, and range carefully; the range is the set of values actually attained.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-042"
+    },
+    {
+      "concept_id": "math-11-intro-3d-geometry",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Introduction to Three Dimensional Geometry",
+      "name": "Introduction to three-dimensional coordinates",
+      "description": "A point in three-dimensional space is represented by coordinates (x, y, z) relative to three mutually perpendicular axes. Coordinate planes are defined by setting one coordinate to zero, and distances between points follow from the three-dimensional distance formula.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-042"
+    },
+    {
+      "concept_id": "math-11-statistics",
+      "subject": "Mathematics",
+      "class": 11,
+      "chapter": "Statistics",
+      "name": "Measures of dispersion",
+      "description": "Statistics describes and compares data using measures of central tendency and dispersion. Range is maximum minus minimum; mean deviation and standard deviation summarize spread around a chosen centre. The same average can describe data sets with very different variability.",
+      "prerequisite_ids": [],
+      "misconception_chunk_ids": [],
+      "syllabus_reference_id": "cbse-2026-27-mathematics-042"
     }
   ]
 }

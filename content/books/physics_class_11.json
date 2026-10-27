@@ -178,9 +178,45 @@
         "phy-11-moment-of-inertia-worked_example-001",
         "phy-11-moment-of-inertia-misconception-001"
       ]
+    },
+    {
+      "chapter_id": "adapted-physics-11-ncert-keph201",
+      "chapter_title": "Mechanical Properties of Solids",
+      "topic_id": "phy-11-elasticity",
+      "concept_id": "phy-11-elasticity",
+      "lesson_id": "lesson-phy-11-elasticity",
+      "chunk_ids": [],
+      "ncert_chapter_code": "keph201"
+    },
+    {
+      "chapter_id": "adapted-physics-11-ncert-keph202",
+      "chapter_title": "Mechanical Properties of Fluids",
+      "topic_id": "phy-11-fluid-mechanics",
+      "concept_id": "phy-11-fluid-mechanics",
+      "lesson_id": "lesson-phy-11-fluid-mechanics",
+      "chunk_ids": [],
+      "ncert_chapter_code": "keph202"
+    },
+    {
+      "chapter_id": "adapted-physics-11-ncert-keph204",
+      "chapter_title": "Thermodynamics",
+      "topic_id": "phy-11-thermodynamics",
+      "concept_id": "phy-11-thermodynamics",
+      "lesson_id": "lesson-phy-11-thermodynamics",
+      "chunk_ids": [],
+      "ncert_chapter_code": "keph204"
+    },
+    {
+      "chapter_id": "adapted-physics-11-ncert-keph205",
+      "chapter_title": "Kinetic Theory",
+      "topic_id": "phy-11-kinetic-theory",
+      "concept_id": "phy-11-kinetic-theory",
+      "lesson_id": "lesson-phy-11-kinetic-theory",
+      "chunk_ids": [],
+      "ncert_chapter_code": "keph205"
     }
   ],
-  "chapter_count": 14,
+  "chapter_count": 18,
   "lesson_content_file": "content/lessons/physics_class_11.json",
   "concept_catalog_file": "content/concepts/physics_class_11.json",
   "item_bank_file": "content/items/physics_class_11.json",

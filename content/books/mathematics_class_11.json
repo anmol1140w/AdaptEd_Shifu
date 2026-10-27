@@ -178,9 +178,36 @@
         "math-11-complement-events-worked_example-001",
         "math-11-complement-events-misconception-001"
       ]
+    },
+    {
+      "chapter_id": "adapted-mathematics-11-ncert-kemh102",
+      "chapter_title": "Relations and Functions",
+      "topic_id": "math-11-relations-functions",
+      "concept_id": "math-11-relations-functions",
+      "lesson_id": "lesson-math-11-relations-functions",
+      "chunk_ids": [],
+      "ncert_chapter_code": "kemh102"
+    },
+    {
+      "chapter_id": "adapted-mathematics-11-ncert-kemh111",
+      "chapter_title": "Introduction to Three Dimensional Geometry",
+      "topic_id": "math-11-intro-3d-geometry",
+      "concept_id": "math-11-intro-3d-geometry",
+      "lesson_id": "lesson-math-11-intro-3d-geometry",
+      "chunk_ids": [],
+      "ncert_chapter_code": "kemh111"
+    },
+    {
+      "chapter_id": "adapted-mathematics-11-ncert-kemh113",
+      "chapter_title": "Statistics",
+      "topic_id": "math-11-statistics",
+      "concept_id": "math-11-statistics",
+      "lesson_id": "lesson-math-11-statistics",
+      "chunk_ids": [],
+      "ncert_chapter_code": "kemh113"
     }
   ],
-  "chapter_count": 14,
+  "chapter_count": 17,
   "lesson_content_file": "content/lessons/mathematics_class_11.json",
   "concept_catalog_file": "content/concepts/mathematics_class_11.json",
   "item_bank_file": "content/items/mathematics_class_11.json",

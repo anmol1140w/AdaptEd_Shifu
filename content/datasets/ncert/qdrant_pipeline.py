@@ -5,7 +5,8 @@ Usage from the repository root:
     python -m content.datasets.ncert.qdrant_pipeline ingest --strategy heading_aware_650_words
     python -m content.datasets.ncert.qdrant_pipeline search "Explain conservation of momentum" --subject Physics --grade 11
 
-Qdrant Cloud credentials are read only from QDRANT_URL and QDRANT_API_KEY.
+Qdrant Cloud credentials are read from backend/.env. Ingestion uses the write key;
+application retrieval uses the read-only key and official-corpus alias.
 """
 from __future__ import annotations
 
@@ -18,22 +19,24 @@ import sys
 import time
 import uuid
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Iterator
 
 from qdrant_client import QdrantClient, models
 from backend.app.infrastructure.ai.settings import AISettings
+from backend.app.infrastructure.ai.retrieval.policy import CORPUS_ID, EMBEDDING_MODEL, OFFICIAL_ALIAS, SOURCE_KIND
 
 ROOT = Path(__file__).resolve().parents[3]
 CORPUS_ROOT = ROOT / "content/datasets/ncert/chunks"
 BOOKS_ROOT = ROOT / "content/books"
 STRATEGIES = ("page", "heading_aware_650_words", "fixed_450_words_overlap_75")
-MODEL = "sentence-transformers/all-minilm-l6-v2"
+MODEL = EMBEDDING_MODEL
 VECTOR_SIZE = 384
-PIPELINE_SCHEMA_VERSION = "2"
+PIPELINE_SCHEMA_VERSION = "4"
 SEGMENT_MAX_WORDS = 64
 SEGMENT_OVERLAP_WORDS = 10
-ACTIVE_ALIAS = "ncert_pcm_active"
+ACTIVE_ALIAS = OFFICIAL_ALIAS
 NAMESPACE = uuid.UUID("19aecab7-c359-4c48-8523-6db9eff38488")
 LOG = logging.getLogger("ncert_qdrant")
 
@@ -49,6 +52,7 @@ TITLE_ALIASES = {
     "application of integrals": "applications of integrals",
     "ray optics": "ray optics and optical instruments",
     "the d and f block elements": "d and f block elements",
+    "complex numbers": "complex numbers and quadratic equations",
 }
 
 
@@ -73,6 +77,42 @@ def _concept_lookup() -> dict[tuple[int, str, str], tuple[str, ...]]:
             if title and concept_id:
                 index[(grade, subject, title)].add(concept_id)
     return {key: tuple(sorted(values)) for key, values in index.items()}
+
+
+def _book_metadata() -> dict[str, dict[str, str]]:
+    catalog = json.loads((ROOT / "content/books/ncert/catalog.json").read_text(encoding="utf-8"))
+    return {
+        book["book_code"]: {
+            "source_book_title": str(book["title"]),
+            "source_edition": str(book.get("edition_label", "")),
+        }
+        for book in catalog.get("books", [])
+    }
+
+
+@lru_cache(maxsize=1)
+def _source_page_limits() -> dict[str, int]:
+    catalog = json.loads((ROOT / "content/books/ncert/catalog.json").read_text(encoding="utf-8"))
+    return {
+        f"content/books/ncert/{chapter['source_pdf']}": int(chapter["pdf_pages"])
+        for book in catalog.get("books", [])
+        for chapter in book.get("chapters", [])
+    }
+
+
+def _unmapped_reason(meta: dict[str, Any]) -> str:
+    """Differentiate intentionally excluded book matter from syllabus mapping gaps."""
+    code = str(meta.get("chapter_code", "")).lower()
+    title = str(meta.get("chapter_title", "")).strip().lower()
+    if code.endswith("an") or title == "answers":
+        return "answer_key"
+    if code.endswith("ps") or title == "prelims":
+        return "preliminaries"
+    if code.endswith(("a1", "a2")) or title == "appendix":
+        return "appendix"
+    if code.endswith("sm") or title == "supplementary material":
+        return "supplementary_material"
+    return "curricular_chapter_needs_authored_concept_mapping"
 
 
 def _read_records(strategy: str) -> Iterator[tuple[Path, int, dict[str, Any]]]:
@@ -111,6 +151,9 @@ def _validate_record(path: Path, line_no: int, record: dict[str, Any]) -> dict[s
     source_pdf = ROOT / str(meta["source_pdf_path"])
     if not source_pdf.is_file():
         raise FileNotFoundError(f"Citation source PDF missing at {path}:{line_no}: {source_pdf}")
+    page_limit = _source_page_limits().get(str(meta["source_pdf_path"]))
+    if page_limit is None or int(meta["page_end"]) > page_limit:
+        raise ValueError(f"Citation page span exceeds the source catalog page count at {path}:{line_no}")
     for key, value in meta.items():
         if not isinstance(value, (str, int, float, bool)) and value is not None:
             raise ValueError(f"Metadata {key!r} is not a scalar at {path}:{line_no}")
@@ -148,20 +191,21 @@ def _concepts_for(meta: dict[str, Any], mapping: dict[tuple[int, str, str], tupl
 def validate_corpus(strategy: str) -> tuple[int, int, int, dict[tuple[int, str, str], tuple[str, ...]]]:
     mapping = _concept_lookup()
     records = indexed_records = segments = 0
-    unmatched: set[str] = set()
+    unmatched: dict[str, str] = {}
     for path, line_no, record in _read_records(strategy):
         meta = _validate_record(path, line_no, record)
         records += 1
         concepts = _concepts_for(meta, mapping)
         if not concepts:
-            unmatched.add(f"{meta['class']} {meta['subject']} {meta['chapter_code']} {meta['chapter_title']}")
+            label = f"{meta['class']} {meta['subject']} {meta['chapter_code']} {meta['chapter_title']}"
+            unmatched[label] = _unmapped_reason(meta)
             continue
         indexed_records += 1
         segments += len(_split_embedding_text(record["page_content"]))
     if unmatched:
         LOG.warning("%d source chapters have no authored concept mapping", len(unmatched))
         for item in sorted(unmatched):
-            LOG.warning("Unmapped chapter: %s", item)
+            LOG.warning("%s: %s", unmatched[item], item)
     return records, indexed_records, segments, mapping
 
 
@@ -177,6 +221,12 @@ def _corpus_fingerprint(strategy: str) -> str:
     for path in sorted(BOOKS_ROOT.glob("*_class_*.json")):
         digest.update(path.name.encode())
         digest.update(path.read_bytes())
+    digest.update(json.dumps(TITLE_ALIASES, sort_keys=True, separators=(",", ":")).encode())
+    mapping_fingerprint = [
+        [grade, subject, title, list(concepts)]
+        for (grade, subject, title), concepts in sorted(_concept_lookup().items())
+    ]
+    digest.update(json.dumps(mapping_fingerprint, separators=(",", ":")).encode())
     return digest.hexdigest()[:12]
 
 
@@ -184,7 +234,7 @@ def _qdrant_client(*, read_only: bool = False) -> QdrantClient:
     settings = AISettings()
     url = settings.qdrant_url.strip()
     api_key = (
-        settings.qdrant_read_only_api_key.strip() or settings.qdrant_api_key.strip()
+        settings.qdrant_read_only_api_key.strip()
         if read_only else settings.qdrant_api_key.strip()
     )
     if not url or not api_key:
@@ -195,6 +245,11 @@ def _qdrant_client(*, read_only: bool = False) -> QdrantClient:
 
 def _make_collection(client: QdrantClient, name: str) -> None:
     schemas = {
+        "corpus_id": models.PayloadSchemaType.KEYWORD,
+        "source_kind": models.PayloadSchemaType.KEYWORD,
+        "source_id": models.PayloadSchemaType.KEYWORD,
+        "ingest_batch": models.PayloadSchemaType.KEYWORD,
+        "content_fingerprint": models.PayloadSchemaType.KEYWORD,
         "subject": models.PayloadSchemaType.KEYWORD,
         "class": models.PayloadSchemaType.INTEGER,
         "book_part": models.PayloadSchemaType.KEYWORD,
@@ -211,6 +266,13 @@ def _make_collection(client: QdrantClient, name: str) -> None:
             raise RuntimeError(f"Existing collection {name} has an incompatible named-vector layout")
         if vectors.size != VECTOR_SIZE or vectors.distance != models.Distance.COSINE:
             raise RuntimeError(f"Existing collection {name} has incompatible vector config")
+        # Do not adopt an unrelated or legacy collection based on vector shape.
+        points, _ = client.scroll(collection_name=name, limit=1,
+                                  with_payload=["corpus_id", "source_kind"], with_vectors=False)
+        if points:
+            payload = points[0].payload or {}
+            if payload.get("corpus_id") != CORPUS_ID or payload.get("source_kind") != SOURCE_KIND:
+                raise RuntimeError(f"Refusing to write into existing collection {name}: corpus provenance does not match")
         existing_indexes = info.payload_schema or {}
         for field, schema in schemas.items():
             if field not in existing_indexes:
@@ -229,6 +291,13 @@ def _atomic_activate(client: QdrantClient, collection: str) -> None:
     existing = next((a for a in aliases if a.alias_name == ACTIVE_ALIAS), None)
     if existing and existing.collection_name == collection:
         return
+    if existing:
+        target, _ = client.scroll(collection_name=existing.collection_name, limit=1,
+                                  with_payload=["corpus_id", "source_kind"], with_vectors=False)
+        if target:
+            payload = target[0].payload or {}
+            if payload.get("corpus_id") != CORPUS_ID or payload.get("source_kind") != SOURCE_KIND:
+                raise RuntimeError(f"Refusing to move {ACTIVE_ALIAS}: its current target is not this official NCERT corpus")
     actions: list[Any] = []
     if existing:
         actions.append(models.DeleteAliasOperation(delete_alias=models.DeleteAlias(alias_name=ACTIVE_ALIAS)))
@@ -241,11 +310,12 @@ def ingest(strategy: str, batch_size: int = 64, activate: bool = True) -> str:
     records, indexed_records, expected_points, concept_map = validate_corpus(strategy)
     fingerprint = _corpus_fingerprint(strategy)
     safe_strategy = strategy.replace("_", "")
-    collection = f"ncertpcm_{safe_strategy}_minilm_{fingerprint}"
+    collection = f"ncertpcm_{safe_strategy}_minilm_{fingerprint}_official_v1"
     LOG.info("Preparing %d mapped source chunks from %d total chunks as %d embedding points",
              indexed_records, records, expected_points)
     client = _qdrant_client()
     _make_collection(client, collection)
+    book_metadata = _book_metadata()
 
     batch: list[models.PointStruct] = []
     sent = 0
@@ -262,13 +332,21 @@ def ingest(strategy: str, batch_size: int = 64, activate: bool = True) -> str:
         normalized["mapping_basis"] = "authored_book_chapter_title"
         normalized["source_status"] = "official_ncert_text_extraction"
         normalized["text_is_extracted_not_visual_transcription"] = True
+        normalized["extraction_strategy"] = "pdftotext_layout_nfkc_font_repair_v1"
+        normalized.update(book_metadata.get(str(meta["book_id"]).removeprefix("ncert-"), {}))
+        normalized["corpus_id"] = CORPUS_ID
+        normalized["source_kind"] = SOURCE_KIND
+        normalized["source_id"] = str(meta["source_id"])
+        normalized["ingest_batch"] = f"{CORPUS_ID}:{strategy}:{fingerprint}"
         segments = _split_embedding_text(record["page_content"])
         for number, segment in enumerate(segments):
+            content_fingerprint = hashlib.sha256(segment.encode("utf-8")).hexdigest()
             payload = {
                 "page_content": segment,
                 "parent_chunk_id": str(meta["chunk_id"]),
                 "embedding_segment": number,
                 "embedding_segment_count": len(segments),
+                "content_fingerprint": content_fingerprint,
                 **normalized,
             }
             batch.append(models.PointStruct(
@@ -288,9 +366,40 @@ def ingest(strategy: str, batch_size: int = 64, activate: bool = True) -> str:
     if count != expected_points:
         raise RuntimeError(f"Ingestion incomplete: expected {expected_points} points, collection has {count}")
     if activate:
+        _verify_representative_queries(client, collection, concept_map)
         _atomic_activate(client, collection)
     LOG.info("Ingested %d points into %s%s", count, collection, f" and activated {ACTIVE_ALIAS}" if activate else "")
     return collection
+
+
+def _verify_representative_queries(client: QdrantClient, collection: str,
+                                   concept_map: dict[tuple[int, str, str], tuple[str, ...]]) -> None:
+    """Require filtered retrieval for every class/subject pair before activation."""
+    representatives: dict[tuple[int, str], tuple[str, str]] = {}
+    for (grade, subject_slug, _title), concept_ids in sorted(concept_map.items()):
+        if concept_ids:
+            representatives.setdefault((grade, subject_slug), (concept_ids[0], _title))
+    if len(representatives) != 6:
+        raise RuntimeError(f"Expected mapped retrieval coverage for six class/subject pairs, found {len(representatives)}")
+    for (grade, subject_slug), (concept_id, title) in representatives.items():
+        subject = subject_slug.title()
+        result = client.query_points(
+            collection_name=collection,
+            query=models.Document(text=f"Explain {title}", model=MODEL),
+            query_filter=models.Filter(must=[
+                models.FieldCondition(key="corpus_id", match=models.MatchValue(value=CORPUS_ID)),
+                models.FieldCondition(key="source_kind", match=models.MatchValue(value=SOURCE_KIND)),
+                models.FieldCondition(key="subject", match=models.MatchValue(value=subject)),
+                models.FieldCondition(key="class", match=models.MatchValue(value=grade)),
+                models.FieldCondition(key="concept_ids", match=models.MatchValue(value=concept_id)),
+            ]),
+            limit=1, with_payload=True, timeout=60,
+        )
+        if not result.points:
+            raise RuntimeError(f"Filtered retrieval verification returned no points for Class {grade} {subject} ({concept_id})")
+        payload = result.points[0].payload or {}
+        if payload.get("source_kind") != SOURCE_KIND or payload.get("corpus_id") != CORPUS_ID:
+            raise RuntimeError("Filtered retrieval verification returned a point from an unexpected corpus")
 
 
 def _upsert_with_retry(client: QdrantClient, collection: str, points: list[models.PointStruct]) -> None:
@@ -307,8 +416,10 @@ def _upsert_with_retry(client: QdrantClient, collection: str, points: list[model
 
 
 def search(query: str, subject: str, grade: int, concept_id: str | None, limit: int = 5) -> list[Any]:
-    client = _qdrant_client()
+    client = _qdrant_client(read_only=True)
     filters: list[Any] = [
+        models.FieldCondition(key="corpus_id", match=models.MatchValue(value=CORPUS_ID)),
+        models.FieldCondition(key="source_kind", match=models.MatchValue(value=SOURCE_KIND)),
         models.FieldCondition(key="subject", match=models.MatchValue(value=subject)),
         models.FieldCondition(key="class", match=models.MatchValue(value=grade)),
     ]
@@ -346,9 +457,20 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "validate":
             rows, indexed_rows, points, mapping = validate_corpus(args.strategy)
+            unmapped = {}
+            for path, line_no, record in _read_records(args.strategy):
+                meta = _validate_record(path, line_no, record)
+                if not _concepts_for(meta, mapping):
+                    unmapped[f"{meta['class']} {meta['subject']} {meta['chapter_code']} {meta['chapter_title']}"] = _unmapped_reason(meta)
             print(json.dumps({"strategy": args.strategy, "source_chunks": rows,
                               "indexed_concept_mapped_chunks": indexed_rows, "embedding_points": points,
-                              "mapped_chapter_concepts": len(mapping)}, indent=2))
+                              "mapped_chapter_concepts": len(mapping),
+                              "intentionally_excluded_chapters": sorted(
+                                  name for name, reason in unmapped.items()
+                                  if reason != "curricular_chapter_needs_authored_concept_mapping"),
+                              "curricular_chapters_needing_mapping": sorted(
+                                  name for name, reason in unmapped.items()
+                                  if reason == "curricular_chapter_needs_authored_concept_mapping")}, indent=2))
         elif args.command == "ingest":
             if args.batch_size < 1 or args.batch_size > 256:
                 raise ValueError("batch-size must be between 1 and 256")
@@ -359,7 +481,10 @@ def main(argv: list[str] | None = None) -> int:
                 payload = point.payload or {}
                 print(json.dumps({"score": point.score, "text": payload.get("page_content"),
                                   "citation": payload.get("citation"), "source_pdf_path": payload.get("source_pdf_path"),
-                                  "chunk_id": payload.get("parent_chunk_id"), "concept_ids": payload.get("concept_ids", [])}, ensure_ascii=False))
+                                  "chunk_id": payload.get("parent_chunk_id"), "source_kind": payload.get("source_kind"),
+                                  "source_id": payload.get("source_id"), "corpus_id": payload.get("corpus_id"),
+                                  "chapter_code": payload.get("chapter_code"), "page_start": payload.get("page_start"),
+                                  "page_end": payload.get("page_end"), "concept_ids": payload.get("concept_ids", [])}, ensure_ascii=False))
         return 0
     except Exception as exc:
         LOG.exception("Qdrant corpus pipeline failed")
