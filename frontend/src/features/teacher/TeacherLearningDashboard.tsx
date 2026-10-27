@@ -27,21 +27,29 @@ export function TeacherLearningDashboard() {
   const [teacherTutor, setTeacherTutor] = useState<{ message: string; check_question: string; citations: LearningCitation[]; provider: string } | null>(null)
   const [teacherTutorHistory, setTeacherTutorHistory] = useState<TutorMemory[]>([])
   const uploadRef = useRef<HTMLInputElement>(null)
+  const refreshRequest = useRef(0)
 
   if (!session) return <Navigate to="/sign-in" replace />
   if (session.user.role !== 'teacher') return <Navigate to="/student/learn" replace />
 
   const refresh = async () => {
+    const requestId = ++refreshRequest.current
     setBusy(true)
     try {
       const [conceptData, analyticsData, bankData, generatedData] = await Promise.all([
         getConcepts(subject, classLevel), getTeacherAnalytics(subject, classLevel), getTeacherQuestionBank('pending', subject, classLevel), getTeacherGeneratedContent(),
       ])
+      if (requestId !== refreshRequest.current) return
       setConcepts(conceptData.concepts); setAnalytics(analyticsData.concepts); setLearners(analyticsData.learners); setItems(bankData.items); setGenerated(generatedData.items)
-      setConceptId((current) => current || conceptData.concepts[0]?.concept_id || '')
+      setConceptId((current) => conceptData.concepts.some((concept) => concept.concept_id === current)
+        ? current
+        : conceptData.concepts[0]?.concept_id || '')
       setError('')
-    } catch (reason) { setError(reason instanceof Error ? reason.message : 'Could not load the teacher workspace.') }
-    finally { setBusy(false) }
+    } catch (reason) {
+      if (requestId === refreshRequest.current) setError(reason instanceof Error ? reason.message : 'Could not load the teacher workspace.')
+    } finally {
+      if (requestId === refreshRequest.current) setBusy(false)
+    }
   }
   useEffect(() => { setConceptId(''); void refresh() }, [subject, classLevel])
   useEffect(() => {
@@ -60,11 +68,12 @@ export function TeacherLearningDashboard() {
     return () => window.clearTimeout(timeout)
   }, [subject, classLevel, preferencesLoaded])
   useEffect(() => {
-    if (!conceptId) { setTeacherTutorHistory([]); return }
+    const concept = concepts.find((item) => item.concept_id === conceptId && item.subject === subject && item.class_level === classLevel)
+    if (!concept) { setTeacherTutorHistory([]); return }
     let active = true
-    getTutorHistory(subject, classLevel, conceptId).then((data) => { if (active) setTeacherTutorHistory(data.items) }).catch(() => { if (active) setTeacherTutorHistory([]) })
+    getTutorHistory(subject, classLevel, concept.concept_id).then((data) => { if (active) setTeacherTutorHistory(data.items) }).catch(() => { if (active) setTeacherTutorHistory([]) })
     return () => { active = false }
-  }, [subject, classLevel, conceptId])
+  }, [subject, classLevel, conceptId, concepts])
 
   const askTeacherTutor = async (event: FormEvent) => {
     event.preventDefault()

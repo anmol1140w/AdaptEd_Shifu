@@ -335,7 +335,9 @@ def learning_progress(
     try:
         rows = connection.execute(
             """WITH evidence AS (
-                 SELECT i.concept_id, a.correct::float AS score, 1.0::float AS max_score, a.created_at
+                 SELECT i.concept_id,
+                        CASE WHEN a.correct THEN 1.0::double precision ELSE 0.0::double precision END AS score,
+                        1.0::double precision AS max_score, a.created_at
                  FROM learning_attempts a JOIN learning_items i ON i.item_id=a.item_id
                  WHERE a.user_id=%s AND i.subject=%s AND i.class_level=%s
                  UNION ALL
@@ -343,7 +345,9 @@ def learning_progress(
                  FROM learning_external_evidence e
                  WHERE e.learner_id=%s AND e.subject=%s AND e.class_level=%s
                )
-               SELECT c.concept_id,c.subject,c.class_level,c.chapter,c.name,c.prerequisite_ids,
+               SELECT c.concept_id,c.subject,c.class_level,c.chapter,c.name,c.description,c.prerequisite_ids,
+                      (SELECT COUNT(*)::int FROM learning_items pending
+                       WHERE pending.concept_id=c.concept_id AND pending.approved=FALSE) AS pending_review_items,
                       COUNT(e.concept_id)::int AS attempts,
                       COUNT(e.concept_id) FILTER (WHERE e.score / e.max_score >= 0.7)::int AS correct,
                       COALESCE(AVG(e.score / e.max_score),0)::float AS accuracy,
@@ -697,7 +701,9 @@ def teacher_analytics(
     try:
         rows = connection.execute(
             """WITH evidence AS (
-                 SELECT a.id,a.user_id,i.concept_id,a.correct::float AS score,1.0::float AS max_score
+                 SELECT a.id,a.user_id,i.concept_id,
+                        CASE WHEN a.correct THEN 1.0::double precision ELSE 0.0::double precision END AS score,
+                        1.0::double precision AS max_score
                  FROM learning_attempts a JOIN learning_items i ON i.item_id=a.item_id AND i.approved
                  WHERE i.subject=%s AND i.class_level=%s
                  UNION ALL
@@ -718,7 +724,9 @@ def teacher_analytics(
         concepts = [{**row, "accuracy": round(float(row["accuracy"]), 3), "intervention": "Review with class" if row["attempts"] >= 3 and float(row["accuracy"]) < 0.55 else "Monitor" if row["attempts"] else "No evidence yet"} for row in rows]
         learners = connection.execute(
             """WITH evidence AS (
-                 SELECT a.user_id,a.id,i.concept_id,a.correct::float AS score,1.0::float AS max_score
+                 SELECT a.user_id,a.id,i.concept_id,
+                        CASE WHEN a.correct THEN 1.0::double precision ELSE 0.0::double precision END AS score,
+                        1.0::double precision AS max_score
                  FROM learning_attempts a JOIN learning_items i ON i.item_id=a.item_id AND i.approved
                  WHERE i.subject=%s AND i.class_level=%s
                  UNION ALL
@@ -822,16 +830,17 @@ def import_external_quiz_scores(payload: ExternalQuizScoreImport, user=Depends(t
 
 @router.post("/ai/tutor")
 def tutor_support(payload: TutorInput, user=Depends(current_user)):
-    sources = _retrieve(payload.subject, payload.class_level, payload.concept_id, payload.question)
     settings = AISettings()
     if not settings.ollama_api_key:
         raise HTTPException(status_code=503, detail="Ollama Cloud is not configured")
-    if not sources:
-        raise HTTPException(status_code=404, detail="No mapped NCERT source was retrieved for this concept")
-    cited = [row["source_id"] for row in sources]
-    schema = {"type": "object", "properties": {"message": {"type": "string", "minLength": 1}, "check_question": {"type": "string", "minLength": 1}, "answer_revealed": {"type": "boolean"}}, "required": ["message", "check_question", "answer_revealed"], "additionalProperties": False}
     memory = connect()
     try:
+        concept = memory.execute(
+            "SELECT name,chapter,description FROM learning_concepts WHERE concept_id=%s AND subject=%s AND class_level=%s",
+            (payload.concept_id, payload.subject, payload.class_level),
+        ).fetchone()
+        if not concept:
+            raise HTTPException(status_code=404, detail="This concept is not mapped to the selected subject and class.")
         recent_turns = memory.execute(
             """SELECT mode, question, response, check_question
                FROM ai_tutor_memory
@@ -841,6 +850,16 @@ def tutor_support(payload: TutorInput, user=Depends(current_user)):
         ).fetchall()
     finally:
         memory.close()
+    retrieval_query = (
+        f"{payload.question}\nTopic: {concept['name']}; chapter: {concept['chapter']}. "
+        f"Key concepts: {concept['description']} "
+        "Explain the definition, law, equation, and worked example for this NCERT concept."
+    )
+    sources = _retrieve(payload.subject, payload.class_level, payload.concept_id, retrieval_query)
+    if not sources:
+        raise HTTPException(status_code=404, detail="No NCERT passages met the relevance cutoff for this question. Try a more specific question or include the chapter topic.")
+    cited = [row["source_id"] for row in sources]
+    schema = {"type": "object", "properties": {"message": {"type": "string", "minLength": 1}, "check_question": {"type": "string", "minLength": 1}, "answer_revealed": {"type": "boolean"}}, "required": ["message", "check_question", "answer_revealed"], "additionalProperties": False}
     prompt = {"task": payload.mode, "subject": payload.subject, "class": payload.class_level, "concept": payload.concept_id,
               "learner_question": payload.question, "recent_conversation": list(reversed(recent_turns)),
               "learner_topic_scores": {key: value.model_dump() for key, value in payload.topic_scores.items()},
@@ -894,7 +913,7 @@ def ai_learning_recommendations(payload: RecommendationInput, user=Depends(curre
     sources: list[dict[str, Any]] = []
     for concept in candidates[:3]:
         sources.extend(_retrieve(payload.subject, payload.class_level, concept["concept_id"],
-                                 f"{concept['name']} {concept['chapter']} explanation worked examples common misconceptions"))
+                                 f"{concept['name']} {concept['chapter']} {concept['description']} explanation worked examples common misconceptions"))
     # Keep retrieval evidence concise and unique while preserving the highest score.
     unique_sources = {source["source_id"]: source for source in sorted(sources, key=lambda row: row["score"], reverse=True)}
     sources = list(unique_sources.values())[:8]
@@ -902,7 +921,7 @@ def ai_learning_recommendations(payload: RecommendationInput, user=Depends(curre
     if not settings.ollama_api_key:
         raise HTTPException(status_code=503, detail="Ollama Cloud is not configured")
     if not sources:
-        raise HTTPException(status_code=404, detail="No mapped NCERT source was retrieved for these learning gaps")
+        raise HTTPException(status_code=404, detail="No NCERT passages met the relevance cutoff for these learning gaps.")
     allowed_concepts = {row["concept_id"] for row in candidates}
     allowed_sources = {row["source_id"]: row for row in sources}
     schema = {
@@ -963,13 +982,13 @@ def generate_weak_area_quiz(payload: QuizGenerateInput, user=Depends(current_use
     weak = next((row for row in progress["concepts"] if row["concept_id"] == payload.concept_id), None)
     if not weak:
         raise HTTPException(status_code=404, detail="Concept not found")
-    query = f"{weak['name']} {weak['chapter']} learning explanation worked examples"
+    query = f"{weak['name']} {weak['chapter']} {weak['description']} learning explanation worked examples"
     sources = _retrieve(payload.subject, payload.class_level, payload.concept_id, query)
     settings = AISettings()
     if not settings.ollama_api_key:
         raise HTTPException(status_code=503, detail="Ollama Cloud is not configured")
     if not sources:
-        raise HTTPException(status_code=404, detail="No mapped NCERT source was retrieved for this concept")
+        raise HTTPException(status_code=404, detail="No NCERT passages met the relevance cutoff for this concept. Try again with a more specific topic question.")
     schema = {"type": "object", "properties": {"items": {"type": "array", "minItems": payload.item_count, "maxItems": payload.item_count, "items": {"type": "object", "properties": {"question": {"type": "string", "minLength": 1}, "answer_guide": {"type": "string", "minLength": 1}, "explanation": {"type": "string", "minLength": 1}, "bloom_level": {"type": "string", "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]}}, "required": ["question", "answer_guide", "explanation", "bloom_level"], "additionalProperties": False}}}, "required": ["items"], "additionalProperties": False}
     data = _ollama_json(settings, "Write accurate, age-appropriate PCM questions. Ground every question and answer in the supplied evidence. Return only JSON matching the schema.", {"task": "generate_weak_area_quiz", "subject": payload.subject, "class": payload.class_level, "concept": payload.concept_id, "target_bloom_progression": ["understand", "apply", "analyze"], "sources": sources, "schema": schema}, schema)
     items = data.get("items")
