@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>AdaptEd</title>
+  <rect width="64" height="64" rx="12" fill="#101213"/>
+  <path d="M15 46 29.5 14h5L49 46h-8l-3-7H26l-3 7h-8Zm14-13h6l-3-8-3 8Z" fill="#65b985"/>
+</svg>
