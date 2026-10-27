@@ -178,8 +178,23 @@ export interface TeacherIntervention {
 export type JeeSubjectId = 'physics' | 'chemistry' | 'mathematics'
 export type ClassLevel = 'Class 11' | 'Class 12'
 export type ExamTarget = 'JEE Main' | 'JEE Advanced' | 'JEE Main + Advanced'
+export type StudentClassLevel = 'Class 11' | 'Class 12' | 'Dropper' | 'Other'
+export type StudentJeeGoal = 'JEE Main' | 'JEE Advanced' | 'Both'
+export type StudentStrengthSubject = JeeSubjectId | 'all'
+export type StudentImprovementSubject = JeeSubjectId | 'not-sure'
+export type StudentLearningStyle = 'concepts-first' | 'questions-first' | 'worked-examples' | 'mix'
 export type ClassroomRole = 'teacher' | 'student'
 export type AuthProvider = 'password' | 'google'
+
+export interface StudentOnboardingProfile {
+  displayName: string
+  currentClass: StudentClassLevel
+  jeeGoal: StudentJeeGoal
+  strongestSubject: StudentStrengthSubject
+  improvementSubject: StudentImprovementSubject
+  learningStyle: StudentLearningStyle
+  completedAt: string
+}
 
 export interface AuthUser {
   id: string
@@ -187,6 +202,9 @@ export interface AuthUser {
   email: string
   role: Role
   onboardingComplete: boolean
+  /** Student preference onboarding is separate from classroom membership onboarding. */
+  studentOnboardingComplete?: boolean
+  studentOnboarding?: StudentOnboardingProfile
 }
 
 export interface AuthSession {

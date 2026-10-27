@@ -120,6 +120,45 @@ button { cursor: pointer; }
 @media (max-width: 390px) { .phase-main { padding-left: 16px; padding-right: 16px; }.phase-nav { padding: 0 16px; }.phase-nav-note { font-size: 7px; }.form-grid { grid-template-columns: 1fr; }.subject-option { flex-direction: column; padding: 7px 4px; }.landing-proof { gap: 8px 13px; }.landing-secondary { font-size: 10px; }.phase-footer span:nth-child(2) { margin-left: 0; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }
 
+.student-onboarding-wrap { width: min(100%, 560px); margin: auto; }
+.student-onboarding-heading { margin-top: 27px; }
+.student-onboarding-card { margin-top: 23px; padding: 0 !important; overflow: hidden; }
+.student-onboarding-progress { padding: 16px 21px 14px; border-bottom: 1.5px solid var(--ink); background: #fffef9; }
+.student-onboarding-progress-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; font: 800 8px "DM Mono", ui-monospace, monospace; letter-spacing: .08em; }
+.student-onboarding-progress-head b { color: #5e5d55; font-weight: 800; }
+.student-onboarding-progress-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 11px; }
+.student-onboarding-progress-track span { height: 7px; border: 1px solid var(--ink); background: #e5e3d9; }
+.student-onboarding-progress-track .student-onboarding-progress-active { background: var(--mint); }
+.student-onboarding-step { padding: 25px 21px 10px; }
+.student-onboarding-step h2 { margin: 11px 0 7px; font-size: clamp(25px, 4vw, 34px); line-height: 1.02; letter-spacing: -.055em; }
+.student-onboarding-copy { margin-bottom: 19px; color: #5d5c54; font-size: 11px; line-height: 1.5; }
+.student-onboarding-fieldset { border: 0; padding: 0; margin: 18px 0 0; }
+.student-onboarding-fieldset legend { padding: 0; margin-bottom: 9px; font-size: 11px; font-weight: 900; }
+.student-onboarding-choice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; }
+.student-onboarding-choice-grid-four { grid-template-columns: repeat(4, 1fr); }
+.student-onboarding-choice, .student-onboarding-goal { min-height: 43px; display: flex; align-items: center; gap: 8px; padding: 9px 10px; border: 1.5px solid var(--ink); background: #fff; cursor: pointer; font-size: 10px; font-weight: 800; line-height: 1.25; }
+.student-onboarding-choice:hover, .student-onboarding-goal:hover { background: #fff9dc; }
+.student-onboarding-choice input, .student-onboarding-goal input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.student-onboarding-choice:focus-within, .student-onboarding-goal:focus-within { outline: 2px solid #126fa0; outline-offset: 2px; }
+.student-onboarding-choice-selected { background: var(--mint) !important; box-shadow: 2px 2px 0 var(--ink); }
+.student-onboarding-choice-selected::before { content: "✓"; display: grid; place-items: center; width: 16px; height: 16px; flex: 0 0 auto; border: 1px solid var(--ink); background: #fff; font-size: 10px; }
+.student-onboarding-goal-list, .student-onboarding-style-list { display: grid; gap: 8px; }
+.student-onboarding-goal { min-height: 61px; align-items: flex-start; padding: 12px; }
+.student-onboarding-goal span { display: grid; gap: 4px; }
+.student-onboarding-goal b { font-size: 12px; }
+.student-onboarding-goal small { color: #5d5c54; font-size: 9px; font-weight: 500; line-height: 1.45; }
+.student-onboarding-style-list .student-onboarding-choice { min-height: 39px; }
+.student-onboarding-actions { display: flex; justify-content: space-between; gap: 10px; padding: 17px 21px 21px; border-top: 1.5px solid var(--ink); background: #fffef9; }
+.student-onboarding-actions button { min-height: 40px; border-radius: 0; font-size: 10px; font-weight: 900; }
+.student-onboarding-disclaimer { margin: 15px auto 0; text-align: center; line-height: 1.5; }
+
+@media (max-width: 560px) {
+  .student-onboarding-choice-grid-four { grid-template-columns: repeat(2, 1fr); }
+  .student-onboarding-step { padding: 22px 16px 8px; }
+  .student-onboarding-progress { padding-left: 16px; padding-right: 16px; }
+  .student-onboarding-actions { padding: 15px 16px 17px; }
+}
+
 /* Four story panels make the landing page a useful product introduction, not just a sign-up splash. */
 .phase-main:has(.landing-story) { padding-top: 0; padding-bottom: 0; }
 .phase-form-area:has(.landing-story) { align-items: stretch; justify-content: stretch; }
@@ -174,3 +213,69 @@ button { cursor: pointer; }
 .legal-contact-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 1.5px solid var(--ink); background: white; flex: 0 0 auto; }
 .legal-contact > div { flex: 1; }.legal-contact b { font-size: 11px; }.legal-contact p { margin-top: 4px; font-size: 10px; color: #45443e; }.legal-contact > a { width: 33px; height: 33px; display: grid; place-items: center; border: 1.5px solid var(--ink); background: var(--yellow); }
 @media (max-width: 650px) { .phase-footer-links { width: 100%; order: 3; justify-content: space-between; gap: 8px; font-size: 8px; }.phase-footer-links a { gap: 3px; }.phase-footer { row-gap: 12px; }.legal-back { font-size: 10px; }.legal-main { padding: 18px 15px 28px !important; }.legal-document { padding: 23px 18px; margin-top: 0; }.legal-sections section { grid-template-columns: 28px minmax(0,1fr); gap: 9px; }.legal-number { width: 24px; height: 24px; }.legal-sections h2 { font-size: 14px; }.legal-sections p { font-size: 11px; } }
+
+/* Landing-page micro-interactions: preserve the existing tokens while adding gentle depth. */
+.landing-primary, .landing-secondary, .feature-link, .landing-scroll-cue,
+.landing-visual, .landing-band, .landing-feature-section, .feature-visual,
+.path-card, .progress-window, .together-note, .subject-chip, .visual-sticker,
+.visual-core, .map-node, .landing-proof span svg {
+  transition: transform .2s cubic-bezier(.2,.75,.25,1), box-shadow .2s cubic-bezier(.2,.75,.25,1), border-color .2s ease, color .2s ease;
+}
+
+.landing-primary, .landing-secondary, .feature-link, .landing-scroll-cue {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.landing-primary:focus-visible, .landing-secondary:focus-visible, .feature-link:focus-visible, .landing-scroll-cue:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.landing-primary:active, .landing-secondary:active, .feature-link:active, .landing-scroll-cue:active {
+  transform: translate(2px, 2px) scale(.99);
+}
+
+.landing-primary svg, .landing-secondary svg, .feature-link svg, .landing-scroll-cue svg,
+.visual-caption svg, .visual-sticker svg, .path-arrow svg, .together-arrow svg {
+  transition: transform .2s cubic-bezier(.2,.75,.25,1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .landing-primary:hover { transform: translate(3px, 3px) scale(1.012); box-shadow: 2px 2px 0 var(--ink); }
+  .landing-secondary:hover, .feature-link:hover, .landing-scroll-cue:hover { transform: translateY(-2px); }
+  .landing-primary:hover svg, .feature-link:hover svg, .landing-scroll-cue:hover svg { transform: translateX(3px); }
+  .landing-secondary:hover svg { transform: translateX(3px); }
+
+  .landing-feature-section:hover { transform: translateY(-3px); box-shadow: 9px 10px 0 var(--ink); }
+  .landing-visual:hover, .feature-visual:hover, .landing-band:hover { transform: translateY(-3px); box-shadow: 8px 10px 0 var(--ink); }
+  .path-card:hover, .together-note:hover, .progress-window:hover { transform: translate(2px, -2px) rotate(0deg); box-shadow: 5px 6px 0 var(--ink); }
+  .subject-chip:hover, .visual-sticker:hover { transform: translateY(-2px) rotate(-1deg); box-shadow: 4px 5px 0 var(--ink); }
+  .visual-caption:hover svg, .visual-sticker:hover svg, .path-arrow:hover svg, .together-arrow:hover svg { transform: translate(3px, -2px); }
+  .landing-visual:hover .visual-core { transform: translate(-50%, -50%) scale(1.025) rotate(-1deg); }
+  .landing-visual:hover .visual-orbit { border-color: #25251f; }
+  .map-row:hover .map-node { transform: scale(1.08) rotate(-5deg); box-shadow: 2px 2px 0 var(--ink); }
+  .landing-proof span:hover svg { transform: scale(1.16) rotate(-8deg); }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .landing-primary:active { box-shadow: 2px 2px 0 var(--ink); }
+  .landing-feature-section:active, .landing-visual:active, .feature-visual:active, .landing-band:active { transform: translateY(-1px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-primary, .landing-secondary, .feature-link, .landing-scroll-cue,
+  .landing-visual, .landing-band, .landing-feature-section, .feature-visual,
+  .path-card, .progress-window, .together-note, .subject-chip, .visual-sticker,
+  .landing-primary svg, .landing-secondary svg, .feature-link svg, .landing-scroll-cue svg,
+  .visual-caption svg, .visual-sticker svg, .path-arrow svg, .together-arrow svg,
+  .visual-core, .map-node, .landing-proof span svg {
+    transition: none !important;
+  }
+  .landing-primary:hover, .landing-secondary:hover, .feature-link:hover, .landing-scroll-cue:hover,
+  .landing-feature-section:hover, .landing-visual:hover, .feature-visual:hover, .landing-band:hover,
+  .path-card:hover, .together-note:hover, .progress-window:hover, .subject-chip:hover, .visual-sticker:hover,
+  .landing-primary:active, .landing-secondary:active, .feature-link:active, .landing-scroll-cue:active,
+  .landing-visual:hover .visual-core, .map-row:hover .map-node, .landing-proof span:hover svg {
+    transform: none !important;
+  }
+}
