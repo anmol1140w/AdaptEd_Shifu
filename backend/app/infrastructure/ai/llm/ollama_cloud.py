@@ -28,7 +28,12 @@ OLLAMA_CHAT_URL = "https://ollama.com/api/chat"
 
 
 class OllamaCloudGenerator(TutorGenerationPort, QuizGenerationPort):
-    """Generate structured learning support with one configured Ollama Cloud model."""
+    """Generate JSON learning support with the configured Ollama Cloud model."""
+
+    provider_name = "Ollama Cloud"
+    provider_id = "ollama-cloud"
+    api_key_setting = "ollama_api_key"
+    model_setting = "ollama_model"
 
     def __init__(
         self,
@@ -38,13 +43,13 @@ class OllamaCloudGenerator(TutorGenerationPort, QuizGenerationPort):
         timeout_seconds: float = 90.0,
     ) -> None:
         settings = AISettings()
-        self._api_key = (api_key or settings.ollama_api_key).strip()
-        self._model = (model or settings.ollama_model).strip()
+        self._api_key = (api_key or getattr(settings, self.api_key_setting)).strip()
+        self._model = (model or getattr(settings, self.model_setting)).strip()
         self._timeout = timeout_seconds
         if not self._api_key:
-            raise ValueError("Set OLLAMA_API_KEY in backend/.env or the process environment")
+            raise ValueError(f"Set {self.api_key_setting.upper()} in backend/.env or the process environment")
         if not self._model:
-            raise ValueError("OLLAMA_MODEL must not be empty")
+            raise ValueError(f"{self.model_setting.upper()} must not be empty")
         if timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be positive")
 
@@ -58,7 +63,7 @@ class OllamaCloudGenerator(TutorGenerationPort, QuizGenerationPort):
             return self._generate_tutor(request=request, sources=sources)
         if isinstance(request, QuizRequest):
             return self._generate_quiz(request=request, sources=sources)
-        raise TypeError(f"unsupported Ollama generation request: {type(request).__name__}")
+        raise TypeError(f"unsupported {self.provider_name} generation request: {type(request).__name__}")
 
     def _generate_tutor(
         self,
@@ -68,13 +73,18 @@ class OllamaCloudGenerator(TutorGenerationPort, QuizGenerationPort):
     ) -> TutorDraft:
         source_ids = [source.source_id for source in sources]
         if not source_ids:
-            raise AIIntegrationError("Ollama tutor generation requires retrieved sources")
+            raise AIIntegrationError(f"{self.provider_name} tutor generation requires retrieved sources")
         schema = {
-            "message": "string: an age-appropriate, source-grounded tutor response",
-            "check_question": "string: one short question that asks the learner to do the next step",
-            "source_ids": ["string: IDs copied exactly from the supplied source list"],
-            "answer_revealed": "boolean",
-            "teacher_review_required": "boolean",
+            "type": "object",
+            "properties": {
+                "message": {"type": "string", "minLength": 1},
+                "check_question": {"type": "string", "minLength": 1},
+                "source_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+                "answer_revealed": {"type": "boolean"},
+                "teacher_review_required": {"type": "boolean"},
+            },
+            "required": ["message", "check_question", "source_ids", "answer_revealed", "teacher_review_required"],
+            "additionalProperties": False,
         }
         prompt = self._context_block(
             request={
@@ -100,6 +110,7 @@ class OllamaCloudGenerator(TutorGenerationPort, QuizGenerationPort):
                 "matching the requested fields, with no Markdown or text outside the JSON."
             ),
             prompt=prompt,
+            schema=schema,
         )
         try:
             message = self._required_string(data, "message")
@@ -115,10 +126,10 @@ class OllamaCloudGenerator(TutorGenerationPort, QuizGenerationPort):
                 confidence=max(source.confidence for source in sources),
                 teacher_review_required=teacher_review,
                 answer_revealed=answer_revealed,
-                provider=f"ollama-cloud:{self._model}",
+                provider=f"{self.provider_id}:{self._model}",
             )
         except (KeyError, TypeError, ValueError) as exc:
-            raise AIIntegrationError(f"Ollama returned an invalid tutor JSON object: {exc}") from exc
+            raise AIIntegrationError(f"{self.provider_name} returned an invalid tutor JSON object: {exc}") from exc
 
     def _generate_quiz(
         self,
@@ -128,19 +139,32 @@ class OllamaCloudGenerator(TutorGenerationPort, QuizGenerationPort):
     ) -> QuizDraft:
         source_ids = [source.source_id for source in sources]
         if not source_ids:
-            raise AIIntegrationError("Ollama quiz generation requires retrieved sources")
+            raise AIIntegrationError(f"{self.provider_name} quiz generation requires retrieved sources")
         schema = {
-            "items": [
-                {
-                    "question": "string",
-                    "answer": "string: concise expected answer or marking key",
-                    "representation": "symbolic | verbal | story",
-                    "source_ids": ["string: IDs copied exactly from the supplied source list"],
-                    "is_transfer": "boolean",
-                }
-            ],
-            "source_ids": ["string: IDs copied exactly from the supplied source list"],
-            "teacher_review_required": "boolean",
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "minItems": request.item_count,
+                    "maxItems": request.item_count,
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "question": {"type": "string", "minLength": 1},
+                            "answer": {"type": "string", "minLength": 1},
+                            "representation": {"type": "string", "enum": ["symbolic", "verbal", "story"]},
+                            "source_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+                            "is_transfer": {"type": "boolean"},
+                        },
+                        "required": ["question", "answer", "representation", "source_ids", "is_transfer"],
+                        "additionalProperties": False,
+                    },
+                },
+                "source_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+                "teacher_review_required": {"type": "boolean"},
+            },
+            "required": ["items", "source_ids", "teacher_review_required"],
+            "additionalProperties": False,
         }
         prompt = self._context_block(
             request={
@@ -168,6 +192,7 @@ class OllamaCloudGenerator(TutorGenerationPort, QuizGenerationPort):
                 "matching the requested fields, with no Markdown or text outside the JSON."
             ),
             prompt=prompt,
+            schema=schema,
         )
         try:
             raw_items = data["items"]
@@ -178,7 +203,7 @@ class OllamaCloudGenerator(TutorGenerationPort, QuizGenerationPort):
                 if not isinstance(raw, dict):
                     raise TypeError(f"items[{index - 1}] must be an object")
                 items.append(QuizItemDraft(
-                    id=f"ollama-{uuid.uuid4().hex}",
+                    id=f"{self.provider_id}-{uuid.uuid4().hex}",
                     subject_id=request.subject_id,
                     concept_id=request.concept_id,
                     difficulty=request.difficulty,
@@ -195,12 +220,12 @@ class OllamaCloudGenerator(TutorGenerationPort, QuizGenerationPort):
                 source_ids=tuple(cited_ids),
                 confidence=max(source.confidence for source in sources),
                 teacher_review_required=teacher_review,
-                provider=f"ollama-cloud:{self._model}",
+                provider=f"{self.provider_id}:{self._model}",
             )
         except (KeyError, TypeError, ValueError) as exc:
-            raise AIIntegrationError(f"Ollama returned an invalid quiz JSON object: {exc}") from exc
+            raise AIIntegrationError(f"{self.provider_name} returned an invalid quiz JSON object: {exc}") from exc
 
-    def _chat_json(self, *, system: str, prompt: str) -> dict[str, Any]:
+    def _chat_json(self, *, system: str, prompt: str, schema: dict[str, Any]) -> dict[str, Any]:
         try:
             response = httpx.post(
                 OLLAMA_CHAT_URL,
@@ -227,9 +252,47 @@ class OllamaCloudGenerator(TutorGenerationPort, QuizGenerationPort):
             parsed = json.loads(self._strip_markdown_json(content))
             if not isinstance(parsed, dict):
                 raise TypeError("generated JSON must be an object")
+            self._validate_json_schema(parsed, schema)
             return parsed
         except (httpx.HTTPError, json.JSONDecodeError, KeyError, TypeError) as exc:
-            raise AIIntegrationError(f"Ollama Cloud chat request failed: {exc}") from exc
+            raise AIIntegrationError(f"{self.provider_name} chat request failed: {exc}") from exc
+
+    @classmethod
+    def _validate_json_schema(cls, value: Any, schema: dict[str, Any], path: str = "output") -> None:
+        """Validate the JSON Schema subset used by these two generation contracts."""
+        expected = schema.get("type")
+        if expected == "object":
+            if not isinstance(value, dict):
+                raise TypeError(f"{path} must be an object")
+            required = schema.get("required", [])
+            missing = [key for key in required if key not in value]
+            if missing:
+                raise TypeError(f"{path} is missing required field(s): {', '.join(missing)}")
+            properties = schema.get("properties", {})
+            if schema.get("additionalProperties") is False:
+                extras = set(value) - set(properties)
+                if extras:
+                    raise TypeError(f"{path} contains unsupported field(s): {', '.join(sorted(extras))}")
+            for key, item in value.items():
+                if key in properties:
+                    cls._validate_json_schema(item, properties[key], f"{path}.{key}")
+            return
+        if expected == "array":
+            if not isinstance(value, list):
+                raise TypeError(f"{path} must be an array")
+            if len(value) < schema.get("minItems", 0) or len(value) > schema.get("maxItems", float("inf")):
+                raise TypeError(f"{path} has an invalid number of items")
+            for index, item in enumerate(value):
+                cls._validate_json_schema(item, schema.get("items", {}), f"{path}[{index}]")
+            return
+        if expected == "string":
+            if not isinstance(value, str) or len(value) < schema.get("minLength", 0):
+                raise TypeError(f"{path} must be a non-empty string")
+            if "enum" in schema and value not in schema["enum"]:
+                raise TypeError(f"{path} must be one of: {', '.join(schema['enum'])}")
+            return
+        if expected == "boolean" and not isinstance(value, bool):
+            raise TypeError(f"{path} must be a boolean")
 
     @staticmethod
     def _context_block(

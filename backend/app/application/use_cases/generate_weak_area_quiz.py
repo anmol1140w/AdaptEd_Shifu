@@ -170,6 +170,9 @@ class GenerateWeakAreaQuiz:
                     draft=draft,
                     sources=retrieval.sources,
                 )
+                if draft.provider.startswith("fallback:"):
+                    fallback_used = True
+                    validation_flags.append("primary_provider_failed")
             except Exception:
                 fallback_used = True
                 validation_flags.append("generated_output_failed")
