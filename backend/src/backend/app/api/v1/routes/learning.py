@@ -8,6 +8,8 @@ import hashlib
 import uuid
 from datetime import datetime, timezone
 from difflib import SequenceMatcher
+from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
 import httpx
@@ -28,6 +30,7 @@ from backend.app.infrastructure.ai.retrieval.policy import (
 )
 
 router = APIRouter(tags=["adaptive learning"])
+_CONTENT_ROOT = Path(__file__).resolve().parents[6].parent / "content"
 
 
 class AssessmentStart(BaseModel):
@@ -133,18 +136,46 @@ def _domain_item(row: dict[str, Any]) -> AssessmentItem:
     )
 
 
+@lru_cache(maxsize=12)
+def _starter_item_ids(subject: str, class_level: int) -> tuple[str, ...]:
+    """Return IDs from the checked-in starter bank, separate from teacher drafts."""
+    path = _CONTENT_ROOT / "items" / f"{subject}_class_{class_level}.json"
+    if not path.exists():
+        return ()
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return ()
+    return tuple(
+        str(item["item_id"])
+        for item in payload.get("items", [])
+        if isinstance(item, dict) and item.get("item_id")
+    )
+
+
 def _load_practice_bank(connection, subject: str, class_level: int) -> tuple[dict[str, Concept], list[dict[str, Any]]]:
-    """Load only authored concepts and teacher-approved database questions."""
+    """Load approved questions plus the curated starter bank from content/items."""
+    starter_ids = _starter_item_ids(subject, class_level)
     concept_rows = connection.execute(
         "SELECT concept_id, subject, class_level, chapter, name, prerequisite_ids FROM learning_concepts WHERE subject=%s AND class_level=%s ORDER BY chapter, name",
         (subject, class_level),
     ).fetchall()
     item_rows = connection.execute(
-        "SELECT * FROM learning_items WHERE subject=%s AND class_level=%s AND approved=TRUE ORDER BY item_id",
-        (subject, class_level),
+        "SELECT * FROM learning_items WHERE subject=%s AND class_level=%s AND (approved=TRUE OR item_id=ANY(%s)) ORDER BY item_id",
+        (subject, class_level, list(starter_ids)),
     ).fetchall()
     concepts = {row["concept_id"]: _domain_concept(dict(row)) for row in concept_rows}
-    items = [dict(row) for row in item_rows if row["concept_id"] in concepts]
+    items = []
+    for item_row in item_rows:
+        row = dict(item_row)
+        if row["concept_id"] not in concepts:
+            continue
+        row["is_starter"] = row["item_id"] in starter_ids and not row["approved"]
+        # Curated, checked-in starter items are usable for practice. Teacher
+        # generated/imported drafts remain unavailable until explicitly approved.
+        if row["is_starter"]:
+            row["approved"] = True
+        items.append(row)
     return concepts, items
 
 
@@ -333,6 +364,7 @@ def learning_progress(
 ):
     connection = connect()
     try:
+        starter_ids = list(_starter_item_ids(subject, class_level))
         rows = connection.execute(
             """WITH evidence AS (
                  SELECT i.concept_id,
@@ -347,7 +379,8 @@ def learning_progress(
                )
                SELECT c.concept_id,c.subject,c.class_level,c.chapter,c.name,c.description,c.prerequisite_ids,
                       (SELECT COUNT(*)::int FROM learning_items pending
-                       WHERE pending.concept_id=c.concept_id AND pending.approved=FALSE) AS pending_review_items,
+                       WHERE pending.concept_id=c.concept_id AND pending.approved=FALSE
+                         AND pending.item_id<>ALL(%s)) AS pending_review_items,
                       COUNT(e.concept_id)::int AS attempts,
                       COUNT(e.concept_id) FILTER (WHERE e.score / e.max_score >= 0.7)::int AS correct,
                       COALESCE(AVG(e.score / e.max_score),0)::float AS accuracy,
@@ -355,18 +388,23 @@ def learning_progress(
                FROM learning_concepts c LEFT JOIN evidence e ON e.concept_id=c.concept_id
                WHERE c.subject=%s AND c.class_level=%s
                GROUP BY c.concept_id ORDER BY c.chapter,c.name""",
-            (user["id"], subject, class_level, user["id"], subject, class_level, subject, class_level),
+            (user["id"], subject, class_level, user["id"], subject, class_level, starter_ids, subject, class_level),
         ).fetchall()
-        _, approved_items = _load_practice_bank(connection, subject, class_level)
+        _, available_items = _load_practice_bank(connection, subject, class_level)
         available_by_concept: dict[str, int] = {}
-        for item in approved_items:
+        approved_by_concept: dict[str, int] = {}
+        starter_by_concept: dict[str, int] = {}
+        for item in available_items:
             available_by_concept[item["concept_id"]] = available_by_concept.get(item["concept_id"], 0) + 1
+            count_by_concept = starter_by_concept if item.get("is_starter") else approved_by_concept
+            count_by_concept[item["concept_id"]] = count_by_concept.get(item["concept_id"], 0) + 1
         concepts = []
         for row in rows:
             accuracy = round(float(row["accuracy"]), 3)
             status = "new" if row["attempts"] == 0 else "needs_support" if accuracy < 0.55 else "developing" if row["attempts"] < 4 else "proficient" if accuracy >= 0.8 else "developing"
             action = "Start with a short lesson and a foundation check" if status == "new" else "Review the lesson, then retry an easier question" if status == "needs_support" else "Practice this concept" if status == "developing" else "Try a transfer question"
-            concepts.append({**row, "available_items": available_by_concept.get(row["concept_id"], 0), "accuracy": accuracy, "mastery_status": status, "recommendation": action})
+            concept_id = row["concept_id"]
+            concepts.append({**row, "available_items": available_by_concept.get(concept_id, 0), "approved_items": approved_by_concept.get(concept_id, 0), "starter_items": starter_by_concept.get(concept_id, 0), "accuracy": accuracy, "mastery_status": status, "recommendation": action})
         by_id = {concept["concept_id"]: concept for concept in concepts}
         focus = sorted(
             (concept for concept in concepts if concept["mastery_status"] != "proficient"),
@@ -408,7 +446,7 @@ def start_adaptive_assessment(payload: AssessmentStart, user=Depends(current_use
         focus_items = [item for item in raw_items if not payload.concept_id or item["concept_id"] == payload.concept_id]
         candidates = raw_items
         if not focus_items:
-            raise HTTPException(status_code=409, detail="No teacher-approved questions are available for this subject, class, and concept.")
+            raise HTTPException(status_code=409, detail="No approved or built-in starter questions are available for this subject, class, and concept.")
         target_count = min(payload.question_count, len(candidates))
         history = _load_attempt_history(connection, user["id"], payload.subject, payload.class_level)
         domain_concepts = tuple(concepts_by_id.values())
@@ -482,7 +520,11 @@ def get_assessment(assessment_id: str, user=Depends(current_user)):
             return {"assessment_id": assessment_id, "status": "completed", "assessment_type": assessment["assessment_type"], "question_count": assessment["target_count"], "index": assessment["current_index"]}
         if assessment["current_index"] >= len(ids):
             raise HTTPException(status_code=409, detail="Assessment has no current question")
-        row = connection.execute("SELECT * FROM learning_items WHERE item_id=%s AND approved=TRUE", (ids[assessment["current_index"]],)).fetchone()
+        starter_ids = list(_starter_item_ids(assessment["subject"], assessment["class_level"]))
+        row = connection.execute(
+            "SELECT * FROM learning_items WHERE item_id=%s AND (approved=TRUE OR item_id=ANY(%s))",
+            (ids[assessment["current_index"]], starter_ids),
+        ).fetchone()
         if not row:
             raise HTTPException(status_code=409, detail="The current question is no longer approved")
         return {"assessment_id": assessment_id, "status": assessment["status"], "assessment_type": assessment["assessment_type"], "question_count": assessment["target_count"], "index": assessment["current_index"], "question": _public_item(dict(row))}
@@ -506,7 +548,11 @@ def submit_adaptive_attempt(assessment_id: str, payload: AttemptInput, user=Depe
             raise HTTPException(status_code=409, detail="Assessment has no current question")
         if ids[index] != payload.item_id:
             raise HTTPException(status_code=409, detail="This answer belongs to a previous or different question. Refresh the current assessment question.")
-        item_row = connection.execute("SELECT * FROM learning_items WHERE item_id=%s AND approved=TRUE", (ids[index],)).fetchone()
+        starter_ids = list(_starter_item_ids(assessment["subject"], assessment["class_level"]))
+        item_row = connection.execute(
+            "SELECT * FROM learning_items WHERE item_id=%s AND (approved=TRUE OR item_id=ANY(%s))",
+            (ids[index], starter_ids),
+        ).fetchone()
         if not item_row:
             raise HTTPException(status_code=409, detail="The current question is no longer approved")
         item = dict(item_row)
@@ -520,7 +566,10 @@ def submit_adaptive_attempt(assessment_id: str, payload: AttemptInput, user=Depe
         next_row = None
         adaptation_reason = "The next question was selected from the approved, unseen question bank."
         if assessment["assessment_type"] == "mock" and next_index < len(ids):
-            next_row = connection.execute("SELECT * FROM learning_items WHERE item_id=%s AND approved=TRUE", (ids[next_index],)).fetchone()
+            next_row = connection.execute(
+                "SELECT * FROM learning_items WHERE item_id=%s AND (approved=TRUE OR item_id=ANY(%s))",
+                (ids[next_index], starter_ids),
+            ).fetchone()
         elif assessment["assessment_type"] == "adaptive" and next_index < int(assessment["target_count"]):
             concepts_by_id, bank = _load_practice_bank(connection, assessment["subject"], assessment["class_level"])
             history = _load_attempt_history(connection, user["id"], assessment["subject"], assessment["class_level"])
@@ -529,15 +578,18 @@ def submit_adaptive_attempt(assessment_id: str, payload: AttemptInput, user=Depe
             outcome = engine.evaluate(focus_concept_id=item["concept_id"], attempts_by_concept={key: tuple(values) for key, values in history.items()})
             selection = engine.select_next_item(recommendation=outcome.recommendation, subject_id=assessment["subject"], items=tuple(_domain_item(row) for row in bank), attempts_by_concept={key: tuple(values) for key, values in history.items()})
             if selection.item:
-                next_row = connection.execute("SELECT * FROM learning_items WHERE item_id=%s AND approved=TRUE", (selection.item.id,)).fetchone()
+                next_row = connection.execute(
+                    "SELECT * FROM learning_items WHERE item_id=%s AND (approved=TRUE OR item_id=ANY(%s))",
+                    (selection.item.id, starter_ids),
+                ).fetchone()
                 adaptation_reason = outcome.recommendation.reason
             if not next_row:
                 next_row = connection.execute(
                     """SELECT i.* FROM learning_items i
-                       WHERE i.subject=%s AND i.class_level=%s AND i.approved=TRUE AND i.item_id<>ALL(%s)
+                       WHERE i.subject=%s AND i.class_level=%s AND (i.approved=TRUE OR i.item_id=ANY(%s)) AND i.item_id<>ALL(%s)
                          AND NOT EXISTS (SELECT 1 FROM learning_attempts prior WHERE prior.user_id=%s AND prior.item_id=i.item_id)
                        ORDER BY i.item_id LIMIT 1""",
-                    (assessment["subject"], assessment["class_level"], ids, user["id"]),
+                    (assessment["subject"], assessment["class_level"], starter_ids, ids, user["id"]),
                 ).fetchone()
                 if next_row:
                     adaptation_reason = "The recommended concept had no unseen approved question, so practice moved to another available concept."

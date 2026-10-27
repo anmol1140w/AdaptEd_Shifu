@@ -16,7 +16,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
 
 export type AdaptiveConcept = {
   concept_id: string; subject: string; class_level: number; chapter: string; name: string
-  description: string; prerequisite_ids: string[]; approved_items?: number; available_items?: number; pending_review_items?: number
+  description: string; prerequisite_ids: string[]; approved_items?: number; starter_items?: number; available_items?: number; pending_review_items?: number
   attempts?: number; correct?: number; accuracy?: number; mastery_status?: string
   recommendation?: string; last_practiced?: string | null
   learners?: number; intervention?: string

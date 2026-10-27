@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import { useAuth } from '../../app/AuthProvider'
 import { askAdaptiveTutor, type LearningCitation, type TopicScores } from '../../services/adaptiveApi'
 import { StudentNav } from './StudentNav'
+import { TutorAnswerText } from './TutorAnswerText'
 import './adaptive-learning.css'
 
 type TutorRouteState = {
@@ -68,7 +69,7 @@ export function AITutoringPage() {
       </section>
       <section className="adaptive-card ai-tutoring-chat"><div className="adaptive-card-heading"><div><span className="adaptive-kicker">SCORE-AWARE TUTOR</span><h2>Ask about {weakestTopic[1].topic}</h2></div><Sparkles size={20} /></div><p className="tutor-caption">Your lowest-scoring topic is the starting focus. The Adaptive Learning tutor receives the full score dictionary with every question.</p>
         <form className="tutor-form" onSubmit={ask}><Input value={question} onChange={(event) => setQuestion(event.target.value)} placeholder={`Ask a question about ${weakestTopic[1].topic}…`} /><Button disabled={busy || question.trim().length < 3} className="adaptive-primary" aria-label="Ask Adaptive Learning">{busy ? <LoaderCircle className="spin" size={16} /> : <Send size={15} />} Ask</Button></form>
-        {answer && <article className="tutor-answer"><div className="rag-answer-meta"><span>Grounded answer</span><small>{answer.provider}</small></div><p>{answer.message}</p><b>Check your understanding</b><p>{answer.check_question}</p><div className="citation-list"><h3>Retrieved NCERT evidence · {answer.citations.length} sources</h3>{answer.citations.map((citation) => <SourceEvidence key={citation.source_id} source={citation} />)}</div></article>}
+        {answer && <article className="tutor-answer"><div className="rag-answer-meta"><span>Grounded answer</span><small>{answer.provider}</small></div><TutorAnswerText text={answer.message} /><b>Check your understanding</b><TutorAnswerText text={answer.check_question} /><div className="citation-list"><h3>Retrieved NCERT evidence · {answer.citations.length} sources</h3>{answer.citations.map((citation) => <SourceEvidence key={citation.source_id} source={citation} />)}</div></article>}
       </section>
     </div>
     <Link to="/student/learn" className="ai-tutoring-next">Return to My learning <ArrowRight size={15} /></Link>
