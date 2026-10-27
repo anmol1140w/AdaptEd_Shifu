@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
-import type { AuthSession, Classroom, CreateClassroomInput, JoinClassroomInput, Role } from '../types'
+import type { AuthSession, Classroom, CreateClassroomInput, JoinClassroomInput, Role, StudentOnboardingProfile } from '../types'
 import { clearSession, getSession, patchSession, setSession, subscribeSession } from '../services/session'
 import {
   completeAuthCallback,
@@ -10,6 +10,7 @@ import {
   type AuthResult,
 } from '../features/auth/services/authService'
 import { createClassroom as createRemoteClassroom, getCurrentUser, joinClassroom as joinRemoteClassroom, listClassrooms, teacherLogin as teacherLoginRemote, teacherRegister as teacherRegisterRemote, upgradeToTeacher as upgradeRemoteToTeacher } from '../services/api'
+import { saveStudentOnboarding } from '../features/onboarding/services/studentOnboardingService'
 
 /**
  * One source of truth for the whole Phase 1 frontend: current user, auth status,
@@ -34,6 +35,7 @@ interface AuthContextValue {
   joinClassroom: (input: JoinClassroomInput) => Promise<{ ok: true; data: Classroom } | { ok: false; message: string }>
   upgradeToTeacher: (inviteCode: string) => Promise<{ ok: true } | { ok: false; message: string }>
   completeOnboarding: (role?: Role) => void
+  completeStudentOnboarding: (profile: StudentOnboardingProfile) => void
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
@@ -123,6 +125,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const userPatch = { onboardingComplete: true, ...(role ? { role } : {}) }
         patchSession(userPatch)
         if (session) setSession({ ...session, user: { ...session.user, ...userPatch } })
+      },
+      completeStudentOnboarding: (profile) => {
+        if (!session) return
+        saveStudentOnboarding(session.user.id, profile)
+        const userPatch = { onboardingComplete: true, studentOnboardingComplete: true, studentOnboarding: profile }
+        patchSession(userPatch)
+        setSession({ ...session, user: { ...session.user, ...userPatch } })
       },
     }
   }, [classrooms, ready, refreshClassrooms, session])
