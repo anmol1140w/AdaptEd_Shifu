@@ -48,10 +48,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let active = true
     const hydrate = async () => {
-      if (getSession()?.isDemo) clearSession()
-      if (!getSession()) {
-        const user = await getCurrentUser()
-        if (active && user) setSession({ user, provider: 'google', issuedAt: new Date().toISOString(), isDemo: false })
+      try {
+        if (getSession()?.isDemo) clearSession()
+        if (!getSession()) {
+          const user = await getCurrentUser()
+          if (active && user) {
+            setSession({
+              user,
+              provider: 'google',
+              issuedAt: new Date().toISOString(),
+              isDemo: false,
+            })
+          }
+        }
+      } catch {
+        // The local demo auth flow remains usable when the optional API is offline.
       }
       if (active) setReady(true)
     }

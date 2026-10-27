@@ -10,12 +10,17 @@ import { JeeProblemPage, TopicProblemsPage } from '../learner/JeeContentPages'
 import { TopicWiseProblemsPage } from '../learner/TopicWiseProblemsPage'
 import { TeacherQuizAttemptPage, TopicQuizAttemptPage, TopicQuizzesPage } from '../learner/TopicQuizzesPage'
 import { TeacherDashboardPage, TeacherLoginPage } from '../teacher/TeacherPages'
+import { StudentProfilePage } from '../profile/StudentProfilePage'
 import { AdaptiveLearningPage } from '../learner/AdaptiveLearningPage'
 import { TeacherLearningDashboard } from '../teacher/TeacherLearningDashboard'
 import { ACADEMIC_YEARS, CLASS_LEVELS, EXAM_TARGETS, JEE_SUBJECTS, subjectLabel } from '../onboarding/services/classroomService'
-import type { AuthSession, ClassLevel, Classroom, CreateClassroomInput, ExamTarget, JeeSubjectId } from '../../types'
+import type { AuthSession, ClassLevel, Classroom, CreateClassroomInput, ExamTarget, JeeSubjectId, StudentClassLevel, StudentImprovementSubject, StudentJeeGoal, StudentLearningStyle, StudentOnboardingProfile, StudentStrengthSubject } from '../../types'
 
 function postAuthRoute(session: AuthSession) {
+  const studentOnboardingComplete = session.user.studentOnboardingComplete
+    ?? (session.user.role === 'student' && session.user.onboardingComplete)
+  if (session.user.role === 'student' && !studentOnboardingComplete) return '/student-onboarding'
+  return '/classroom'
   if (session.user.role === 'teacher') return '/teacher'
   return session.user.onboardingComplete ? '/student/learn' : '/classroom'
 }
@@ -29,7 +34,9 @@ function Notice({ children, tone = 'error' }: { children: ReactNode; tone?: 'err
 }
 
 function Frame({ children, side }: { children: ReactNode; side?: ReactNode }) {
-  return <main className="phase-shell"><header className="phase-nav"><Brand /><span className="phase-nav-note"><span className="live-dot" /> LEARN WITH INTENT</span><span className="phase-nav-right">A clearer way to keep moving forward</span></header><div className={`phase-main ${side ? 'phase-main-split' : ''}`}><section className="phase-form-area">{children}</section>{side && <aside className="phase-art-area">{side}</aside>}</div><footer className="phase-footer"><span>AdaptEd © 2026</span><nav className="phase-footer-links" aria-label="Policies and project links"><Link to="/terms">Terms &amp; Conditions</Link><Link to="/privacy">Privacy Policy</Link><a href="https://github.com/sharadvyas123/AdaptEd_Shifu" target="_blank" rel="noreferrer"><span className="github-mark" aria-hidden="true">GH</span> GitHub</a></nav><span>Built for focused learning <Sparkles size={13} /></span></footer></main>
+  const { session } = useAuth()
+  const initials = session?.user.name.split(/\s+/).map((part) => part[0]).join('').slice(0, 2).toUpperCase()
+  return <main className="phase-shell"><header className="phase-nav"><Brand /><span className="phase-nav-note"><span className="live-dot" /> LEARN WITH INTENT</span><span className="phase-nav-right">A clearer way to keep moving forward</span>{session?.user.role === 'student' && <Link className="phase-profile-link" to="/student/profile" aria-label="Open your student profile"><span className="phase-profile-avatar">{initials}</span><span>Profile</span><ArrowRight size={14} /></Link>}</header><div className={`phase-main ${side ? 'phase-main-split' : ''}`}><section className="phase-form-area">{children}</section>{side && <aside className="phase-art-area">{side}</aside>}</div><footer className="phase-footer"><span>AdaptEd © 2026</span><nav className="phase-footer-links" aria-label="Policies and project links"><Link to="/terms">Terms &amp; Conditions</Link><Link to="/privacy">Privacy Policy</Link><a href="https://github.com/sharadvyas123/AdaptEd_Shifu" target="_blank" rel="noreferrer"><span className="github-mark" aria-hidden="true">GH</span> GitHub</a></nav><span>Built for focused learning <Sparkles size={13} /></span></footer></main>
 }
 
 function BrandPanel({ eyebrow, title, copy, visual = 'orbit' }: { eyebrow: string; title: ReactNode; copy: string; visual?: 'orbit' | 'classroom' }) {
@@ -82,6 +89,115 @@ function SignUpPage() {
   return <AuthLayout eyebrow="GET STARTED" title={<>Make room<br />to get better.</>} subtitle="A focused classroom and a useful next step can change your whole prep routine." mode="sign-up"><GoogleButton disabled={!google.configured} onClick={() => { const result = continueWithGoogle(); setGoogleMessage(result.ok ? '' : result.message) }} message={googleMessage || (google.configured ? '' : 'Google sign-in needs OAuth configuration before it can be used.')} /><Divider /><form onSubmit={submit} className="phase-form" noValidate><Field id="signup-name" label="Full name" autoComplete="name" placeholder="Your name" value={form.name} onChange={(event) => update('name', event.target.value)} /><Field id="signup-email" label="Email address" type="email" autoComplete="email" placeholder="you@example.com" value={form.email} onChange={(event) => update('email', event.target.value)} /><Field id="signup-password" label="Password" type="password" autoComplete="new-password" placeholder="At least 8 characters" value={form.password} onChange={(event) => update('password', event.target.value)} /><Field id="signup-confirm" label="Confirm password" type="password" autoComplete="new-password" placeholder="Enter it once more" value={form.confirm} onChange={(event) => update('confirm', event.target.value)} /><Field id="signup-teacher-code" label="Teacher invite code (optional)" type="password" autoComplete="off" placeholder="Provided by your project admin" value={form.teacherInviteCode} onChange={(event) => update('teacherInviteCode', event.target.value)} />{error && <Notice>{error}</Notice>}<Button type="submit" className="submit-button">Create account <ArrowRight size={17} /></Button></form></AuthLayout>
 }
 
+type StudentOnboardingForm = Omit<StudentOnboardingProfile, 'completedAt'>
+
+const INITIAL_STUDENT_ONBOARDING: StudentOnboardingForm = {
+  displayName: '',
+  currentClass: '' as StudentClassLevel,
+  jeeGoal: '' as StudentJeeGoal,
+  strongestSubject: '' as StudentStrengthSubject,
+  improvementSubject: '' as StudentImprovementSubject,
+  learningStyle: '' as StudentLearningStyle,
+}
+
+const studentClassOptions: Array<{ value: StudentClassLevel; label: string }> = [
+  { value: 'Class 11', label: 'Class 11' },
+  { value: 'Class 12', label: 'Class 12' },
+  { value: 'Dropper', label: 'Dropper' },
+  { value: 'Other', label: 'Other' },
+]
+
+const studentGoalOptions: Array<{ value: StudentJeeGoal; label: string; description: string }> = [
+  { value: 'JEE Main', label: 'JEE Main', description: 'Build speed and accuracy for the main exam.' },
+  { value: 'JEE Advanced', label: 'JEE Advanced', description: 'Go deeper with challenging, multi-step problems.' },
+  { value: 'Both', label: 'Both', description: 'Prepare for both exams with one focused path.' },
+]
+
+const studentSubjectOptions: Array<{ value: StudentStrengthSubject; label: string }> = [
+  { value: 'physics', label: 'Physics' },
+  { value: 'chemistry', label: 'Chemistry' },
+  { value: 'mathematics', label: 'Mathematics' },
+  { value: 'all', label: 'About the same in all' },
+]
+
+const studentImprovementOptions: Array<{ value: StudentImprovementSubject; label: string }> = [
+  { value: 'physics', label: 'Physics' },
+  { value: 'chemistry', label: 'Chemistry' },
+  { value: 'mathematics', label: 'Mathematics' },
+  { value: 'not-sure', label: 'Not sure yet' },
+]
+
+const learningStyleOptions: Array<{ value: StudentLearningStyle; label: string }> = [
+  { value: 'concepts-first', label: 'Concept explanations first' },
+  { value: 'questions-first', label: 'Solve questions first' },
+  { value: 'worked-examples', label: 'Learn through worked examples' },
+  { value: 'mix', label: 'Mix of all three' },
+]
+
+function StudentChoice({
+  name,
+  value,
+  selected,
+  label,
+  onChange,
+}: {
+  name: string
+  value: string
+  selected: boolean
+  label: string
+  onChange: () => void
+}) {
+  return <label className={`student-onboarding-choice ${selected ? 'student-onboarding-choice-selected' : ''}`}><input type="radio" name={name} value={value} checked={selected} onChange={onChange} /><span>{label}</span></label>
+}
+
+function StudentOnboardingPage() {
+  const { session, completeStudentOnboarding } = useAuth()
+  const navigate = useNavigate()
+  const [step, setStep] = useState(1)
+  const [form, setForm] = useState<StudentOnboardingForm>(INITIAL_STUDENT_ONBOARDING)
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+
+  if (!session) return <Navigate to="/sign-in" replace />
+  if (session.user.role !== 'student') return <Navigate to="/classroom" replace />
+  const alreadyComplete = session.user.studentOnboardingComplete
+    ?? session.user.onboardingComplete
+  if (alreadyComplete) return <Navigate to="/classroom" replace />
+
+  const update = <K extends keyof StudentOnboardingForm>(key: K, value: StudentOnboardingForm[K]) => {
+    setForm((current) => ({ ...current, [key]: value }))
+    setError('')
+  }
+
+  const validateStep = () => {
+    if (step === 1 && !form.displayName.trim()) return 'Tell us what you should be called.'
+    if (step === 1 && !form.currentClass) return 'Choose your current class.'
+    if (step === 2 && !form.jeeGoal) return 'Choose the exam you are preparing for.'
+    if (step === 3 && !form.strongestSubject) return 'Choose your strongest subject.'
+    if (step === 3 && !form.improvementSubject) return 'Choose the subject that needs improvement.'
+    if (step === 3 && !form.learningStyle) return 'Choose a learning style.'
+    return ''
+  }
+
+  const continueStep = () => {
+    const message = validateStep()
+    if (message) { setError(message); return }
+    setError('')
+    setStep((current) => Math.min(3, current + 1))
+  }
+
+  const finish = () => {
+    const message = validateStep()
+    if (message) { setError(message); return }
+    setBusy(true)
+    const profile: StudentOnboardingProfile = { ...form, displayName: form.displayName.trim(), completedAt: new Date().toISOString() }
+    completeStudentOnboarding(profile)
+    navigate('/classroom', { replace: true })
+  }
+
+  return <Frame side={<BrandPanel eyebrow="A PATH THAT FITS" title={<>Make your<br />next step yours.</>} copy="A few quick answers help AdaptEd shape a clearer JEE preparation path around how you learn." />}><div className="student-onboarding-wrap"><Brand compact /><div className="auth-heading student-onboarding-heading"><span className="section-kicker">STUDENT SETUP</span><h1>Let’s get to know<br />your prep.</h1><p>Three quick steps, then we’ll take you to classroom setup.</p></div><Card className="phase-card student-onboarding-card"><div className="student-onboarding-progress" aria-label={`Step ${step} of 3`}><div className="student-onboarding-progress-head"><span>YOUR STARTING POINT</span><b>STEP {String(step).padStart(2, '0')} / 03</b></div><div className="student-onboarding-progress-track">{[1, 2, 3].map((item) => <span className={item <= step ? 'student-onboarding-progress-active' : ''} key={item} />)}</div></div>{step === 1 && <section className="student-onboarding-step" aria-labelledby="student-step-one-title"><span className="section-kicker">01 / BASIC PROFILE</span><h2 id="student-step-one-title">What should we call you?</h2><p className="student-onboarding-copy">Use the name you want to see across your learning space.</p><Field id="student-display-name" label="Display name" autoComplete="name" placeholder={session.user.name} value={form.displayName} onChange={(event) => update('displayName', event.target.value)} /><fieldset className="student-onboarding-fieldset"><legend>Current class</legend><div className="student-onboarding-choice-grid student-onboarding-choice-grid-four">{studentClassOptions.map((option) => <StudentChoice key={option.value} name="current-class" value={option.value} label={option.label} selected={form.currentClass === option.value} onChange={() => update('currentClass', option.value)} />)}</div></fieldset></section>}{step === 2 && <section className="student-onboarding-step" aria-labelledby="student-step-two-title"><span className="section-kicker">02 / JEE GOAL</span><h2 id="student-step-two-title">Which exam are you preparing for?</h2><p className="student-onboarding-copy">We’ll use this to keep the recommendations focused.</p><fieldset className="student-onboarding-fieldset"><legend>Exam goal</legend><div className="student-onboarding-goal-list">{studentGoalOptions.map((option) => <label className={`student-onboarding-goal ${form.jeeGoal === option.value ? 'student-onboarding-choice-selected' : ''}`} key={option.value}><input type="radio" name="jee-goal" value={option.value} checked={form.jeeGoal === option.value} onChange={() => update('jeeGoal', option.value)} /><span><b>{option.label}</b><small>{option.description}</small></span></label>)}</div></fieldset></section>}{step === 3 && <section className="student-onboarding-step" aria-labelledby="student-step-three-title"><span className="section-kicker">03 / LEARNING PREFERENCES</span><h2 id="student-step-three-title">How should we shape your practice?</h2><p className="student-onboarding-copy">There’s no wrong answer. Pick what feels most useful today.</p><fieldset className="student-onboarding-fieldset"><legend>Strongest subject</legend><div className="student-onboarding-choice-grid">{studentSubjectOptions.map((option) => <StudentChoice key={option.value} name="strongest-subject" value={option.value} label={option.label} selected={form.strongestSubject === option.value} onChange={() => update('strongestSubject', option.value)} />)}</div></fieldset><fieldset className="student-onboarding-fieldset"><legend>Subject needing improvement</legend><div className="student-onboarding-choice-grid">{studentImprovementOptions.map((option) => <StudentChoice key={option.value} name="improvement-subject" value={option.value} label={option.label} selected={form.improvementSubject === option.value} onChange={() => update('improvementSubject', option.value)} />)}</div></fieldset><fieldset className="student-onboarding-fieldset"><legend>Preferred learning style</legend><div className="student-onboarding-style-list">{learningStyleOptions.map((option) => <StudentChoice key={option.value} name="learning-style" value={option.value} label={option.label} selected={form.learningStyle === option.value} onChange={() => update('learningStyle', option.value)} />)}</div></fieldset></section>}{error && <Notice>{error}</Notice>}<div className="student-onboarding-actions"><Button type="button" variant="neutral" onClick={() => { setError(''); setStep((current) => Math.max(1, current - 1)) }} disabled={step === 1 || busy}><ArrowLeft size={16} /> Back</Button>{step < 3 ? <Button type="button" className="submit-button" onClick={continueStep}>Continue <ArrowRight size={17} /></Button> : <Button type="button" className="submit-button" onClick={finish} disabled={busy}>{busy ? 'Saving…' : 'Finish setup'} <Check size={17} /></Button>}</div></Card><p className="demo-disclaimer student-onboarding-disclaimer">Development-only save: your answers are stored in this browser for this account until a supported profile API is available.</p></div></Frame>
+}
+
 function Protected({ children }: { children: ReactNode }) {
   const { status } = useAuth()
   if (status === 'loading') return <div className="phase-loading">Loading your workspace…</div>
@@ -93,6 +209,31 @@ function ProtectedTeacher({ children }: { children: ReactNode }) {
   const { status, session } = useAuth()
   if (status === 'loading') return <div className="phase-loading">Loading your workspace…</div>
   if (status !== 'authenticated' || session?.user.role !== 'teacher') return <Navigate to="/teacher-login" replace />
+  return children
+}
+
+function ProtectedStudent({ children }: { children: ReactNode }) {
+  const { status, session } = useAuth()
+  const location = useLocation()
+  const preview = new URLSearchParams(location.search).get('preview') === '1'
+  if (preview) return children
+  if (status === 'loading') return <div className="phase-loading">Loading your workspace…</div>
+  if (status !== 'authenticated' || !session) return <Navigate to="/sign-in" replace />
+  if (session.user.role !== 'student') return <Navigate to="/classroom" replace />
+  const studentOnboardingComplete = session.user.studentOnboardingComplete
+    ?? session.user.onboardingComplete
+  if (!studentOnboardingComplete) return <Navigate to="/student-onboarding" replace />
+  if (!session.user.onboardingComplete) return <Navigate to="/classroom" replace />
+  return children
+}
+
+function ProtectedStudentProfile({ children }: { children: ReactNode }) {
+  const { status, session } = useAuth()
+  if (status === 'loading') return <div className="phase-loading">Loading your workspace…</div>
+  if (status !== 'authenticated' || !session) return <Navigate to="/sign-in" replace />
+  if (session.user.role !== 'student') return <Navigate to="/classroom" replace />
+  const studentOnboardingComplete = session.user.studentOnboardingComplete ?? session.user.onboardingComplete
+  if (!studentOnboardingComplete) return <Navigate to="/student-onboarding" replace />
   return children
 }
 
