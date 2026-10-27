@@ -10,7 +10,7 @@ from google.oauth2 import id_token
 from pydantic import BaseModel, Field, field_validator
 
 from backend.app.api.v1.dependencies import current_user
-from backend.app.core.security import create_access_token, hash_password, verify_password
+from backend.app.core.security import create_access_token, create_oauth_state, hash_password, verify_oauth_state, verify_password
 from backend.app.core.settings import settings
 from backend.app.infrastructure.database.connection import connect
 
@@ -58,7 +58,7 @@ def user_response(user: dict, token: str) -> dict:
 def google_start(response: Response):
     if not settings.google_client_id or not settings.google_client_secret:
         raise HTTPException(status_code=503, detail="Google OAuth is not configured")
-    state = secrets.token_urlsafe(32)
+    state = create_oauth_state(settings.secret_key)
     response = RedirectResponse(
         url=GOOGLE_AUTH_URL
         + "?"
@@ -80,7 +80,9 @@ async def google_callback(request: Request, code: str | None = None, state: str 
     if error:
         return RedirectResponse(f"{settings.frontend_url}/?auth_error={error}")
     expected_state = request.cookies.get("google_oauth_state")
-    if not code or not state or not expected_state or not secrets.compare_digest(state, expected_state):
+    # The signed state is the source of truth. The cookie is an additional check
+    # when the browser stays on one host; localhost and 127.0.0.1 cannot share cookies.
+    if not code or not state or not verify_oauth_state(state, settings.secret_key):
         raise HTTPException(status_code=400, detail="Invalid OAuth state")
     async with httpx.AsyncClient(timeout=10) as client:
         token_response = await client.post(
@@ -121,7 +123,7 @@ async def google_callback(request: Request, code: str | None = None, state: str 
     connection.commit()
     connection.close()
     token = create_access_token(user["id"], user["role"], settings.secret_key, settings.access_token_ttl_seconds)
-    redirect = RedirectResponse(f"{settings.frontend_url}/auth/callback")
+    redirect = RedirectResponse(f"{settings.frontend_url}/classroom")
     redirect.set_cookie("access_token", token, max_age=settings.access_token_ttl_seconds, httponly=True, secure=False, samesite="lax")
     redirect.delete_cookie("google_oauth_state")
     return redirect

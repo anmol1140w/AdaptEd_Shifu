@@ -5,6 +5,7 @@ import psycopg
 from psycopg.rows import dict_row
 
 from backend.app.core.settings import settings
+from backend.app.infrastructure.database.granular_content_seed import seed_granular_content
 
 
 SCHEMA = """
@@ -35,12 +36,61 @@ CREATE TABLE IF NOT EXISTS classroom_memberships (
     PRIMARY KEY (classroom_id, user_id)
 );
 CREATE INDEX IF NOT EXISTS idx_classrooms_join_code_hash ON classrooms(join_code_hash);
+CREATE TABLE IF NOT EXISTS jee_topics (
+    id TEXT PRIMARY KEY,
+    subject TEXT NOT NULL CHECK (subject IN ('physics', 'chemistry', 'mathematics')),
+    name TEXT NOT NULL,
+    slug TEXT NOT NULL UNIQUE,
+    syllabus_source TEXT NOT NULL DEFAULT 'JEE Main 2026 / JEE Advanced 2026',
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS jee_problems (
+    id TEXT PRIMARY KEY,
+    title TEXT NOT NULL,
+    subject TEXT NOT NULL CHECK (subject IN ('physics', 'chemistry', 'mathematics')),
+    chapter TEXT NOT NULL,
+    statement TEXT NOT NULL,
+    question_type TEXT NOT NULL CHECK (question_type IN ('MCQ', 'Numerical')),
+    difficulty TEXT NOT NULL CHECK (difficulty IN ('Easy', 'Medium', 'Hard')),
+    choices JSONB,
+    answer TEXT NOT NULL,
+    explanation TEXT NOT NULL,
+    formula TEXT,
+    hints JSONB NOT NULL DEFAULT '[]'::jsonb,
+    exam_relevance JSONB NOT NULL DEFAULT '["JEE Main"]'::jsonb,
+    estimated_minutes INTEGER NOT NULL DEFAULT 5,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS problem_topics (
+    problem_id TEXT NOT NULL REFERENCES jee_problems(id) ON DELETE CASCADE,
+    topic_id TEXT NOT NULL REFERENCES jee_topics(id) ON DELETE CASCADE,
+    PRIMARY KEY (problem_id, topic_id)
+);
+CREATE INDEX IF NOT EXISTS idx_jee_topics_subject ON jee_topics(subject);
+CREATE INDEX IF NOT EXISTS idx_problem_topics_topic ON problem_topics(topic_id);
+CREATE TABLE IF NOT EXISTS problem_attempts (
+    id TEXT PRIMARY KEY,
+    problem_id TEXT NOT NULL REFERENCES jee_problems(id) ON DELETE CASCADE,
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    answer TEXT NOT NULL,
+    correct BOOLEAN NOT NULL,
+    time_taken INTEGER NOT NULL DEFAULT 0,
+    hint_used BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_problem_attempts_user ON problem_attempts(user_id, problem_id);
+CREATE TABLE IF NOT EXISTS content_seed_meta (
+    key TEXT PRIMARY KEY,
+    value TEXT NOT NULL,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
 """
 
 
 def connect() -> psycopg.Connection:
     connection = psycopg.connect(settings.database_url, password=settings.database_password, row_factory=dict_row)
     connection.execute(SCHEMA)
+    seed_granular_content(connection)
     connection.commit()
     return connection
 
