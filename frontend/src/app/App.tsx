@@ -10,6 +10,7 @@ import { PrivacyPage, TermsPage } from './LegalPages'
 import { Badge, Button, Card, CheckRow, DifficultyBadge, EmptyState, IconButton, Input, LinkButton, MasteryBadge, Metric, Notice, PageHeader, ProgressBar, SectionHeading, Select } from '../components/ui'
 import { ASSESSMENTS, BASE_INTERVENTIONS, CONCEPTS, getAssessment, getConcept, getProblem, PROBLEMS, STUDENT, SUBJECT_META, subjectLabel, TEACHER, TEACHER_STUDENTS } from '../services/data'
 import { activityLabel, addTutorMessage, activitySummary, getDateKey, loadState, recordActivity, recordProblemAttempt, resetState, saveState, updateIntervention } from '../services/storage'
+import { createClassroom, getClassroom, getCurrentUser, joinClassroom, logout, startGoogleLogin, upgradeToTeacher, type AuthUser } from '../services/api'
 import { adjustedMastery, calculateConceptMastery, generateRecommendations, generateTargetedQuiz, masteryStatus, recommendationReason, selectAdaptiveQuestions } from '../services/learning'
 import type { DemoState, Difficulty, LearningActivity, Problem, Role } from '../types'
 
@@ -56,11 +57,11 @@ export default function App() {
     setState((current) => { const next = { ...current, selectedRole: nextRole }; saveState(next); return next })
     navigate(nextRole === 'student' ? '/student' : '/teacher/dashboard')
   }
-  return <Routes><Route path="/privacy" element={<PrivacyPage />} /><Route path="/terms" element={<TermsPage />} /><Route path="*" element={<AppWorkspace state={state} setState={setState} role={role} onRoleChange={selectRole} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />} /></Routes>
+  return <Routes><Route path="/privacy" element={<PrivacyPage />} /><Route path="/terms" element={<TermsPage />} /><Route path="/auth/callback" element={<AuthCallbackPage />} /><Route path="/class-access" element={<ClassAccessPage />} /><Route path="/classrooms/:slug" element={<ClassroomPage />} /><Route path="*" element={<AppWorkspace state={state} setState={setState} role={role} onRoleChange={selectRole} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />} /></Routes>
 }
 
 function AppWorkspace({ state, setState, role, onRoleChange, sidebarOpen, setSidebarOpen }: { state: DemoState; setState: React.Dispatch<React.SetStateAction<DemoState>>; role: Role; onRoleChange: (role: Role) => void; sidebarOpen: boolean; setSidebarOpen: (open: boolean) => void }) {
-  return <AppContext.Provider value={{ state, setState }}><div className={`app ${sidebarOpen ? '' : 'sidebar-collapsed'}`}><AppShell role={role} onRoleChange={onRoleChange} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /><main className="main"><Routes><Route path="/" element={<RoleLanding onRoleChange={onRoleChange} />} /><Route path="/student" element={<StudentDashboard />} /><Route path="/student/problems" element={<ProblemExplorer />} /><Route path="/student/problems/:id" element={<ProblemDetail />} /><Route path="/student/activity" element={<ActivityPage />} /><Route path="/student/assessments" element={<AssessmentsPage />} /><Route path="/student/assessments/:id" element={<AssessmentPlayer />} /><Route path="/student/skills" element={<SkillsPage />} /><Route path="/student/learning-path" element={<LearningPathPage />} /><Route path="/student/ai-tutor" element={<TutorPage />} /><Route path="/student/quiz-builder" element={<QuizBuilderPage />} /><Route path="/teacher/dashboard" element={<TeacherDashboard />} /><Route path="/teacher/students" element={<TeacherStudents />} /><Route path="/teacher/students/:id" element={<TeacherStudentDetail />} /><Route path="/teacher/assessments" element={<AssessmentsPage />} /><Route path="/teacher/interventions" element={<InterventionsPage />} /><Route path="/teacher/reports" element={<ReportsPage />} /><Route path="*" element={<Navigate to={role === 'student' ? '/student' : '/teacher/dashboard'} replace />} /></Routes></main></div></AppContext.Provider>
+  return <AppContext.Provider value={{ state, setState }}><div className={`app ${sidebarOpen ? '' : 'sidebar-collapsed'}`}><AppShell role={role} onRoleChange={onRoleChange} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /><main className="main"><Routes><Route path="/" element={<RoleLanding />} /><Route path="/student" element={<StudentDashboard />} /><Route path="/student/problems" element={<ProblemExplorer />} /><Route path="/student/problems/:id" element={<ProblemDetail />} /><Route path="/student/activity" element={<ActivityPage />} /><Route path="/student/assessments" element={<AssessmentsPage />} /><Route path="/student/assessments/:id" element={<AssessmentPlayer />} /><Route path="/student/skills" element={<SkillsPage />} /><Route path="/student/learning-path" element={<LearningPathPage />} /><Route path="/student/ai-tutor" element={<TutorPage />} /><Route path="/student/quiz-builder" element={<QuizBuilderPage />} /><Route path="/teacher/dashboard" element={<TeacherDashboard />} /><Route path="/teacher/students" element={<TeacherStudents />} /><Route path="/teacher/students/:id" element={<TeacherStudentDetail />} /><Route path="/teacher/assessments" element={<AssessmentsPage />} /><Route path="/teacher/interventions" element={<InterventionsPage />} /><Route path="/teacher/reports" element={<ReportsPage />} /><Route path="*" element={<Navigate to={role === 'student' ? '/student' : '/teacher/dashboard'} replace />} /></Routes></main></div></AppContext.Provider>
 }
 
 function AppShell({ role, onRoleChange, sidebarOpen, setSidebarOpen }: { role: Role; onRoleChange: (role: Role) => void; sidebarOpen: boolean; setSidebarOpen: (open: boolean) => void }) {
@@ -82,8 +83,37 @@ function AppShell({ role, onRoleChange, sidebarOpen, setSidebarOpen }: { role: R
   </>
 }
 
-function RoleLanding({ onRoleChange }: { onRoleChange: (role: Role) => void }) {
-  return <div className="landing"><div className="landing-left"><div className="brand brand-large"><div className="brand-mark">A</div><div className="brand-word">Adapt<span>Ed</span></div></div><div className="eyebrow">Learning workspace</div><h1>Find the concepts<br /><em>to work on next.</em></h1><p>Practice questions, review concept evidence, and choose the next useful learning step from one workspace.</p><div className="landing-flow"><div><strong>Practice</strong><span>Tagged questions</span></div><ArrowRight size={18} /><div><strong>Review</strong><span>Concept evidence</span></div><ArrowRight size={18} /><div><strong>Plan</strong><span>Next activity</span></div></div></div><div className="role-picker"><div className="eyebrow">Choose a workspace</div><h2>Open AdaptEd</h2><p className="muted">The current workspace uses local records so you can inspect the product without an account.</p><button className="role-card" type="button" onClick={() => onRoleChange('student')}><span className="role-icon role-icon-green"><GraduationCap size={20} /></span><span><strong>Aarav Sharma</strong><span>Class 12 · JEE Main</span><small>Student workspace</small></span><ArrowRight size={18} /></button><button className="role-card" type="button" onClick={() => onRoleChange('teacher')}><span className="role-icon role-icon-amber"><Users size={20} /></span><span><strong>Priya Verma</strong><span>Physics teacher</span><small>Teacher workspace</small></span><ArrowRight size={18} /></button><div className="landing-note"><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link></div></div></div>
+function RoleLanding() {
+  return <div className="landing"><div className="landing-left"><div className="brand brand-large"><div className="brand-mark">A</div><div className="brand-word">Adapt<span>Ed</span></div></div><div className="eyebrow">Adaptive learning workspace</div><h1>Learn smarter.<br /><em>Master every concept.</em></h1><p>Join your classroom, discover your knowledge gaps, and get a clear next step tailored to your learning.</p><div className="landing-flow"><div><strong>Assess</strong><span>Find gaps</span></div><ArrowRight size={18} /><div><strong>Learn</strong><span>Targeted practice</span></div><ArrowRight size={18} /><div><strong>Improve</strong><span>Track mastery</span></div></div></div><div className="role-picker"><div className="eyebrow">Get started</div><h2>Open your workspace</h2><p className="muted">Sign in securely with Google, then join an existing class or create one.</p><button className="role-card" type="button" onClick={startGoogleLogin}><span className="role-icon role-icon-green"><GraduationCap size={20} /></span><span><strong>Continue with Google</strong><span>Secure account sign-in</span><small>Join or create a classroom</small></span><ArrowRight size={18} /></button><div className="landing-note"><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link></div></div></div>
+}
+
+function AuthCallbackPage() {
+  const navigate = useNavigate()
+  const [message, setMessage] = useState('Checking your Google account…')
+  useEffect(() => { getCurrentUser().then((user) => { if (user) navigate('/class-access', { replace: true }); else setMessage('Could not complete sign-in. Please try again.') }).catch(() => setMessage('Could not complete sign-in. Please try again.')) }, [navigate])
+  return <div className="landing"><div className="role-picker"><div className="eyebrow">Google sign-in</div><h2>{message}</h2><p className="muted">Please wait while AdaptEd creates your secure session.</p></div></div>
+}
+
+function ClassAccessPage() {
+  const navigate = useNavigate()
+  const [user, setUser] = useState<AuthUser | null>(null)
+  const [code, setCode] = useState('')
+  const [name, setName] = useState('')
+  const [inviteCode, setInviteCode] = useState('')
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+  useEffect(() => { getCurrentUser().then((current) => { if (!current) navigate('/', { replace: true }); else setUser(current) }) }, [navigate])
+  const run = async (action: () => Promise<{ slug: string }>) => { setBusy(true); setError(''); try { const classroom = await action(); navigate(`/classrooms/${classroom.slug}`) } catch (err) { setError(err instanceof Error ? err.message : 'Something went wrong') } finally { setBusy(false) } }
+  const create = async () => { if (user?.role !== 'teacher') await upgradeToTeacher(inviteCode.trim()); return createClassroom(name.trim()) }
+  return <div className="landing"><div className="role-picker"><div className="eyebrow">Welcome{user ? `, ${user.name}` : ''}</div><h2>Choose your classroom path</h2><p className="muted">Join a class with the teacher’s code, or create a new classroom if you are a teacher.</p>{error && <Notice tone="warning">{error}</Notice>}<div className="class-access-form"><Input placeholder="Class join code" value={code} onChange={(event) => setCode(event.target.value)} /><Button disabled={busy || !code.trim()} onClick={() => run(() => joinClassroom(code.trim()))}>Join class</Button></div><div className="class-access-divider">or create a classroom</div>{user?.role !== 'teacher' && <Input placeholder="Teacher invite code" value={inviteCode} onChange={(event) => setInviteCode(event.target.value)} />}<div className="class-access-form"><Input placeholder="Classroom name" value={name} onChange={(event) => setName(event.target.value)} /><Button disabled={busy || !name.trim() || (user?.role !== 'teacher' && !inviteCode.trim())} onClick={() => run(create)}>Create class</Button></div><button className="text-link" onClick={async () => { await logout(); navigate('/') }}>Sign out</button></div></div>
+}
+
+function ClassroomPage() {
+  const { slug } = useParams()
+  const [classroom, setClassroom] = useState<{ name: string; description?: string; slug: string } | null>(null)
+  const [error, setError] = useState('')
+  useEffect(() => { if (slug) getClassroom(slug).then(setClassroom).catch((err) => setError(err instanceof Error ? err.message : 'Could not load classroom')) }, [slug])
+  return <div className="landing"><div className="role-picker"><div className="eyebrow">Classroom</div>{error ? <Notice tone="warning">{error}</Notice> : classroom ? <><h2>{classroom.name}</h2><p className="muted">You are now connected to this classroom.</p><Badge tone="green">{classroom.slug}</Badge></> : <h2>Loading classroom…</h2>}</div></div>
 }
 
 function LegacyRoleLanding({ onRoleChange }: { onRoleChange: (role: Role) => void }) {
