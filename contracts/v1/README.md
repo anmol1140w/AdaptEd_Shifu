@@ -19,6 +19,10 @@ frontend can coordinate without importing backend Python classes.
 | `tutor_response.schema.json` | Grounded tutor message, check question, sources and fallback metadata. |
 | `weak_area_quiz_request.schema.json` | Concept, difficulty, misconception and quiz-size context. |
 | `weak_area_quiz_response.schema.json` | Validated quiz items without exposing generated answers. |
+| `question_bank_preview_request.schema.json` | Normalized question rows after frontend CSV/Excel decoding. |
+| `question_bank_preview_response.schema.json` | Per-row errors and independent Bloom/difficulty suggestions with provenance. |
+| `question_bank_import_request.schema.json` | Teacher-confirmed question-bank import payload. |
+| `question_bank_import_response.schema.json` | Persisted bank identity and imported question metadata. |
 
 ## Boundary rules
 

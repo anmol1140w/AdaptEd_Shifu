@@ -8,9 +8,11 @@ from dataclasses import dataclass
 from .api.v1.routes.assessment import AssessmentApi
 from .api.v1.routes.learning_support import LearningSupportApi
 from .api.v1.routes.teacher_interventions import TeacherInterventionApi
+from .api.v1.routes.question_banks import QuestionBankApi
 from .application.assessment_facade import AssessmentFacade
 from .application.learning_support_facade import LearningSupportFacade
 from .application.teacher_intervention_facade import TeacherInterventionFacade
+from .application.question_bank_facade import QuestionBankFacade
 from .application.ports.ai import RetrievedSource
 from .application.ports.assessment import AssessmentGraderPort
 from .application.use_cases.build_subject_summary import BuildSubjectSummary
@@ -20,6 +22,7 @@ from .application.use_cases.prepare_attempt import PrepareAttempt
 from .application.use_cases.provide_tutor_support import ProvideTutorSupport
 from .application.use_cases.start_assessment import StartAssessment
 from .application.use_cases.submit_attempt import SubmitAttempt
+from .application.use_cases.manage_question_bank import ManageQuestionBank
 from .domain.entities.learning import AssessmentItem, Concept
 from .domain.services.learning_engine import LearningEngine
 from .infrastructure.assessment.grading import DeterministicAssessmentGrader
@@ -41,6 +44,8 @@ from .infrastructure.in_memory import (
     InMemoryMasteryStates,
     InMemoryRecommendations,
     InMemorySessionIds,
+    InMemoryQuestionBankIds,
+    InMemoryQuestionBankStore,
 )
 
 
@@ -63,6 +68,9 @@ class InMemoryAssessmentRuntime:
     intervention_api: TeacherInterventionApi
     intervention_facade: TeacherInterventionFacade
     ai_audit: InMemoryAIAudit
+    question_bank_api: QuestionBankApi
+    question_bank_facade: QuestionBankFacade
+    question_bank_store: InMemoryQuestionBankStore
 
 
 def build_in_memory_assessment_runtime(
@@ -177,6 +185,13 @@ def build_in_memory_assessment_runtime(
         subject_names=subject_name_map,
     )
     intervention_api = TeacherInterventionApi(facade=intervention_facade)
+    question_bank_store = InMemoryQuestionBankStore()
+    question_bank_manager = ManageQuestionBank(
+        store=question_bank_store,
+        ids=InMemoryQuestionBankIds(),
+    )
+    question_bank_facade = QuestionBankFacade(manager=question_bank_manager)
+    question_bank_api = QuestionBankApi(facade=question_bank_facade)
     return InMemoryAssessmentRuntime(
         api=api,
         facade=facade,
@@ -193,4 +208,7 @@ def build_in_memory_assessment_runtime(
         intervention_api=intervention_api,
         intervention_facade=intervention_facade,
         ai_audit=ai_audit,
+        question_bank_api=question_bank_api,
+        question_bank_facade=question_bank_facade,
+        question_bank_store=question_bank_store,
     )

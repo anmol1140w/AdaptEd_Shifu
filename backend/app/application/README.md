@@ -13,5 +13,7 @@ The first implemented actions are:
 - `assessment_facade.py` — `AssessmentFacade.start()`, `AssessmentFacade.submit()` and `AssessmentFacade.summary()` coordinate the v1 request parser, application use cases and response mapper without requiring an HTTP framework.
 - `use_cases/provide_tutor_support.py` — `ProvideTutorSupport.execute()` retrieves approved context, validates tutor output, and falls back safely when AI support is unavailable.
 - `use_cases/generate_weak_area_quiz.py` — `GenerateWeakAreaQuiz.execute()` generates concept-aligned practice, validates it, redacts answers at the contract boundary, and falls back safely.
+- `use_cases/manage_question_bank.py` — `ManageQuestionBank.preview()` validates normalized rows and invokes the deterministic classifier; `import_bank()` persists only valid rows through `QuestionBankStorePort`.
+- `question_bank_facade.py` and `api/v1/routes/question_banks.py` — teacher-only, framework-independent preview/import boundaries for the question-bank v1 contracts.
 - `learning_support_facade.py` — `LearningSupportFacade.tutor()` and `LearningSupportFacade.weak_area_quiz()` coordinate the support contracts without an HTTP framework.
 - `../bootstrap.py` — `build_in_memory_assessment_runtime()` composes the ports, use cases, facade and API adapter for local execution without a database or HTTP server.
