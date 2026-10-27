@@ -134,6 +134,7 @@ export function calendarDates(days: number) {
   const today = new Date()
   today.setHours(12, 0, 0, 0)
   const end = new Date(today)
+  end.setDate(end.getDate() + (7 - end.getDay()) % 7)
   const start = new Date(today)
   start.setDate(start.getDate() - days + 1)
   const mondayOffset = (start.getDay() + 6) % 7

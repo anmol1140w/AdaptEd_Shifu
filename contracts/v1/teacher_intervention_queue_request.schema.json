@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "adapted/contracts/v1/teacher_intervention_queue_request",
+  "title": "Teacher intervention queue request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "subject_id"],
+  "properties": {
+    "contract_version": {"const": "v1"},
+    "subject_id": {"type": "string", "minLength": 1},
+    "learner_ids": {
+      "type": ["array", "null"],
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}
