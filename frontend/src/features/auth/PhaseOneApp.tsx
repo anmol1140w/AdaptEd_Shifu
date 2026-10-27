@@ -344,7 +344,7 @@ export function PhaseOneApp() {
     <Route path="/classroom/join" element={<Protected><JoinClassroomPage /></Protected>} />
     <Route path="/classroom/created" element={<ProtectedTeacher><CreatedPage /></ProtectedTeacher>} />
     <Route path="/student/learn" element={<Protected><AdaptiveLearningPage /></Protected>} />
-    <Route path="/student/ai-tutoring" element={<Protected><AITutoringPage /></Protected>} />
+    <Route path="/student/adaptive-learning" element={<Protected><AITutoringPage /></Protected>} />
     <Route path="/student/profile" element={<ProtectedStudentProfile><StudentProfilePage /></ProtectedStudentProfile>} />
     <Route path="/student/problems" element={<Protected><TopicWiseProblemsPage /></Protected>} />
     <Route path="/student/topics/:subject/:slug" element={<Protected><TopicProblemsPage /></Protected>} />

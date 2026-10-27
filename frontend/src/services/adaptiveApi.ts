@@ -80,6 +80,9 @@ export function askTutor(input: { subject: string; class_level: number; concept_
     method: 'POST', body: JSON.stringify(input),
   })
 }
+export function askAdaptiveTutor(input: { subject: string; class_level: number; concept_id: string; question: string; topic_scores: TopicScores }) {
+  return askTutor({ ...input, mode: 'explanation' })
+}
 export function getTutorHistory(subject: string, classLevel: number, conceptId: string) {
   const params = new URLSearchParams({ subject, class_level: String(classLevel), concept_id: conceptId })
   return request<{ items: TutorMemory[] }>(`/ai/tutor-history?${params.toString()}`)
