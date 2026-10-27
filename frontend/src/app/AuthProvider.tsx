@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
-import type { AuthSession, Classroom, CreateClassroomInput, JoinClassroomInput, Role } from '../types'
+import type { AuthSession, Classroom, CreateClassroomInput, JoinClassroomInput, Role, StudentOnboardingProfile } from '../types'
 import { clearSession, getSession, patchSession, setSession, subscribeSession } from '../services/session'
 import {
   completeAuthCallback,
@@ -10,6 +10,7 @@ import {
   type AuthResult,
 } from '../features/auth/services/authService'
 import { createClassroom as createRemoteClassroom, getCurrentUser, joinClassroom as joinRemoteClassroom, listClassrooms, teacherLogin as teacherLoginRemote, teacherRegister as teacherRegisterRemote, upgradeToTeacher as upgradeRemoteToTeacher } from '../services/api'
+import { getStudentOnboarding, saveStudentOnboarding } from '../features/onboarding/services/studentOnboardingService'
 
 /**
  * One source of truth for the whole Phase 1 frontend: current user, auth status,
@@ -33,6 +34,7 @@ interface AuthContextValue {
   createClassroom: (input: CreateClassroomInput) => Promise<{ ok: true; data: Classroom } | { ok: false; message: string }>
   joinClassroom: (input: JoinClassroomInput) => Promise<{ ok: true; data: Classroom } | { ok: false; message: string }>
   upgradeToTeacher: (inviteCode: string) => Promise<{ ok: true } | { ok: false; message: string }>
+  completeStudentOnboarding: (profile: StudentOnboardingProfile) => { ok: true; persistence: 'localStorage' | 'memory' }
   completeOnboarding: (role?: Role) => void
 }
 
@@ -48,9 +50,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let active = true
     const hydrate = async () => {
-      if (!getSession()) {
-        const user = await getCurrentUser()
-        if (active && user) setSession({ user: { ...user, onboardingComplete: false }, provider: 'google', issuedAt: new Date().toISOString(), isDemo: false })
+      try {
+        if (!getSession()) {
+          const user = await getCurrentUser()
+          const profile = user?.role === 'student' ? getStudentOnboarding(user.id) : null
+          if (active && user) setSession({ user: { ...user, onboardingComplete: false, studentOnboardingComplete: Boolean(profile), ...(profile ? { studentOnboarding: profile } : {}) }, provider: 'google', issuedAt: new Date().toISOString(), isDemo: false })
+        }
+      } catch {
+        // The local demo auth flow remains usable when the optional API is offline.
       }
       if (active) setReady(true)
     }
@@ -106,6 +113,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       createClassroom: async (input) => { try { const result = await createRemoteClassroom(input); await refreshClassrooms(); return { ok: true, data: result } } catch (error) { return { ok: false, message: error instanceof Error ? error.message : 'Could not create classroom' } } },
       joinClassroom: async (input) => { try { const result = await joinRemoteClassroom(input.code); await refreshClassrooms(); return { ok: true, data: result } } catch (error) { return { ok: false, message: error instanceof Error ? error.message : 'Could not join classroom' } } },
       upgradeToTeacher: async (inviteCode) => { try { await upgradeRemoteToTeacher(inviteCode); patchSession({ role: 'teacher' }); return { ok: true } } catch (error) { return { ok: false, message: error instanceof Error ? error.message : 'Invalid teacher invite code' } } },
+      completeStudentOnboarding: (profile) => {
+        if (!session) return { ok: true, persistence: 'memory' as const }
+        const saved = saveStudentOnboarding(session.user.id, profile)
+        const userPatch = { name: profile.displayName, studentOnboardingComplete: true, studentOnboarding: profile }
+        patchSession(userPatch)
+        setSession({ ...session, user: { ...session.user, ...userPatch } })
+        return saved
+      },
       completeOnboarding: (role) => {
         const userPatch = { onboardingComplete: true, ...(role ? { role } : {}) }
         patchSession(userPatch)

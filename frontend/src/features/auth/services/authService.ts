@@ -1,6 +1,7 @@
 import type { AuthProvider, AuthSession, AuthUser } from '../../../types'
 import { getSession, setSession } from '../../../services/session'
 import { membershipsFor } from '../../onboarding/services/classroomService'
+import { getStudentOnboarding } from '../../onboarding/services/studentOnboardingService'
 
 /**
  * Phase 1 authentication service.
@@ -46,8 +47,9 @@ export async function completeGoogleCallback(): Promise<AuthResult<AuthSession>>
     const response = await fetch(`${API_BASE}/auth/me`, { credentials: 'include' })
     if (!response.ok) return { ok: false, message: 'Google sign-in could not be completed. Please try again.', field: 'form' }
     const body = await response.json() as { user: { id: string; name: string; email: string; role: 'student' | 'teacher' } }
+    const profile = body.user.role === 'student' ? getStudentOnboarding(body.user.id) : null
     const session: AuthSession = {
-      user: { ...body.user, onboardingComplete: false },
+      user: { ...body.user, onboardingComplete: false, studentOnboardingComplete: Boolean(profile), ...(profile ? { studentOnboarding: profile } : {}) },
       provider: 'google',
       issuedAt: new Date().toISOString(),
       isDemo: false,
@@ -79,8 +81,9 @@ function createSession(name: string, email: string, provider: AuthProvider): Aut
     id: `local-${email.trim().toLowerCase()}`,
     name: name.trim(),
     email: email.trim().toLowerCase(),
-    role: 'teacher',
+    role: 'student',
     onboardingComplete: false,
+    studentOnboardingComplete: false,
   }
   return {
     user,
@@ -103,6 +106,14 @@ export function signInWithPassword(input: { email: string; password: string }): 
   if (returning) {
     session.user.onboardingComplete = returning.user.onboardingComplete
     session.user.role = returning.user.role
+    session.user.studentOnboardingComplete = returning.user.studentOnboardingComplete
+      ?? (returning.user.onboardingComplete && returning.user.role === 'student')
+    session.user.studentOnboarding = returning.user.studentOnboarding
+  }
+  const storedProfile = session.user.role === 'student' ? getStudentOnboarding(session.user.id) : null
+  if (storedProfile) {
+    session.user.studentOnboarding = storedProfile
+    session.user.studentOnboardingComplete = true
   }
   const memberRecord = membershipsFor(session.user.id)
     .flatMap((classroom) => classroom.members)
