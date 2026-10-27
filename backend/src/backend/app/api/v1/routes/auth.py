@@ -46,12 +46,27 @@ class LoginRequest(BaseModel):
         return value.strip().lower()
 
 
+class TeacherRegisterRequest(BaseModel):
+    name: str = Field(min_length=1, max_length=120)
+    unique_id: str = Field(min_length=4, max_length=80, pattern=r"^[A-Za-z0-9._-]+$")
+    password: str = Field(min_length=8, max_length=128)
+
+
+class TeacherLoginRequest(BaseModel):
+    unique_id: str = Field(min_length=1, max_length=80)
+    password: str
+
+
 class TeacherUpgradeRequest(BaseModel):
     invite_code: str = Field(min_length=8, max_length=128)
 
 
 def user_response(user: dict, token: str) -> dict:
     return {"access_token": token, "token_type": "bearer", "user": user}
+
+
+def teacher_user(row: dict) -> dict:
+    return {"id": row["id"], "email": row["email"], "name": row["name"], "role": "teacher", "unique_id": row["unique_id"]}
 
 
 @router.get("/google/start")
@@ -152,6 +167,41 @@ def register(payload: RegisterRequest):
     finally:
         connection.close()
     token = create_access_token(user["id"], user["role"], settings.secret_key, settings.access_token_ttl_seconds)
+    return user_response(user, token)
+
+
+@router.post("/teacher/register", status_code=status.HTTP_201_CREATED)
+def teacher_register(payload: TeacherRegisterRequest, response: Response):
+    connection = connect()
+    unique_id = payload.unique_id.strip().lower()
+    user = {"id": str(uuid.uuid4()), "email": f"{unique_id}@teacher.local", "name": payload.name.strip(), "role": "teacher", "unique_id": unique_id}
+    try:
+        connection.execute(
+            "INSERT INTO users (id, email, name, password_hash, role, unique_id) VALUES (%s, %s, %s, %s, 'teacher', %s)",
+            (user["id"], user["email"], user["name"], hash_password(payload.password), unique_id),
+        )
+        connection.commit()
+    except Exception as error:
+        if "duplicate key" in str(error).lower():
+            raise HTTPException(status_code=409, detail="That teacher ID is already registered") from None
+        raise
+    finally:
+        connection.close()
+    token = create_access_token(user["id"], "teacher", settings.secret_key, settings.access_token_ttl_seconds)
+    response.set_cookie("access_token", token, max_age=settings.access_token_ttl_seconds, httponly=True, secure=False, samesite="lax")
+    return user_response(user, token)
+
+
+@router.post("/teacher/login")
+def teacher_login(payload: TeacherLoginRequest, response: Response):
+    connection = connect()
+    row = connection.execute("SELECT * FROM users WHERE unique_id = %s AND role = 'teacher'", (payload.unique_id.strip().lower(),)).fetchone()
+    connection.close()
+    if row is None or not verify_password(payload.password, row["password_hash"]):
+        raise HTTPException(status_code=401, detail="Incorrect teacher ID or password")
+    user = teacher_user(row)
+    token = create_access_token(user["id"], "teacher", settings.secret_key, settings.access_token_ttl_seconds)
+    response.set_cookie("access_token", token, max_age=settings.access_token_ttl_seconds, httponly=True, secure=False, samesite="lax")
     return user_response(user, token)
 
 
