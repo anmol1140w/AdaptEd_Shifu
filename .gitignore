@@ -6,3 +6,17 @@ __pycache__/
 .env.*
 Flow.md
 decision.md
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
