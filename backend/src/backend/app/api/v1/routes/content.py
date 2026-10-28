@@ -53,7 +53,7 @@ def list_problems(topic: str | None = Query(default=None), subject: str | None =
             values.extend([f"%{search}%", f"%{search}%"])
         where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
         rows = connection.execute(
-            f"""SELECT p.id, p.title, p.subject, p.chapter, p.question_type, p.difficulty,
+            f"""SELECT p.id, p.title, p.subject, p.chapter, p.question_type, p.difficulty, p.bloom_level,
                        p.estimated_minutes, p.exam_relevance,
                        COALESCE(bool_or(a.correct), FALSE) AS solved,
                        COALESCE(bool_or(a.id IS NOT NULL), FALSE) AS attempted,
