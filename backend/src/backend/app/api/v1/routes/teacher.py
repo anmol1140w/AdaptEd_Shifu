@@ -1,3 +1,4 @@
+import json
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -6,6 +7,7 @@ from psycopg.types.json import Json
 
 from backend.app.api.v1.dependencies import current_user, teacher_only
 from backend.app.infrastructure.database.connection import connect
+from backend.app.infrastructure.database.rewards import award_teacher_quiz_completion, total_coins
 
 router = APIRouter(prefix="/teacher", tags=["teacher"])
 
@@ -26,6 +28,11 @@ class QuizCreateRequest(BaseModel):
     difficulty: str = Field(pattern="^(Easy|Medium|Hard)$")
     time_limit_minutes: int = Field(default=30, ge=1, le=300)
     questions: list[QuizQuestionRequest] = Field(min_length=1, max_length=100)
+
+
+class StudentQuizAttemptRequest(BaseModel):
+    attempt_id: str = Field(min_length=1, max_length=80)
+    answers: dict[str, str] = Field(default_factory=dict, max_length=100)
 
 
 @router.get("/classrooms")
@@ -108,7 +115,75 @@ def student_quiz_detail(quiz_id: str, user=Depends(current_user)):
     if quiz is None:
         connection.close()
         raise HTTPException(status_code=404, detail="Quiz not found")
-    questions = connection.execute("SELECT id, position, prompt, question_type, choices, answer, explanation, hints FROM teacher_quiz_questions WHERE quiz_id = %s ORDER BY position", (quiz_id,)).fetchall()
+    questions = connection.execute("SELECT id, position, prompt, question_type, choices FROM teacher_quiz_questions WHERE quiz_id = %s ORDER BY position", (quiz_id,)).fetchall()
     connection.close()
     return {"quiz": {**quiz, "questions": questions}}
+
+
+@router.post("/student-quizzes/{quiz_id}/attempt")
+def submit_student_quiz_attempt(quiz_id: str, payload: StudentQuizAttemptRequest, user=Depends(current_user)):
+    if user["role"] != "student":
+        raise HTTPException(status_code=403, detail="Only students can submit classroom quizzes")
+    connection = connect()
+    try:
+        existing = connection.execute(
+            "SELECT id,user_id,quiz_id,score,max_score,points_awarded FROM teacher_quiz_attempts WHERE id=%s",
+            (payload.attempt_id,),
+        ).fetchone()
+        if existing:
+            if existing["user_id"] != user["id"] or existing["quiz_id"] != quiz_id:
+                raise HTTPException(status_code=409, detail="This attempt ID is already in use")
+            result = {"attempt_id": existing["id"], "score": existing["score"], "max_score": existing["max_score"], "points_awarded": existing["points_awarded"], "coins": total_coins(connection, user["id"]), "already_submitted": True}
+            connection.commit()
+            return result
+        quiz = connection.execute(
+            """SELECT q.id FROM teacher_quizzes q JOIN classroom_memberships m ON m.classroom_id=q.classroom_id
+               WHERE q.id=%s AND q.published=TRUE AND m.user_id=%s AND m.role='student'""",
+            (quiz_id, user["id"]),
+        ).fetchone()
+        if quiz is None:
+            raise HTTPException(status_code=404, detail="Quiz not found")
+        questions = connection.execute(
+            "SELECT id,answer FROM teacher_quiz_questions WHERE quiz_id=%s ORDER BY position",
+            (quiz_id,),
+        ).fetchall()
+        if not questions:
+            raise HTTPException(status_code=409, detail="This quiz has no questions")
+        valid_ids = {question["id"] for question in questions}
+        if set(payload.answers) - valid_ids:
+            raise HTTPException(status_code=422, detail="Answers contain a question that is not part of this quiz")
+        if set(payload.answers) != valid_ids or any(not answer.strip() for answer in payload.answers.values()):
+            raise HTTPException(status_code=422, detail="Answer every question before submitting the quiz")
+        normalize = lambda value: "".join(value.strip().casefold().split()).replace("−", "-").replace("–", "-")
+        score = sum(
+            normalize(payload.answers.get(question["id"], "")) == normalize(str(question["answer"]))
+            for question in questions
+        )
+        coins_awarded = award_teacher_quiz_completion(connection, user["id"], quiz_id, payload.attempt_id)
+        inserted = connection.execute(
+            """INSERT INTO teacher_quiz_attempts
+               (id,quiz_id,user_id,answers,score,max_score,points_awarded)
+               VALUES (%s,%s,%s,%s::jsonb,%s,%s,%s)
+               ON CONFLICT (id) DO NOTHING
+               RETURNING id""",
+            (payload.attempt_id, quiz_id, user["id"], json.dumps(payload.answers), score, len(questions), coins_awarded),
+        ).fetchone()
+        if inserted is None:
+            existing = connection.execute(
+                "SELECT id,user_id,quiz_id,score,max_score,points_awarded FROM teacher_quiz_attempts WHERE id=%s",
+                (payload.attempt_id,),
+            ).fetchone()
+            if not existing or existing["user_id"] != user["id"] or existing["quiz_id"] != quiz_id:
+                raise HTTPException(status_code=409, detail="This attempt ID is already in use")
+            result = {"attempt_id": existing["id"], "score": existing["score"], "max_score": existing["max_score"], "points_awarded": existing["points_awarded"], "coins": total_coins(connection, user["id"]), "already_submitted": True}
+            connection.commit()
+            return result
+        result = {"attempt_id": payload.attempt_id, "score": score, "max_score": len(questions), "points_awarded": coins_awarded, "coins": total_coins(connection, user["id"]), "already_submitted": False}
+        connection.commit()
+        return result
+    except HTTPException:
+        connection.rollback()
+        raise
+    finally:
+        connection.close()
 
