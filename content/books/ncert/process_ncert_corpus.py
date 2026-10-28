@@ -14,6 +14,7 @@ ARCHIVES = ROOT / "source_archives"
 PDF_ROOT = ROOT / "source_pdfs"
 DOCUMENT_ROOT = ROOT.parent.parent / "datasets" / "ncert" / "chunks"
 INDEX_PATH = ROOT / "catalog.json"
+PAGE_OVERRIDES_PATH = ROOT / "page_text_overrides.jsonl"
 PDFTOTEXT = "/usr/bin/pdftotext"
 
 BOOKS = {
@@ -62,6 +63,14 @@ def clean(text: str) -> str:
             continue
         lines.append(s)
     return "\n".join(lines).strip()
+
+def clean_verified_override(text: str) -> str:
+    """Tidy authored corrections while preserving scientific Unicode notation.
+
+    Unlike extracted PDF text, verified overrides already have repaired glyphs;
+    NFKC would flatten subscript/superscript charges and indices in equations.
+    """
+    return "\n".join(re.sub(r"\s+", " ", line).strip() for line in text.splitlines()).strip()
 
 def pdf_pages(pdf: Path) -> list[str]:
     result = subprocess.run([PDFTOTEXT, "-layout", str(pdf), "-"], check=True, capture_output=True, text=True)
@@ -129,6 +138,59 @@ def page_records(book_code: str, pdf: Path, pages: list[str], title: str, meta: 
         "has_unmapped_private_use_glyphs": bool(re.search(r"[\uE000-\uF8FF]", page)),
         "word_count": len(page.split()), "source_pdf": str(pdf.relative_to(PDF_ROOT)),
     } for num, page in enumerate(pages, 1)]
+
+def load_page_overrides(path: Path = PAGE_OVERRIDES_PATH) -> dict[tuple[str, int], dict[str, str]]:
+    """Load human-verified page corrections without touching source PDFs.
+
+    Each JSONL row must include book_code, chapter_code, pdf_page,
+    verified_text, verified_against_pdf=true, reviewer, and reviewed_at.
+    Example: {"book_code":"kech1","chapter_code":"kech104","pdf_page":9,
+    "verified_text":"...","verified_against_pdf":true,"reviewer":"name",
+    "reviewed_at":"2026-10-28"}.
+    """
+    if not path.exists():
+        return {}
+    overrides: dict[tuple[str, int], dict[str, str]] = {}
+    for line_no, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        if not line.strip():
+            continue
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"Invalid page override JSON at {path}:{line_no}: {exc}") from exc
+        required = ("book_code", "chapter_code", "pdf_page", "verified_text", "verified_against_pdf", "reviewer", "reviewed_at")
+        missing = [key for key in required if key not in row or row[key] in (None, "")]
+        if missing:
+            raise ValueError(f"Page override at {path}:{line_no} is missing {', '.join(missing)}")
+        if row["verified_against_pdf"] is not True:
+            raise ValueError(f"Page override at {path}:{line_no} must be explicitly verified against its source PDF")
+        page_no = int(row["pdf_page"])
+        if page_no < 1 or not isinstance(row["verified_text"], str):
+            raise ValueError(f"Invalid page number or corrected text at {path}:{line_no}")
+        key = (f"{row['book_code']}/{row['chapter_code']}", page_no)
+        if key in overrides:
+            raise ValueError(f"Duplicate page override for {key[0]} page {page_no}")
+        overrides[key] = {"text": clean_verified_override(row["verified_text"]), "reviewer": str(row["reviewer"]), "reviewed_at": str(row["reviewed_at"])}
+    return overrides
+
+def apply_page_overrides(records: list[dict], book_code: str, chapter_code: str,
+                         overrides: dict[tuple[str, int], dict[str, str]]) -> list[dict]:
+    source_key = f"{book_code}/{chapter_code}"
+    corrected = []
+    for record in records:
+        row = dict(record)
+        override = overrides.get((source_key, int(row["pdf_page"])))
+        if override:
+            row["page_text"] = override["text"]
+            row["word_count"] = len(override["text"].split())
+            row["has_unmapped_private_use_glyphs"] = bool(re.search(r"[\uE000-\uF8FF]", override["text"]))
+            row["text_origin"] = "human_verified_page_override"
+            row["override_reviewer"] = override["reviewer"]
+            row["override_reviewed_at"] = override["reviewed_at"]
+        else:
+            row["text_origin"] = "pdftotext_layout"
+        corrected.append(row)
+    return corrected
 
 def heading_aware(records: list[dict], prefix: str, max_words: int = 650):
     # Keep explicit worked examples together, even when they exceed the target size.
@@ -220,6 +282,7 @@ def assemble_chunks(parts, records, book_code, grade, subject, part_num, chapter
         table_pages = [p for p, flags in page_flags.items() if "table_reference" in flags]
         formula_pages = [p for p, flags in page_flags.items() if "formula_or_equation" in flags or "chemical_equation" in flags]
         glyph_pages = [r["pdf_page"] for r in records if pstart <= r["pdf_page"] <= pend and r["has_unmapped_private_use_glyphs"]]
+        overrides = [r for r in records if pstart <= r["pdf_page"] <= pend and r.get("text_origin") == "human_verified_page_override"]
         source_pdf = f"content/books/ncert/source_pdfs/{book_code}/{chapter_code}.pdf"
         notes = []
         if visual_pages:
@@ -251,6 +314,8 @@ def assemble_chunks(parts, records, book_code, grade, subject, part_num, chapter
                 "table_reference_pages": ",".join(map(str, table_pages)),
                 "formula_pages": ",".join(map(str, formula_pages)),
                 "unmapped_glyph_pages": ",".join(map(str, glyph_pages)),
+                "human_verified_override_pages": ",".join(str(r["pdf_page"]) for r in overrides),
+                "human_verified_override_reviewers": ",".join(sorted({str(r["override_reviewer"]) for r in overrides})),
                 "requires_source_pdf_for_visual_review": bool(visual_pages or table_pages),
                 "requires_source_pdf_for_equation_review": bool(formula_pages or glyph_pages),
                 "extraction_notes": " ".join(notes),
@@ -265,6 +330,7 @@ def main():
     catalog = {"schema_version": "1.0", "title": "NCERT PCM Class 11–12 Source Corpus", "language": "en",
                "source_authority": "National Council of Educational Research and Training (NCERT)",
                "source_catalog": "https://ncert.nic.in/textbook.php", "books": []}
+    page_overrides = load_page_overrides()
     for code, meta in BOOKS.items():
         grade, slug, subject, part = meta
         archive = ARCHIVES / f"{code}dd.zip"
@@ -287,7 +353,7 @@ def main():
                 if not pages:
                     continue
                 title = official_chapter_title(code, pdf_path.stem, chapter_title(pages, pdf_path.stem))
-                records = page_records(code, pdf_path, pages, title, meta)
+                records = apply_page_overrides(page_records(code, pdf_path, pages, title, meta), code, pdf_path.stem, page_overrides)
                 chapter = {"chapter_code": pdf_path.stem, "chapter_title": title,
                            "source_pdf": str(pdf_path.relative_to(ROOT)), "pdf_pages": len(pages),
                            "word_count": sum(r["word_count"] for r in records)}

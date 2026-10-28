@@ -89,6 +89,20 @@ CREATE TABLE IF NOT EXISTS problem_attempts (
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_problem_attempts_user ON problem_attempts(user_id, problem_id);
+CREATE TABLE IF NOT EXISTS learner_coin_events (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    event_key TEXT NOT NULL UNIQUE,
+    event_type TEXT NOT NULL,
+    points INTEGER NOT NULL CHECK (points >= 0),
+    description TEXT NOT NULL,
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_learner_coin_events_user_time
+    ON learner_coin_events(user_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_learner_coin_events_activity_date
+    ON learner_coin_events(user_id, event_type, (metadata->>'activity_date'));
 CREATE TABLE IF NOT EXISTS content_seed_meta (
     key TEXT PRIMARY KEY,
     value TEXT NOT NULL,
@@ -119,6 +133,18 @@ CREATE TABLE IF NOT EXISTS teacher_quiz_questions (
 );
 ALTER TABLE teacher_quiz_questions ADD COLUMN IF NOT EXISTS bloom_level TEXT NOT NULL DEFAULT 'understand';
 CREATE INDEX IF NOT EXISTS idx_teacher_quizzes_classroom ON teacher_quizzes(classroom_id, published);
+CREATE TABLE IF NOT EXISTS teacher_quiz_attempts (
+    id TEXT PRIMARY KEY,
+    quiz_id TEXT NOT NULL REFERENCES teacher_quizzes(id) ON DELETE CASCADE,
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    answers JSONB NOT NULL,
+    score INTEGER NOT NULL CHECK (score >= 0),
+    max_score INTEGER NOT NULL CHECK (max_score > 0 AND score <= max_score),
+    points_awarded INTEGER NOT NULL DEFAULT 0 CHECK (points_awarded >= 0),
+    completed_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_teacher_quiz_attempts_user
+    ON teacher_quiz_attempts(user_id, completed_at DESC);
 CREATE TABLE IF NOT EXISTS learning_concepts (
     concept_id TEXT PRIMARY KEY,
     subject TEXT NOT NULL CHECK (subject IN ('physics', 'chemistry', 'mathematics')),
@@ -144,6 +170,9 @@ CREATE TABLE IF NOT EXISTS learning_items (
     question TEXT NOT NULL,
     answer_guide TEXT NOT NULL,
     explanation TEXT NOT NULL,
+    options JSONB NOT NULL DEFAULT '[]'::jsonb,
+    marks DOUBLE PRECISION,
+    time_seconds INTEGER,
     source_reference_ids JSONB NOT NULL DEFAULT '[]'::jsonb,
     supporting_chunk_ids JSONB NOT NULL DEFAULT '[]'::jsonb,
     citation_status TEXT NOT NULL DEFAULT 'teacher_review_required',
@@ -157,6 +186,9 @@ ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS bloom_source TEXT NOT NULL D
 ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS bloom_teacher_verified BOOLEAN NOT NULL DEFAULT FALSE;
 ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS difficulty_source TEXT NOT NULL DEFAULT 'unverified_seed';
 ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS difficulty_teacher_verified BOOLEAN NOT NULL DEFAULT FALSE;
+ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS options JSONB NOT NULL DEFAULT '[]'::jsonb;
+ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS marks DOUBLE PRECISION;
+ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS time_seconds INTEGER;
 CREATE INDEX IF NOT EXISTS idx_learning_items_lookup ON learning_items(subject, class_level, concept_id, approved, difficulty);
 CREATE TABLE IF NOT EXISTS learning_assessments (
     id TEXT PRIMARY KEY,
@@ -310,8 +342,8 @@ def seed_pcm_learning_content(connection: psycopg.Connection) -> None:
                     """INSERT INTO learning_items
                        (item_id, concept_id, subject, class_level, chapter, item_type, bloom_level,
                         difficulty, question, answer_guide, explanation, source_reference_ids,
-                        supporting_chunk_ids, citation_status)
-                       VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s::jsonb,%s)
+                        supporting_chunk_ids, citation_status, options, marks, time_seconds, approved)
+                       VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s::jsonb,%s,%s::jsonb,%s,%s,%s)
                        ON CONFLICT (item_id) DO UPDATE SET concept_id=EXCLUDED.concept_id,
                          subject=EXCLUDED.subject, class_level=EXCLUDED.class_level, chapter=EXCLUDED.chapter,
                          item_type=EXCLUDED.item_type, bloom_level=EXCLUDED.bloom_level,
@@ -319,12 +351,15 @@ def seed_pcm_learning_content(connection: psycopg.Connection) -> None:
                          answer_guide=EXCLUDED.answer_guide, explanation=EXCLUDED.explanation,
                          source_reference_ids=EXCLUDED.source_reference_ids,
                          supporting_chunk_ids=EXCLUDED.supporting_chunk_ids,
-                         citation_status=EXCLUDED.citation_status""",
+                         citation_status=EXCLUDED.citation_status, options=EXCLUDED.options,
+                         marks=EXCLUDED.marks, time_seconds=EXCLUDED.time_seconds""",
                     (item["item_id"], item["concept_id"], subject, grade, item.get("chapter", ""),
                      item.get("item_type", "short_answer"), item.get("bloom_level", "understand"),
                      str(item.get("difficulty", "easy")).lower(), item["question"], item.get("answer_guide", ""),
                      item.get("explanation", ""), json.dumps(item.get("source_reference_ids", [])),
-                     json.dumps(item.get("supporting_chunk_ids", [])), item.get("citation_status", "teacher_review_required")),
+                     json.dumps(item.get("supporting_chunk_ids", [])), item.get("citation_status", "teacher_review_required"),
+                     json.dumps(item.get("options", [])), item.get("marks"), item.get("time_seconds"),
+                     bool(item.get("teacher_approved", False))),
                 )
     connection.execute(
         """INSERT INTO content_seed_meta (key, value) VALUES ('pcm_learning_content', %s)

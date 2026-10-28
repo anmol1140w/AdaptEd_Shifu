@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '../../app/AuthProvider'
 import { StudentNav } from './StudentNav'
-import { getJeeProblem, listJeeProblems, listJeeTopics, studentQuizDetail, submitJeeAttempt, type JeeProblem, type JeeTopic } from '../../services/api'
+import { getJeeProblem, listJeeProblems, listJeeTopics, studentQuizDetail, submitJeeAttempt, submitStudentQuizAttempt, type JeeProblem, type JeeTopic } from '../../services/api'
 import './problems.css'
 
 const bloomLabel = (level?: string) => {
@@ -34,15 +34,16 @@ export function TopicQuizAttemptPage() {
   const [startedAt] = useState(() => Date.now())
   const [finished, setFinished] = useState(false)
   const [score, setScore] = useState(0)
+  const [coinsEarned, setCoinsEarned] = useState(0)
   const [seconds, setSeconds] = useState(0)
   useEffect(() => { if (!slug) return; listJeeProblems(slug).then(async (rows) => setProblems(await Promise.all(rows.map((row) => getJeeProblem(row.id))))).catch(() => setProblems([])) }, [slug])
   useEffect(() => { if (finished) return; const timer = window.setInterval(() => setSeconds(Math.floor((Date.now() - startedAt) / 1000)), 1000); return () => window.clearInterval(timer) }, [finished, startedAt])
   const current = problems[index]
   const time = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`
-  const submit = async (event: FormEvent) => { event.preventDefault(); if (!current || !answer.trim()) return; const attempt = await submitJeeAttempt(current.id, { answer, time_taken: seconds, hint_used: false }); setScore((value) => value + (attempt.correct ? 1 : 0)); if (index >= problems.length - 1) setFinished(true); else { setIndex((value) => value + 1); setAnswer('') } }
+  const submit = async (event: FormEvent) => { event.preventDefault(); if (!current || !answer.trim()) return; const attempt = await submitJeeAttempt(current.id, { answer, time_taken: seconds, hint_used: false }); setScore((value) => value + (attempt.correct ? 1 : 0)); setCoinsEarned((value) => value + attempt.points_awarded); if (index >= problems.length - 1) setFinished(true); else { setIndex((value) => value + 1); setAnswer('') } }
   if (!session) return <Navigate to="/sign-in" replace />
   if (!current && !finished) return <div className="phase-loading">Loading quiz…</div>
-  return <div className="problems-app"><StudentNav /><main className="problem-detail-main">{finished ? <article className="problem-detail-card quiz-result-card"><span className="problems-kicker">QUIZ COMPLETE</span><h1>{slug?.split('-').slice(1).join(' ')}</h1><p className="quiz-score-large">{score} / {problems.length} correct</p><Button className="check-answer-button" onClick={() => navigate(`/student/topics/${subject}/${slug}`)}>Back to topic <ArrowRight size={15} /></Button></article> : <article className="problem-detail-card"><div className="problem-timer problem-timer-top-left"><Clock3 size={16} /><span>{time}</span></div><div className="detail-meta"><span>QUESTION {index + 1} / {problems.length}</span><span>{bloomLabel(current?.bloom_level)}</span><span>{current?.difficulty}</span></div><h1>{current?.title}</h1><div className="question-statement"><span className="problems-kicker">QUIZ QUESTION</span><p>{current?.statement}</p></div><form className="answer-form" onSubmit={submit}>{current?.choices?.map((choice) => <label className={`problem-choice ${answer === choice ? 'choice-picked' : ''}`} key={choice}><input type="radio" name="quiz-answer" value={choice} checked={answer === choice} onChange={() => setAnswer(choice)} /><span className="choice-radio" />{choice}</label>)}<Button className="check-answer-button" type="submit" disabled={!answer}><Check size={15} /> Submit and continue</Button></form></article>}</main></div>
+  return <div className="problems-app"><StudentNav /><main className="problem-detail-main">{finished ? <article className="problem-detail-card quiz-result-card"><span className="problems-kicker">QUIZ COMPLETE</span><h1>{slug?.split('-').slice(1).join(' ')}</h1><p className="quiz-score-large">{score} / {problems.length} correct</p><p className="adapt-coins-earned">+{coinsEarned} AdaptCoins earned</p><Button className="check-answer-button" onClick={() => navigate(`/student/topics/${subject}/${slug}`)}>Back to topic <ArrowRight size={15} /></Button></article> : <article className="problem-detail-card"><div className="problem-timer problem-timer-top-left"><Clock3 size={16} /><span>{time}</span></div><div className="detail-meta"><span>QUESTION {index + 1} / {problems.length}</span><span>{bloomLabel(current?.bloom_level)}</span><span>{current?.difficulty}</span></div><h1>{current?.title}</h1><div className="question-statement"><span className="problems-kicker">QUIZ QUESTION</span><p>{current?.statement}</p></div><form className="answer-form" onSubmit={submit}>{current?.choices?.map((choice) => <label className={`problem-choice ${answer === choice ? 'choice-picked' : ''}`} key={choice}><input type="radio" name="quiz-answer" value={choice} checked={answer === choice} onChange={() => setAnswer(choice)} /><span className="choice-radio" />{choice}</label>)}<Button className="check-answer-button" type="submit" disabled={!answer}><Check size={15} /> Submit and continue</Button></form></article>}</main></div>
 }
 
 export function TeacherQuizAttemptPage() {
@@ -52,16 +53,40 @@ export function TeacherQuizAttemptPage() {
   const [quiz, setQuiz] = useState<Awaited<ReturnType<typeof studentQuizDetail>> | null>(null)
   const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [finished, setFinished] = useState(false)
-  const [startedAt] = useState(() => Date.now())
-  const [seconds, setSeconds] = useState(0)
+  const [answers, setAnswers] = useState<Record<string, string>>({})
+  const [result, setResult] = useState<{ score: number; max_score: number; points_awarded: number; coins: number } | null>(null)
+  const [attemptId] = useState(() => crypto.randomUUID())
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState('')
   useEffect(() => { if (quizId) studentQuizDetail(quizId).then(setQuiz).catch(() => setQuiz(null)) }, [quizId])
-  useEffect(() => { if (finished) return; const timer = window.setInterval(() => setSeconds(Math.floor((Date.now() - startedAt) / 1000)), 1000); return () => window.clearInterval(timer) }, [finished, startedAt])
   if (!session) return <Navigate to="/sign-in" replace />
   if (!quiz) return <div className="phase-loading">Loading quiz…</div>
   const question = quiz.questions[index]
-  const time = `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`
-  const submit = async (event: FormEvent) => { event.preventDefault(); if (!answer.trim()) return; const correct = answer.trim().toLowerCase() === question.answer.trim().toLowerCase(); setScore((value) => value + (correct ? 1 : 0)); if (index === quiz.questions.length - 1) setFinished(true); else { setIndex((value) => value + 1); setAnswer('') } }
-  return <div className="problems-app"><StudentNav /><main className="problem-detail-main"><article className="problem-detail-card">{finished ? <><span className="problems-kicker">QUIZ COMPLETE</span><h1>{quiz.title}</h1><p className="quiz-score-large">{score} / {quiz.questions.length} correct</p><Button className="check-answer-button" onClick={() => navigate('/student/quizzes')}>Back to quizzes <ArrowRight size={15} /></Button></> : <><div className="problem-timer problem-timer-top-left"><Clock3 size={16} /><span>{time}</span></div><div className="detail-meta"><span>QUESTION {index + 1} / {quiz.questions.length}</span><span>{bloomLabel(question.bloom_level)}</span><span>{quiz.difficulty}</span></div><h1>{quiz.title}</h1><div className="question-statement"><span className="problems-kicker">CLASSROOM QUIZ</span><p>{question.prompt}</p></div><form className="answer-form" onSubmit={submit}>{question.choices.map((choice) => <label className={`problem-choice ${answer === choice ? 'choice-picked' : ''}`} key={choice}><input type="radio" name="teacher-quiz-answer" value={choice} checked={answer === choice} onChange={() => setAnswer(choice)} /><span className="choice-radio" />{choice}</label>)}<Button className="check-answer-button" type="submit" disabled={!answer}>Submit and continue <ArrowRight size={15} /></Button></form></>}</article></main></div>
+  const submit = async (event: FormEvent) => {
+    event.preventDefault()
+    if (!answer.trim() || busy) return
+    const nextAnswers = { ...answers, [question.id]: answer }
+    setAnswers(nextAnswers)
+    if (index < quiz.questions.length - 1) {
+      setIndex((value) => value + 1)
+      setAnswer('')
+      return
+    }
+    setBusy(true)
+    setError('')
+    try {
+      const saved = await submitStudentQuizAttempt(quiz.id, attemptId, nextAnswers)
+      setResult(saved)
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : 'Could not save quiz results.')
+      setAnswers((current) => {
+        const copy = { ...current }
+        delete copy[question.id]
+        return copy
+      })
+    } finally {
+      setBusy(false)
+    }
+  }
+  return <div className="problems-app"><StudentNav /><main className="problem-detail-main"><article className="problem-detail-card">{result ? <><span className="problems-kicker">QUIZ COMPLETE · SAVED</span><h1>{quiz.title}</h1><p className="quiz-score-large">{result.score} / {result.max_score} correct</p><p className="adapt-coins-earned">+{result.points_awarded} AdaptCoins · {result.coins} total</p><Button className="check-answer-button" onClick={() => navigate('/student/quizzes')}>Back to quizzes <ArrowRight size={15} /></Button></> : <><div className="detail-meta"><span>QUESTION {index + 1} / {quiz.questions.length}</span><span>{bloomLabel(question.bloom_level)}</span><span>{quiz.difficulty}</span></div><h1>{quiz.title}</h1><div className="question-statement"><span className="problems-kicker">CLASSROOM QUIZ</span><p>{question.prompt}</p></div>{error && <p role="alert" className="answer-feedback answer-incorrect">{error}</p>}<form className="answer-form" onSubmit={submit}>{question.choices.map((choice) => <label className={`problem-choice ${answer === choice ? 'choice-picked' : ''}`} key={choice}><input type="radio" name="teacher-quiz-answer" value={choice} checked={answer === choice} onChange={() => setAnswer(choice)} /><span className="choice-radio" />{choice}</label>)}<Button className="check-answer-button" type="submit" disabled={!answer || busy}>{busy ? 'Saving…' : index === quiz.questions.length - 1 ? 'Submit quiz' : 'Submit and continue'} <ArrowRight size={15} /></Button></form><small>{Object.keys(answers).length + (answer && !answers[question.id] ? 1 : 0)} of {quiz.questions.length} answered · completion is saved to your account</small></>}</article></main></div>
 }

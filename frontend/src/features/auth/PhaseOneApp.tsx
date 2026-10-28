@@ -15,6 +15,7 @@ import { StudentProfilePage } from '../profile/StudentProfilePage'
 import { AdaptiveLearningPage } from '../learner/AdaptiveLearningPage'
 import { AITutoringPage } from '../learner/AITutoringPage'
 import { TeacherLearningDashboard } from '../teacher/TeacherLearningDashboard'
+import { RewardsLeaderboardPage } from '../learner/RewardsLeaderboardPage'
 import { ACADEMIC_YEARS, CLASS_LEVELS, EXAM_TARGETS, JEE_SUBJECTS, subjectLabel } from '../onboarding/services/classroomService'
 import type { AuthSession, ClassLevel, Classroom, CreateClassroomInput, ExamTarget, JeeSubjectId, StudentClassLevel, StudentImprovementSubject, StudentJeeGoal, StudentLearningStyle, StudentOnboardingProfile, StudentStrengthSubject } from '../../types'
 
@@ -347,6 +348,7 @@ export function PhaseOneApp() {
     <Route path="/classroom/join" element={<Protected><JoinClassroomPage /></Protected>} />
     <Route path="/classroom/created" element={<ProtectedTeacher><CreatedPage /></ProtectedTeacher>} />
     <Route path="/student/learn" element={<Protected><AdaptiveLearningPage /></Protected>} />
+    <Route path="/leaderboard" element={<Protected><RewardsLeaderboardPage /></Protected>} />
     <Route path="/student/adaptive-learning" element={<Protected><AITutoringPage /></Protected>} />
     <Route path="/student/profile" element={<ProtectedStudentProfile><StudentProfilePage /></ProtectedStudentProfile>} />
     <Route path="/student/problems" element={<Protected><TopicWiseProblemsPage /></Protected>} />

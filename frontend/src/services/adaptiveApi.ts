@@ -24,6 +24,7 @@ export type AdaptiveConcept = {
 export type AdaptiveQuestion = {
   item_id: string; concept_id: string; subject: string; class_level: number
   chapter: string; item_type: string; bloom_level: string; difficulty: string; question: string
+  options?: string[]; marks?: number | null; time_seconds?: number | null
 }
 export type LearningPathStep = { concept_id: string; name: string; chapter: string; mastery_status: string; action: string; reason: string }
 export type LearnerSummary = { learner_id: string; name: string; attempts: number; accuracy: number; weak_concepts: string[]; intervention: string }
@@ -46,7 +47,7 @@ export type TutorMemory = { id: string; mode: 'hint' | 'explanation' | 'check_qu
 export type LearningPreferences = { subject: string; class_level: number; updated_at: string | null }
 export type TopicScore = { topic: string; attempts: number; correct: number; accuracy: number; mastery_score: number; confidence: number; trend: 'insufficient_evidence' | 'improving' | 'stable' | 'declining' }
 export type TopicScores = Record<string, TopicScore>
-export type AssessmentSummary = { attempts: number; correct: number; accuracy: number; topic_scores: TopicScores }
+export type AssessmentSummary = { attempts: number; scored_attempts: number; ungraded_attempts: number; correct: number; accuracy: number; topic_scores: TopicScores }
 
 export function getConcepts(subject: string, classLevel: number) {
   return request<{ concepts: AdaptiveConcept[] }>(`/learning/concepts?subject=${subject}&class_level=${classLevel}`)
@@ -55,7 +56,7 @@ export function getProgress(subject: string, classLevel: number) {
   return request<{ subject: string; class_level: number; concepts: AdaptiveConcept[]; learning_path: LearningPathStep[] }>(`/learning/progress?subject=${subject}&class_level=${classLevel}`)
 }
 export function getLearningPreferences() {
-  return request<{ preferences: LearningPreferences }>('/learning/preferences')
+  return request<{ preferences: LearningPreferences; allowed_class_levels: number[] }>('/learning/preferences')
 }
 export function saveLearningPreferences(subject: string, classLevel: number) {
   return request<{ preferences: LearningPreferences }>('/learning/preferences', {
@@ -71,12 +72,12 @@ export function resumeAdaptiveAssessment(assessmentId: string) {
   return request<{ assessment_id: string; status: string; assessment_type: 'adaptive' | 'mock'; question_count: number; index: number; question?: AdaptiveQuestion }>(`/assessments/${encodeURIComponent(assessmentId)}`)
 }
 export function submitAdaptiveAttempt(assessmentId: string, itemId: string, answer: string, timeTaken: number) {
-  return request<{ correct: boolean; answer_guide: string; explanation: string; grading: { correct: boolean; score: number; method: 'ollama' | 'exact' | 'similarity'; feedback: string }; completed: boolean; index: number; adaptation?: string; adaptation_reason?: string; question?: AdaptiveQuestion; summary?: AssessmentSummary }>(`/assessments/${assessmentId}/attempt`, {
+  return request<{ correct: boolean | null; answer_guide: string; explanation: string; grading: { correct: boolean | null; score: number | null; method: 'ollama' | 'exact' | 'manual_review'; requires_manual_review?: boolean; feedback: string }; completed: boolean; index: number; adaptation?: string; adaptation_reason?: string; question?: AdaptiveQuestion; summary?: AssessmentSummary; reward?: { points_awarded: number; coins: number } }>(`/assessments/${assessmentId}/attempt`, {
     method: 'POST', body: JSON.stringify({ item_id: itemId, answer, time_taken: timeTaken }),
   })
 }
 export function askTutor(input: { subject: string; class_level: number; concept_id: string; question: string; mode: 'hint' | 'explanation' | 'check_question'; topic_scores?: Record<string, TopicScore> }) {
-  return request<{ id: string; message: string; check_question: string; citations: LearningCitation[]; provider: string }>('/ai/tutor', {
+  return request<{ id: string; message: string; check_question: string; citations: LearningCitation[]; provider: string; points_awarded?: number; coins?: number | null }>('/ai/tutor', {
     method: 'POST', body: JSON.stringify(input),
   })
 }
@@ -104,13 +105,26 @@ export function getTeacherQuestionBank(status: 'pending' | 'approved' | 'all' = 
   return request<{ items: (AdaptiveQuestion & { answer_guide: string; explanation: string; approved: boolean; citation_status: string; bloom_source: string; bloom_teacher_verified: boolean; difficulty_teacher_verified: boolean; source_reference_ids: string[]; supporting_chunk_ids: string[] })[] }>(`/teacher/question-bank?status=${status}${subject ? `&subject=${subject}` : ''}${classLevel ? `&class_level=${classLevel}` : ''}`)
 }
 export function reviewQuestion(itemId: string, approved: boolean) {
-  return request<{ item: { item_id: string; approved: boolean } }>(`/teacher/question-bank/${encodeURIComponent(itemId)}/review?approved=${approved}`, { method: 'PATCH' })
+  return request<{ item: { item_id: string; approved: boolean }; content_item_path: string | null }>(`/teacher/question-bank/${encodeURIComponent(itemId)}/review?approved=${approved}`, { method: 'PATCH' })
+}
+export function editTeacherQuestion(itemId: string, input: { question?: string; answer_guide?: string; explanation?: string; bloom_level?: string; difficulty?: string; options?: string[] }) {
+  return request<{ item: { item_id: string } }>(`/teacher/question-bank/${encodeURIComponent(itemId)}`, { method: 'PATCH', body: JSON.stringify(input) })
+}
+export function getTeacherManualGrades(subject: string, classLevel: number) {
+  return request<{ items: { attempt_id: string; learner_id: string; learner_name: string; subject: string; class_level: number; chapter: string; question: string; answer: string; answer_guide: string; explanation: string; grading_feedback: string | null; created_at: string }[] }>(`/teacher/manual-grading?subject=${subject}&class_level=${classLevel}`)
+}
+export function reviewManualGrade(attemptId: string, correct: boolean, feedback: string) {
+  return request<{ item: { id: string; correct: boolean; grading_method: string; grading_feedback: string } }>(`/teacher/manual-grading/${encodeURIComponent(attemptId)}`, { method: 'PATCH', body: JSON.stringify({ correct, feedback }) })
 }
 export function importTeacherQuestion(input: { subject: string; class_level: number; chapter: string; concept_id: string; question: string; answer_guide: string; explanation: string; difficulty: string; bloom_level?: string }) {
   return request<{ item_id: string; bloom_level: string; approved: boolean; message: string }>('/teacher/question-bank/import', { method: 'POST', body: JSON.stringify(input) })
 }
-export function importTeacherQuestionBatch(questions: { subject: string; class_level: number; chapter: string; concept_id: string; question: string; answer_guide: string; explanation?: string; difficulty?: string; bloom_level?: string; source_reference_ids?: string[]; supporting_chunk_ids?: string[] }[]) {
+export function importTeacherQuestionBatch(questions: { subject: string; class_level: number; chapter: string; concept_id?: string; topic?: string; question: string; question_type?: string; answer_guide: string; explanation?: string; difficulty?: string; bloom_level?: string; options?: string[]; marks?: number; time_seconds?: number; source_reference_ids?: string[]; supporting_chunk_ids?: string[] }[]) {
   return request<{ items: { item_id: string; concept_id: string; bloom_level: string; bloom_teacher_verified: boolean }[]; message: string }>('/teacher/question-bank/import-batch', { method: 'POST', body: JSON.stringify({ questions }) })
+}
+export type QuestionClassification = { bloom_level: string; bloom_name: string; bloom_confidence: number; bloom_reason: string; difficulty: string; difficulty_reason: string }
+export function classifyTeacherQuestionBatch(questions: { question: string; question_type: string; subject: string; topic: string; correct_answer?: string; marking_rubric?: string; test_cases?: string; options?: string[]; marks?: number; time_seconds?: number }[]) {
+  return request<{ suggestions: QuestionClassification[] }>('/teacher/question-bank/classify-batch', { method: 'POST', body: JSON.stringify({ questions }) })
 }
 export function getTeacherGeneratedContent() {
   return request<{ items: { id: string; subject: string; class_level: number; concept_id: string; payload: { question: string; answer_guide: string; explanation: string; bloom_level: string }[]; source_ids: string[]; sources: { source_id: string; citation: string; text: string; score: number }[] }[] }>('/teacher/generated-content')
