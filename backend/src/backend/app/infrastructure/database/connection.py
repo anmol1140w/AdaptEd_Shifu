@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from threading import Lock
 from typing import Iterator
 
 import psycopg
@@ -8,6 +9,14 @@ import json
 
 from backend.app.core.settings import settings
 from backend.app.infrastructure.database.granular_content_seed import seed_granular_content
+
+
+# Schema changes should run once per database version, not once per API request.
+# The advisory lock also serializes initial setup across multiple app workers.
+DATABASE_SCHEMA_VERSION = "1"
+DATABASE_BOOTSTRAP_LOCK_ID = 731_945_280_611
+_database_init_lock = Lock()
+_database_initialized = False
 
 
 SCHEMA = """
@@ -86,6 +95,20 @@ CREATE TABLE IF NOT EXISTS problem_attempts (
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_problem_attempts_user ON problem_attempts(user_id, problem_id);
+CREATE TABLE IF NOT EXISTS learner_coin_events (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    event_key TEXT NOT NULL UNIQUE,
+    event_type TEXT NOT NULL,
+    points INTEGER NOT NULL CHECK (points >= 0),
+    description TEXT NOT NULL,
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_learner_coin_events_user_time
+    ON learner_coin_events(user_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_learner_coin_events_activity_date
+    ON learner_coin_events(user_id, event_type, (metadata->>'activity_date'));
 CREATE TABLE IF NOT EXISTS content_seed_meta (
     key TEXT PRIMARY KEY,
     value TEXT NOT NULL,
@@ -114,6 +137,19 @@ CREATE TABLE IF NOT EXISTS teacher_quiz_questions (
     hints JSONB NOT NULL DEFAULT '[]'::jsonb
 );
 CREATE INDEX IF NOT EXISTS idx_teacher_quizzes_classroom ON teacher_quizzes(classroom_id, published);
+CREATE TABLE IF NOT EXISTS teacher_quiz_attempts (
+    id TEXT PRIMARY KEY,
+    quiz_id TEXT NOT NULL REFERENCES teacher_quizzes(id) ON DELETE CASCADE,
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    answers JSONB NOT NULL,
+    score INTEGER NOT NULL CHECK (score >= 0),
+    max_score INTEGER NOT NULL CHECK (max_score > 0 AND score <= max_score),
+    points_awarded INTEGER NOT NULL DEFAULT 0 CHECK (points_awarded >= 0),
+    completed_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+ALTER TABLE teacher_quiz_attempts ADD COLUMN IF NOT EXISTS points_awarded INTEGER NOT NULL DEFAULT 0;
+CREATE INDEX IF NOT EXISTS idx_teacher_quiz_attempts_user
+    ON teacher_quiz_attempts(user_id, completed_at DESC);
 CREATE TABLE IF NOT EXISTS learning_concepts (
     concept_id TEXT PRIMARY KEY,
     subject TEXT NOT NULL CHECK (subject IN ('physics', 'chemistry', 'mathematics')),
@@ -175,10 +211,15 @@ CREATE TABLE IF NOT EXISTS learning_attempts (
     user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     item_id TEXT NOT NULL REFERENCES learning_items(item_id) ON DELETE CASCADE,
     answer TEXT NOT NULL,
-    correct BOOLEAN NOT NULL,
+    correct BOOLEAN,
+    grading_method TEXT NOT NULL DEFAULT 'legacy',
+    grading_feedback TEXT,
     time_taken INTEGER NOT NULL DEFAULT 0,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+ALTER TABLE learning_attempts ALTER COLUMN correct DROP NOT NULL;
+ALTER TABLE learning_attempts ADD COLUMN IF NOT EXISTS grading_method TEXT NOT NULL DEFAULT 'legacy';
+ALTER TABLE learning_attempts ADD COLUMN IF NOT EXISTS grading_feedback TEXT;
 CREATE INDEX IF NOT EXISTS idx_learning_attempts_user ON learning_attempts(user_id, item_id, created_at DESC);
 CREATE TABLE IF NOT EXISTS learning_external_evidence (
     id TEXT PRIMARY KEY,
@@ -328,13 +369,40 @@ def seed_pcm_learning_content(connection: psycopg.Connection) -> None:
     )
 
 
+def _initialize_database(connection: psycopg.Connection) -> None:
+    connection.execute("SELECT pg_advisory_xact_lock(%s)", (DATABASE_BOOTSTRAP_LOCK_ID,))
+    connection.execute(
+        """CREATE TABLE IF NOT EXISTS adapted_schema_versions (
+               version TEXT PRIMARY KEY,
+               applied_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+           )"""
+    )
+    current = connection.execute(
+        "SELECT version FROM adapted_schema_versions WHERE version=%s",
+        (DATABASE_SCHEMA_VERSION,),
+    ).fetchone()
+    if not current:
+        connection.execute(SCHEMA)
+        connection.execute(
+            "INSERT INTO adapted_schema_versions (version) VALUES (%s)",
+            (DATABASE_SCHEMA_VERSION,),
+        )
+    # Content loaders are themselves fingerprint/version guarded. Running them
+    # once per process refreshes changed authored content without DDL per request.
+    seed_granular_content(connection)
+    seed_pcm_learning_content(connection)
+    connection.commit()
+
+
 def connect() -> psycopg.Connection:
+    global _database_initialized
     connection = psycopg.connect(settings.database_url, password=settings.database_password, row_factory=dict_row)
     try:
-        connection.execute(SCHEMA)
-        seed_granular_content(connection)
-        seed_pcm_learning_content(connection)
-        connection.commit()
+        if not _database_initialized:
+            with _database_init_lock:
+                if not _database_initialized:
+                    _initialize_database(connection)
+                    _database_initialized = True
         return connection
     except Exception:
         connection.rollback()

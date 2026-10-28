@@ -9,7 +9,45 @@
       "chapter_recall_at_5": 0.9692,
       "mrr_at_5": 0.9462,
       "citation_precision_at_5": 0.8154,
-      "ranking": "local lexical BM25; not Qdrant Cloud Inference"
+      "ranking": "local lexical BM25; not Qdrant Cloud Inference",
+      "by_class_subject": {
+        "class_11_physics": {
+          "answerable_queries": 13,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 0.9615,
+          "chapter_citation_precision_at_5": 0.7846
+        },
+        "class_11_chemistry": {
+          "answerable_queries": 9,
+          "chapter_recall_at_5": 0.8889,
+          "mrr_at_5": 0.8889,
+          "chapter_citation_precision_at_5": 0.8
+        },
+        "class_11_mathematics": {
+          "answerable_queries": 12,
+          "chapter_recall_at_5": 0.9167,
+          "mrr_at_5": 0.875,
+          "chapter_citation_precision_at_5": 0.75
+        },
+        "class_12_physics": {
+          "answerable_queries": 12,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 0.9583,
+          "chapter_citation_precision_at_5": 0.95
+        },
+        "class_12_chemistry": {
+          "answerable_queries": 9,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "chapter_citation_precision_at_5": 0.9111
+        },
+        "class_12_mathematics": {
+          "answerable_queries": 10,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "chapter_citation_precision_at_5": 0.7
+        }
+      }
     },
     {
       "strategy": "heading_aware_650_words",
@@ -20,7 +58,45 @@
       "chapter_recall_at_5": 0.9846,
       "mrr_at_5": 0.9359,
       "citation_precision_at_5": 0.8092,
-      "ranking": "local lexical BM25; not Qdrant Cloud Inference"
+      "ranking": "local lexical BM25; not Qdrant Cloud Inference",
+      "by_class_subject": {
+        "class_11_physics": {
+          "answerable_queries": 13,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 0.9231,
+          "chapter_citation_precision_at_5": 0.7538
+        },
+        "class_11_chemistry": {
+          "answerable_queries": 9,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 0.9259,
+          "chapter_citation_precision_at_5": 0.7778
+        },
+        "class_11_mathematics": {
+          "answerable_queries": 12,
+          "chapter_recall_at_5": 0.9167,
+          "mrr_at_5": 0.8333,
+          "chapter_citation_precision_at_5": 0.7333
+        },
+        "class_12_physics": {
+          "answerable_queries": 12,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 0.9583,
+          "chapter_citation_precision_at_5": 0.9333
+        },
+        "class_12_chemistry": {
+          "answerable_queries": 9,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "chapter_citation_precision_at_5": 0.9556
+        },
+        "class_12_mathematics": {
+          "answerable_queries": 10,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "chapter_citation_precision_at_5": 0.72
+        }
+      }
     },
     {
       "strategy": "fixed_450_words_overlap_75",
@@ -31,7 +107,45 @@
       "chapter_recall_at_5": 0.9769,
       "mrr_at_5": 0.9385,
       "citation_precision_at_5": 0.8462,
-      "ranking": "local lexical BM25; not Qdrant Cloud Inference"
+      "ranking": "local lexical BM25; not Qdrant Cloud Inference",
+      "by_class_subject": {
+        "class_11_physics": {
+          "answerable_queries": 13,
+          "chapter_recall_at_5": 0.9615,
+          "mrr_at_5": 1.0,
+          "chapter_citation_precision_at_5": 0.8615
+        },
+        "class_11_chemistry": {
+          "answerable_queries": 9,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 0.9444,
+          "chapter_citation_precision_at_5": 0.8444
+        },
+        "class_11_mathematics": {
+          "answerable_queries": 12,
+          "chapter_recall_at_5": 0.9167,
+          "mrr_at_5": 0.7917,
+          "chapter_citation_precision_at_5": 0.7
+        },
+        "class_12_physics": {
+          "answerable_queries": 12,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 0.9583,
+          "chapter_citation_precision_at_5": 0.95
+        },
+        "class_12_chemistry": {
+          "answerable_queries": 9,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 1.0,
+          "chapter_citation_precision_at_5": 0.9778
+        },
+        "class_12_mathematics": {
+          "answerable_queries": 10,
+          "chapter_recall_at_5": 1.0,
+          "mrr_at_5": 0.95,
+          "chapter_citation_precision_at_5": 0.76
+        }
+      }
     }
   ],
   "query_results": {
