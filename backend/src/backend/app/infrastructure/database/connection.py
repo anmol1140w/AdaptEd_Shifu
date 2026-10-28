@@ -405,7 +405,13 @@ def _initialize_database(connection: psycopg.Connection) -> None:
 
 def connect() -> psycopg.Connection:
     global _database_initialized
-    connection = psycopg.connect(settings.database_url, password=settings.database_password, row_factory=dict_row)
+    connection_options = {"row_factory": dict_row}
+    # A complete Neon connection URL can already contain its password. Passing
+    # an empty password keyword overrides that URL credential and makes every
+    # database-backed request fail authentication.
+    if settings.database_password:
+        connection_options["password"] = settings.database_password
+    connection = psycopg.connect(settings.database_url, **connection_options)
     try:
         if not _database_initialized:
             with _database_init_lock:
