@@ -334,7 +334,10 @@ def seed_pcm_learning_content(connection: psycopg.Connection) -> None:
 
 
 def connect() -> psycopg.Connection:
-    connection = psycopg.connect(settings.database_url, password=settings.database_password, row_factory=dict_row)
+    connection_options = {"row_factory": dict_row}
+    if settings.database_password:
+        connection_options["password"] = settings.database_password
+    connection = psycopg.connect(settings.database_url, **connection_options)
     try:
         connection.execute(SCHEMA)
         seed_granular_content(connection)
