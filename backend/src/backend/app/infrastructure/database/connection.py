@@ -175,6 +175,9 @@ CREATE TABLE IF NOT EXISTS learning_items (
     question TEXT NOT NULL,
     answer_guide TEXT NOT NULL,
     explanation TEXT NOT NULL,
+    options JSONB NOT NULL DEFAULT '[]'::jsonb,
+    marks DOUBLE PRECISION,
+    time_seconds INTEGER,
     source_reference_ids JSONB NOT NULL DEFAULT '[]'::jsonb,
     supporting_chunk_ids JSONB NOT NULL DEFAULT '[]'::jsonb,
     citation_status TEXT NOT NULL DEFAULT 'teacher_review_required',
@@ -188,6 +191,9 @@ ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS bloom_source TEXT NOT NULL D
 ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS bloom_teacher_verified BOOLEAN NOT NULL DEFAULT FALSE;
 ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS difficulty_source TEXT NOT NULL DEFAULT 'unverified_seed';
 ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS difficulty_teacher_verified BOOLEAN NOT NULL DEFAULT FALSE;
+ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS options JSONB NOT NULL DEFAULT '[]'::jsonb;
+ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS marks DOUBLE PRECISION;
+ALTER TABLE learning_items ADD COLUMN IF NOT EXISTS time_seconds INTEGER;
 CREATE INDEX IF NOT EXISTS idx_learning_items_lookup ON learning_items(subject, class_level, concept_id, approved, difficulty);
 CREATE TABLE IF NOT EXISTS learning_assessments (
     id TEXT PRIMARY KEY,
@@ -346,8 +352,8 @@ def seed_pcm_learning_content(connection: psycopg.Connection) -> None:
                     """INSERT INTO learning_items
                        (item_id, concept_id, subject, class_level, chapter, item_type, bloom_level,
                         difficulty, question, answer_guide, explanation, source_reference_ids,
-                        supporting_chunk_ids, citation_status)
-                       VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s::jsonb,%s)
+                        supporting_chunk_ids, citation_status, options, marks, time_seconds, approved)
+                       VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s::jsonb,%s,%s::jsonb,%s,%s,%s)
                        ON CONFLICT (item_id) DO UPDATE SET concept_id=EXCLUDED.concept_id,
                          subject=EXCLUDED.subject, class_level=EXCLUDED.class_level, chapter=EXCLUDED.chapter,
                          item_type=EXCLUDED.item_type, bloom_level=EXCLUDED.bloom_level,
@@ -355,12 +361,15 @@ def seed_pcm_learning_content(connection: psycopg.Connection) -> None:
                          answer_guide=EXCLUDED.answer_guide, explanation=EXCLUDED.explanation,
                          source_reference_ids=EXCLUDED.source_reference_ids,
                          supporting_chunk_ids=EXCLUDED.supporting_chunk_ids,
-                         citation_status=EXCLUDED.citation_status""",
+                         citation_status=EXCLUDED.citation_status, options=EXCLUDED.options,
+                         marks=EXCLUDED.marks, time_seconds=EXCLUDED.time_seconds""",
                     (item["item_id"], item["concept_id"], subject, grade, item.get("chapter", ""),
                      item.get("item_type", "short_answer"), item.get("bloom_level", "understand"),
                      str(item.get("difficulty", "easy")).lower(), item["question"], item.get("answer_guide", ""),
                      item.get("explanation", ""), json.dumps(item.get("source_reference_ids", [])),
-                     json.dumps(item.get("supporting_chunk_ids", [])), item.get("citation_status", "teacher_review_required")),
+                     json.dumps(item.get("supporting_chunk_ids", [])), item.get("citation_status", "teacher_review_required"),
+                     json.dumps(item.get("options", [])), item.get("marks"), item.get("time_seconds"),
+                     bool(item.get("teacher_approved", False))),
                 )
     connection.execute(
         """INSERT INTO content_seed_meta (key, value) VALUES ('pcm_learning_content', %s)

@@ -17,6 +17,11 @@ services:
   backend:
     build:
       context: ./backend
+    volumes:
+      # The adaptive learning route reads and writes approved question banks here.
+      # Keep this bound to the repository so teacher approvals are visible to Git
+      # and survive backend container recreation.
+      - ./content:/content
     restart: unless-stopped
     environment:
       ADAPTED_DATABASE_URL: postgresql://adapted_user@db:5432/adapted

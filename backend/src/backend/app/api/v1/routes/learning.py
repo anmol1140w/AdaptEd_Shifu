@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 import hashlib
 import uuid
@@ -35,6 +36,7 @@ from backend.app.infrastructure.ai.retrieval.policy import (
 )
 
 router = APIRouter(tags=["adaptive learning"])
+logger = logging.getLogger(__name__)
 _CONTENT_ROOT = Path(__file__).resolve().parents[6].parent / "content"
 
 
@@ -82,12 +84,17 @@ class QuestionImport(BaseModel):
     subject: str = Field(pattern="^(physics|chemistry|mathematics)$")
     class_level: int = Field(ge=11, le=12)
     chapter: str = Field(min_length=2, max_length=180)
-    concept_id: str = Field(min_length=3, max_length=180)
+    concept_id: str | None = Field(default=None, min_length=3, max_length=180)
+    topic: str | None = Field(default=None, min_length=2, max_length=180)
     question: str = Field(min_length=5, max_length=3000)
+    question_type: str = Field(default="short_answer", pattern="^(mcq|numerical|short_answer|descriptive|coding)$")
     answer_guide: str = Field(min_length=1, max_length=3000)
     explanation: str = Field(default="", max_length=5000)
-    difficulty: str = Field(default="medium", pattern="^(easy|medium|hard)$")
+    difficulty: str | None = Field(default=None, pattern="^(easy|medium|hard)$")
     bloom_level: str | None = Field(default=None, pattern="^(remember|understand|apply|analyze|evaluate|create)$")
+    options: list[str] = Field(default_factory=list, max_length=6)
+    marks: float | None = Field(default=None, gt=0, le=100)
+    time_seconds: int | None = Field(default=None, gt=0, le=86400)
     source_reference_ids: list[str] = Field(default_factory=list, max_length=20)
     supporting_chunk_ids: list[str] = Field(default_factory=list, max_length=50)
 
@@ -99,6 +106,31 @@ class QuestionBatchImport(BaseModel):
 class ManualGradeReview(BaseModel):
     correct: bool
     feedback: str = Field(min_length=1, max_length=1500)
+
+class QuestionClassificationInput(BaseModel):
+    question: str = Field(min_length=5, max_length=3000)
+    question_type: str = Field(pattern="^(mcq|numerical|short_answer|descriptive|coding)$")
+    subject: str = Field(pattern="^(physics|chemistry|mathematics)$")
+    topic: str = Field(min_length=2, max_length=180)
+    correct_answer: str = Field(default="", max_length=3000)
+    marking_rubric: str = Field(default="", max_length=5000)
+    test_cases: str = Field(default="", max_length=5000)
+    options: list[str] = Field(default_factory=list, max_length=6)
+    marks: float | None = Field(default=None, gt=0, le=100)
+    time_seconds: int | None = Field(default=None, gt=0, le=86400)
+
+
+class QuestionClassificationBatch(BaseModel):
+    questions: list[QuestionClassificationInput] = Field(min_length=1, max_length=100)
+
+
+class QuestionReviewEdit(BaseModel):
+    question: str | None = Field(default=None, min_length=5, max_length=3000)
+    answer_guide: str | None = Field(default=None, min_length=1, max_length=3000)
+    explanation: str | None = Field(default=None, max_length=5000)
+    bloom_level: str | None = Field(default=None, pattern="^(remember|understand|apply|analyze|evaluate|create)$")
+    difficulty: str | None = Field(default=None, pattern="^(easy|medium|hard)$")
+    options: list[str] | None = Field(default=None, max_length=6)
 
 
 def _db_error() -> None:
@@ -135,7 +167,8 @@ def _public_item(row: dict[str, Any]) -> dict[str, Any]:
         "subject": row["subject"], "class_level": row["class_level"],
         "chapter": row["chapter"], "item_type": row["item_type"],
         "bloom_level": row["bloom_level"], "difficulty": row["difficulty"],
-        "question": row["question"],
+        "question": row["question"], "options": row.get("options", []),
+        "marks": row.get("marks"), "time_seconds": row.get("time_seconds"),
     }
 
 
@@ -692,7 +725,7 @@ def teacher_question_bank(
             values.append(class_level)
         where = " WHERE " + " AND ".join(filters) if filters else ""
         rows = connection.execute(
-            "SELECT item_id,concept_id,subject,class_level,chapter,bloom_level,bloom_source,bloom_teacher_verified,difficulty,difficulty_source,difficulty_teacher_verified,question,answer_guide,explanation,source_reference_ids,supporting_chunk_ids,citation_status,approved FROM learning_items" + where + " ORDER BY subject,class_level,chapter,item_id",
+            "SELECT item_id,concept_id,subject,class_level,chapter,item_type,bloom_level,bloom_source,bloom_teacher_verified,difficulty,difficulty_source,difficulty_teacher_verified,question,answer_guide,explanation,options,marks,time_seconds,source_reference_ids,supporting_chunk_ids,citation_status,approved FROM learning_items" + where + " ORDER BY subject,class_level,chapter,item_id",
             values,
         ).fetchall()
         return {"items": rows}
@@ -757,18 +790,21 @@ def review_manual_grade(attempt_id: str, payload: ManualGradeReview, user=Depend
 def import_teacher_question(payload: QuestionImport, user=Depends(teacher_only)):
     connection = connect()
     try:
-        concept = connection.execute("SELECT chapter FROM learning_concepts WHERE concept_id=%s AND subject=%s AND class_level=%s", (payload.concept_id, payload.subject, payload.class_level)).fetchone()
+        concept_id, concept = _resolve_import_concept(connection, payload)
         if not concept:
             raise HTTPException(status_code=422, detail="Concept does not match the selected PCM subject and class")
-        bloom = payload.bloom_level or _infer_bloom(payload.question)
+        classification = _classify_question(payload)
+        bloom = payload.bloom_level or classification.bloom_level.name.lower()
+        difficulty = payload.difficulty or classification.difficulty.value
         item_id = f"teacher-{uuid.uuid4()}"
         connection.execute(
-            """INSERT INTO learning_items (item_id,concept_id,subject,class_level,chapter,item_type,bloom_level,bloom_source,bloom_teacher_verified,difficulty,difficulty_source,difficulty_teacher_verified,question,answer_guide,explanation,source_reference_ids,supporting_chunk_ids,created_by,approved,citation_status)
-               VALUES (%s,%s,%s,%s,%s,'short_answer',%s,%s,%s,%s,'teacher',TRUE,%s,%s,%s,%s::jsonb,%s::jsonb,%s,FALSE,'teacher_authored_review_required')""",
-            (item_id, payload.concept_id, payload.subject, payload.class_level, payload.chapter, bloom,
-             "teacher" if payload.bloom_level else "rule_based", bool(payload.bloom_level), payload.difficulty,
+            """INSERT INTO learning_items (item_id,concept_id,subject,class_level,chapter,item_type,bloom_level,bloom_source,bloom_teacher_verified,difficulty,difficulty_source,difficulty_teacher_verified,question,answer_guide,explanation,source_reference_ids,supporting_chunk_ids,created_by,approved,citation_status,options,marks,time_seconds)
+               VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s::jsonb,%s,FALSE,'teacher_authored_review_required',%s::jsonb,%s,%s)""",
+            (item_id, concept_id, payload.subject, payload.class_level, payload.chapter or concept["chapter"], payload.question_type, bloom,
+             "teacher" if payload.bloom_level else "rule_based", bool(payload.bloom_level), difficulty,
+             "teacher" if payload.difficulty else "rule_based", bool(payload.difficulty),
              payload.question, payload.answer_guide, payload.explanation, json.dumps(payload.source_reference_ids),
-             json.dumps(payload.supporting_chunk_ids), user["id"]),
+             json.dumps(payload.supporting_chunk_ids), user["id"], json.dumps(payload.options), payload.marks, payload.time_seconds),
         )
         connection.commit()
         return {"item_id": item_id, "bloom_level": bloom, "approved": False, "message": "Saved as a draft for teacher review."}
@@ -779,26 +815,51 @@ def import_teacher_question(payload: QuestionImport, user=Depends(teacher_only))
         connection.close()
 
 
+@router.post("/teacher/question-bank/classify-batch")
+def classify_teacher_question_batch(payload: QuestionClassificationBatch, user=Depends(teacher_only)):
+    suggestions = []
+    for question in payload.questions:
+        classification = _classify_metadata(
+            question=question.question, question_type=question.question_type,
+            subject=question.subject, topic=question.topic,
+            correct_answer=question.correct_answer or question.marking_rubric or question.test_cases,
+            options=question.options, marks=question.marks, time_seconds=question.time_seconds,
+            marking_rubric=question.marking_rubric, test_cases=question.test_cases,
+        )
+        suggestions.append({
+            "bloom_level": f"BT{int(classification.bloom_level)}",
+            "bloom_name": classification.bloom_level.name.lower(),
+            "bloom_confidence": classification.bloom_confidence,
+            "bloom_reason": classification.bloom_reason,
+            "difficulty": classification.difficulty.value,
+            "difficulty_reason": classification.difficulty_reason,
+        })
+    return {"suggestions": suggestions}
+
+
 @router.post("/teacher/question-bank/import-batch", status_code=201)
 def import_teacher_question_batch(payload: QuestionBatchImport, user=Depends(teacher_only)):
     connection = connect()
     inserted = []
     try:
         for question in payload.questions:
-            concept = connection.execute("SELECT chapter FROM learning_concepts WHERE concept_id=%s AND subject=%s AND class_level=%s", (question.concept_id, question.subject, question.class_level)).fetchone()
+            concept_id, concept = _resolve_import_concept(connection, question)
             if not concept:
-                raise HTTPException(status_code=422, detail=f"Unknown concept {question.concept_id} for {question.subject} Class {question.class_level}")
-            bloom = question.bloom_level or _infer_bloom(question.question)
+                raise HTTPException(status_code=422, detail=f"Unknown topic {question.topic or question.chapter} for {question.subject} Class {question.class_level}")
+            classification = _classify_question(question)
+            bloom = question.bloom_level or classification.bloom_level.name.lower()
+            difficulty = question.difficulty or classification.difficulty.value
             item_id = f"teacher-{uuid.uuid4()}"
             connection.execute(
-                """INSERT INTO learning_items (item_id,concept_id,subject,class_level,chapter,item_type,bloom_level,bloom_source,bloom_teacher_verified,difficulty,difficulty_source,difficulty_teacher_verified,question,answer_guide,explanation,source_reference_ids,supporting_chunk_ids,created_by,approved,citation_status)
-                   VALUES (%s,%s,%s,%s,%s,'short_answer',%s,%s,%s,%s,'teacher',TRUE,%s,%s,%s,%s::jsonb,%s::jsonb,%s,FALSE,'teacher_authored_review_required')""",
-                (item_id, question.concept_id, question.subject, question.class_level, question.chapter or concept["chapter"], bloom,
-                 "teacher" if question.bloom_level else "rule_based", bool(question.bloom_level), question.difficulty,
+                """INSERT INTO learning_items (item_id,concept_id,subject,class_level,chapter,item_type,bloom_level,bloom_source,bloom_teacher_verified,difficulty,difficulty_source,difficulty_teacher_verified,question,answer_guide,explanation,source_reference_ids,supporting_chunk_ids,created_by,approved,citation_status,options,marks,time_seconds)
+                   VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s::jsonb,%s,FALSE,'teacher_authored_review_required',%s::jsonb,%s,%s)""",
+                (item_id, concept_id, question.subject, question.class_level, question.chapter or concept["chapter"], question.question_type, bloom,
+                 "teacher" if question.bloom_level else "rule_based", bool(question.bloom_level), difficulty,
+                 "teacher" if question.difficulty else "rule_based", bool(question.difficulty),
                  question.question, question.answer_guide, question.explanation, json.dumps(question.source_reference_ids),
-                 json.dumps(question.supporting_chunk_ids), user["id"]),
+                 json.dumps(question.supporting_chunk_ids), user["id"], json.dumps(question.options), question.marks, question.time_seconds),
             )
-            inserted.append({"item_id": item_id, "concept_id": question.concept_id, "bloom_level": bloom, "bloom_teacher_verified": bool(question.bloom_level)})
+            inserted.append({"item_id": item_id, "concept_id": concept_id, "bloom_level": bloom, "bloom_teacher_verified": bool(question.bloom_level)})
         connection.commit()
         return {"items": inserted, "message": f"Saved {len(inserted)} questions as drafts for review."}
     except HTTPException:
@@ -815,14 +876,66 @@ def import_teacher_question_batch(payload: QuestionBatchImport, user=Depends(tea
 def review_question(item_id: str, approved: bool = Query(), user=Depends(teacher_only)):
     connection = connect()
     try:
+        bank = connection.execute("SELECT subject,class_level FROM learning_items WHERE item_id=%s", (item_id,)).fetchone()
+        if not bank:
+            raise HTTPException(status_code=404, detail="Question not found")
+        connection.execute("SELECT pg_advisory_xact_lock(hashtext(%s))", (f"adaptive-content:{bank['subject']}:{bank['class_level']}",))
         row = connection.execute(
-            "UPDATE learning_items SET approved=%s, reviewed_by=%s, bloom_source=CASE WHEN %s THEN 'teacher_review' ELSE bloom_source END, bloom_teacher_verified=CASE WHEN %s THEN TRUE ELSE bloom_teacher_verified END, difficulty_source=CASE WHEN %s THEN 'teacher_review' ELSE difficulty_source END, difficulty_teacher_verified=CASE WHEN %s THEN TRUE ELSE difficulty_teacher_verified END, updated_at=CURRENT_TIMESTAMP WHERE item_id=%s RETURNING item_id,approved,bloom_level,bloom_teacher_verified,difficulty_teacher_verified",
+            "UPDATE learning_items SET approved=%s, reviewed_by=%s, bloom_source=CASE WHEN %s THEN 'teacher_review' ELSE bloom_source END, bloom_teacher_verified=CASE WHEN %s THEN TRUE ELSE bloom_teacher_verified END, difficulty_source=CASE WHEN %s THEN 'teacher_review' ELSE difficulty_source END, difficulty_teacher_verified=CASE WHEN %s THEN TRUE ELSE difficulty_teacher_verified END, updated_at=CURRENT_TIMESTAMP WHERE item_id=%s RETURNING item_id,approved,bloom_level,bloom_teacher_verified,difficulty_teacher_verified,concept_id,subject,class_level,chapter,item_type,difficulty,question,answer_guide,explanation,options,marks,time_seconds,source_reference_ids,supporting_chunk_ids,citation_status",
             (approved, user["id"], approved, approved, approved, approved, item_id),
         ).fetchone()
         if not row:
             raise HTTPException(status_code=404, detail="Question not found")
+        content_item_path = _persist_reviewed_content_item(row)
         connection.commit()
-        return {"item": row}
+        return {
+            "item": {key: row[key] for key in ("item_id", "approved", "bloom_level", "bloom_teacher_verified", "difficulty_teacher_verified")},
+            "content_item_path": str(content_item_path.relative_to(_CONTENT_ROOT.parent)) if approved else None,
+        }
+    finally:
+        connection.close()
+
+
+@router.patch("/teacher/question-bank/{item_id}")
+def edit_teacher_question(item_id: str, payload: QuestionReviewEdit, user=Depends(teacher_only)):
+    connection = connect()
+    try:
+        current = connection.execute("SELECT * FROM learning_items WHERE item_id=%s", (item_id,)).fetchone()
+        if not current:
+            raise HTTPException(status_code=404, detail="Question not found")
+        if current["approved"]:
+            connection.execute("SELECT pg_advisory_xact_lock(hashtext(%s))", (f"adaptive-content:{current['subject']}:{current['class_level']}",))
+        changes = {key: value for key, value in payload.model_dump(exclude_unset=True).items() if value is not None}
+        if not changes:
+            raise HTTPException(status_code=422, detail="Provide at least one field to update")
+        question = changes.get("question", current["question"])
+        answer = changes.get("answer_guide", current["answer_guide"])
+        explanation = changes.get("explanation", current["explanation"])
+        bloom = changes.get("bloom_level", current["bloom_level"])
+        difficulty = changes.get("difficulty", current["difficulty"])
+        options = changes.get("options", current.get("options") or [])
+        connection.execute(
+            """UPDATE learning_items SET question=%s,answer_guide=%s,explanation=%s,bloom_level=%s,difficulty=%s,
+               options=%s::jsonb,
+               bloom_source=CASE WHEN %s THEN 'teacher_override' ELSE bloom_source END,
+               bloom_teacher_verified=CASE WHEN %s THEN TRUE ELSE bloom_teacher_verified END,
+               difficulty_source=CASE WHEN %s THEN 'teacher_override' ELSE difficulty_source END,
+               difficulty_teacher_verified=CASE WHEN %s THEN TRUE ELSE difficulty_teacher_verified END,
+               updated_at=CURRENT_TIMESTAMP WHERE item_id=%s""",
+            (question, answer, explanation, bloom, difficulty, json.dumps(options),
+             "bloom_level" in changes, "bloom_level" in changes,
+             "difficulty" in changes, "difficulty" in changes, item_id),
+        )
+        updated = connection.execute("SELECT * FROM learning_items WHERE item_id=%s", (item_id,)).fetchone()
+        if updated["approved"]:
+            _persist_reviewed_content_item(updated)
+        connection.commit()
+        return {"item": {"item_id": item_id, "question": question, "answer_guide": answer,
+                          "explanation": explanation, "bloom_level": bloom, "difficulty": difficulty,
+                          "options": options}}
+    except HTTPException:
+        connection.rollback()
+        raise
     finally:
         connection.close()
 
@@ -1184,17 +1297,115 @@ def review_generated_content(content_id: str, approved: bool = Query(), user=Dep
         connection.close()
 
 
-def _infer_bloom(question: str) -> str:
-    classification = QuestionClassifier().classify(
-        QuestionDraft(
-            question=question,
-            question_type="descriptive",
-            subject="physics",
-            topic="teacher-authored question",
-            fields={"marking_rubric": "Teacher review required."},
-        )
+def _resolve_import_concept(connection, question: QuestionImport):
+    if question.concept_id:
+        concept = connection.execute(
+            "SELECT concept_id,chapter,name FROM learning_concepts WHERE concept_id=%s AND subject=%s AND class_level=%s",
+            (question.concept_id, question.subject, question.class_level),
+        ).fetchone()
+        if concept:
+            return concept["concept_id"], concept
+        if not question.topic:
+            return None, None
+
+    topic = (question.topic or question.chapter).strip()
+    existing = connection.execute(
+        "SELECT concept_id,chapter,name FROM learning_concepts WHERE subject=%s AND class_level=%s AND lower(name)=lower(%s) ORDER BY concept_id LIMIT 1",
+        (question.subject, question.class_level, topic),
+    ).fetchone()
+    if existing:
+        return existing["concept_id"], existing
+
+    slug = re.sub(r"[^a-z0-9]+", "-", topic.casefold()).strip("-")[:90] or "topic"
+    concept_id = f"teacher-topic-{question.subject}-{question.class_level}-{slug}"
+    connection.execute(
+        """INSERT INTO learning_concepts (concept_id,subject,class_level,chapter,name,description,prerequisite_ids)
+           VALUES (%s,%s,%s,%s,%s,'Teacher-created topic for adaptive practice','[]'::jsonb)
+           ON CONFLICT (concept_id) DO NOTHING""",
+        (concept_id, question.subject, question.class_level, question.chapter or topic, topic),
     )
-    return classification.bloom_level.name.lower()
+    concept = connection.execute(
+        "SELECT concept_id,chapter,name FROM learning_concepts WHERE concept_id=%s",
+        (concept_id,),
+    ).fetchone()
+    return (concept_id, concept) if concept else (None, None)
+
+
+def _classify_question(question: QuestionImport):
+    return _classify_metadata(
+        question=question.question, question_type=question.question_type,
+        subject=question.subject, topic=question.topic or question.chapter,
+        correct_answer=question.answer_guide, options=question.options,
+        marks=question.marks, time_seconds=question.time_seconds,
+    )
+
+
+def _classify_metadata(
+    *, question: str, question_type: str, subject: str, topic: str,
+    correct_answer: str, options: list[str], marks: float | None,
+    time_seconds: int | None, marking_rubric: str = "", test_cases: str = "",
+):
+    fields = {f"option_{letter}": value for letter, value in zip("abcd", options)}
+    if question_type == "mcq":
+        # Classification should still work on incomplete preview rows so teachers
+        # can see suggestions while correcting missing choices or an answer key.
+        for letter in "abcd":
+            fields.setdefault(f"option_{letter}", "")
+        if sum(bool(str(fields.get(f"option_{letter}", "")).strip()) for letter in "abcd") < 2:
+            fields["option_a"] = fields["option_a"] or "Preview option A"
+            fields["option_b"] = fields["option_b"] or "Preview option B"
+    if marking_rubric:
+        fields["marking_rubric"] = marking_rubric
+    if test_cases:
+        fields["test_cases"] = test_cases
+    return QuestionClassifier().classify(QuestionDraft(
+        question=question,
+        question_type=question_type,
+        subject=subject,
+        topic=topic,
+        correct_answer=correct_answer or "Pending teacher answer",
+        fields=fields,
+        marks=marks,
+        time_seconds=time_seconds,
+    ))
+
+
+def _persist_reviewed_content_item(row: dict[str, Any]) -> Path:
+    """Write each approved teacher question to its own inspectable JSON file."""
+    safe_item_id = re.sub(r"[^A-Za-z0-9._-]+", "_", str(row["item_id"])).strip("._")
+    if not safe_item_id:
+        raise HTTPException(status_code=400, detail="Question has an invalid item ID")
+    directory = _CONTENT_ROOT / "items" / "approved" / f"{row['subject']}_class_{row['class_level']}"
+    path = directory / f"{safe_item_id}.json"
+    try:
+        if row["approved"]:
+            item = {
+                "schema_version": "1.0",
+                "item_id": row["item_id"], "subject": row["subject"].title(), "class": row["class_level"],
+                "chapter": row["chapter"], "concept_id": row["concept_id"],
+                "item_type": row["item_type"], "options": row.get("options") or [],
+                "bloom_level": row["bloom_level"], "difficulty": row["difficulty"],
+                "question": row["question"], "answer_guide": row["answer_guide"],
+                "explanation": row["explanation"], "marks": row.get("marks"),
+                "time_seconds": row.get("time_seconds"),
+                "source_reference_ids": row.get("source_reference_ids") or [],
+                "supporting_chunk_ids": row.get("supporting_chunk_ids") or [],
+                "citation_status": "teacher_authored_reviewed", "teacher_approved": True,
+            }
+            path.parent.mkdir(parents=True, exist_ok=True)
+            temporary = path.with_suffix(path.suffix + ".tmp")
+            temporary.write_text(json.dumps(item, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            temporary.replace(path)
+        else:
+            path.unlink(missing_ok=True)
+        logger.info(
+            "Adaptive question JSON updated: path=%s item_id=%s approved=%s",
+            path, row["item_id"], bool(row["approved"]),
+        )
+        return path
+    except (OSError, ValueError, TypeError) as exc:
+        logger.exception("Could not update adaptive question JSON at %s for item %s", path, row.get("item_id"))
+        raise HTTPException(status_code=503, detail=f"Could not update the adaptive content bank: {exc}") from exc
 
 
 def _retrieve(
