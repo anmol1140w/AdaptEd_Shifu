@@ -4,6 +4,7 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import { useAuth } from '../../app/AuthProvider'
 import { teacherClassAnalytics, teacherStudentProfile } from '../../services/api'
 import { TeacherFrame } from './TeacherPages'
+import './teacher.css'
 
 function percent(value: unknown) {
   return `${Math.round(Number(value ?? 0) * 100)}%`

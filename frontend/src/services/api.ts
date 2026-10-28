@@ -169,7 +169,6 @@ export async function submitStudentQuizAttempt(id: string, attemptId: string, an
   if (!response.ok) throw new Error(body.detail ?? 'Could not save quiz results')
   return body as { attempt_id: string; score: number; max_score: number; points_awarded: number; coins: number; already_submitted: boolean }
 }
-}
 
 export async function listJeeTopics(subject?: string): Promise<JeeTopic[]> {
   const response = await apiFetch(`/content/topics${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`)
