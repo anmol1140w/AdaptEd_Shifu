@@ -11,7 +11,7 @@ button { cursor: pointer; }
 .phase-shell { min-height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 .phase-nav { height: 76px; max-width: 1440px; width: 100%; margin: 0 auto; padding: 0 5.3vw; display: flex; align-items: center; gap: 32px; border-bottom: 2px solid var(--ink); }
 .brand-mark-lockup { display: inline-flex; align-items: center; gap: 9px; font-size: 23px; letter-spacing: -1.4px; font-weight: 950; white-space: nowrap; }
-.brand-symbol { width: 34px; height: 34px; display: grid; place-items: center; background: var(--yellow); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); font-size: 20px; font-weight: 950; transform: rotate(-4deg); }
+.brand-symbol { width: 34px; height: 34px; display: block; object-fit: contain; }
 .brand-dot { color: #ff665a; }
 .brand-compact { display: none; }
 .phase-nav-note { display: inline-flex; align-items: center; gap: 8px; font-family: "DM Mono", ui-monospace, monospace; font-size: 10px; font-weight: 800; letter-spacing: .09em; border: 2px solid var(--ink); padding: 8px 10px; background: var(--mint); box-shadow: 3px 3px 0 var(--ink); }
@@ -66,7 +66,7 @@ button { cursor: pointer; }
 .ring-two { width: min(270px, 63%); height: 150px; transform: translate(-50%, -50%) rotate(58deg); }
 .orbit-core { position: absolute; left: 50%; top: 58%; width: 82px; height: 82px; transform: translate(-50%, -50%); border: 2px solid var(--ink); background: var(--coral); box-shadow: 5px 5px 0 var(--ink); display: grid; place-items: center; z-index: 1; }
 .orbit-tag { position: absolute; z-index: 2; border: 2px solid var(--ink); padding: 8px 11px; box-shadow: 3px 3px 0 var(--ink); background: #fff; font: 900 9px "DM Mono", ui-monospace, monospace; }
-.tag-phy { left: 16%; top: 23%; background: var(--blue); transform: rotate(-8deg); }
+.tag-phy { left: 16%; top: 48%; background: var(--blue); transform: rotate(-8deg); }
 .tag-chem { right: 12%; top: 38%; background: var(--mint); transform: rotate(5deg); }
 .tag-math { left: 32%; bottom: 30%; background: var(--coral); transform: rotate(4deg); }
 .panel-bottom { margin-top: auto; position: relative; z-index: 3; flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; border-top: 2px solid var(--ink); padding-top: 12px; background: inherit; font: 800 9px "DM Mono", ui-monospace, monospace; letter-spacing: .09em; }

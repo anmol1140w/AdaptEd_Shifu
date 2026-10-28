@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS jee_problems (
     statement TEXT NOT NULL,
     question_type TEXT NOT NULL CHECK (question_type IN ('MCQ', 'Numerical')),
     difficulty TEXT NOT NULL CHECK (difficulty IN ('Easy', 'Medium', 'Hard')),
+    bloom_level TEXT NOT NULL DEFAULT 'understand' CHECK (bloom_level IN ('remember', 'understand', 'apply', 'analyze', 'evaluate', 'create')),
     choices JSONB,
     answer TEXT NOT NULL,
     explanation TEXT NOT NULL,
@@ -68,6 +69,8 @@ CREATE TABLE IF NOT EXISTS jee_problems (
     estimated_minutes INTEGER NOT NULL DEFAULT 5,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+ALTER TABLE jee_problems ADD COLUMN IF NOT EXISTS bloom_level TEXT NOT NULL DEFAULT 'understand';
+UPDATE jee_problems SET bloom_level = 'understand' WHERE bloom_level IS NULL;
 CREATE TABLE IF NOT EXISTS problem_topics (
     problem_id TEXT NOT NULL REFERENCES jee_problems(id) ON DELETE CASCADE,
     topic_id TEXT NOT NULL REFERENCES jee_topics(id) ON DELETE CASCADE,
@@ -125,8 +128,10 @@ CREATE TABLE IF NOT EXISTS teacher_quiz_questions (
     choices JSONB NOT NULL DEFAULT '[]'::jsonb,
     answer TEXT NOT NULL,
     explanation TEXT NOT NULL DEFAULT '',
-    hints JSONB NOT NULL DEFAULT '[]'::jsonb
+    hints JSONB NOT NULL DEFAULT '[]'::jsonb,
+    bloom_level TEXT NOT NULL DEFAULT 'understand' CHECK (bloom_level IN ('remember', 'understand', 'apply', 'analyze', 'evaluate', 'create'))
 );
+ALTER TABLE teacher_quiz_questions ADD COLUMN IF NOT EXISTS bloom_level TEXT NOT NULL DEFAULT 'understand';
 CREATE INDEX IF NOT EXISTS idx_teacher_quizzes_classroom ON teacher_quizzes(classroom_id, published);
 CREATE TABLE IF NOT EXISTS teacher_quiz_attempts (
     id TEXT PRIMARY KEY,
@@ -364,7 +369,10 @@ def seed_pcm_learning_content(connection: psycopg.Connection) -> None:
 
 
 def connect() -> psycopg.Connection:
-    connection = psycopg.connect(settings.database_url, password=settings.database_password, row_factory=dict_row)
+    connection_options = {"row_factory": dict_row}
+    if settings.database_password:
+        connection_options["password"] = settings.database_password
+    connection = psycopg.connect(settings.database_url, **connection_options)
     try:
         connection.execute(SCHEMA)
         seed_granular_content(connection)

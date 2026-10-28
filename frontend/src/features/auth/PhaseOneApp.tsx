@@ -10,6 +10,7 @@ import { JeeProblemPage, TopicProblemsPage } from '../learner/JeeContentPages'
 import { TopicWiseProblemsPage } from '../learner/TopicWiseProblemsPage'
 import { TeacherQuizAttemptPage, TopicQuizAttemptPage, TopicQuizzesPage } from '../learner/TopicQuizzesPage'
 import { TeacherDashboardPage, TeacherLoginPage } from '../teacher/TeacherPages'
+import { TeacherAnalyticsPage, TeacherStudentProfilePage } from '../teacher/TeacherInsightsPages'
 import { StudentProfilePage } from '../profile/StudentProfilePage'
 import { AdaptiveLearningPage } from '../learner/AdaptiveLearningPage'
 import { AITutoringPage } from '../learner/AITutoringPage'
@@ -27,7 +28,7 @@ function postAuthRoute(session: AuthSession) {
 }
 
 function Brand({ compact = false }: { compact?: boolean }) {
-  return <Link to="/" className={`brand-mark-lockup ${compact ? 'brand-compact' : ''}`} aria-label="AdaptEd home"><span className="brand-symbol">A</span><span>Adapt<span className="brand-dot">Ed</span></span></Link>
+  return <Link to="/" className={`brand-mark-lockup ${compact ? 'brand-compact' : ''}`} aria-label="AdaptEd home"><img className="brand-symbol" src="/adapted-icon.svg" alt="" /><span>Adapt<span className="brand-dot">Ed</span></span></Link>
 }
 
 function Notice({ children, tone = 'error' }: { children: ReactNode; tone?: 'error' | 'success' | 'info' }) {
@@ -338,6 +339,8 @@ export function PhaseOneApp() {
     <Route path="/student-onboarding" element={<Protected><StudentOnboardingPage /></Protected>} />
     <Route path="/teacher-login" element={status === 'authenticated' && session?.user.role === 'teacher' ? <Navigate to="/teacher" replace /> : <TeacherLoginPage />} />
     <Route path="/teacher" element={<ProtectedTeacher><TeacherDashboardPage /></ProtectedTeacher>} />
+    <Route path="/teacher/classrooms/:slug/students/:studentId" element={<ProtectedTeacher><TeacherStudentProfilePage /></ProtectedTeacher>} />
+    <Route path="/teacher/classrooms/:slug/analytics" element={<ProtectedTeacher><TeacherAnalyticsPage /></ProtectedTeacher>} />
     <Route path="/teacher/learning" element={<ProtectedTeacher><TeacherLearningDashboard /></ProtectedTeacher>} />
     <Route path="/auth/callback" element={<CallbackPage />} />
     <Route path="/classroom" element={<Protected><ClassroomHome /></Protected>} />

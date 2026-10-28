@@ -6,7 +6,7 @@ async function apiFetch(path: string, init: RequestInit = {}) {
 import type { Classroom, CreateClassroomInput } from '../types'
 
 export type JeeTopic = { id: string; subject: 'physics' | 'chemistry' | 'mathematics'; name: string; slug: string; problem_count: number }
-export type JeeProblem = { id: string; title: string; subject: string; chapter: string; statement: string; question_type: 'MCQ' | 'Numerical'; difficulty: 'Easy' | 'Medium' | 'Hard'; choices?: string[]; answer: string; explanation: string; hints: string[]; formula?: string; exam_relevance: string[]; estimated_minutes: number; topics: string[]; solved?: boolean; attempted?: boolean; attempts?: { correct: boolean; created_at: string }[] }
+export type JeeProblem = { id: string; title: string; subject: string; chapter: string; statement: string; question_type: 'MCQ' | 'Numerical'; difficulty: 'Easy' | 'Medium' | 'Hard'; bloom_level?: string; choices?: string[]; answer: string; explanation: string; hints: string[]; formula?: string; exam_relevance: string[]; estimated_minutes: number; topics: string[]; solved?: boolean; attempted?: boolean; attempts?: { correct: boolean; created_at: string }[] }
 
 export type AuthUser = { id: string; email: string; name: string; role: 'student' | 'teacher'; unique_id?: string; onboardingComplete: boolean }
 
@@ -116,6 +116,29 @@ export async function teacherStudents(slug: string) {
   return body.students as Array<Record<string, string | number>>
 }
 
+export async function teacherStudentProfile(slug: string, studentId: string) {
+  const response = await fetch(`${API_BASE}/teacher/classrooms/${encodeURIComponent(slug)}/students/${encodeURIComponent(studentId)}/profile`, { credentials: 'include' })
+  const body = await response.json()
+  if (!response.ok) throw new Error(body.detail ?? 'Could not load student profile')
+  return body as {
+    student: Record<string, string | number>
+    summary: Record<string, string | number>
+    topics: Array<Record<string, string | number>>
+    recent: Array<Record<string, string | number | boolean>>
+  }
+}
+
+export async function teacherClassAnalytics(slug: string) {
+  const response = await fetch(`${API_BASE}/teacher/classrooms/${encodeURIComponent(slug)}/analytics`, { credentials: 'include' })
+  const body = await response.json()
+  if (!response.ok) throw new Error(body.detail ?? 'Could not load classroom analytics')
+  return body as {
+    classroom: Record<string, string | number>
+    overview: Record<string, string | number>
+    topics: Array<Record<string, string | number>>
+  }
+}
+
 export async function createTeacherQuiz(payload: { classroom_slug: string; title: string; description: string; difficulty: string; time_limit_minutes: number; questions: Array<{ prompt: string; question_type: 'MCQ' | 'Numerical'; choices: string[]; answer: string; explanation: string; hints: string[] }> }) {
   const response = await fetch(`${API_BASE}/teacher/quizzes`, { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
   const body = await response.json()
@@ -134,7 +157,7 @@ export async function studentQuizDetail(id: string) {
   const response = await fetch(`${API_BASE}/teacher/student-quizzes/${encodeURIComponent(id)}`, { credentials: 'include' })
   const body = await response.json()
   if (!response.ok) throw new Error(body.detail ?? 'Could not load quiz')
-  return body.quiz as { id: string; title: string; difficulty: string; time_limit_minutes: number; questions: Array<{ id: string; prompt: string; question_type: string; choices: string[] }> }
+  return body.quiz as { id: string; title: string; difficulty: string; time_limit_minutes: number; questions: Array<{ id: string; prompt: string; question_type: string; choices: string[]; bloom_level?: string }> }
 }
 
 export async function submitStudentQuizAttempt(id: string, attemptId: string, answers: Record<string, string>) {
@@ -145,6 +168,7 @@ export async function submitStudentQuizAttempt(id: string, attemptId: string, an
   const body = await response.json()
   if (!response.ok) throw new Error(body.detail ?? 'Could not save quiz results')
   return body as { attempt_id: string; score: number; max_score: number; points_awarded: number; coins: number; already_submitted: boolean }
+}
 }
 
 export async function listJeeTopics(subject?: string): Promise<JeeTopic[]> {
