@@ -1433,7 +1433,9 @@ def _retrieve(
         result = client.query_points(
             collection_name=OFFICIAL_ALIAS,
             query=models.Document(text=query, model=EMBEDDING_MODEL),
-            query_filter=models.Filter(must=filters), limit=8 if allow_related_concepts else 5, with_payload=True,
+            query_filter=models.Filter(must=filters),
+            limit=8 if allow_related_concepts else 5,
+            with_payload=True,
         )
         sources = []
         for point in result.points:
