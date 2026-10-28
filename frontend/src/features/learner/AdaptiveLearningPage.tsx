@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 import { ArrowRight, BookOpenCheck, BrainCircuit, Check, CircleHelp, LoaderCircle, Send, Sparkles } from 'lucide-react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
@@ -34,6 +34,7 @@ export function AdaptiveLearningPage() {
   const [classLevel, setClassLevel] = useState(11)
   const [allowedClassLevels, setAllowedClassLevels] = useState<number[]>([])
   const [preferencesLoaded, setPreferencesLoaded] = useState(false)
+  const [refreshingClassroomAccess, setRefreshingClassroomAccess] = useState(false)
   const [concepts, setConcepts] = useState<AdaptiveConcept[]>([])
   const [learningPath, setLearningPath] = useState<LearningPathStep[]>([])
   const [selectedConcept, setSelectedConcept] = useState('')
@@ -60,6 +61,26 @@ export function AdaptiveLearningPage() {
   const [recommendationNotice, setRecommendationNotice] = useState('')
   const progressRequest = useRef(0)
 
+  const refreshClassroomAccess = useCallback(async () => {
+    setRefreshingClassroomAccess(true)
+    try {
+      const { preferences, allowed_class_levels } = await getLearningPreferences()
+      const permittedLevels: number[] = [...new Set(allowed_class_levels)].filter((level) => level === 11 || level === 12).sort()
+      setSubject(preferences.subject)
+      setAllowedClassLevels(permittedLevels)
+      setClassLevel(permittedLevels.includes(preferences.class_level) ? preferences.class_level : (permittedLevels[0] ?? preferences.class_level))
+      setError(permittedLevels.length === 0
+        ? 'No classroom membership is linked to this account. If you already joined, confirm you are signed in with the same Google account, then refresh or join with your classroom code.'
+        : '')
+      setPreferencesLoaded(true)
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : 'Could not load your classroom access.')
+      setPreferencesLoaded(true)
+    } finally {
+      setRefreshingClassroomAccess(false)
+    }
+  }, [])
+
   const refresh = async () => {
     const requestId = ++progressRequest.current
     try {
@@ -76,22 +97,8 @@ export function AdaptiveLearningPage() {
     }
   }
   useEffect(() => {
-    let active = true
-    getLearningPreferences().then(({ preferences, allowed_class_levels }) => {
-      if (!active) return
-      setSubject(preferences.subject)
-      const permittedLevels: number[] = [...new Set(allowed_class_levels)].filter((level) => level === 11 || level === 12).sort()
-      setAllowedClassLevels(permittedLevels)
-      setClassLevel(permittedLevels.includes(preferences.class_level) ? preferences.class_level : (permittedLevels[0] ?? preferences.class_level))
-      if (permittedLevels.length === 0) setError('Join a Class 11 or Class 12 classroom to access adaptive learning.')
-      setPreferencesLoaded(true)
-    }).catch((reason) => {
-      if (!active) return
-      setError(reason instanceof Error ? reason.message : 'Could not load your classroom access.')
-      setPreferencesLoaded(true)
-    })
-    return () => { active = false }
-  }, [])
+    void refreshClassroomAccess()
+  }, [refreshClassroomAccess])
   useEffect(() => {
     if (!preferencesLoaded || !allowedClassLevels.includes(classLevel)) return
     const timeout = window.setTimeout(() => { void saveLearningPreferences(subject, classLevel).catch(() => {}) }, 300)
@@ -110,7 +117,10 @@ export function AdaptiveLearningPage() {
     const refreshWhenVisible = () => {
       if (document.visibilityState !== 'visible') return
       window.clearTimeout(refreshTimer)
-      refreshTimer = window.setTimeout(() => { void refresh() }, 250)
+      refreshTimer = window.setTimeout(() => {
+        void refreshClassroomAccess()
+        void refresh()
+      }, 250)
     }
     const interval = window.setInterval(() => {
       if (document.visibilityState === 'visible') void refresh()
@@ -123,7 +133,7 @@ export function AdaptiveLearningPage() {
       window.removeEventListener('focus', refreshWhenVisible)
       document.removeEventListener('visibilitychange', refreshWhenVisible)
     }
-  }, [subject, classLevel, preferencesLoaded])
+  }, [subject, classLevel, preferencesLoaded, refreshClassroomAccess])
   useEffect(() => {
     if (!session?.user.id) return
     const key = `adaptive-assessment:${session.user.id}`
@@ -220,13 +230,15 @@ export function AdaptiveLearningPage() {
       <div className="adaptive-subjects">{subjects.map((item) => <button key={item.id} className={subject === item.id ? 'active' : ''} onClick={() => { setSelectedConcept(''); setSubject(item.id) }}>{item.label}</button>)}</div>
       <label>Class {allowedClassLevels.length > 1
         ? <select value={classLevel} onChange={(event) => { setSelectedConcept(''); setClassLevel(Number(event.target.value)) }}>{allowedClassLevels.map((level) => <option value={level} key={level}>Class {level}</option>)}</select>
-        : <span className="adaptive-class-value">{allowedClassLevels.length ? `Class ${allowedClassLevels[0]}` : 'Join a classroom'}</span>}</label>
+        : allowedClassLevels.length
+          ? <span className="adaptive-class-value">Class {allowedClassLevels[0]}</span>
+          : <Link className="adaptive-class-value" to="/classroom/join">Join a classroom</Link>}</label>
     </section>
-    {error && <div className="adaptive-alert" role="alert">{error}{preferencesLoaded && allowedClassLevels.length === 0 && <Link to="/classroom/join">Join a classroom</Link>}</div>}
+    {error && <div className="adaptive-alert" role="alert"><span>{error}</span>{preferencesLoaded && allowedClassLevels.length === 0 && <><Button variant="neutral" disabled={refreshingClassroomAccess} onClick={() => void refreshClassroomAccess()}>{refreshingClassroomAccess ? <LoaderCircle className="spin" size={15} /> : null}Refresh access</Button><Link to="/classroom/join">Join with a classroom code</Link></>}</div>}
     <section className="adaptive-path-card"><div className="path-title"><span className="adaptive-kicker">YOUR RECOMMENDED PATH</span><b>Small steps, in the right order</b><small>Prerequisites come first. Your results update this path after each assessment.</small><Button variant="neutral" disabled={busy || !allowedClassLevels.includes(classLevel)} onClick={() => void requestRecommendations()}>{busy ? <LoaderCircle className="spin" size={15} /> : <Sparkles size={15} />} Get AI study recommendations</Button></div>{learningPath.slice(0, 4).map((step, index) => <article className="path-step" key={step.concept_id}><span className="path-step-number">{String(index + 1).padStart(2, '0')}</span><div><b>{step.name}</b><small>{step.chapter} · {step.action}</small></div><span className={`path-status status-${step.mastery_status}`}>{step.mastery_status.replaceAll('_', ' ')}</span></article>)}{recommendationNotice && <p className="recommendation-status">{recommendationNotice}</p>}{aiRecommendations.map((item) => <article className="ai-recommendation" key={item.concept_id}><b>{item.concept_name} · {item.chapter}</b><p>{item.action}</p><small>{item.reason}</small>{item.source_ids.map((sourceId) => { const source = recommendationCitations.find((citation) => citation.source_id === sourceId); return source ? <SourceEvidence key={sourceId} source={source} /> : null })}</article>)}</section>
     <div className="adaptive-grid">
       <section className="adaptive-card progress-card"><div className="adaptive-card-heading"><div><span className="adaptive-kicker">CONCEPT MASTERY</span><h2>Know what to work on</h2></div><BookOpenCheck size={20} /></div>
-        {concepts.length ? <div className="concept-progress-list">{concepts.map((concept) => <button key={concept.concept_id} className={`concept-progress-row ${selectedConcept === concept.concept_id ? 'selected' : ''}`} onClick={() => { setSelectedConcept(concept.concept_id); setTutor(null); setResult(null) }}><span className="concept-progress-copy"><b>{concept.name}</b><small>{concept.chapter} · {concept.attempts ?? 0} attempts</small></span><span className={`mastery-pill mastery-${concept.mastery_status ?? 'new'}`}>{concept.attempts ? `${Math.round((concept.accuracy ?? 0) * 100)}%` : 'New'}</span></button>)}</div> : <p className="adaptive-empty">{allowedClassLevels.length ? 'Loading your PCM concept map…' : 'Join a classroom to load the concepts for your class.'}</p>}
+        {concepts.length ? <div className="concept-progress-list">{concepts.map((concept) => <button key={concept.concept_id} className={`concept-progress-row ${selectedConcept === concept.concept_id ? 'selected' : ''}`} onClick={() => { setSelectedConcept(concept.concept_id); setTutor(null); setResult(null) }}><span className="concept-progress-copy"><b>{concept.name}</b><small>{concept.chapter} · {concept.attempts ?? 0} attempts</small></span><span className={`mastery-pill mastery-${concept.mastery_status ?? 'new'}`}>{concept.attempts ? `${Math.round((concept.accuracy ?? 0) * 100)}%` : 'New'}</span></button>)}</div> : <p className="adaptive-empty">{allowedClassLevels.length ? 'Loading your PCM concept map…' : <>Join a classroom to load the concepts for your class. <Link to="/classroom/join">Enter classroom code</Link></>}</p>}
       </section>
       <section className="adaptive-card practice-card"><div className="adaptive-card-heading"><div><span className="adaptive-kicker">{assessmentType === 'mock' ? 'MOCK ASSESSMENT' : 'TARGETED ASSESSMENT'}</span><h2>{question ? `Question ${questionIndex}` : result ? 'Assessment complete' : 'Practice at your pace'}</h2></div><Sparkles size={20} /></div>
         {question ? <form onSubmit={submit} className="adaptive-question"><div className="assessment-progress"><div><b>Question {questionIndex}</b><span>of {assessmentQuestionCount}</span></div><div className="assessment-progress-track"><span style={{ width: `${assessmentQuestionCount ? Math.min(100, questionIndex / assessmentQuestionCount * 100) : 0}%` }} /></div></div><div className="question-tags"><span>{question.chapter}</span><span>{question.difficulty}</span><span>{bloomLabel(question.bloom_level)}</span></div><p>{question.question}</p>{question.item_type === 'mcq' && question.options?.length ? <fieldset className="adaptive-mcq-options" disabled={busy || Boolean(feedback)}><legend>Your answer</legend>{question.options.map((option, index) => <label key={`${index}-${option}`}><input type="radio" name="adaptive-answer" value={option} checked={answer === option} onChange={() => setAnswer(option)} /><span>{String.fromCharCode(65 + index)}.</span>{option}</label>)}</fieldset> : <><label className="adaptive-answer-label" htmlFor="adaptive-answer">Your answer</label><textarea id="adaptive-answer" className="adaptive-answer-input" value={answer} disabled={busy || Boolean(feedback)} onChange={(event) => setAnswer(event.target.value)} placeholder="Show your thinking in a few words" rows={3} /></>}{feedback && <div className={`answer-feedback-box ${feedback.correct === null ? 'review' : feedback.correct ? 'correct' : 'incorrect'}`}><b>{feedback.correct === null ? 'This answer was saved for review.' : feedback.correct ? 'That matches the expected answer.' : 'Let’s use this as a learning signal.'}</b><p>{feedback.explanation}</p><div className="grading-result"><div><b>{feedback.grading.method === 'ollama' ? 'AI concept check' : feedback.grading.method === 'exact' ? 'Direct answer match' : 'Teacher review needed'}</b><span>{feedback.grading.score === null ? 'Not scored' : `${Math.round(feedback.grading.score * 100)}% conceptual match`}</span></div><p>{feedback.grading.feedback}</p></div><small>Answer guide: {feedback.answerGuide}</small>{feedback.adaptationReason && <small className="adaptation-reason">Next step: {feedback.adaptationReason}</small>}</div>}{feedback && nextQuestion ? <Button type="button" disabled={busy} className="adaptive-primary" onClick={() => { setQuestion(nextQuestion); setNextQuestion(null); setFeedback(null); setAnswer(''); setQuestionStartedAt(Date.now()) }}>Continue to the next question <ArrowRight size={15} /></Button> : <Button type="submit" disabled={busy || !answer.trim()} className="adaptive-primary">{busy ? <LoaderCircle className="spin" size={16} /> : <Send size={15} />} Submit answer</Button>}</form> : result ? <div className="assessment-result"><span className="result-score">{result.correct}<small> / {result.scored_attempts}</small></span><p>{Math.round(result.accuracy * 100)}% correct across scored answers. {result.ungraded_attempts ? `${result.ungraded_attempts} answer(s) were saved for review and excluded from mastery.` : 'Your answers shaped the next questions in this practice set.'}</p>{assessmentReward && <p className="adapt-coins-earned">+{assessmentReward.points_awarded} AdaptCoins earned · {assessmentReward.coins} total</p>}{feedback && <article className={`final-answer-review ${feedback.correct === null ? 'review' : feedback.correct ? 'correct' : 'incorrect'}`}><span className="adaptive-kicker">FINAL ANSWER · {feedback.correct === null ? 'TEACHER REVIEW' : feedback.correct ? 'CORRECT' : 'REVIEW THIS ONE'}</span><b>{feedback.questionText}</b><p>Your answer: {feedback.submittedAnswer || 'No answer entered'}</p><p>{feedback.explanation}</p><div className="grading-result"><div><b>{feedback.grading.method === 'ollama' ? 'AI concept check' : feedback.grading.method === 'exact' ? 'Direct answer match' : 'Teacher review needed'}</b><span>{feedback.grading.score === null ? 'Not scored' : `${Math.round(feedback.grading.score * 100)}% conceptual match`}</span></div><p>{feedback.grading.feedback}</p></div><small>Expected answer: {feedback.answerGuide}</small></article>}<Button onClick={() => void start(assessmentType)} className="adaptive-primary">Try another set <ArrowRight size={15} /></Button><button type="button" className="ai-tutoring-cta" onClick={() => navigate('/student/adaptive-learning', { state: { subject, classLevel, topicScores: result.topic_scores, summary: { attempts: result.attempts, correct: result.correct, accuracy: result.accuracy } } })}><span className="ai-tutoring-icon"><BrainCircuit size={18} /></span><span><b>Adaptive Learning</b><small>Ask about your results and get a focused explanation</small></span><ArrowRight size={17} /></button></div> : <div className="adaptive-start"><p>{selected?.recommendation ?? 'Start a short assessment. Questions will adapt to your responses and saved learning history.'}</p>{(selected?.available_items ?? 0) === 0 ? <div className="adaptive-no-questions" role="status"><b>No reviewed practice questions are available for this concept.</b><span>{selected?.pending_review_items ? `${selected.pending_review_items} questions are waiting for teacher review. Teachers can review them in Teacher view → Adaptive PCM insights → Question bank drafts.` : 'Ask your teacher to add or approve questions. Assessments only use teacher-approved items.'}</span></div> : <><Button disabled={busy || !selected} onClick={() => void start('adaptive')} className="adaptive-primary">{busy ? <LoaderCircle className="spin" size={16} /> : <ArrowRight size={15} />} Start adaptive practice</Button><small>{selected?.approved_items ?? 0} approved · {selected?.starter_items ?? 0} built-in starter questions available for {selected?.name ?? 'this concept'}.</small></> }<Button variant="neutral" disabled={busy || mockQuestionCount === 0} onClick={() => void start('mock')}>{mockQuestionCount ? `Start ${mockQuestionCount}-question mock quiz` : 'Mock quiz needs available questions'} <ArrowRight size={15} /></Button>{mockQuestionCount === 0 && <small>{availableQuestionCount === 0 ? 'The mock quiz will appear when questions are available in this subject and class.' : `${availableQuestionCount} approved or built-in starter questions are available in this class.`}</small>}</div>}

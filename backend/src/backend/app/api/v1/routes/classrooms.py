@@ -84,12 +84,19 @@ def join_classroom(payload: JoinClassroomRequest, user=Depends(current_user)):
     if classroom is None:
         connection.close()
         raise HTTPException(status_code=404, detail="Invalid classroom code")
-    if classroom["owner_id"] == user["id"]:
+    if classroom["owner_id"] == user["id"] and user["role"] != "student":
         connection.close()
         return {"classroom": classroom_view(classroom), "already_member": True}
     try:
+        already_member = connection.execute(
+            "SELECT 1 FROM classroom_memberships WHERE classroom_id=%s AND user_id=%s",
+            (classroom["id"], user["id"]),
+        ).fetchone() is not None
         connection.execute(
-            "INSERT INTO classroom_memberships (classroom_id, user_id, role) VALUES (%s, %s, 'student')",
+            """INSERT INTO classroom_memberships (classroom_id, user_id, role)
+               VALUES (%s, %s, 'student')
+               ON CONFLICT (classroom_id, user_id) DO UPDATE
+               SET role='student', joined_at=CURRENT_TIMESTAMP""",
             (classroom["id"], user["id"]),
         )
         connection.execute(
@@ -98,11 +105,6 @@ def join_classroom(payload: JoinClassroomRequest, user=Depends(current_user)):
             (user["id"], classroom["class_level"]),
         )
         connection.commit()
-        already_member = False
-    except Exception as error:
-        if "duplicate key" not in str(error).lower():
-            raise
-        already_member = True
     finally:
         connection.close()
     return {"classroom": classroom_view(classroom), "already_member": already_member}
