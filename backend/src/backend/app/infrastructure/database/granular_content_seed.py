@@ -29,7 +29,7 @@ TOPICS: dict[str, tuple[str, ...]] = {
     ),
 }
 
-VERSION = "granular-topics-v3-bloom-levels"
+VERSION = "granular-topics-v2"
 
 
 def slugify(value: str) -> str:
@@ -39,19 +39,6 @@ def slugify(value: str) -> str:
 def seed_granular_content(connection) -> None:
     marker = connection.execute("SELECT value FROM content_seed_meta WHERE key = 'jee_content'").fetchone()
     if marker and marker["value"] == VERSION:
-        return
-
-    # Upgrade the existing starter catalog in place. This keeps learner attempts
-    # while replacing the old database default (BT2 for every question) with
-    # explicit Bloom levels for the two static checks per topic.
-    if marker:
-        connection.execute("UPDATE jee_problems SET bloom_level = 'remember' WHERE id LIKE 'jee-%-1'")
-        connection.execute("UPDATE jee_problems SET bloom_level = 'apply' WHERE id LIKE 'jee-%-2'")
-        connection.execute(
-            """INSERT INTO content_seed_meta (key, value) VALUES ('jee_content', %s)
-               ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, updated_at = CURRENT_TIMESTAMP""",
-            (VERSION,),
-        )
         return
 
     # These are generated records from the previous starter catalog only.
@@ -77,8 +64,8 @@ def seed_granular_content(connection) -> None:
                 ]
                 connection.execute(
                     """INSERT INTO jee_problems
-                    (id, title, subject, chapter, statement, question_type, difficulty, bloom_level, choices, answer, explanation, hints, exam_relevance)
-                    VALUES (%s, %s, %s, %s, %s, 'MCQ', %s, %s, %s, %s, %s, %s, %s)""",
+                    (id, title, subject, chapter, statement, question_type, difficulty, choices, answer, explanation, hints, exam_relevance)
+                    VALUES (%s, %s, %s, %s, %s, 'MCQ', %s, %s, %s, %s, %s, %s)""",
                     (
                         problem_id,
                         f"{topic_name}: Concept Check {number}",
@@ -86,7 +73,6 @@ def seed_granular_content(connection) -> None:
                         topic_name,
                         f"A JEE aspirant is solving a problem on {topic_name}. Which approach is the soundest first step?",
                         "Easy" if number == 1 else "Medium",
-                        "remember" if number == 1 else "apply",
                         Json(choices),
                         choices[0],
                         "Identify the governing idea, write down the given and required quantities, and verify the conditions before applying a relation.",
