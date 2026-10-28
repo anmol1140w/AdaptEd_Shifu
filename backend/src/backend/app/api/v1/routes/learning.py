@@ -25,6 +25,12 @@ from backend.app.domain.entities.question_bank import QuestionDraft
 from backend.app.domain.services.learning_engine import LearningEngine
 from backend.app.domain.services.question_classifier import QuestionClassifier
 from backend.app.infrastructure.database.connection import connect
+from backend.app.infrastructure.database.rewards import (
+    award_ai_tutor,
+    award_assessment_completion,
+    award_external_quiz_completion,
+    total_coins,
+)
 from backend.app.infrastructure.ai.settings import AISettings
 from backend.app.infrastructure.ai.retrieval.policy import (
     CORPUS_ID, EMBEDDING_MODEL, MIN_RELEVANCE_SCORE, OFFICIAL_ALIAS, SOURCE_KIND,
@@ -663,6 +669,9 @@ def submit_adaptive_attempt(assessment_id: str, payload: AttemptInput, user=Depe
                 }
             total = len(attempt_rows); correct_total = sum(bool(row["correct"]) for row in attempt_rows)
             response["summary"] = {"attempts": total, "correct": correct_total, "accuracy": round(correct_total / total, 3) if total else 0, "topic_scores": topic_scores}
+            if user["role"] == "student":
+                earned = award_assessment_completion(connection, user["id"], assessment_id, assessment["assessment_type"])
+                response["reward"] = {"points_awarded": earned, "coins": total_coins(connection, user["id"])}
         connection.commit()
         return response
     except HTTPException:
@@ -958,6 +967,7 @@ def import_external_quiz_scores(payload: ExternalQuizScoreImport, user=Depends(t
         attempted_at = payload.attempted_at or datetime.now(timezone.utc)
         inserted = 0
         duplicate = 0
+        coins_awarded = 0
         for question, question_id, chapter in prepared:
             evidence_id = str(uuid.uuid5(uuid.NAMESPACE_URL, f"adapted:{payload.source_system}:{payload.source_event_id}:{question_id}"))
             row = connection.execute(
@@ -983,8 +993,12 @@ def import_external_quiz_scores(payload: ExternalQuizScoreImport, user=Depends(t
             if actual != expected:
                 raise HTTPException(status_code=409, detail="This source event was already imported with different score data.")
             duplicate += 1
+        if inserted and payload.questions:
+            coins_awarded = award_external_quiz_completion(
+                connection, payload.student_id, payload.source_system, payload.source_event_id, payload.quiz_id,
+            )
         connection.commit()
-        return {"source_event_id": payload.source_event_id, "inserted": inserted, "already_imported": duplicate,
+        return {"source_event_id": payload.source_event_id, "inserted": inserted, "already_imported": duplicate, "points_awarded": coins_awarded,
                 "total_questions": len(prepared), "message": "Scores are saved as learner evidence."}
     except HTTPException:
         connection.rollback(); raise
@@ -1021,7 +1035,7 @@ def tutor_support(payload: TutorInput, user=Depends(current_user)):
         f"Key concepts: {concept['description']} "
         "Explain the definition, law, equation, and worked example for this NCERT concept."
     )
-    sources = _retrieve(payload.subject, payload.class_level, payload.concept_id, retrieval_query)
+    sources = _retrieve(payload.subject, payload.class_level, payload.concept_id, retrieval_query, allow_related_concepts=True)
     if not sources:
         raise HTTPException(status_code=404, detail="No NCERT passages met the relevance cutoff for this question. Try a more specific question or include the chapter topic.")
     cited = [row["source_id"] for row in sources]
@@ -1039,6 +1053,8 @@ def tutor_support(payload: TutorInput, user=Depends(current_user)):
         memory_id = str(uuid.uuid4())
         cited_sources = sources
         audit.execute("INSERT INTO ai_request_audit (id,user_id,request_type,subject,class_level,concept_id,provider,source_ids) VALUES (%s,%s,'tutor',%s,%s,%s,%s,%s::jsonb)", (str(uuid.uuid4()),user["id"],payload.subject,payload.class_level,payload.concept_id,f"ollama-cloud:{settings.ollama_model}",json.dumps(cited)))
+        points_awarded = award_ai_tutor(audit, user["id"]) if user["role"] == "student" else 0
+        coins = total_coins(audit, user["id"]) if user["role"] == "student" else None
         audit.execute("""INSERT INTO ai_tutor_memory
             (id,user_id,subject,class_level,concept_id,mode,question,response,check_question,source_ids,sources)
             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s::jsonb)""",
@@ -1046,7 +1062,7 @@ def tutor_support(payload: TutorInput, user=Depends(current_user)):
         audit.commit()
     finally:
         audit.close()
-    return {"id": memory_id, "message": data["message"], "check_question": data["check_question"], "citations": cited_sources, "provider": f"ollama-cloud:{settings.ollama_model}"}
+    return {"id": memory_id, "message": data["message"], "check_question": data["check_question"], "citations": cited_sources, "provider": f"ollama-cloud:{settings.ollama_model}", "points_awarded": points_awarded, "coins": coins}
 
 
 @router.get("/ai/tutor-history")
@@ -1313,23 +1329,34 @@ def _persist_reviewed_content_item(row: dict[str, Any]) -> Path:
         raise HTTPException(status_code=503, detail=f"Could not update the adaptive content bank: {exc}") from exc
 
 
-def _retrieve(subject: str, class_level: int, concept_id: str, query: str) -> list[dict[str, Any]]:
+def _retrieve(
+    subject: str,
+    class_level: int,
+    concept_id: str | None,
+    query: str,
+    *,
+    allow_related_concepts: bool = False,
+) -> list[dict[str, Any]]:
     settings = AISettings()
     key = settings.qdrant_read_only_api_key
     if not settings.qdrant_url or not key:
         raise HTTPException(status_code=503, detail="Qdrant retrieval is not configured")
     try:
         client = QdrantClient(url=settings.qdrant_url, api_key=key, cloud_inference=True, timeout=30)
+        filters = [
+            models.FieldCondition(key="corpus_id", match=models.MatchValue(value=CORPUS_ID)),
+            models.FieldCondition(key="source_kind", match=models.MatchValue(value=SOURCE_KIND)),
+            models.FieldCondition(key="subject", match=models.MatchValue(value=subject.title())),
+            models.FieldCondition(key="class", match=models.MatchValue(value=class_level)),
+        ]
+        if concept_id and not allow_related_concepts:
+            filters.append(models.FieldCondition(key="concept_ids", match=models.MatchValue(value=concept_id)))
         result = client.query_points(
             collection_name=OFFICIAL_ALIAS,
             query=models.Document(text=query, model=EMBEDDING_MODEL),
-            query_filter=models.Filter(must=[
-                models.FieldCondition(key="corpus_id", match=models.MatchValue(value=CORPUS_ID)),
-                models.FieldCondition(key="source_kind", match=models.MatchValue(value=SOURCE_KIND)),
-                models.FieldCondition(key="subject", match=models.MatchValue(value=subject.title())),
-                models.FieldCondition(key="class", match=models.MatchValue(value=class_level)),
-                models.FieldCondition(key="concept_ids", match=models.MatchValue(value=concept_id)),
-            ]), limit=5, with_payload=True,
+            query_filter=models.Filter(must=filters),
+            limit=8 if allow_related_concepts else 5,
+            with_payload=True,
         )
         sources = []
         for point in result.points:
@@ -1342,7 +1369,9 @@ def _retrieve(subject: str, class_level: int, concept_id: str, query: str) -> li
             if payload.get("source_kind") != SOURCE_KIND or payload.get("corpus_id") != CORPUS_ID:
                 continue
             concept_ids = payload.get("concept_ids", [])
-            if not isinstance(concept_ids, list) or concept_id not in concept_ids:
+            if not isinstance(concept_ids, list) or not concept_ids or (concept_id and not allow_related_concepts and concept_id not in concept_ids):
+                continue
+            if payload.get("subject") != subject.title() or payload.get("class") != class_level:
                 continue
             sources.append({
                 "source_id": f"{payload.get('parent_chunk_id',payload.get('chunk_id',point.id))}:segment:{payload.get('embedding_segment',0)}",
