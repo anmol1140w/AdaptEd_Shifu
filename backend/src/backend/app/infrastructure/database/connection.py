@@ -86,6 +86,20 @@ CREATE TABLE IF NOT EXISTS problem_attempts (
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_problem_attempts_user ON problem_attempts(user_id, problem_id);
+CREATE TABLE IF NOT EXISTS learner_coin_events (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    event_key TEXT NOT NULL UNIQUE,
+    event_type TEXT NOT NULL,
+    points INTEGER NOT NULL CHECK (points >= 0),
+    description TEXT NOT NULL,
+    metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_learner_coin_events_user_time
+    ON learner_coin_events(user_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_learner_coin_events_activity_date
+    ON learner_coin_events(user_id, event_type, (metadata->>'activity_date'));
 CREATE TABLE IF NOT EXISTS content_seed_meta (
     key TEXT PRIMARY KEY,
     value TEXT NOT NULL,
@@ -114,6 +128,18 @@ CREATE TABLE IF NOT EXISTS teacher_quiz_questions (
     hints JSONB NOT NULL DEFAULT '[]'::jsonb
 );
 CREATE INDEX IF NOT EXISTS idx_teacher_quizzes_classroom ON teacher_quizzes(classroom_id, published);
+CREATE TABLE IF NOT EXISTS teacher_quiz_attempts (
+    id TEXT PRIMARY KEY,
+    quiz_id TEXT NOT NULL REFERENCES teacher_quizzes(id) ON DELETE CASCADE,
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    answers JSONB NOT NULL,
+    score INTEGER NOT NULL CHECK (score >= 0),
+    max_score INTEGER NOT NULL CHECK (max_score > 0 AND score <= max_score),
+    points_awarded INTEGER NOT NULL DEFAULT 0 CHECK (points_awarded >= 0),
+    completed_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_teacher_quiz_attempts_user
+    ON teacher_quiz_attempts(user_id, completed_at DESC);
 CREATE TABLE IF NOT EXISTS learning_concepts (
     concept_id TEXT PRIMARY KEY,
     subject TEXT NOT NULL CHECK (subject IN ('physics', 'chemistry', 'mathematics')),
