@@ -11,7 +11,7 @@ function TeacherFrame({ children }: { children: React.ReactNode }) {
   const { session, signOut } = useAuth()
   const navigate = useNavigate()
   if (!session || session.user.role !== 'teacher') return <Navigate to="/teacher-login" replace />
-  return <div className="teacher-shell"><header className="teacher-nav"><Link to="/" className="teacher-brand">A<span>AdaptEd</span></Link><span className="teacher-nav-label">TEACHER WORKSPACE</span><Link className="teacher-learning-link" to="/teacher/learning">Adaptive PCM insights</Link><Link className="teacher-learning-link" to="/leaderboard">Class leaderboard</Link><div className="teacher-user">{session.user.name}<button onClick={() => { signOut(); navigate('/') }}><LogOut size={14} /> Sign out</button></div></header>{children}</div>
+  return <div className="teacher-shell"><header className="teacher-nav"><Link to="/" className="teacher-brand">A<span>AdaptEd</span></Link><span className="teacher-nav-label">TEACHER WORKSPACE</span><Link className="teacher-learning-link" to="/teacher/learning">Adaptive PCM insights</Link><div className="teacher-user">{session.user.name}<button onClick={() => { signOut(); navigate('/') }}><LogOut size={14} /> Sign out</button></div></header>{children}</div>
 }
 
 export function TeacherLoginPage() {

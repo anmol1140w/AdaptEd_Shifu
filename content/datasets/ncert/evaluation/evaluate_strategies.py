@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import json
-import argparse
 import math
 import re
 from collections import Counter
@@ -90,33 +89,10 @@ def evaluate(strategy: str, queries: list[dict]) -> tuple[dict, dict[str, list[d
         "citation_precision_at_5": round(sum(citation_precision) / max(len(citation_precision), 1), 4),
         "ranking": "local lexical BM25; not Qdrant Cloud Inference",
     }
-    by_combo = {}
-    for grade in (11, 12):
-        for subject in ("Physics", "Chemistry", "Mathematics"):
-            subset = [q for q in answerable if q["class"] == grade and q["subject"] == subject]
-            recalls, reciprocal_ranks, precisions = [], [], []
-            for query in subset:
-                hits = query_results[query["id"]]
-                expected = set(query["expected_chapter_codes"])
-                found = [str(hit["chapter_code"]) for hit in hits]
-                ranks = [idx for idx, code in enumerate(found, 1) if code in expected]
-                recalls.append(len(set(found) & expected) / max(len(expected), 1))
-                reciprocal_ranks.append(1 / ranks[0] if ranks else 0.0)
-                precisions.append(sum(code in expected for code in found) / max(len(found), 1))
-            by_combo[f"class_{grade}_{subject.lower()}"] = {
-                "answerable_queries": len(subset),
-                "chapter_recall_at_5": round(sum(recalls) / max(len(recalls), 1), 4),
-                "mrr_at_5": round(sum(reciprocal_ranks) / max(len(reciprocal_ranks), 1), 4),
-                "chapter_citation_precision_at_5": round(sum(precisions) / max(len(precisions), 1), 4),
-            }
-    metrics["by_class_subject"] = by_combo
     return metrics, query_results
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=Path(__file__).with_name("results.json"))
-    args = parser.parse_args()
     queries = load_queries()
     if len(queries) < 60:
         raise SystemExit(f"Evaluation set too small: {len(queries)} questions (need at least 60)")
@@ -129,13 +105,10 @@ def main() -> None:
         metrics, per_query = evaluate(strategy, queries)
         results.append(metrics)
         detail[strategy] = per_query
-    out = args.output
-    if not out.is_absolute():
-        out = ROOT / out
-    out.parent.mkdir(parents=True, exist_ok=True)
+    out = Path(__file__).with_name("results.json")
     out.write_text(json.dumps({"metrics": results, "query_results": detail}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(results, indent=2))
-    print(f"Detailed ranked hits written to {out}")
+    print(f"Detailed ranked hits written to {out.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
