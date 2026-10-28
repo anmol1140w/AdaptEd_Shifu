@@ -5,7 +5,6 @@ from pydantic import BaseModel, Field
 
 from backend.app.api.v1.dependencies import current_user
 from backend.app.infrastructure.database.connection import connect
-from backend.app.infrastructure.database.rewards import award_problem_solve, total_coins
 
 router = APIRouter(prefix="/content", tags=["jee-content"])
 
@@ -105,13 +104,8 @@ def submit_attempt(problem_id: str, payload: AttemptRequest, user=Depends(curren
                VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING id, correct, created_at""",
             (str(uuid.uuid4()), problem_id, user["id"], payload.answer.strip(), correct, payload.time_taken, payload.hint_used),
         ).fetchone()
-        points_awarded = 0
-        coins = None
-        if correct and user["role"] == "student":
-            points_awarded = award_problem_solve(connection, user["id"], problem_id, row["id"])
-            coins = total_coins(connection, user["id"])
         connection.commit()
-        return {"attempt": row, "points_awarded": points_awarded, "coins": coins}
+        return {"attempt": row}
     finally:
         connection.close()
 

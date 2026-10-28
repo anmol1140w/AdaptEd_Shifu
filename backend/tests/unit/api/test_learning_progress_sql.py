@@ -12,7 +12,7 @@ class LearningProgressSqlTests(unittest.TestCase):
         route_path = Path(__file__).resolve().parents[3] / "src/backend/app/api/v1/routes/learning.py"
         source = route_path.read_text(encoding="utf-8")
 
-        self.assertEqual(source.count("CASE WHEN a.correct IS NULL THEN NULL WHEN a.correct THEN 1.0::double precision"), 3)
+        self.assertEqual(source.count("CASE WHEN a.correct THEN 1.0::double precision"), 3)
         self.assertEqual(source.count("ELSE 0.0::double precision END AS score"), 3)
         self.assertNotIn("a.correct::float", source)
 

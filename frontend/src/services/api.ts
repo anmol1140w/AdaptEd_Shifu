@@ -134,17 +134,7 @@ export async function studentQuizDetail(id: string) {
   const response = await fetch(`${API_BASE}/teacher/student-quizzes/${encodeURIComponent(id)}`, { credentials: 'include' })
   const body = await response.json()
   if (!response.ok) throw new Error(body.detail ?? 'Could not load quiz')
-  return body.quiz as { id: string; title: string; difficulty: string; time_limit_minutes: number; questions: Array<{ id: string; prompt: string; question_type: string; choices: string[] }> }
-}
-
-export async function submitStudentQuizAttempt(id: string, attemptId: string, answers: Record<string, string>) {
-  const response = await fetch(`${API_BASE}/teacher/student-quizzes/${encodeURIComponent(id)}/attempt`, {
-    method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ attempt_id: attemptId, answers }),
-  })
-  const body = await response.json()
-  if (!response.ok) throw new Error(body.detail ?? 'Could not save quiz results')
-  return body as { attempt_id: string; score: number; max_score: number; points_awarded: number; coins: number; already_submitted: boolean }
+  return body.quiz as { id: string; title: string; difficulty: string; time_limit_minutes: number; questions: Array<{ id: string; prompt: string; choices: string[]; answer: string; explanation: string }> }
 }
 
 export async function listJeeTopics(subject?: string): Promise<JeeTopic[]> {
@@ -172,5 +162,5 @@ export async function submitJeeAttempt(id: string, payload: { answer: string; ti
   const response = await apiFetch(`/content/problems/${encodeURIComponent(id)}/attempt`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
   const body = await response.json()
   if (!response.ok) throw new Error(body.detail ?? 'Could not save attempt')
-  return { ...body.attempt, points_awarded: Number(body.points_awarded ?? 0), coins: body.coins == null ? null : Number(body.coins) }
+  return body.attempt
 }
